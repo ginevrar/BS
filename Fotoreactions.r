@@ -1,7 +1,5 @@
-setwd("C:/Users/gi/Dropbox")
-atm_hg<-read.csv("atm_hg.csv", header = TRUE, sep=";"); str(atm_hg)
-setwd("C:/Users/gi/Dropbox/29_Luglio/Anoxic3c/ore1")
-
+setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0")
+atm_hg<-read.table("atm_hg.txt", header = TRUE); str(atm_hg)
 atm_hg0<-atm_hg$atm_hg0
 # 164 anni per 12 mesi = 1968
 # 163 anni per 12 mesi = 1956

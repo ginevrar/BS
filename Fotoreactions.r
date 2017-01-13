@@ -1,7 +1,15 @@
 #
-# nn tornano i conti
-#
 # Mass Balance delle foto reazioni
+# output fotoreactions indipendenti dalla massa
+#
+# FORMULA OUTPUT:
+# kred_adj<- LNt_red * kred * fd *(fDOChg*100)  [1/day]
+# 
+#kred * massa = massa/day
+#
+#  
+# ok i calcoli, 
+#fatto test !
 #
 # gen 2013-dic 2013 --> [1958:1969]
 # 
@@ -16,17 +24,16 @@ atm_hg<-read.table("atm_hg.txt", header = TRUE); str(atm_hg)
 atm_hg0<-atm_hg$atm_hg0   # --- atm conc of hg0 -
 str(atm_hg0)
 
-light<-read.table("light_norm.txt", header = TRUE); 
-names(light)<-'light' ; light_sur<-light$light
-light_sur_w_m2<-read.table("light_w_m2.txt", header = TRUE); 
-light_sur_w_m2<-light_sur_w_m2$wm2
+light<-read.table("light_norm.txt", header = TRUE); names(light)<-'light' ; light_sur<-light$light
+light_sur_w_m2<-read.table("light_w_m2.txt", header = TRUE); light_sur_w_m2<-light_sur_w_m2$wm2
+fd<-read.table("frac_day.txt", header = F); 
 
 kred<-0.12
 kox<-0.14
 kdeg<-3.14685E-2
 
 #Leggi model output
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1b")
+setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1b_real_light")
 hg<-read.csv("Dissolved_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
@@ -123,8 +130,12 @@ TEMPO[1:10]  # stringa con date
 rdate1<-as.Date(TEMPO, tz= "GMT", format="%Y") #creo rdate1 (per  xlab)
 
 #------- calcolo frazioni DOC complexed
+siltOL<-silt$Oxic1/10^6
+POMOL<-POM$Oxic1/10^6
 
-fDOChg   <-DOChg$Oxic1/(DOChg$Oxic1+hg$Oxic1+Phg$Oxic1); mean(fDOChg, na.rm=TRUE);plot(fDOChg*100)
+fDOChg2   <-DOChg$Oxic1/(DOChg$Oxic1+hg$Oxic1+Phg$Oxic1); mean(fDOChg, na.rm=TRUE);plot(fDOChg*100)
+fDOChg <- (10^3*(2.9*10^-6))/(1+(10^3*(2.9*10^-6))+((siltOL*3000)+(POMOL*(5.1*10^5))))
+#uguale a primam
 fDOCmehg <-DOCmehg$Oxic1/mehgT$Oxic1
 fDOChg0  <-DOChg0$Oxic1/hg0$Oxic1
 fdhg0    <-dhg0$Oxic1/hg0$Oxic1
@@ -153,81 +164,49 @@ mean(hg0_g_m3/hgII_g_m3*100) #hg0 %
 # skred = kred*LN(t)*[xdOC*hgII]*10^-6
 ke<-0.2        #extintion coeff
 e<-2.71828     #nepero 
-d<-20       #box depth
-
-L_ref<-350
-ekde<-e^(-ke*d)
-LNt_red<-(light_sur_w_m2/L_ref)*((1-ekde)/(ke*d))
+d<-20 
+fac1<-ke*d
+      #box depth
+L_ref<-220
+ekde<-e^-fac1
+LNt_red<-(light_sur_w_m2/L_ref)*((1-ekde)/(fac1))
 str(LNt_red)
 plot(LNt_red[12:24], type='l')
 
 out_red_1_d  <-fotored$Oxic1; str(out_red_1_d); mean(out_red_1_d)
-out_ox_1_d <-fotored$Oxic1*(kox/kred)
-out_dem_1_d <-fotodem$Oxic1
+out_ox_1_d <-(fotored$Oxic1*(kox/kred)); mean(out_ox_1_d)
+out_dem_1_d <-fotodem$Oxic1; mean(out_dem_1_d[1900:1968])
 
-kred_adj<- LNt_red[1:1968]*kred
-skred<-kred_adj*fDOChg*100
-mean(skred)  
+kred_adj<- LNt_red[1:1968]*fd$V1[1:1968]*kred*(fDOChg*100); mean(kred_adj)  
+mean(out_red_1_d)
+kox_adj<-kred_adj*(kox/kred); mean (kox_adj)
+kdem_adj<- (LNt_red[1:1968]*fd$V1[1:1968]*kdeg*(fDOCmehg*100))
+mean(kdem_adj[1900:1968]/20)  # mia formula qua stima di 20 volte?
+mean(out_dem_1_d[1900:1968])
 
-mean(kred_adj)  
-par(mfrow=c(1,2))
-plot(out_red_1_d[3:50], type='l')    # and becomes on average 3E-4/day
+kred_mol_day<-(out_red_1_d*HgII_pmols)/10^12; mean(kred_mol_day)
+kox_mol_day<-(out_ox_1_d*Hg0_pmols1)/10^12; mean(kox_mol_day)
+kdem_mol_day<-(out_dem_1_d*MeHg_pmols)/10^12; mean(kdem_mol_day)
 
-plot(kred_adj[3:50], type='l')
-
-
-#original kred (0.12 /day is corrected to the DOC fraction )
-
-red_g_m3_day<-mean(kred_adj*hgII_ngL) # questo da stesso risultato di out_red in oxic1, quindi 
-
-kred_adj2<- LNt_red[1:1968]*kred*(DOChg)
-
-mean(out_red_1_d*hgII_ngL*10^-6)     # nell'output del modello sono già incluse le moltiplicazioni per 
-                          # i ng/L 
-red_pg_m3_day<-red_g_m3_day*10^12
-
-LNt_red[1:1968]*kred*DOChg*10^-6
-
-
-
-kox_adj<- LNt_red[1:1968]*kox*0.99*1e-6  #original kred (0.12 /day is corrected to the DOC fraction )
-mean(kox_adj*hg0_g_m3[1:1968])
-mean(out_ox_1_d)
-
-fotox_1_s   <-(fotox/(24*60*60)) 
-fotodem_1_s <-(fotodem$Oxic1/(24*60*60))
-fotored_1_s <-(fotored$Oxic1/(24*60*60))
-
-ef_red <-fotored_1_s/fDOChg ; mean(ef_red) # quindi questo dovrebbe restituire il tasso in input +  o meno
-ef_ox  <-fotox_1_s          ;  mean(ef_ox)
-ef_deg <-fotodem_1_s/fDOCmehg
-
+# kmol trasformate all'anno
+fotored_kmols_y<-kred_mol_day*365/1000; mean(fotored_kmols_y)
+fotox_kmols_y<-kox_mol_day*365/1000;mean(fotox_kmols_y)
+fotodem_kmols_y<- kdem_mol_day*365/1000;mean(fotodem_kmols_y)
 
 #FOTORIDUZIONE
-HgII_pmols<-HgII_pM*oxic_vol_L;
-fotored_pmols_sec <-fotored_1_s* HgII_pmols
-fotored_pmols_y <-fotored_pmols_sec*60*60*24*365
-fotored_kmols_y<-fotored_pmols_y/10^15
+fotored_1_s <-(fotored$Oxic1/(24*60*60))
+fotox_1_s   <-(out_ox_1_d/(24*60*60)) 
+fotodem_1_s <-(fotodem$Oxic1/(24*60*60))
+
 fotored_kmols_y_media<-tapply(fotored_kmols_y,rep(1:(length(fotored_kmols_y)/12), each = 12), mean)
-plot(fotored_kmols_y_media, type='b')
-
+mean(fotored_kmols_y_media)
 #FOTOSSIDAZIONE
-Hg0_pmols1<-Hg0_pM1*oxic_vol_L 
-fotox_pmol_s <- fotox_1_s*Hg0_pmols1
-fotox_pmols_y <-fotox_pmol_s*60*60*24*365
-fotox_kmols_y<-fotox_pmols_y/10^15
 fotox_kmols_y_media<-tapply(fotox_kmols_y,rep(1:(length(fotox_kmols_y)/12), each = 12), mean)
-fotox_kmols_y_media<-as.numeric(fotox_kmols_y_media)
-plot(fotox_kmols_y_media)
-
+fotox_kmols_y_media<-as.numeric(fotox_kmols_y_media); mean(fotox_kmols_y_media)
 #FOTODEG
-MeHg_pmols <-mehg_pM*oxic_vol_L 
-fotodem_pmol_s<-fotodem_1_s*MeHg_pmols
-fotodem_pmols_y <-fotodem_pmol_s*60*60*24*365
-fotodem_kmols_y<-fotodem_pmols_y/10^12
 fotodem_kmols_y_media<-tapply(fotodem_kmols_y,rep(1:(length(fotodem_kmols_y)/12), each = 12), mean)
 fotodem_kmols_y_media<-as.numeric(fotodem_kmols_y_media)
-plot(fotodem_kmols_y_media)
+mean(fotodem_kmols_y_media)
 
 output_kmol_y<-cbind(fotox_kmols_y, fotored_kmols_y, 
                      fotodem_kmols_y, 
@@ -259,3 +238,4 @@ output_kmol_y_media<-cbind(fotox_kmols_y_media, fotored_kmols_y_media,
 
 write.csv(output_kmol_y, file="A_fotoreazioni1.csv")
 write.csv(output_kmol_y_media , file="A_fotoreazioni_media1.csv")
+

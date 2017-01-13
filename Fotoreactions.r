@@ -1,6 +1,6 @@
-setwd("C:/Users/Ginevra/Google Drive/ogni_ora")
+setwd("C:/Users/gi/Dropbox")
 atm_hg<-read.csv("atm_hg.csv", header = TRUE, sep=";"); str(atm_hg)
-setwd("C:/Users/Ginevra/Dropbox/29_Luglio/Anoxic3c/ore1")
+setwd("C:/Users/gi/Dropbox/29_Luglio/Anoxic3c/ore1")
 
 atm_hg0<-atm_hg$atm_hg0
 # 164 anni per 12 mesi = 1968

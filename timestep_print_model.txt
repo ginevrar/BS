@@ -1,0 +1,9 @@
+164	
+64/4 = 41	cluster da 4 anni, cioè 41 anni bisestili
+	
+	
+(164 - 41)*365 = 44895	giorni di anni normali 
+       41 *366 = 15006	giorni di anni bisestili
+
+59901			giorni tot
+59901 / 164 = 30.4375	model timestep

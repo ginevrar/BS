@@ -2,6 +2,11 @@
 # Mass Balance delle foto reazioni
 # output fotoreactions indipendenti dalla massa
 #
+# evasion indipendente da massa hg in acque, 
+# anche da conc atmosfera, a questi livelli....
+# importante temp correction factor....
+#
+# 
 # FORMULA OUTPUT:
 # kred_adj<- LNt_red * kred * fd *(fDOChg*100)  [1/day]
 # 
@@ -19,6 +24,11 @@
 #
 #
 #
+t<-15
+sigma<-1.1
+sigma^(t-20)  
+kvol=.1*(sigma^(t-20))
+kvol
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0")
 atm_hg<-read.table("atm_hg.txt", header = TRUE); str(atm_hg)
 atm_hg0<-atm_hg$atm_hg0   # --- atm conc of hg0 -
@@ -33,7 +43,15 @@ kox<-0.14
 kdeg<-3.14685E-2
 
 #Leggi model output
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1b_real_light")
+setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/zerohg")
+
+evasion<-read.csv("Volatilization_Loss_Rate.csv", header=FALSE, skip = 1, sep = ",", dec=".")
+names(evasion)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
+                  "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
+evasion<-evasion[2:1969,1:13]
+str(evasion)
+cCC<-tail(evasion)
+
 hg<-read.csv("Dissolved_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
@@ -98,12 +116,6 @@ fotodem<-read.csv("Photo_Demethylation_Rate.csv", header=FALSE, skip = 1, sep = 
 names(fotodem)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                   "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
 fotodem<-fotodem[2:1969,1:13]
-
-evasion<-read.csv("Volatilization_Loss_Rate.csv", header=FALSE, skip = 1, sep = ",", dec=".")
-names(evasion)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                  "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-evasion<-evasion[2:1969,1:13]
-str(evasion)
 
 silt<-read.csv("Silts_Fines.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(silt)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
@@ -229,6 +241,7 @@ ef_deg_media     <-tapply(ef_deg,rep(1:(length(ef_deg)/12), each = 12), mean)
 Hg0_pM_media1<-tapply(Hg0_pM1,rep(1:(length(Hg0_pM1)/12), each = 12), mean)
 HgII_pM_media<-tapply(HgII_pM,rep(1:(length(HgII_pM)/12), each = 12), mean)
 mehg_pM_media<-tapply(mehg_pM,rep(1:(length(mehg_pM)/12), each = 12), mean)
+
 
 
 output_kmol_y_media<-cbind(fotox_kmols_y_media, fotored_kmols_y_media, 

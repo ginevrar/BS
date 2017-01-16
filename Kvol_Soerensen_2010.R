@@ -28,11 +28,6 @@ A<-0.25  # (unitless) Constant based on the
 u<-c(1.347741947,.183236717,1.061082668,0.578819799,0.632989111,0.7980219,
      2.283728059,2.183822636,1.944001452,0.869728034,0.666685241,1.100868196)
 
-
-#----------- Schmidt number
-ScCO2 <-0.11*(Tc^2)-(6.16*Tc) + 644.7   # ok --- Burke, J.; Hoyer, M.; Keeler, G.; Scherbatskoy, T. 
-                                                # Water, Air, Soil
-                                                # Pollut. 1995, 80, 353
 #----------- calc density(T, sal) ------
 a<-0.824493 - 0.0040899*Tc + 0.000076438*Tc^2 -
   0.00000082467*Tc^3 + 0.0000000053675*Tc^4
@@ -46,15 +41,37 @@ library(marelac) # Function viscosity calculates the shear
  N<-viscosity(S = 18, t = Tc, P = 1)    #formula is valid for 0 < t < 30 and 0 < S < 36
  
  D<-(7.4*10^-8*((saf*Mw)^1/2)*Tk)/(N*(Vb^0.6) )    # DIFFUSIVITY cm2/s
+ v<-N/Rho2  # kinematic viscosity 
 
-
- v<-N/Rho2
+ #----------- Schmidt number
+ ScCO2 <-0.11*(Tc^2)-(6.16*Tc) + 644.7    # ok --- Burke, J.; Hoyer, M.; Keeler, G.; Scherbatskoy, T. 
+                                          # Water, Air, Soil
+                                          # Pollut. 1995, 80, 353
  ScHg0 <- v/D 
  
  #  u wind vel [m/s]
- m     <-(ScHg0/ScCO2)^-.5  # [m/hr-1]
- kvol  <-A*(u^2)*m
+ fr     <-(ScHg0/ScCO2)^-.5  # [m/hr-1]
+ kvol  <-A*(u^2)*fr     # range 0 -8 
+ plot( kvol, type='l')
+mean(kvol)  #2.7
+plot( kvol, Tc)
+lm(kvol ~ Tc)
+sigma<-1.1
+    kvol_adj<-kvol*sigma^(Tc-20)
+    plot( kvol_adj, type='l')
 
+  
   setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/Deposizione_atm")
 write.table(kvol, file='kvol_soerensen_2010.txt')
 
+
+salinity<-0.0018066*Cl_mg_L    # Cl (mg/L) 
+
+
+#bouchet et al. 2011   kHg comprese tra 0 e 200 cm/h  -> 0.2 m/h
+#  2.4  m/day 
+
+k_CO2=(0.1+2.26)*u    #bouchet et al. 2011
+k_Hg<-k_CO2*fr           #[m/s]
+mean(k_Hg)              #
+k_Hg_cm_h<-(k_Hg*100)/60*60 

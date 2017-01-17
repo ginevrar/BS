@@ -1,0 +1,5 @@
+# sim Wh1b_real_light  ?
+# bene fotoreazioni e Hg0 (non va a zero)
+# ricalibrazione  LOAD intermedio a LOADmin*1.55  ----
+# quindi risistemare un pò tutto
+# 

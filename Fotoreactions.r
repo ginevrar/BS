@@ -6,7 +6,6 @@
 # kred_adj<- LNt_red * kred * fd *(fDOChg*100)  [1/day]
 # 
 #kred * massa = massa/day
-#
 #  
 # ok i calcoli, 
 #fatto test !
@@ -17,8 +16,6 @@
 #  2414 out/200 anni = 12.07
 #  sim 1850 - 2050
 #
-#
-#
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0")
 atm_hg<-read.table("atm_hg.txt", header = TRUE); str(atm_hg)
 atm_hg0<-atm_hg$atm_hg0   # --- atm conc of hg0 -
@@ -28,9 +25,9 @@ light<-read.table("light_norm.txt", header = TRUE); names(light)<-'light' ; ligh
 light_sur_w_m2<-read.table("light_w_m2.txt", header = TRUE); light_sur_w_m2<-light_sur_w_m2$wm2
 fd<-read.table("frac_day.txt", header = F); 
 
-kred<-0.12
-kox<-0.14
-kdeg<-3.14685E-2
+kred<-1.2
+kox<-1.4
+kdeg<-3.14685E-1
 
 #Leggi model output
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1b_real_light")
@@ -158,6 +155,11 @@ mehg_ngL<-mehgT$Oxic1
 
 mean(hg0_g_m3/hgII_g_m3*100) #hg0 %
 
+# ---------
+ef_red <-fotored_1_s/fDOChg ; mean(ef_red*60*60*24) 
+mean(ef_red)# quindi questo dovrebbe restituire il tasso in input +  o meno
+ef_ox  <-fotox_1_s  /fDOChg        ;  mean(ef_ox*60*60*24)
+ef_deg <-fotodem_1_s/fDOCmehg;     mean(ef_deg*60*60*24)
 # --------- fotoreactions out [1/d] /84600 -> 1/s; 
 # --------- those rate are given by someting as -> kdeg (1/d) * fDOCmehg (-) adjusted for light intensity
 #  
@@ -167,11 +169,11 @@ e<-2.71828     #nepero
 d<-20 
 fac1<-ke*d
       #box depth
-L_ref<-220
-ekde<-e^-fac1
-LNt_red<-(light_sur_w_m2/L_ref)*((1-ekde)/(fac1))
-str(LNt_red)
-plot(LNt_red[12:24], type='l')
+#L_ref<-220
+#ekde<-e^-fac1
+###LNt_red<-(light_sur_w_m2/L_ref)*((1-ekde)/(fac1))
+##str(LNt_red)
+#plot(LNt_red[12:24], type='l')
 
 out_red_1_d  <-fotored$Oxic1; str(out_red_1_d); mean(out_red_1_d)
 out_ox_1_d <-(fotored$Oxic1*(kox/kred)); mean(out_ox_1_d)

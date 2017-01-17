@@ -21,15 +21,8 @@
 # primo anno out ha 13 out, gli alti 12
 #  2414 out/200 anni = 12.07
 #  sim 1850 - 2050
-#
-#
-#
-t<-15
-sigma<-1.1
-sigma^(t-20)  
-kvol=.1*(sigma^(t-20))
-kvol
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0")
+
+setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0")
 atm_hg<-read.table("atm_hg.txt", header = TRUE); str(atm_hg)
 atm_hg0<-atm_hg$atm_hg0   # --- atm conc of hg0 -
 str(atm_hg0)
@@ -43,7 +36,7 @@ kox<-0.14
 kdeg<-3.14685E-2
 
 #Leggi model output
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/zerohg")
+setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1b_real_light")
 
 evasion<-read.csv("Volatilization_Loss_Rate.csv", header=FALSE, skip = 1, sep = ",", dec=".")
 names(evasion)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
@@ -92,7 +85,7 @@ hg0<-read.csv("Elemental_Hg.csv", header=FALSE, skip = 1, sep = ",", dec=".")
 names(hg0)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
               "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
 hg0<-hg0[2:1969,1:13]
-
+plot(hg0$Oxic1/200.59*10^3, type='l')
 dhg0<-read.csv("Dissolved_Elemental_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(dhg0)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")

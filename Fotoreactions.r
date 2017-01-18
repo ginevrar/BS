@@ -277,8 +277,7 @@ volat1_kmol_y<-volat_g_y/(200.59*1000); plot(volat1_kmol_y, type="l")
 Volat1_kmol_y_media<-tapply(volat1_kmol_y,rep(1:(length(volat1_kmol_y)/12), each = 12),
                             mean); Volat1_kmol_y_media<-as.numeric(Volat1_kmol_y_media)
 
-plot(tail(volat1_kmol_y,800), type="l"); 
-plot(tail(hg0_ng_L,700), type="l")
+plot(tail(volat1_kmol_y,24), type="l"); 
 
 volat1_kmol_y_cumul<-cumsum(Volat1_kmol_y_media); volat1_kmol_y_cumul<-as.numeric(volat1_kmol_y_cumul)
 plot(volat1_kmol_y_cumul, type="l")
@@ -287,11 +286,7 @@ volatile<-data.frame(Volat1_kmol_y_media, volat1_kmol_y_cumul); str(volatile)
 write.csv(volatile, file="volat_media_e_cum.csv")
 write.csv(volat1_kmol_y, file="volat_kmoly.csv", row.names=F)
 
-
-plot(tail(hg0_g_m3,30), type="l", col="blue", lwd=2)
-par(new=TRUE)
-plot(tail(skvol,30), type="l")
-
+mean(tail(volat1_kmol_y,12), type="l"); 
 
 plot(head(hg0_g_m3,24), type="l", col="blue", lwd=2)
 par(new=TRUE)
@@ -299,5 +294,16 @@ plot(head(skvol,24), type="l")
 par(new=TRUE)
 plot(head(kvol_1_day,24), type="l", col='red')
 
+#VOLATILIZZAZIONE2
+hg0_res<- Hg0_pM1*oxic_vol_m3*1000
+vvol_pM_day<-kvol_1_day*hg0_res
 
+vvol_kmol_y<-vvol_pM_day*365/10^15
+vvol_kmol_y_media<-tapply(vvol_kmol_y,rep(1:(length(vvol_kmol_y)/12), each = 12),
+                          mean); Volat1_kmol_y_media<-as.numeric(vvol_kmol_y)
+plot(tail(vvol_kmol_y_media,24), type="l"); 
+plot(vvol_kmol_y_media, type="l"); 
+
+
+mean(tail(Volat1_kmol_y_media,24));mean(tail(vvol_kmol_y_media,24))
 

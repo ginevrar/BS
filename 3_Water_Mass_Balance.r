@@ -100,15 +100,16 @@ Output_terms<-as.numeric(evasione_kmol_y + depo_Phg_kmol_y + hgT_outflow_kmol_y)
 
 atm_hg_kg_day <- input_hg1$atm_load_kg_d*10^6; atm_hg_kg_day <-as.numeric(atm_hg_kg_day); str(atm_hg_kg_day)
 atm_hg_kmol_day<-atm_hg_kg_day/200.59; atm_hg_kmol_y<-atm_hg_kmol_day*365  #depo atmosferica 
+mean(tail(atm_hg_kmol_y,12))
 
 river_hg_kg_day<-input_hg1$river_load_hgT_kg_d*10^6; river_hg_kg_day<-as.numeric(river_hg_kg_day); str(river_hg_kg_day)
 river_hg_kmol_day<-river_hg_kg_day/200.59; river_hg_kmol_y<-river_hg_kmol_day*365  #rivers and azov sea
 
 #boundary da anno sim 2460 (1960)
 inflow  <-seg_outflow$CIL*10^6  #m3/s
-bound  <-input_hg1$hgT_bound_ng_l; str(bound)
-
 inflow_m3_y<-(inflow *60*60*24*365); inflow_L_y<-inflow_m3_y*1000
+bound  <-input_hg1$hgT_bound_ng_l; str(bound) #hgT ngL
+
 hgT_inflow_g_y<-(bound *inflow_L_y)/10^9  #ngL*L/y->ng/y/10^9->g/y
 hgT_inflow_kmol_y<-hgT_inflow_g_y/(200.59*1000) 
 
@@ -120,6 +121,7 @@ input_media   <-tapply(Input_terms,rep(1:(length(Input_terms)/12),each = 12), me
 output_media   <-tapply(Output_terms,rep(1:(length(Output_terms)/12),each = 12), mean)
 cum_in<-cumsum(input_media); summary(cum_in)
 cum_out<-cumsum(output_media); summary(cum_out)
+cum_in-cum_out
 
 net_sed_input1<-(depo_Phg_kmol_y-burial1_kmol_y-diffusion_kmol_y+diffusion_sed_to_sed_kmol_y) 
 

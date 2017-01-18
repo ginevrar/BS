@@ -62,7 +62,7 @@ setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
   Phgs<-read.csv("Total_Sorbed_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
   names(Phgs)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                 "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-  Phgs <-Phgs[2:1969,1:12] #ng/L
+  Phgs <-Phgs[2:1969,1:12] #ng/L o g/m3
   
   TOTs<-read.csv("Total_Solids.csv", header=FALSE, skip = 1,sep = ",", dec=".")
   names(TOTs)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
@@ -166,10 +166,20 @@ Vol_Sed2_m3<-volumes$Sed2*10^6;  str(Vol_Sed2_m3); plot(Vol_Sed2_m3)
      
 Sed1_g_m3  <- TOTs$Sed1;              Sed2_g_m3 <- TOTs$Sed2
 Sed1_g     <-Sed1_g_m3*Vol_Sed1_m3;     Sed2_g<-Sed2_g_m3*Vol_Sed2_m3
-cm3_sed1   <-Sed1_g/2.65;               cm3_sed2<-Sed2_g/2.65
+Sed1_kmol<-Sed1_g/(200.59*10^9)
+tail(Sed1_kmol,1); tail(Sed2_g,1)
+
+cm3_sed1   <-Sed1_g/2.43;               cm3_sed2<-Sed2_g/2.43
 m3_sed1    <-cm3_sed1/10^6;              m3_sed2<-cm3_sed2/10^6
 m3_PW1     <-Vol_Sed1_m3-m3_sed1;       m3_PW2<-Vol_Sed2_m3-m3_sed2
 PW1_L      <- m3_PW1*1000;              PW2_L<- m3_PW2*1000
+
+hg_kg_s1<-tail(HgT_sed1_ngm3*m3_sed1/10^12)
+hg_kg_s2<-tail(HgT_sed2_ngm3*m3_sed2/10^12)
+
+hg_kmol_s1<-hg_kg_s1/200.59
+hg_kmol_s2<-hg_kg_s2/200.59;hg_kmol_s2
+hg_kmol_s2+hg_kmol_s1
 
 bulk1<-bulkD$Sed1;bulk2<-bulkD$Sed2
 dryd1<-0.097;dryd2<-0.2425
@@ -180,7 +190,7 @@ porosity2<-bulk2-dryd2;
 Diffusion_coeff<-10^-9             #m2/s
 DF<-Diffusion_coeff*60*60*24       #m2/day
 #     ng/L to g/m3
-deep_w_hg<- diss_hg$Anoxic3      #diss hg ngL Bottom water
+deep_w_hg<- diss_hg$Anoxic3      # ngL diss hg  Bottom water
 deep_w_hg_gm3<-deep_w_hg/10^6 
 
 PWhg1_ngL<-diss_hg$Sed1; PWhg2_ngL<-diss_hg$Sed2  #diss hg ngL SED

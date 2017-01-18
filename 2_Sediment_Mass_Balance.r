@@ -1,4 +1,4 @@
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1b")
+setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 
   hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
   names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
@@ -108,10 +108,6 @@ setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1b")
   
   solids_w  <-TOTs$Anoxic3
 
-par(mfrow=c(1,2))
-plot(SEDhg_sed1 , main="HgT sed, ng/g")
-plot(SEDhg_sed2 , main="HgT sed, ng/g"); tail(SEDhg_sed1);tail(SEDhg_sed2);
-
 HgT_sed1_ngm3 <- solids_sed1 *SEDhg_sed1  #ng/g*g/m3
 HgT_sed2_ngm3 <- solids_sed2 *SEDhg_sed2 
 HgT_sed1_gm3 <-HgT_sed1_ngm3/10^9         #mg/m3->g/m3 hgP
@@ -215,14 +211,13 @@ tail (PWhg2_kmol)
                         #      diff <0 --> verso sedimento     (giu)
 term1<-(DF*Model_area*porosity1)/(0.03/porosity1)  # m2/day*m2/m -->m3/day
 term2<-(PWhg1_gm3/porosity1)-(deep_w_hg_gm3)       # g/m3
-diffusion_g_day<-term1*term2; plot(diffusion_g_day)                       # m3/day*g/m3--> g/day   
+diffusion_g_day<-term1*term2;                        # m3/day*g/m3--> g/day   
 diffusion_g_m2_day<-diffusion_g_day/Model_area
 diffusion_mol_m2_day<-diffusion_g_m2_day/200.49
 diffusion_umol_m2_y<-diffusion_mol_m2_day*10^6*365; summary(diffusion_umol_m2_y); diffusion_kmol_day<-diffusion_g_day/(200.49*1000)
 diffusion_kmol_y<-diffusion_kmol_day*365
 diffusion_kmol_y_media<-tapply(diffusion_kmol_y,rep(1:(length(diffusion_kmol_y)/12),each = 12), mean)
 diffusion_kmol_cumul<-cumsum(diffusion_kmol_y_media)
-tail(diffusion_kmol_cumul)
 plot(diffusion_kmol_cumul)
 plot(diffusion_kmol_y_media); tail(diffusion_kmol_y_media,3)
 
@@ -236,10 +231,8 @@ diffusion_sed_to_sed_kmol_y_media<-tapply(diffusion_sed_to_sed_kmol_y,rep(1:(len
 diffusion_sed_to_sed_kmol_cumul<-cumsum(diffusion_sed_to_sed_kmol_y_media)
 tail(diffusion_sed_to_sed_kmol_cumul)
 
-
 sed_balance<-cbind(media1_depo_kmol_y,burial1_media,
                    burial2_media,diffusion_kmol_y_media,diffusion_sed_to_sed_kmol_y_media)
-
 sed_balance_long<-cbind(depo_Phg_kmol_y, burial1_kmol_y, burial2_kmol_y,
                         diffusion_kmol_y, diffusion_sed_to_sed_kmol_y)
 

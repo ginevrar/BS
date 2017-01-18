@@ -1,5 +1,5 @@
 setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
-#setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1b")
+setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 evasion<-read.csv("Volatilization_Loss_Rate.csv", header=FALSE, skip = 1, sep = ",", dec=".")
 names(evasion)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                   "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
@@ -278,7 +278,7 @@ plot(disshg_pM,prof, type="b",pch=24,  lwd=1,cex=1.5,
 legend(3,11, pch=c(21,21),legend=c("Data", "Model"),
        col=c("#1f78b4", "#fe9929", '#fee08b44','#fee08b44'), cex=1.5)
 #text(3,15,"OM=7*10^5 \n silt=2.
-text(4,12,'OL', cex=.9, font=2)
+text(4,13,'OL', cex=.9, font=2)
 text(4,14.7,'CIL', cex=.9, font=2)
 text(4,15.9,'SOL', cex=.9, font=2)
 text(1,16.6,'AOL', cex=.9, font=2)

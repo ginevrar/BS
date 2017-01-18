@@ -21,19 +21,6 @@
 #  2414 out/200 anni = 12.07
 #  sim 1850 - 2050
 #
-<<<<<<< ours
-#
-#
-t<-15
-sigma<-1.1
-sigma^(t-20)  
-kvol=.1*(sigma^(t-20))
-kvol
-||||||| base
-#
-#
-=======
->>>>>>> theirs
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0")
 atm_hg<-read.table("atm_hg.txt", header = TRUE); str(atm_hg)
 atm_hg0<-atm_hg$atm_hg0   # --- atm conc of hg0 -

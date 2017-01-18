@@ -21,9 +21,10 @@
 #  2414 out/200 anni = 12.07
 #  sim 1850 - 2050
 #
+setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0")
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0")
-atm_hg<-read.table("atm_hg.txt", header = TRUE); str(atm_hg)
-atm_hg0<-atm_hg$atm_hg0   # --- atm conc of hg0 -
+atm_hg<-read.table("atm_hg.txt", header = F); str(atm_hg)
+atm_hg0<-atm_hg$V1[1:1968]   # --- atm conc of hg0 -
 str(atm_hg0)
 
 light<-read.table("light_norm.txt", header = TRUE); names(light)<-'light' ; light_sur<-light$light
@@ -35,7 +36,8 @@ kox<-1.4
 kdeg<-3.14685E-1
 
 #Leggi model output
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/zerohg")
+setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 
 evasion<-read.csv("Volatilization_Loss_Rate.csv", header=FALSE, skip = 1, sep = ",", dec=".")
 names(evasion)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
@@ -248,4 +250,54 @@ output_kmol_y_media<-cbind(fotox_kmols_y_media, fotored_kmols_y_media,
 
 write.csv(output_kmol_y, file="A_fotoreazioni1.csv")
 write.csv(output_kmol_y_media , file="A_fotoreazioni_media1.csv")
+
+
+#VOLATILIZZAZIONE
+H<-7.1*10^-3     # Henry's Law constant  
+R<-8.206*10^-5   # Universal Gas constant  8.206??0-5 atm/molar-K
+Tk<-288.15       # 15^C
+divisore<-H/(R*Tk)
+
+kvol_1_day_all<-evasion$Oxic1  # kvol ogni sim
+tail(kvol_1_day_all)
+
+kvol_1_day<-kvol_1_day_all #media kvol tutte sim
+
+hg0_media_globale_pM<-Hg0_pM1
+
+tail(hg0_media_globale_pM)
+hg0_media_globale_ngL<-(hg0_media_globale_pM*200.59)/1000  #media Hg0 in ng/L (per conti)
+hg0_g_m3<-hg0_media_globale_ngL/10^6; summary(hg0_g_m3)    #media Hg0 in g/m3
+
+skvol<-kvol_1_day*(hg0_g_m3 - (atm_hg0/divisore))
+#g/m3 day
+volat_g_y<-skvol*oxic_vol_m3*365;
+volat1_kmol_y<-volat_g_y/(200.59*1000); plot(volat1_kmol_y, type="l")
+
+Volat1_kmol_y_media<-tapply(volat1_kmol_y,rep(1:(length(volat1_kmol_y)/12), each = 12),
+                            mean); Volat1_kmol_y_media<-as.numeric(Volat1_kmol_y_media)
+
+plot(tail(volat1_kmol_y,800), type="l"); 
+plot(tail(hg0_ng_L,700), type="l")
+
+volat1_kmol_y_cumul<-cumsum(Volat1_kmol_y_media); volat1_kmol_y_cumul<-as.numeric(volat1_kmol_y_cumul)
+plot(volat1_kmol_y_cumul, type="l")
+
+volatile<-data.frame(Volat1_kmol_y_media, volat1_kmol_y_cumul); str(volatile)
+write.csv(volatile, file="volat_media_e_cum.csv")
+write.csv(volat1_kmol_y, file="volat_kmoly.csv", row.names=F)
+
+
+plot(tail(hg0_g_m3,30), type="l", col="blue", lwd=2)
+par(new=TRUE)
+plot(tail(skvol,30), type="l")
+
+
+plot(head(hg0_g_m3,24), type="l", col="blue", lwd=2)
+par(new=TRUE)
+plot(head(skvol,24), type="l")
+par(new=TRUE)
+plot(head(kvol_1_day,24), type="l", col='red')
+
+
 

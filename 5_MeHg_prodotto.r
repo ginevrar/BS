@@ -1,7 +1,7 @@
 ## Produzione INTERNA MeHg
 
 #REAZIONI VANNO MOLTIPLICATE PER TOTALE E NON PER FASE DISCiOLTA (?!?!)
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 
 met<-read.csv('Bacterial_Methylation_Rate.csv', header=FALSE, skip = 1,sep = ",", dec=".")
 names(met)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
@@ -127,7 +127,11 @@ trasf<-cbind(met_kmol_y,demet_kmol_y); str(trasf)
 write.csv(trasf, file='trasformazioni.csv')
 
 netto_prodotto_long<-met_kmol_y-demet_kmol_y
+netto_prodotto_TOT_long<-rowSums(netto_prodotto_long)
+
 write.csv(netto_prodotto_long, file='mehg_prodotto_kmol_y.csv')
+
+
 
 met_kmol_y_media <-as.numeric(lapply(met_kmol_y ,rep(1:(length(met_kmol_y)/12),each=12), mean))
 
@@ -146,12 +150,12 @@ demet_kmol_y<-data.frame(OL_demet_kmol_y_media, SOL_demet_kmol_y_media, AOL_deme
 netto_prodotto_OL  <-(OL_met_kmol_y_media - OL_demet_kmol_y_media) 
 netto_prodotto_SOL <-(SOL_met_kmol_y_media- SOL_demet_kmol_y_media) 
 netto_prodotto_AOL <-(AOL_met_kmol_y_media- AOL_demet_kmol_y_media) 
-netto<-netto_prodotto_OL+netto_prodotto_SOL+netto_prodotto_AOL
+netto<-netto_prodotto_OL+netto_prodotto_SOL+netto_prodotto_AOL; mean(tail(netto,12))
 netto_prodotto<-data.frame(netto_prodotto_OL,netto_prodotto_SOL, 
                   netto_prodotto_AOL, netto)
 
 write.csv(netto_prodotto, file='netto_prodotto_1.csv')
-
+write.table(netto, file='netto_TOT.txt')
 plot(netto_prodotto_OL);abline(h=2.9)
 plot(netto_prodotto_SOL);abline(h=2.9)
 plot(netto_prodotto_AOL);abline(h=2.9)

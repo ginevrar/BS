@@ -2,7 +2,6 @@ setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0")
 input_hg1 <-read.table("input_hg.txt", header=TRUE);
 head(input_hg1,1)
 
-
 setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 
 mehg_prodotto_kmol_y<-read.csv('mehg_prodotto_kmol_y.csv'); str(mehg_prodotto_kmol_y)
@@ -116,7 +115,8 @@ inflow_m3_y<-(inflow *60*60*24*365); inflow_L_y<-inflow_m3_y*1000
 mehgT_inflow_g_y<-(bound *inflow_L_y)/10^9  #ngL*L/y->ng/y/10^9->g/y
 mehgT_inflow_kmol_y<-mehgT_inflow_g_y/(215*1000) 
 
-Input_terms<-(river_mehg_kmol_y + mehgT_inflow_kmol_y + diffusion_kmol_y+ mehg_prodotto_kmol_y_TOT); str(Input_terms); summary(Input_terms)
+Input_terms<-(river_mehg_kmol_y + mehgT_inflow_kmol_y + 
+                diffusion_kmol_y+ mehg_prodotto_kmol_y_TOT); str(Input_terms); summary(Input_terms)
 diffe<-(Input_terms-Output_terms); summary(diffe)
 diff_media   <-tapply(diffe,rep(1:(length(diffe)/12),each = 12), mean); cumulative_diff_kmol<-cumsum(diff_media); tail(cumulative_diff_kmol,1)
 
@@ -128,7 +128,9 @@ Output_terms_media  <-as.numeric(output_media)
 cum_in<-cumsum(input_media); summary(cum_in)
 cum_out<-cumsum(output_media); summary(cum_out)
 
-net_sed_input1<-(depo_Pmehg_kmol_y-burial1_kmol_y-diffusion_kmol_y+diffusion_sed_to_sed_kmol_y) 
+plot(depo_Pmehg_kmol_y)
+net_sed_input1<-(depo_Pmehg_kmol_y-burial1_kmol_y-diffusion_kmol_y+
+                   diffusion_sed_to_sed_kmol_y) 
 
 river_mehg_kmol_y_media    <-as.numeric(tapply(river_mehg_kmol_y,rep(1:(length(river_mehg_kmol_y)/12), each = 12), mean))
 mehgT_inflow_kmol_y_media  <-as.numeric(tapply(mehgT_inflow_kmol_y,rep(1:(length(mehgT_inflow_kmol_y)/12), each = 12), mean))

@@ -129,7 +129,12 @@ write.csv(trasf, file='trasformazioni.csv')
 netto_prodotto_long<-met_kmol_y-demet_kmol_y
 netto_prodotto_TOT_long<-rowSums(netto_prodotto_long)
 
+metilato   <-rowSums(met_kmol_y)
+demetilato <-rowSums(demet_kmol_y)
+
 write.csv(netto_prodotto_long, file='mehg_prodotto_kmol_y.csv')
+write.csv(demetilato, file='demetilato.csv')
+write.csv(metilato, file='metilato.csv')
 
 
 

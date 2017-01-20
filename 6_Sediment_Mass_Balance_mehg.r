@@ -178,8 +178,10 @@ m3_PW1     <-Vol_Sed1_m3-m3_sed1;       m3_PW2<-Vol_Sed2_m3-m3_sed2
 PW1_L      <- m3_PW1*1000;              PW2_L<- m3_PW2*1000
 
 bulk1<-bulkD$Sed1;bulk2<-bulkD$Sed2
-dryd1<-0.104;dryd2<-0.78
+dryd1<-0.097;dryd2<-0.2425
+
 porosity1<-bulk1-dryd1;porosity2<-bulk2-dryd2
+
 Diffusion_coeff<-10^-9             #m2/s
 DF<-Diffusion_coeff*60*60*24       #m2/day
 #     ng/L to g/m3

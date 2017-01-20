@@ -108,11 +108,7 @@ burial_sed1  <-burial$Sed1;     burial_sed2 <-burial$Sed2  #cm/y
 
 solids_w  <-TOTs$Anoxic3
 
-par(mfrow=c(1,2))
-plot(SEDmehg_sed1 , main="MeHg sed, ng/g")
-plot(SEDmehg_sed2 , main="MeHg sed, ng/g"); tail(SEDmehg_sed1);tail(SEDmehg_sed2);
-
-MeHg_sed1_ngm3 <- solids_sed1 *SEDmehg_sed1  #ng/g*g/m3
+MeHg_sed1_ngm3  <- solids_sed1 *SEDmehg_sed1  #ng/g*g/m3
 MeHg_sed2_ngm3  <- solids_sed2 *SEDmehg_sed2 
 MeHg_sed1_gm3   <-MeHg_sed1_ngm3/10^9         #mg/m3->g/m3 hgP
 MeHg_sed2_gm3   <-MeHg_sed2_ngm3/10^9
@@ -150,12 +146,12 @@ fPOM<-mean(POMs$Anoxic3/TOTs$Anoxic3, na.rm=TRUE)
 fsilt<-mean(silts$Anoxic3/TOTs$Anoxic3, na.rm=TRUE)
 
 depo_media1<-(POM_depo_1_day*fPOM+silt_depo_1_day*fsilt)  #1/day
-mean(depo_media1)
+mean(depo_media1) # 0.005 /d
 
-depo_Pmehg_ug_m3_d<-depo_media1*Pmehgs$Anoxic3    #1/day *ug/m3 ->ug/m3d
-depo_Pmehg_g_d    <-(depo_Pmehg_ug_m3_d*Vol_anox3)/10^6   #ug/m3d
-depo_Pmehg_mol_d  <-depo_Pmehg_g_d/200.59
-depo_Pmehg_kmol_y <-(depo_Pmehg_mol_d/1000)*365
+depo_Pmehg_ug_m3_d <-depo_media1*Pmehgs$Anoxic3    #1/day *ug/m3 ->ug/m3d
+depo_Pmehg_g_d     <-(depo_Pmehg_ug_m3_d*Vol_anox3)/10^6   #ug/m3d
+depo_Pmehg_mol_d   <-depo_Pmehg_g_d/215
+depo_Pmehg_kmol_y  <-(depo_Pmehg_mol_d/1000)*365
 plot(depo_Pmehg_kmol_y)
 
 media1_depo_kmol_y <-tapply(depo_Pmehg_kmol_y,rep(1:(length(depo_Pmehg_kmol_y)/12),each = 12), mean)
@@ -167,15 +163,22 @@ summary(cum_depo)
 #DIFFUSIONE
 Oxic1_vol_m3 <- 5.9E+12  
 Oxic1_vol_L <-Oxic1_vol_m3*1000
-Vol_Sed1_m3<-volumes$Sed1*10^6; str(Vol_Sed1_m3)
-Vol_Sed2_m3<-volumes$Sed2*10^6;  str(Vol_Sed2_m3); plot(Vol_Sed2_m3)
+Vol_Sed1_m3<-volumes$Sed1 *10^6;  str(Vol_Sed1_m3)
+Vol_Sed2_m3<-volumes$Sed2 *10^6;  str(Vol_Sed2_m3); plot(Vol_Sed2_m3)
 
-Sed1_g_m3  <- TOTs$Sed1;              Sed2_g_m3 <- TOTs$Sed2
+Sed1_g_m3  <- TOTs$Sed1;              	Sed2_g_m3 <- TOTs$Sed2
 Sed1_g     <-Sed1_g_m3*Vol_Sed1_m3;     Sed2_g<-Sed2_g_m3*Vol_Sed2_m3
-cm3_sed1   <-Sed1_g/2.65;               cm3_sed2<-Sed2_g/2.65
-m3_sed1    <-cm3_sed1/10^6;              m3_sed2<-cm3_sed2/10^6
+cm3_sed1   <-Sed1_g/2.43;               cm3_sed2<-Sed2_g/2.43
+m3_sed1    <-cm3_sed1/10^6;             m3_sed2<-cm3_sed2/10^6
 m3_PW1     <-Vol_Sed1_m3-m3_sed1;       m3_PW2<-Vol_Sed2_m3-m3_sed2
 PW1_L      <- m3_PW1*1000;              PW2_L<- m3_PW2*1000
+
+mehg_kg_s1<-tail(MeHg_sed1_ngm3*m3_sed1/10^12)
+mehg_kg_s2<-tail(MeHg_sed2_ngm3*m3_sed2/10^12)
+
+mehg_kmol_s1<-mehg_kg_s1/215
+mehg_kmol_s2<-hg_kg_s2/215;mehg_kmol_s2
+mehg_kmol_s2+mehg_kmol_s1
 
 bulk1<-bulkD$Sed1;bulk2<-bulkD$Sed2
 dryd1<-0.097;dryd2<-0.2425
@@ -201,6 +204,7 @@ par(new=TRUE)
 plot(PWmehg2_ngL, col="brown",type="l", ylim=c(0,1.3), ylab="ng/L")
 legend(0,1.2,pch=19, col=c("darkblue", "orange", "brown"), 
        legend=c("deep w", "PW1", "PW2"))
+	   
 PWmehg1_ng<-PWmehg1_ngL*PW1_L
 PWmehg2_ng<-PWmehg2_ngL*PW2_L
 PWmehg1_g<-PWmehg1_ng/10^9
@@ -228,7 +232,7 @@ term1b<-(DF*Model_area*porosity2)/(0.05/porosity2)
 term2b<-(PWmehg2_gm3/porosity2)-(PWmehg1_gm3/porosity1)  #sempre < 0 (giu - da sed1 a sed2)
 diffusion_sed_to_sed_g_day<-term1b*term2b   #g/day
 
-diffusion_sed_to_sed_kmol_day<-diffusion_sed_to_sed_g_day/(200.49*1000)
+diffusion_sed_to_sed_kmol_day<-diffusion_sed_to_sed_g_day/(215*1000)
 diffusion_sed_to_sed_kmol_y<-diffusion_sed_to_sed_kmol_day*365
 diffusion_sed_to_sed_kmol_y_media<-tapply(diffusion_sed_to_sed_kmol_y,rep(1:(length(diffusion_sed_to_sed_kmol_y)/12),each = 12), mean)
 diffusion_sed_to_sed_kmol_cumul<-cumsum(diffusion_sed_to_sed_kmol_y_media)
@@ -244,3 +248,7 @@ write.csv(sed_balance, file="aasediment_input_output_medie_mehg.csv")
 write.csv(sed_balance_long , file="aasediment_input_output_mehg.csv")
 
 getwd()
+
+par(mfrow=c(1,2))
+plot(SEDmehg_sed1 , main="MeHg sed, ng/g")
+plot(SEDmehg_sed2 , main="MeHg sed, ng/g"); tail(SEDmehg_sed1);tail(SEDmehg_sed2);

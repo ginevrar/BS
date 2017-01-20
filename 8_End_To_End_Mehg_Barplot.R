@@ -1,11 +1,9 @@
 
 setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
-
 demtilato<-read.csv(file='demetilato.csv')
 
 #leggo outpout sim per ogni sim partita a ore diverse
 ore1  <-read.table("water_input_output_mehg_1", header=TRUE, sep=","); str(ore1)
-
 
 diffusion_kmol_y<-cbind(ore1$diffusion_kmol_y_media)
 
@@ -20,7 +18,7 @@ river_mehg_kmol_y<-ore1$river_mehg_kmol_y_media
 
 mehg_prodotto_kmol_y<-ore1$mehg_prodotto_kmol_y_media
 Output_terms<-(depo_Pmehg_kmol_y+mehgT_outflow_kmol_y-diffusion_kmol_y)
-Input_terms<-(mehgT_inflow_kmol_y + river_mehg_kmol_y +mehg_prodotto_kmol_y)
+Input_terms <-(mehgT_inflow_kmol_y + river_mehg_kmol_y +mehg_prodotto_kmol_y)
 
 Output_terms[2:164]; 
 Input_terms[2:164];
@@ -68,7 +66,7 @@ par(mfrow=c(1,1))
 plot(ax2, cumulative_diff_kmol, main="Cumulative net input to the Black Sea Water",
      ylab="kmol", xlab=" ", col="violetred1",type="b",lwd="2", ylim=c(0,380))
 
-Output_terms<-(depo_Pmehg_kmol_y+mehgT_outflow_kmol_y + diffusion_kmol_y)
+Output_terms<-(depo_Pmehg_kmol_y+mehgT_outflow_kmol_y)
 Input_terms<-(mehgT_inflow_kmol_y +river_mehg_kmol_y  +mehg_prodotto_kmol_y+ diffusion_kmol_y)
 
 dev.new(height=100,width=200)
@@ -133,8 +131,14 @@ tot_out<-mean(tail(Output_terms,3))
 str(f_MB_water)
 groups <- dimnames(f_MB_water)[[2]]
 neg<-cbind(f_MB_sed_depo, f_MB_outflow,0,0)   
-pos<-cbind(f_MB_river,  f_MB_inflow, f_MB_met, f_MB_diffusion) # f_MB_met,#f_MB_demet,
+pos<-cbind(f_MB_river, f_MB_inflow, f_MB_met, f_MB_diffusion) # f_MB_met,#f_MB_demet,
+tot_in-f_MB_met
 
+f_MB_sed_depo/tot_out*100
+f_MB_outflow/tot_out*100
+f_MB_river/(tot_in-f_MB_met)*100
+f_MB_inflow/(tot_in-f_MB_met)*100
+f_MB_diffusion/(tot_in-f_MB_met)*100
 
 neg2<-cbind(f_MB_burial2, f_MB_diffusion, 0,f_MB_sed_depo,0, f_MB_outflow)   
 pos2<-cbind(f_MB_sed_depo, 0,f_MB_diffusion,  f_MB_river, f_MB_met, f_MB_inflow) # f_MB_met,#f_MB_demet,

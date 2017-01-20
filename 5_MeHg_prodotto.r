@@ -131,6 +131,16 @@ netto_prodotto_TOT_long<-rowSums(netto_prodotto_long)
 
 metilato   <-rowSums(met_kmol_y)
 demetilato <-rowSums(demet_kmol_y)
+mean(tail(metilato,36))
+mean(tail(demetilato,36))
+
+mean(tail(met_kmol_y_OL,12))/mean(tail(metilato,12))*100
+mean(tail(met_kmol_y_SOL,12))/mean(tail(metilato,12))*100
+mean(tail(met_kmol_y_AOL,12))/mean(tail(metilato,12))*100
+
+mean(tail(demet_kmol_y_OL,12))/mean(tail(demetilato,12))*100
+mean(tail(demet_kmol_y_SOL,12))/mean(tail(demetilato,12))*100
+mean(tail(demet_kmol_y_AOL,12))/mean(tail(demetilato,12))*100
 
 write.csv(netto_prodotto_long, file='mehg_prodotto_kmol_y.csv')
 write.csv(demetilato, file='demetilato.csv')

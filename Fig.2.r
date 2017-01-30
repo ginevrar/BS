@@ -294,8 +294,6 @@ rect(0, 10.5 , 1.2,15.64 , density = NULL, angle = 45,
 rect(0, 14.25 , 1.2,15.28 , density = NULL, angle = 45, 
      col = '#ffffd922', border = '#e8e888', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
-
-
 rect(0, 16.2 ,  1.2,17.04 , density = NULL, angle = 45, 
      col = '#d2c7c722', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
      xpd = NULL)

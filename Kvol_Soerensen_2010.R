@@ -54,11 +54,10 @@ library(marelac) # Function viscosity calculates the shear
  fr     <-(ScHg0/ScCO2)^-.5  # [m/hr-1]
  kvol  <-A*(u^2)*fr     # range 0 -8 
  plot( kvol, type='l')
-mean(kvol)  #2.7
+mean(kvol)  #2.7   # comparable to k (m/day) in Rolfhus and fitz 2001
 plot( kvol, Tc)
-lm(kvol ~ Tc)
-sigma<-1.1
-  
+
+
   
   setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/Deposizione_atm")
 write.table(kvol, file='kvol_soerensen_2010.txt')
@@ -78,4 +77,21 @@ k_Hg_cm_h<-(k_Hg*100)/60*60
 #from rolfhus et fitzg 2001
 w<-5
 u<-sqrt(w)
-kvol_wannikof<-2.8*10^-6*(2.8*w-9.6)*((ScHg0/600)^-1/2)
+kvol_wannikof<-0.31*w^2*((ScHg0/600)^-1/2)  #cm/h
+kvol_wannikof*24 #m/day
+
+
+BS_surf<-2.961E+11
+evasion<-5     #kmol/y
+a<-evasion/BS_surf #kmol/m2y 
+b<-a*10^3 #mol/m2y 
+evasion_pmol_m2_d<-b*10^12/365 #pmol/m2d
+evasion_pmol_m2_d
+
+
+# Hg0 evasion compiled b ysoerensen et al 2013
+ev_ng_m2_h<-c(1.9,0.1,1.67,5.57,0.8,2.86)
+
+ev_pmol_m2_d<-ev_ng_m2_d*24/200.59*1000
+mean(ev_pmol_m2_d)
+range(ev_pmol_m2_d)

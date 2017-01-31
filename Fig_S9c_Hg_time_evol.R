@@ -28,7 +28,11 @@ mehgT<-mehgT[2:1969,1:12]
 hgT<-read.csv('Total_Hg.csv', header=FALSE, skip = 1,sep = ",", dec=".")
 names(hgT)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
 hgT<-hgT[2:1969,1:12]
+Temp<-read.csv('Segment_Temperature.csv', header=FALSE, skip = 1,sep = ",", dec=".")
+names(Temp)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
+Temp<-Temp[2:1969,1:12]
 
+Temp<-tail(Temp,36)
 
 hg0_fM<-tail(hg0,36)/200.59*10^6
 hg0a<-mean(hg0_fM$Oxic1)
@@ -42,6 +46,12 @@ hg0i<-mean(hg0_fM$Anoxic2)
 hg0l<-mean(hg0_fM$Anoxic3)
 hg0_layer<-c(hg0a,hg0b,hg0c,hg0d,hg0e,hg0f,hg0h,hg0i,hg0l)
 plot(hg0_layer)
+
+range(hg0_fM$Oxic1)
+plot(hg0_fM$Oxic1, xlim=c(0,36))
+par(new=T)
+plot(Temp$Oxic1, type='b',xlim=c(0,36))
+mean(hg0a)
 hg_inor_diss<-(DOChg+hg+hg0); tail(hg_inor_diss)
 mehgdiss<-(mehg+DOCmehg)
 tail(hg_inor_diss$Anoxic2)

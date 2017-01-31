@@ -35,82 +35,6 @@ summary(cum_out)
 
 
 
-dev.new(height=100,width=200)
-par(mfrow=c(1,1))
-plot(ax,atm_hg_kmol_y, col="cyan3", type="l",  ylim=c(-25,50), 
-     main="Input and Output of Hg to the water", ylab= "kmol/y", 
-     xlab= " ", lwd=2)
-par(new=TRUE)
-plot(ax, river_hg_kmol_y, col="darkgreen", type="l",  ylim=c(-25,50), 
-     ylab= " ",xlab= " ", lwd=2)
-par(new=TRUE)
-plot(ax, hgT_inflow_kmol_y, col="darkblue", type="l",  
-     ylim=c(-25,50), ylab= " ", xlab= " ", lwd=2)
-par(new=TRUE)
-plot(ax, diffusion_kmol_y, col="springgreen3", type="l", 
-     ylim=c(-25,50), ylab= " ", xlab= " ", lwd=2)
-par(new=TRUE)
-plot(ax, Input_terms, col="black", type="l", lty=2, 
-     ylim=c(-25,50), ylab= " ", xlab= " ", lwd=2)
-text(1900,6,'Atmospheric deposition',col='cyan3')
-text(1900,20,'Rivers load',col='darkgreen')
-text(1940,40,'Total Input',col=1)
-text(1990,3,'Inflow from Marmara Sea',col='darkblue')
-text(1920,2.6,'Diffusion from sediment',col='springgreen3')
-#legend(1850,50, pch=19, legend=c("Atmospheric deposition","Inflow from Marmara Sea",
-#                               "Rivers load","Pore-water diffusion","Total Input"), 
-#col=c("cyan3", "blue","darkgreen","springgreen3", "black"))
-par(new=TRUE)
-#dev.new(height=100,width=200)
-#par(mfrow=c(1,1))
-plot(ax, -evasione_kmol_y, col="cyan4", type="l", xlab= " ", ylim=c(-25,50), 
-     main=" ", ylab= "kmol/y", lwd=2)
-par(new=TRUE)
-plot(ax, -depo_Phg_kmol_y, col="orange", type="l", xlab= " ", ylim=c(-25,50), 
-     ylab= "kmol/y", lwd=2)
-par(new=TRUE)
-plot(ax, -hgT_outflow_kmol_y, col="royalblue", type="l",  ylim=c(-25,50),xlab= " ",
-     ylab= "kmol/y", lwd=2)
-par(new=TRUE)
-plot(ax, -Output_terms, col="black", type="l", lty=2, ylim=c(-25,50), 
-     xlab= " ", ylab= "", lwd=2)
-text(1920,-5,'Evasion',col='cyan4')
-text(1970,-10,'Deposition to the sediment',col='orange')
-text(1900,-18,'Total Output',col=1)
-text(1990,-6,'Outflow to Marmara Sea',col='royalblue')
-#text(1920,2.8,'Diffusion from sediment',col='springgreen3')
-#legend(1850,-22, col=c("cyan3","blue","orange","black"), pch=19, 
-#    legend=c("Volatilization","Outflow to the Marmara Sea",
-#          "Deposition to the sediment","Total Output")) 
-
-ax<-seq(1850,2013, by=1)
-str(ax)
-dev.new()
-par(mfrow=c(1,1))
-plot(ax,Output_terms,  col="palegreen2",
-     type="l",ylim=c(0,50), main="HgT input and output to the Black Sea Water",
-     ylab="kmol/y", xlab=" ")
-par(new=TRUE)
-plot(ax,Input_terms,col="tomato", type="l",ylim=c(0,50), ylab="kmol/y", xlab=" ")
-par(new=TRUE)
-plot(ax,diff,col="plum", type="l",ylim=c(0,50), ylab="kmol/y", xlab=" ")
-abline(h=0,lty=2, col="gray54")
-legend("topleft",legend=c("Input","Output","Difference"),
-       col=c("tomato","palegreen2","plum"),pch=19)
-
-ax2<-(seq(1850,2013,by=1))
-str(ax2)
-dev.new()
-par(mfrow=c(1,1))
-plot(ax2, cumulative_diff_kmol, main="Cumulative net input to the Black Sea Water",
-     ylab="kmol", xlab=" ", col="violetred1",type="l",lwd=2, ylim=c(0,4000))
-par(new=TRUE)
-plot(ax2, cum_in, main="Cumulative net input to the Black Sea Water",
-     ylab="kmol", xlab=" ", col="tomato",type="l",lwd="2", ylim=c(0,4000))
-par(new=TRUE)
-plot(ax2, cum_out, main="Cumulative net input to the Black Sea Water",
-     ylab="kmol", xlab=" ", col="palegreen2",type="l",lwd="2", ylim=c(0,4000))
-#Output_terms     
 
 # bILANCIO ULTIMI 3 aNNI
 f_MB_depo_atm<-mean(tail(atm_hg_kmol_y,3)); plot(f_MB_depo_atm)
@@ -133,6 +57,57 @@ str(f_MB_water)
 groups <- dimnames(f_MB_water)[[2]]
 neg<-cbind(f_MB_sed_depo, f_MB_evasion,  f_MB_outflow, zero)
 pos<-cbind(f_MB_river, f_MB_depo_atm,  f_MB_inflow, f_MB_diffusion)
+
+neg2<-cbind(f_MB_burial2, f_MB_diffusion, 0,f_MB_sed_depo, f_MB_outflow,f_MB_evasion )   
+pos2<-cbind(f_MB_sed_depo, 0,f_MB_diffusion,  f_MB_river, f_MB_inflow,f_MB_depo_atm) # f_MB_met,#f_MB_demet,
+
+
+#
+#@
+######## - BARPLOT ACQUE E SEDIMENTI INSIEME
+dev.new(height=200, width=100)
+par(mar=c(0.5, 3, 2.5, 1), mfrow=c(1,1))  #bottom-left-top-right
+plot.new()
+plot.window(xlim=c(-31, 31), ylim=c(-1, 6))
+ticks <- seq(-30,30,10)
+y <- c(.5,1.5,2.5,3.5,4.5,5.5) 
+h <- 0.15
+### aggiungere produzione interna e degradazione  m
+lines(rep(0, 2), c(0, 6), col="grey")
+segments(-31, y, 31, y, lty="dotted", col="grey")  #linee orizzontali 
+
+rect(-neg2, y-h, 0, y+h, col=c("darkorange1","darkorange1",
+                               "cyan3","cyan3","cyan3","cyan3"))
+rect(0, y-h, pos2, y+h, col=c('#fdd49e','#fdd49e',"lightcyan2",
+                              "lightcyan2","lightcyan2",
+                              "lightcyan2"))
+text(12,.8, expression("Hg"[P]*~"Deposition \n to the Sediment"))
+text(-12,3.9, expression("Hg"[P]*~"Deposition \n to the Sediment"))
+text(-7.50,4.7, expression("Hg"[T]*~"Outflow"))
+text(12,3.9,  expression("Hg"[T]*~"Rivers Load"))
+text(7,4.7, expression("Hg"[T]*~"Inflow"))
+text(7,2.8, expression("Hg"[D]*~"Diffusion"))
+text(-7,1.8, expression("Hg"[D]*~"Diffusion"))
+text(-8,.8, expression("Hg"[P]*~"Burial"))
+text(-10,5.9, expression("Hg"^0*~'Volatilization'))
+text(10,5.9, expression("Hg"^II*~'Deposition'))
+title("Hg Budget in the Black Sea [kmol/y]")
+par(cex.axis=1, mex=0.5)
+axis(1, at=ticks, labels=(ticks), pos=0)
+tw <- 1.5*strwidth("neg")
+segments(-31, 2.2, 31, 2.2, lty=2, col="black") 
+text(25,6, "Water", cex=1.2, font=4, col='cyan4')
+text(25,1.9, "Sediment", cex=1.2, font=4, col='darkorange1')
+text(-15, -0.6, "Output", font=2, pos=2)
+text(15, -0.6, "Input", font=2,pos=4)
+
+
+
+
+
+
+
+
 
 #BAR PLOT figone
 win.graph()

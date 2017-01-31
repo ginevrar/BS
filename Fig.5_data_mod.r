@@ -96,15 +96,15 @@ names(mehgT)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2
 
 # dati utimo anno
 
-fine_hgT<-hgT[1968:1979,]
-fine_hg<- hg [1968:1979,]
-fine_Phg<- Phg [1968:1979,]
-fine_DOChg<- DOChg [1968:1979,]
-fine_DOCmehg<- DOCmehg [1968:1979,]
-fine_mehg<- mehg [1968:1979,]
-fine_hg0<- hg0 [1968:1979,]
-fine_mehgT<- mehgT [1968:1979,]
-fine_solids<- solids [1968:1979,]
+fine_hgT<-hgT[1957:1968,]
+fine_hg<- hg [1957:1968,]
+fine_Phg<- Phg [1957:1968,]
+fine_DOChg<- DOChg [1957:1968,]
+fine_DOCmehg<- DOCmehg [1957:1968,]
+fine_mehg<- mehg [1957:1968,]
+fine_hg0<- hg0 [1957:1968,]
+fine_mehgT<- mehgT [1957:1968,]
+fine_solids<- solids [1957:1968,]
 
 hgII_pM<-(hg+DOChg0+DOChg)/200.59*1000
 tail(hgII_pM,3)
@@ -238,11 +238,11 @@ mean(disshg_pM[1:4])
 
 
 ##-----SEDIMENT conc
-hgT_fine<-hgT[1968:1979, 1:13]
+hgT_fine<-hgT[1957:1968, 1:13]
 b<-mean(hgT_fine$Sed1/200.59*1000);b
 c<-mean(hgT_fine$Sed2/200.59*1000);c
 
-mehgT_fine<-mehgT[1968:1979, 1:13]
+mehgT_fine<-mehgT[1957:1968, 1:13]
 d<-mean(mehgT_fine$Sed1/200.59*1000)
 e<-mean(mehgT_fine$Sed2/200.59*1000)
 

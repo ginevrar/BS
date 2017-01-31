@@ -69,33 +69,37 @@ plot(ax2, cumulative_diff_kmol, main="Cumulative net input to the Black Sea Wate
 Output_terms<-(depo_Pmehg_kmol_y+mehgT_outflow_kmol_y)
 Input_terms<-(mehgT_inflow_kmol_y +river_mehg_kmol_y  +mehg_prodotto_kmol_y+ diffusion_kmol_y)
 
-dev.new(height=100,width=200)
+
+dev.new()
 par(mfrow=c(1,1))
-plot(ax, river_mehg_kmol_y, col="darkgreen", type="l",  ylim=c(-7,7), ylab= " ",
-     xlab= " ", lwd=2, lty=1)
+plot(ax, river_mehg_kmol_y, col="darkgreen", type="l",
+     ylim=c(-7,7), ylab= " ", yaxt='n', xaxt='n',
+     xlab= " ", yaxt='n', xaxt='n',lwd=2, lty=1)
 par(new=TRUE)
 plot(ax, mehgT_inflow_kmol_y, col="darkblue", lwd=2, type="l", 
-     ylim=c(-7,7), ylab= " ",     xlab= " ", lty=1)
+     ylim=c(-7,7), ylab= " ", yaxt='n', xaxt='n',xlab= " ", lty=1)
 par(new=TRUE)
 plot(ax, diffusion_kmol_y, col="springgreen3", lwd=2, type="l",  ylim=c(-7,7), ylab= " ",
-     xlab= " ")
+     yaxt='n', xaxt='n',xlab= " ")
 par(new=TRUE)
 plot(ax, Input_terms, col="black", type="l", lty=2, lwd=2, ylim=c(-7,7), ylab= " ",
-     xlab= " ")
+     yaxt='n', xaxt='n',xlab= " ")
 par(new=TRUE)
 plot(ax, mehg_prodotto_kmol_y, col="hotpink3", type="l", lty=1, 
-     lwd=2, ylim=c(-7,7), ylab= " ",     xlab= " ")
+     lwd=2, ylim=c(-7,7), ylab= " ", yaxt='n', xaxt='n',    xlab= " ")
 #&legend(1850,2.8, pch=19,box.col="lightgray",  legend=c("Inflow from Marmara Sea","Rivers load","Pore-water diffusion","Total Input"), 
 #col=c( "blue","darkgreen","springgreen3", "black"))
 #dev.new(height=100,width=200)
 #par(mfrow=c(1,1))
 par(new=TRUE)
 plot(ax, -depo_Pmehg_kmol_y, main="Input and Output of MeHg to the water", col="orange",
-     type="l", xlab= " ", ylim=c(-7,7), ylab= "kmol/y", lwd=2)
+     type="l", xlab= " ",yaxt='n', xaxt='n', ylim=c(-7,7), ylab= "kmol/y", lwd=2)
 par(new=TRUE)
-plot(ax, -mehgT_outflow_kmol_y, col="royalblue", type="l",lwd=2, ylim=c(-7,7),xlab= " ", ylab= "kmol/y")
+plot(ax, -mehgT_outflow_kmol_y, col="royalblue", type="l",yaxt='n', xaxt='n',
+     lwd=2, ylim=c(-7,7),xlab= " ", ylab= "kmol/y")
 par(new=TRUE)
-plot(ax, -Output_terms, col="black", type="l", lty=2, ylim=c(-7,7), xlab= " ", ylab= "", lwd=2)
+plot(ax, -Output_terms, col="black", type="l", lty=2, 
+     ylim=c(-7,7), xlab= " ", ylab= "", lwd=2)
 #legend(1850,0.22, col=c("blue","orange","black"), pch=19, 
 #legend=c("Outflow to the Marmara Sea",
 #          "Deposition to the sediment","Total Output")) 
@@ -103,7 +107,7 @@ text(1940,6,'Total input', col=1)
 text(1975,3.5,'Internal \n net production', col='hotpink3')
 text(1920,.4,'Inflow from Marmara', col='darkblue')
 text(1920,-.4,'Outflow from Marmara', col='royalblue')
-text(1980,.8,'Diffusion from sediment', col='springgreen3')
+text(1985,.8,'Diffusion from sediment', col='springgreen3')
 text(1900,1.5,'Rivers load', col='darkgreen')
 text(1940,-4,'Total output', col=1)
-text(1990,-3,'Deposition to \n the sediment', col='orange')
+text(1990,-2.5,'Deposition to \n the sediment', col='orange')

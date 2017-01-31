@@ -48,28 +48,28 @@ dev.new()
 par(mfrow=c(1,1)) 
 plot(ax2, hgdiss_pM_mean$Oxic1, col="deepskyblue", ylab=" ", ylim=c(0,.9),
      xlab=" ", main=expression("Concentrations of MeHg"[D]*" in the model layers"),
-     type="l",lwd=2,lty=1)
+     type="l",lwd=2,lty=1, xaxt='n', yaxt='n')
 par(new=TRUE)
 plot(ax2, hgdiss_pM_mean$Oxic2, ylim=c(0,.9), col="dodgerblue", 
-     ylab="Hg (pM)", xlab=" ", type="l",lwd=2,lty=2)
+     ylab="MeHg (pM)", xlab=" ", type="l",lwd=2,lty=2, xaxt='n', yaxt='n')
 par(new=TRUE)
 plot(ax2, hgdiss_pM_mean$CIL, ylim=c(0,.9), col="#225ea8", ylab=" ", 
-     xlab=" ", type="l",lwd=2,lty=3)
+     xlab=" ", type="l",lwd=2,lty=3, xaxt='n', yaxt='n')
 par(new=TRUE)
 plot(ax2, hgdiss_pM_mean$Oxycline, ylim=c(0,.9), col="#bdbdbd", 
-     ylab=" ", xlab="Time (years)", type="l",lwd=2,lty=4)
+     ylab=" ", xlab="Time (years)", type="l",lwd=2,lty=4, xaxt='n', yaxt='n')
 par(new=TRUE) 
 plot(ax2, hgdiss_pM_mean$Suboxic1, ylim=c(0,.9), col="#addd8e", 
-     ylab="   ", xlab="   ", type="l",lwd=2,lty=5) 
+     ylab="   ", xlab="   ", type="l",lwd=2,lty=5, xaxt='n', yaxt='n') 
 par(new=TRUE)
 plot(ax2, hgdiss_pM_mean$Suboxic2, ylim=c(0,.9), col="#41ab5d", 
-     ylab=" ", xlab=" ", type="l",lwd=2,lty=1) 
+     ylab=" ", xlab=" ", type="l",lwd=2,lty=1, xaxt='n', yaxt='n') 
 par(new=TRUE)
 plot(ax2, hgdiss_pM_mean$Anoxic, ylim=c(0,.9), col="#feb24c", 
-     ylab=" ", xlab=" ", type="l",lwd=2,lty=2)
+     ylab=" ", xlab=" ", type="l",lwd=2,lty=2, xaxt='n', yaxt='n')
 par(new=TRUE)
 plot(ax2, hgdiss_pM_mean$Anoxic2,  ylim=c(0,.9), col="#fc4e2a", 
-     ylab=" ", xlab=" ", type="l",lwd=2,lty=3)
+     ylab=" ", xlab=" ", type="l",lwd=2,lty=3, xaxt='n', yaxt='n')
 par(new=TRUE)
 plot(ax2, hgdiss_pM_mean$Anoxic3, ylim=c(0,.9), col="#800026", 
      ylab=" ", xlab=" ", type="l",lwd=2,lty=4)

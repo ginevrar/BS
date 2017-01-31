@@ -58,9 +58,7 @@ mean(kvol)  #2.7
 plot( kvol, Tc)
 lm(kvol ~ Tc)
 sigma<-1.1
-    kvol_adj<-kvol*sigma^(Tc-20)
-    plot( kvol_adj, type='l')
-
+  
   
   setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/Deposizione_atm")
 write.table(kvol, file='kvol_soerensen_2010.txt')
@@ -76,3 +74,8 @@ k_CO2=(0.1+2.26)*u    #bouchet et al. 2011
 k_Hg<-k_CO2*fr           #[m/s]
 mean(k_Hg)              #
 k_Hg_cm_h<-(k_Hg*100)/60*60 
+
+#from rolfhus et fitzg 2001
+w<-5
+u<-sqrt(w)
+kvol_wannikof<-2.8*10^-6*(2.8*w-9.6)*((ScHg0/600)^-1/2)

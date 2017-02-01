@@ -22,7 +22,7 @@
 #  sim 1850 - 2050
 #
 setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0")
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0")
+setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 atm_hg<-read.table("atm_hg.txt", header = F); str(atm_hg)
 atm_hg0<-atm_hg$V1[1:1968]   # --- atm conc of hg0 -
 str(atm_hg0)

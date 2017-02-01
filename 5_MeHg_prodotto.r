@@ -176,4 +176,22 @@ plot(netto_prodotto_SOL);abline(h=2.9)
 plot(netto_prodotto_AOL);abline(h=2.9)
 plot(netto);abline(h=2.9)
 
+mean(tail(netto,12))
+mean(tail(netto_prodotto_OL,12))
+mean(tail(netto_prodotto_SOL,12))
+mean(tail(netto_prodotto_AOL,12))
 
+mean(tail(AOL_met_kmol_y_media,12))
+mean(tail(AOL_demet_kmol_y_media,12))
+
+a<-mean(tail(netto_prodotto_OL,12))+
+  mean(tail(netto_prodotto_SOL,12))+mean(tail(netto_prodotto_AOL,12))
+
+b<-a+1.64
+1/b*100
+.6/b*100
+.06/b*100
+
+(a/b*100)+(1/b)*100+(.06/b*100)+(.6/b*100)
+
+AOL_met_kmol_y_media

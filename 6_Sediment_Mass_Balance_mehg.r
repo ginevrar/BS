@@ -1,4 +1,4 @@
-setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
@@ -137,7 +137,6 @@ bb<-cbind(burial1_cumul,burial2_cumul)
 
 #DEPOSIZIONE Phg
 #depo m/day * depth(m) --> 1/day
-#depo m/day * g/m3     --> g/m2d
 
 Vol_anox3<-1E+14
 POM_depo_1_day<-POM_depos$Anoxic3/350
@@ -153,6 +152,18 @@ depo_Pmehg_g_d     <-(depo_Pmehg_ug_m3_d*Vol_anox3)/10^6   #ug/m3d
 depo_Pmehg_mol_d   <-depo_Pmehg_g_d/215
 depo_Pmehg_kmol_y  <-(depo_Pmehg_mol_d/1000)*365
 plot(depo_Pmehg_kmol_y)
+
+surf<-Vol_anox3/350
+#depo m/day * g/m3     --> ug/m2d
+depo2<-POM_depos$Anoxic3*Pmehgs$Anoxic3*surf #ug/d
+u<-mean(tail(depo2,12)/10^9)   #kg/d
+depo22<-silt_depos$Anoxic3*Pmehgs$Anoxic3*surf #ug/d
+uu<-mean(tail(depo22,12)/10^9)
+
+depo_new_kg_d<-fPOM*u + (fsilt*uu)
+depo_new_kmol<-depo_new_kg_d/200.59
+depo_new_kmol_y<-depo_new_kmol*365
+
 
 media1_depo_kmol_y <-tapply(depo_Pmehg_kmol_y,rep(1:(length(depo_Pmehg_kmol_y)/12),each = 12), mean)
 plot(media1_depo_kmol_y)
@@ -251,4 +262,4 @@ getwd()
 
 par(mfrow=c(1,2))
 plot(SEDmehg_sed1 , main="MeHg sed, ng/g")
-plot(SEDmehg_sed2 , main="MeHg sed, ng/g"); tail(SEDmehg_sed1);tail(SEDmehg_sed2);
+plot(SEDmehg_sed2 , main="MeHg sed, ng/g"); tail(SEDmehg_sed1);tail(SEDmehg_sed2)

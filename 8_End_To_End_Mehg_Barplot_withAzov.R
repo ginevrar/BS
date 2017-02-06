@@ -57,8 +57,8 @@ f_MB_outflow/tot_out*100
 f_MB_azov/(tot_in)*100
 f_MB_inflow/(tot_in)*100
 f_MB_diffusion/(tot_in)*100
-neg2<-cbind(f_MB_burial2, f_MB_diffusion,f_MB_sed_depo,0,0, f_MB_outflow)   
-pos2<-cbind(f_MB_sed_depo, f_MB_diffusion,  f_MB_river,  f_MB_met,f_MB_azov, f_MB_inflow) # f_MB_met,#f_MB_demet,
+neg2<-cbind(f_MB_burial2, f_MB_diffusion,f_MB_sed_depo,0, f_MB_outflow,0)   
+pos2<-cbind(f_MB_sed_depo, f_MB_diffusion,  f_MB_river,  f_MB_azov, f_MB_inflow,f_MB_met) # f_MB_met,#f_MB_demet,
 
 #BAR PLOT figone ACQUE E SEDIMENTI INSIEME
 dev.new(height=200, width=100)
@@ -80,11 +80,11 @@ text(2,1, expression("MeHg"[P]*~"Deposition"))
 text(2,.8,"to the Sediment")
 text(-2,3, expression("MeHg"[P]*~"Deposition"))
 text(-2,2.8,"to the Sediment")
-text(-1.50,5.7, expression("MeHg"[T]*~"Outflow"))
+text(-1.50,4.8, expression("MeHg"[T]*~"Outflow"))
 text(2,2.9,  expression("MeHg"[T]*~"Rivers Load"))
-text(1.5,5.7, expression("MeHg"[T]*~"Inflow"))
-text(2.1,3.9, expression("Net methylated MeHg"))
-text(2.1,4.9, expression("MeHg"[T]*~"Azov Sea Load"))
+text(1.5,4.8, expression("MeHg"[T]*~"Inflow"))
+text(2.1,5.8, expression("Net methylated MeHg"))
+text(2.1,3.8, expression("MeHg"[T]*~"Azov Sea Load"))
 text(1.6,1.8, expression("MeHg"[D]*~"Diffusion"))
 text(-1.6,1.8, expression("MeHg"[D]*~"Diffusion"))
 text(-1.8,.8, expression("MeHg"[P]*~"Burial"))
@@ -93,10 +93,10 @@ title(expression("MeHg"[T]*~"Budget in the Black Sea [kmol/y]"))
 par(cex.axis=1, mex=0.5)
 axis(1, at=ticks, labels=(ticks), pos=0)
 tw <- 1.5*strwidth("neg")
-segments(-5, 2, 5, 2, lty=2, col="black") 
+segments(-5, 1.5, 5, 1.5, lty=2, col="black") 
 text(-4.1,5.7, "Water", cex=1.2, font=4, col='cyan4')
 text(-4.1,1.4, "Sediment", cex=1.2, font=4, col='darkorange1')
-text(4,2, "Sediment - Water \n Interface", cex=1.1, font=3, col='black')
+text(4,1.5, "Sediment - Water \n Interface", cex=1.1, font=3, col='black')
 text(-3, -0.6, "Output", pos=2, font=2)
 text(3, -0.6, "Input", pos=4, font=2)
 

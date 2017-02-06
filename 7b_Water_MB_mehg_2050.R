@@ -1,65 +1,74 @@
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0")
 input_hg1 <-read.table("input_hg.txt", header=TRUE);
 head(input_hg1,1)
+in_2013<-rbind(input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8],
+               input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],
+               input_hg1[1957:1968,1:8])
+str(input_hg1$river_load_hgT_kg_d)
+str(in_2013$river_load_hgT_kg_d)
+latest<-rbind(in_2013,in_2013,in_2013); str(latest)
+input_hg1<-rbind.data.frame(input_hg1,latest,input_hg1[1957:1968,1:8])
+str(input_hg1$inflow_L_y)
 
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 
-mehg_prodotto_kmol_y<-read.csv('mehg_prodotto_kmol_y.csv'); str(mehg_prodotto_kmol_y)
+mehg_prodotto_kmol_y<-read.csv('mehg_prodotto_kmol_y_2050.csv'); str(mehg_prodotto_kmol_y)
 mehg_prodotto_kmol_y_TOT<-rowSums(mehg_prodotto_kmol_y[2:4])
+str(mehg_prodotto_kmol_y_TOT)
 #Leggi dati
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-             "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hg<-hg[2:1969,1:13]
-
+             "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hg<-hg[3:2414,1:13]
+str(hg$Oxic1)
 hgT<-read.csv("Total_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hgT)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hgT<-hgT[2:1969,1:13]
+              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hgT<-hgT[3:2414,1:13]
 
 DOChg<-read.csv("DOC_Sorbed_Divalent_Hg.csv", header=FALSE, skip =1, sep = ",", dec=".")
 names(DOChg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); DOChg<-DOChg[2:1969,1:13]
+                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); DOChg<-DOChg[3:2414,1:13]
 
 Phg<-read.csv("Total_Sorbed_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(Phg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); Phg<-Phg[2:1969,1:13]
+              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); Phg<-Phg[3:2414,1:13]
 
 SEDhg<-read.csv("Total_Sorbed_Divalent_Hg_Solids.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(SEDhg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); SEDhg<-SEDhg[2:1969,1:13]
+                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); SEDhg<-SEDhg[3:2414,1:13]
 
 mehg<-read.csv("Dissolved_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(mehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-               "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); mehg<-mehg[2:1969,1:13]
+               "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); mehg<-mehg[3:2414,1:13]
 
 DOCmehg<-read.csv("DOC_Sorbed_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(DOCmehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                  "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); DOCmehg<-DOCmehg[2:1969,1:13]
+                  "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); DOCmehg<-DOCmehg[3:2414,1:13]
 
 mehgT<-read.csv("Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(mehgT)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                 "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); 
-mehgT<-mehgT[2:1969,1:13]
-
+mehgT<-mehgT[3:2414,1:13]
+str(mehgT)
 hg0<-read.csv("Elemental_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hg0)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hg0<-hg0[2:1969,1:13]
+              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hg0<-hg0[3:2414,1:13]
 
 solids<-read.csv("Total_Solids.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(solids)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                 "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); solids<-solids[2:1969,1:13]
+                 "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); solids<-solids[3:2414,1:13]
 
 burial<-read.csv("Sediment_Burial_Velocity.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(burial)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", "Suboxic1","Suboxic2",
-                 "Anoxic1", "Anoxic2","Anoxic3","Sed1","Sed2"); burial<-burial[2:1969,1:13]
+                 "Anoxic1", "Anoxic2","Anoxic3","Sed1","Sed2"); burial<-burial[3:2414,1:13]
 
 bulkD<-read.csv("Sediment_Bulk_Density.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(bulkD)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", "Suboxic1","Suboxic2", 
-                "Anoxic1", "Anoxic2","Anoxic3","Sed1","Sed2"); bulkD<-bulkD[2:1969,1:13]
+                "Anoxic1", "Anoxic2","Anoxic3","Sed1","Sed2"); bulkD<-bulkD[3:2414,1:13]
 
 
 seg_outflow<-read.csv("Segment_outflow.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(seg_outflow)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", "Suboxic1","Suboxic2",
-                      "Anoxic1", "Anoxic2", "Anoxic3","Sed1","Sed2"); seg_outflow<-seg_outflow[2:1969,1:13]
+                      "Anoxic1", "Anoxic2", "Anoxic3","Sed1","Sed2"); seg_outflow<-seg_outflow[3:2414,1:13]
 
 diss_mehg<-DOCmehg+mehg; str(diss_mehg)
 diss_mehg_pM<- diss_mehg/215*1000
@@ -68,15 +77,15 @@ diss_mehg_pM<- diss_mehg/215*1000
 mehgT <-mehgT$Oxic1
 outflow1  <-seg_outflow$Oxic1  #m3/s
 outflow_m3_y<-(outflow1 *60*60*24*365)*10^6  #correzione 10^6 perche input scalato
-plot(outflow_m3_y); outflow_L_y<-outflow_m3_y*1000   #m3 to L
+outflow_L_y<-outflow_m3_y*1000   #m3 to L
 
 mehgT_outflow<-outflow_L_y*mehgT     # L/y * ng/L -> ng/y
 mehgT_outflow_g_y<-mehgT_outflow/10^9
 mehgT_outflow_mol_y<-mehgT_outflow_g_y/215														
 mehgT_outflow_kmol_y<-mehgT_outflow_mol_y/1000; str(mehgT_outflow_kmol_y)
 
-bent_dyn<-read.csv("aasediment_input_output_mehg.csv", header=TRUE); tail(bent_dyn,3);
-bent_dyn_medie<-read.csv("aasediment_input_output_medie_mehg.csv", header=TRUE); tail(bent_dyn_medie,3);
+bent_dyn<-read.csv("aasediment_input_output_mehg_2050.csv", header=TRUE); tail(bent_dyn,3);
+bent_dyn_medie<-read.csv("aasediment_input_output_medie_mehg_2050.csv", header=TRUE); tail(bent_dyn_medie,3);
 
 diffusion_kmol_y			<-bent_dyn$diffusion_kmol_y
 diffusion_sed_to_sed_kmol_y	<-bent_dyn$diffusion_sed_to_sed_kmol_y
@@ -150,8 +159,8 @@ bilancio_w_all<-cbind(river_mehg_kmol_y, mehgT_inflow_kmol_y,diffusion_kmol_y,
                       burial2_kmol_y, mehg_prodotto_kmol_y)	  
 
 				  
-write.csv(bilancio_w, file="water_input_output_mehg_1")
-write.csv(bilancio_w_all, file="water_input_output_long_mehg_1")
+write.csv(bilancio_w, file="water_input_output_mehg_1_2050")
+write.csv(bilancio_w_all, file="water_input_output_long_mehg_1_2050")
 
 bilancioacque<-(river_mehg_kmol_y_media+mehgT_inflow_kmol_y_media + diffusion_kmol_y_media -
                   mehgT_outflow_kmol_y_media - depo_Pmehg_kmol_y_media )
@@ -174,5 +183,5 @@ bilancio_water_cumulativo<-cbind(river_mehg_kmol_cum,
                                    Pmehg_deposition_kmol_cum,mehgT_outflow_kmol_cum,
                                  burial1_cum, burial2_cum, diffusion1_cum, diffusion2_cum,
                                  Output_terms_cum, cumulative_diff_kmol)
-write.csv(bilancio_water_cumulativo, file="bilancio_acque_mehg_1.csv")
+write.csv(bilancio_water_cumulativo, file="bilancio_acque_mehg_1_2050.csv")
 

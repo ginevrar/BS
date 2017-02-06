@@ -92,36 +92,35 @@ summary(hg)
 a<-c(2.1,2,3)
 ax2<-(seq(1850,2050,by=1))
 str(ax2)
-
 dev.new()
 par(mfrow=c(1,1)) 
 plot(ax2, hgdiss_pM_mean$Oxic1, col="deepskyblue", ylab=" ", ylim=c(0,3.5),
      xlab=" ", main=expression("Concentrations of Hg"[D]*" in the model layers"),
-     type="l",lwd=2,lty=1, xaxt='n')
+     type="l",lwd=2,lty=1, cex.axis=1.4)
 par(new=TRUE)
 plot(ax2, hgdiss_pM_mean$Oxic2, ylim=c(0,3.5), col="dodgerblue", 
-     ylab="Hg (pM)", xlab=" ", type="l",lwd=2,lty=2, xaxt='n')
+     ylab="Hg (pM)", xlab=" ", type="l",lwd=2,lty=2, xaxt='n', yaxt='n')
 par(new=TRUE)
 plot(ax2, hgdiss_pM_mean$CIL, ylim=c(0,3.5), col="#225ea8", ylab=" ", 
-     xlab=" ", type="l",lwd=2,lty=3,  xaxt='n')
+     xlab=" ", type="l",lwd=2,lty=3,  xaxt='n', yaxt='n')
 par(new=TRUE)
 plot(ax2, hgdiss_pM_mean$Oxycline, ylim=c(0,3.5), col="#bdbdbd", 
-     ylab=" ", xlab="Time (years)", type="l",lwd=2,lty=4,  xaxt='n')
+     ylab=" ", xlab="Time (years)", type="l",lwd=2,lty=4, yaxt='n',  xaxt='n')
 par(new=TRUE) 
 plot(ax2, hgdiss_pM_mean$Suboxic1, ylim=c(0,3.5), col="#addd8e", 
-     ylab="   ", xlab="   ", xaxt='n', type="l",lwd=3,lty=5) 
+     ylab="   ", xlab="   ", xaxt='n', type="l",lwd=3, yaxt='n',lty=5) 
 par(new=TRUE)
 plot(ax2, hgdiss_pM_mean$Suboxic2, ylim=c(0,3.5), col="#41ab5d", 
-     ylab=" ", xlab=" ", type="l", xaxt='n',lwd=2,lty=1) 
+     ylab=" ", xlab=" ", type="l", xaxt='n',lwd=2, yaxt='n',lty=1) 
 par(new=TRUE)
 plot(ax2, hgdiss_pM_mean$Anoxic, ylim=c(0,3.5), col="#feb24c", 
-     ylab=" ", xlab=" ", type="l",lwd=2,lty=2, xaxt='n')
+     ylab=" ", xlab=" ", type="l",lwd=2,lty=2, yaxt='n', xaxt='n')
 par(new=TRUE)
 plot(ax2, hgdiss_pM_mean$Anoxic2,  ylim=c(0,3.5), col="#fc4e2a", 
-     ylab=" ", xlab=" ", type="l",lwd=2,lty=3, xaxt='n')
+     ylab=" ", xlab=" ", type="l",lwd=2,lty=3, yaxt='n', xaxt='n')
 par(new=TRUE)
 plot(ax2, hgdiss_pM_mean$Anoxic3, ylim=c(0,3.5), col="#800026", 
-     ylab=" ", xlab=" ", type="l",lwd=2,lty=4)
+     ylab=" ", xlab=" ", type="l",lwd=2, yaxt='n',lty=4,  xaxt='n')
 
 legend(1850,3.5, pch=19,legend=c("Euphotic1","Euphotic2","CIL",'Oxycline',
                                  "SOL" ,"UAOL1", "UAOL2",
@@ -131,6 +130,13 @@ legend(1850,3.5, pch=19,legend=c("Euphotic1","Euphotic2","CIL",'Oxycline',
        lty=c(1,2,3,4,5,1,2,3,4))
 #abline(v=1970,col='red')
 #abline(v=2013)
+
+
+
+
+
+
+
 dev.new()
 par(mfrow=c(1,1)) 
 plot(hgT$Oxic1, col="deepskyblue", ylab=" ", ylim=c(0,3.5),
@@ -165,5 +171,5 @@ legend(1850,3.5, pch=19,legend=c("Euphotic1","Euphotic2","CIL",'Oxycline',
                                  "SOL" ,"UAOL1", "UAOL2",
                                  "DAOL", "BBL"),
        col=c('deepskyblue', 'dodgerblue','#225ea8','#bdbdbd',
-             '#addd8e','#41ab5d','#feb24c','#fc4e2a','#800026'), 
+             '#addd8e','#41ab5d','#feb24c','#fc4e2a','#800026')) 
        

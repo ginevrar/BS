@@ -1,6 +1,4 @@
 
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
-demtilato<-read.csv(file='demetilato.csv')
 
 #leggo outpout sim per ogni sim partita a ore diverse
 ore1  <-read.table("water_input_output_mehg_1", header=TRUE, sep=","); str(ore1)
@@ -20,6 +18,7 @@ mehg_prodotto_kmol_y<-ore1$mehg_prodotto_kmol_y_media
 Output_terms<-(depo_Pmehg_kmol_y+mehgT_outflow_kmol_y-diffusion_kmol_y)
 Input_terms <-(mehgT_inflow_kmol_y +0.02+ river_mehg_kmol_y +mehg_prodotto_kmol_y+diffusion_kmol_y)
 
+Input_terms-mehg_prodotto_kmol_y
 Output_terms[2:164]; 
 Input_terms[2:164];
 summary(Output_terms);summary(Input_terms)

@@ -41,7 +41,7 @@ par(mfrow=c(1,1))
 plot(atm_hg_kmol_y, col="cyan3", type="l",  ylim=c(-35,40), 
      main=expression("Input and Output of Hg to the water"), ylab= "kmol/y", 
      xlab= " ",  lwd=1, 
-     cex.axis=1.4, cex.lab=1.4,cex.main=1.2))
+     cex.axis=1.4, cex.lab=1.4,cex.main=1.5)
 par(new=TRUE)
 plot(river_hg_kmol_y, col="darkgreen", type="l", 
      xaxt='n',yaxt='n',ylim=c(-30,40), 

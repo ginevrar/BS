@@ -1,4 +1,4 @@
-setwd("C:/Users/gi/Dropbox/BlackSea2/nuovi_script")
+setwd("C:/Users/Ginevra/Dropbox/BlackSea2/nuovi_script")
 Clean_data<-read.table('Dataset_Finale_new_no_bosforo.txt', header=T)
 str(Clean_data)
 win.graph()
@@ -23,10 +23,10 @@ rect(6, 14.25 , 27,15.285 , density = NULL, angle = 45,
      xpd = NULL)
 
 rect(6, 16.2 , 27,17.04 , density = NULL, angle = 45, 
-     col = '#d2c7c722', border ='#d2c7c7', lty = NULL, lwd = par("lwd"),
+     col = '#eadede22', border ='#d2c7c7', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(6, 15.64 , 27,16.2 , density = NULL, angle = 45, 
-     col = '#35978f22', border = '#35978f', lty = NULL, lwd = par("lwd"),
+     col = '#1d932722', border = '#35978f', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(6, 17.04 , 27,17.2 , density = NULL, angle = 45, 
      col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),
@@ -86,11 +86,11 @@ rect(0, 14.25 , 350,15.285 , density = NULL,angle = 45,
 
 
 rect(0, 16.2 ,  350,17.04 , density = NULL, angle = 45, 
-     col = '#d2c7c722', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
+     col = '#eadede22', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 
 rect(0, 15.64 ,  350,16.2 , density = NULL, angle = 45, 
-     col = '#35978f22', border = '#35978f', lty = NULL, lwd = par("lwd"),
+     col = '#1d932722', border = '#35978f', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(0, 17.04 ,  350,17.2 , density = NULL, angle = 45, 
      col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),
@@ -142,10 +142,10 @@ rect(0, 14.25 , 5000,15.285 , density = NULL, angle = 45,
      xpd = NULL)
 
 rect(0, 16.2 ,  5000,17.04 , density = NULL, angle = 45, 
-     col = '#d2c7c722', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
+     col = '#eadede22', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(0, 15.64 ,  5000,16.2 , density = NULL, angle = 45, 
-     col = '#35978f22', border = '#35978f', lty = NULL, lwd = par("lwd"),
+     col = '#1d932722', border = '#35978f', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(0, 17.04 ,  5000,17.2 , density = NULL, angle = 45, 
      col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),
@@ -171,7 +171,7 @@ plot(Mn$Mn, Mn$sigma, ylim=rev(range(Clean_data$sigma)), xlim=c(0,5000),
      col="#e1e22f", bg="#d5f41900", cex.lab=1.8, cex=1.4,
      frame=FALSE,xaxt='n',yaxt='n',  pch=24, xlab='',lwd=1.5,
      ylab='')
-abline(h=16.3)
+
 #mtext("dMn (nM)",1,line=3, at=c(7500),col="darkorange", cex=0.9)
 axis(2, at=y,line=0, col="black" )
 axis(2, at=y2,line=0,labels=F, col="black" , tck =-.02)
@@ -183,17 +183,17 @@ no3<-Clean_data[(Clean_data$NO3>0.1),]
 plot(no3$NO3, no3$sigma, cex=1.4,xlim=c(0,5), 
      col="#66c2a400", lwd=1.3,frame=F, ylim=rev(range(Clean_data$sigma)),
      ylab='', cex.lab=1.8,xaxt='n',yaxt='n',     xlab="", pch=24)
-rect(0, 10.5 , 5,15.64 , density = NULL, angle = 45, 
+rect(0, 10.5, 5, 15.64 , density = NULL, angle = 45, 
      col = '#abd9e922', border = '#abd9e9', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(0, 14.25 , 5,15.28 , density = NULL, angle = 45, 
      col = '#ffffd922', border = '#e8e888', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(0, 16.2 ,  5,17.04 , density = NULL, angle = 45, 
-     col = '#d2c7c722', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
+     col = '#eadede22', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(0, 15.64 ,  5,16.2 , density = NULL, angle = 45, 
-     col = '#35978f22', border = '#35978f', lty = NULL, lwd = par("lwd"),
+     col = '#1d932722', border = '#35978f', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(0, 17.04 ,5, 17.2 , density = NULL, angle = 45, 
      col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),
@@ -217,7 +217,6 @@ Fe<-Clean_data[(Clean_data$Fe>0.1),]
 plot(Fe$Fe, Fe$sigma, ylim=rev(range(Clean_data$sigma)), cex=1.3,
      lwd=1.4, xlim=c(0,500),
      col="#f49b42", frame=FALSE, xaxt='n',yaxt='n',xlab="", pch=23,ylab="")
-abline(h=16.5)
 axis(1,at=fe,line=.3, col="#f49b42")
 Lines <- list(bquote('Fe'[D]),  bquote("(nM)"))
 mtext(do.call(expression, Lines),side=1,
@@ -247,10 +246,10 @@ rect(0, 14.25 , 5,15.28 , density = NULL, angle = 45,
      col = '#ffffd922', border = '#e8e888', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(0, 16.2 ,  5,17.04 , density = NULL, angle = 45, 
-     col = '#d2c7c722', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
+     col = '#eadede22', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(0, 15.64 ,  5,16.2 , density = NULL, angle = 45, 
-     col = '#35978f22', border = '#35978f', lty = NULL, lwd = par("lwd"),
+     col = '#1d932722', border = '#35978f', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 
 rect(0, 17.04 ,  5,17.2 , density = NULL, angle = 45, 
@@ -295,10 +294,10 @@ rect(0, 14.25 , 1.2,15.28 , density = NULL, angle = 45,
      col = '#ffffd922', border = '#e8e888', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(0, 16.2 ,  1.2,17.04 , density = NULL, angle = 45, 
-     col = '#d2c7c722', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
+     col = '#eadede22', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(0, 15.64 ,  1.2,16.2 , density = NULL, angle = 45, 
-     col = '#35978f22', border = '#35978f', lty = NULL, lwd = par("lwd"),
+     col = '#1d932722', border = '#35978f', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(0, 17.04 ,  1.2,17.2 , density = NULL, angle = 45, 
      col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),

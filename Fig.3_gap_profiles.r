@@ -1,7 +1,7 @@
 
 #medie<-read.table("C:/Users/gi/Dropbox/BlackSea2/buoni_script/medie_layer_Mn2.txt", 
 #                header=TRUE)
-medie<-read.table("C:/Users/gi/Dropbox/BlackSea2/nuovi_script/medie_dati_new_12layers.txt", sep="\t", 
+medie<-read.table("C:/Users/Ginevra/Dropbox/BlackSea2/nuovi_script/medie_dati_new_12layers.txt", sep="\t", 
                   header=TRUE)
 str(medie)
 
@@ -22,7 +22,7 @@ rect(-1.5, 16.2-4, 1,17.04-4, density = NULL, angle = 45,
      col = '#eadede22', border = '#eadede', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(-1.5, 15.64-4, 1,16.2-4, density = NULL, angle = 45, 
-     col = '#b2d8b222', border = '#35978f', lty = NULL, lwd = par("lwd"),
+     col = '#1d932722', border = '#35978f', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 rect(-1.5, 17.04-4, 1,17.23-4, density = NULL, angle = 45, 
      col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),

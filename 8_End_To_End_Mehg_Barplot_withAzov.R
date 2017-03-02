@@ -1,5 +1,5 @@
 
-
+setwd('C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1')
 #leggo outpout sim per ogni sim partita a ore diverse
 ore1  <-read.table("water_input_output_mehg_1", header=TRUE, sep=","); str(ore1)
 
@@ -89,16 +89,17 @@ text(1.6,1.8, expression("MeHg"[D]*~"Diffusion"))
 text(-1.6,1.8, expression("MeHg"[D]*~"Diffusion"))
 text(-1.8,.8, expression("MeHg"[P]*~"Burial"))
 
-title(expression("MeHg"[T]*~"Budget in the Black Sea [kmol/y]"))
+title(expression("MeHg"[T]*~"Budget in the Black Sea"))
 par(cex.axis=1, mex=0.5)
 axis(1, at=ticks, labels=(ticks), pos=0)
 tw <- 1.5*strwidth("neg")
 segments(-5, 1.5, 5, 1.5, lty=2, col="black") 
 text(-4.1,5.7, "Water", cex=1.2, font=4, col='cyan4')
-text(-4.1,1.4, "Sediment", cex=1.2, font=4, col='darkorange1')
+text(-4.1,1.3, "Sediment", cex=1.2, font=4, col='darkorange1')
 text(4,1.5, "Sediment - Water \n Interface", cex=1.1, font=3, col='black')
 text(-3, -0.6, "Output", pos=2, font=2)
 text(3, -0.6, "Input", pos=4, font=2)
+text(-0.5, -0.6, "kmol/y", pos=4, font=1, cex=1.3)
 
 #rect(-tot_out, -0.6-h, 0, -0.6+h, col="cyan3")
 #rect(0, -0.6-h, tot_in, -0.6+h, col="lightcyan2")

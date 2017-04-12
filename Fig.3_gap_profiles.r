@@ -63,8 +63,10 @@ text(0.55,17.27-4,"BBL", adj=0, font=2, cex= .9)
 axis(1, at=asse,labels=asse, cex.axis=1)
 axis.break(2,11.5,style="slash",brw=0.03)  
 # hiding vertical lines
-mtext(expression(paste(sigma[theta]*'  (kg/m'^3*')')), 2, 
+
+mtext(expression(paste(sigma[theta]*'  (kg m'^-3*')')), 2, 
       line=2.5,at=12,col="black", cex=1.1)
+
 mtext('Concentrations', 1, line=2.5,
       at=.42,col="black", cex=1.1)
 ##dev.new(heigt=11,weight=5.5)
@@ -75,8 +77,8 @@ legend(0.5,11, pch=c(21,22,24,23,25,8), bg='#FFFFFF', cex=1.2,
                                                 (expression('MeHg'[D]*'     pM')),
                                                 (expression('Mn'[D]*'          µM 10'^-1)),
                                                 (expression('Fe'[D]*'          µM')),
-                                                "HS           mM ",
-                                                (expression('O'[2]*'            mM'))),
+                                                (expression('HS'^-'           mM')),
+                                                (expression('O'[2]*'          mM'))),
        col=c("#256486","#e7298a", "#e1e22f","#ff7f00","#fb6a4a88","#66c2a5"), 
        pt.bg=c('#3690c088','#df65b088','#e1e22f88','#ff7f0088','#fb6a4a'))
 

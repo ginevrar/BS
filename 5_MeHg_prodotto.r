@@ -120,6 +120,9 @@ demet_kmol_y_OL  <-demet_pmol_day_oxic*365/10^15; mean(tail(demet_kmol_y_OL,12))
 demet_kmol_y_SOL <-demet_pmol_day_suboxic*365/10^15; mean(tail(demet_kmol_y_SOL,12)) # 10 kmol
 demet_kmol_y_AOL <-demet_pmol_day_anoxic*365/10^15; mean(tail(demet_kmol_y_AOL,12))#  198 kmol
 
+
+
+
 met_kmol_y<-data.frame(met_kmol_y_OL, met_kmol_y_SOL, met_kmol_y_AOL)
 demet_kmol_y<-data.frame(demet_kmol_y_OL, demet_kmol_y_SOL, demet_kmol_y_AOL)
 
@@ -195,3 +198,14 @@ b<-a+1.64
 (a/b*100)+(1/b)*100+(.06/b*100)+(.6/b*100)
 
 AOL_met_kmol_y_media
+
+
+m_pmol_day_anoxic	  <-data.frame((hgT_pmol_UAL1*met$Suboxic2),(hgT_pmol_UAL2*met$Anoxic1),
+  (hgT_pmol_DAOL*met$Anoxic2) , (hgT_pmol_BBL*met$Anoxic3))
+
+colMeans(tail(m_pmol_day_anoxic, 12)*365/10^15)
+
+dm_pmol_day_anoxic  <-data.frame((mehgT_pmol_UAL1*demet$Suboxic2),(mehgT_pmol_UAL2*demet$Anoxic1),
+  (mehgT_pmol_DAOL*demet$Anoxic2),(mehgT_pmol_BBL*demet$Anoxic3))
+
+colMeans(tail(dm_pmol_day_anoxic, 12)*365/10^15)

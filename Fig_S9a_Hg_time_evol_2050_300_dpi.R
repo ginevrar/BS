@@ -22,7 +22,8 @@ plot(diffusion_kmol_y)
 plot(river_hg_kmol_y)
 
 Output_terms<-(evasione_kmol_y+depo_Phg_kmol_y+hgT_outflow_kmol_y)
-Input_terms<-(hgT_inflow_kmol_y +river_hg_kmol_y +atm_hg_kmol_y + diffusion_kmol_y)Output_terms[2:164]; summary(Output_terms)
+Input_terms<-(hgT_inflow_kmol_y +river_hg_kmol_y +atm_hg_kmol_y + diffusion_kmol_y)
+Output_terms[2:164]; summary(Output_terms)
 
 
 diff<-Input_terms-Output_terms
@@ -40,7 +41,7 @@ tiff('Fig.7A_Hg.tiff', height=25, width=23, units='cm',
      compression="lzw", res=300)
 par(mfrow=c(1,1))
 plot(atm_hg_kmol_y, col="cyan3", type="l",  ylim=c(-35,40), 
-     main=expression("Input and Output of Hg to the water"), ylab= "kmol/y", 
+     main=expression("Hg fluxes to the Black Sea"), ylab= " ", 
      xlab= " ",  lwd=1, 
      cex.axis=1.4, cex.lab=1.4,cex.main=1.5)
 par(new=TRUE)
@@ -63,7 +64,7 @@ text(900,8,'Atmospheric deposition',col='cyan3', cex=1.5)
 text(1520,20,'Rivers load',col='darkgreen', cex=1.5)
 text(800,36,'Total Input',col=1, cex=2)
 #text(1980,12,'Inflow from Marmara Sea',col='darkblue')
-text(1500,3,'Diffusion from sediment',col='#b8b800', cex=1.5)
+text(1500,2.5,'Diffusion from sediment',col='#b8b800', cex=1.5)
 #legend(1850,50, pch=19, legend=c("Atmospheric deposition","Inflow from Marmara Sea",
 #                               "Rivers load","Pore-water diffusion","Total Input"), 
 #col=c("cyan3", "blue","darkgreen","springgreen3", "black"))
@@ -89,7 +90,7 @@ mtext(expression(paste('kmol y'^-1)), 2, line=2, cex=1.4)
 
 text(1920,-10,'Evasion',col='cyan4',cex=1.5)
 text(2100,-18,'Deposition to \n the sediment',col='orange',cex=1.5)
-text(800,-22,'Total Output',col=1,cex=2,cex=1.5)
+text(800,-22,'Total Output',col=1,cex=2)
 text(1980,0,'Marmara Sea In - Out',col='darkblue', cex=1.4)
 #text(1920,2.8,'Diffusion from sediment',col='springgreen3')
 #legend(1850,-22, col=c("cyan3","blue","orange","black"), pch=19, 

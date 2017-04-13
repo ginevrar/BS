@@ -1,6 +1,6 @@
 getwd()
 #wd('C:/Users/gi/Dropbox/29_Luglio/Anoxic3c/ore17')
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 
 hg<-read.csv("Dissolved_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
@@ -101,8 +101,7 @@ medie_hg_pM<-c(2.105000,
 a<-c(2.1,2,3)
 ax2<-(seq(1850,2013,by=1))
 
-str(ax2)
-dev.new()
+
 par(mfrow=c(1,1)) 
 plot(ax2, hgdiss_pM_mean$Oxic1, col="deepskyblue", ylab=" ", ylim=c(0,3.5),
      xlab=" ", main=expression("Concentrations of Hg"[D]*" in the model layers"),
@@ -131,6 +130,9 @@ plot(ax2, hgdiss_pM_mean$Anoxic2,  ylim=c(0,3.5), col="#fc4e2a",
 par(new=TRUE)
 plot(ax2, hgdiss_pM_mean$Anoxic3, ylim=c(0,3.5), col="#800026", 
      ylab=" ", xlab=" ", type="l",lwd=2,lty=4)
+
+dev.off()
+
 
 legend(1850,3.5, pch=19,legend=c("Euphotic1","Euphotic2","CIL",'Oxycline',
                                  "SOL" ,"UAOL1", "UAOL2",

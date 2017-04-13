@@ -74,7 +74,10 @@ f_MB_azov/tot_in*100
 neg2<-cbind(f_MB_burial2, f_MB_diffusion, f_MB_sed_depo, 0,f_MB_outflow,f_MB_evasion)   
 pos2<-cbind(f_MB_sed_depo, f_MB_diffusion,  f_MB_river, f_MB_azov, f_MB_inflow,f_MB_depo_atm) # f_MB_met,#f_MB_demet,
 
-dev.new(height=200, width=100)
+setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
+
+tiff('Fig.8_Barplot_Hg.tiff', height=25, width=23, units='cm', 
+      compression="lzw", res=300)
 par(mar=c(0.5, 3, 2.5, 1), mfrow=c(1,1))  #bottom-left-top-right
 plot.new()
 plot.window(xlim=c(-31, 31), ylim=c(-1, 6))
@@ -90,32 +93,32 @@ rect(-neg2, y-h, 0, y+h, col=c("darkorange1","darkorange1",
 rect(0, y-h, pos2, y+h, col=c('#fdd49e',"lightcyan2","lightcyan2",
                               "lightcyan2","lightcyan2",
                               "lightcyan2"))
-text(12,1, expression("Hg"[P]*~"Deposition"))
-text(12,.8, "to the Sediment")
-text(-12,3, expression("Hg"[P]*~"Deposition"))
-text(-12,2.8, "to the Sediment")
-text(-7.50,4.7, expression("Hg"[T]*~"Outflow"))
-text(10,2.9,  expression("Hg"[T]*~"Rivers Load"))
-text(11,3.8,  expression("Hg"[T]*~"Azov Sea Load"))
-text(7,4.7, expression("Hg"[T]*~"Inflow"))
-text(7,1.8, expression("Hg"[D]*~"Diffusion"))
-text(-7,1.8, expression("Hg"[D]*~"Diffusion"))
-text(-8,.8, expression("Hg"[P]*~"Burial"))
-text(-10,5.9, expression("Hg"^0*~'Volatilization'))
-text(9,5.9, expression("Hg"^II*~'Deposition'))
-title(expression("Hg"[T]*~"Budget in the Black Sea"))
+text(12,1, expression("Hg"[P]*~"Deposition"), cex=1.5)
+text(12,.8, "to the Sediment", cex=1.5)
+text(-12,3, expression("Hg"[P]*~"Deposition"), cex=1.5)
+text(-12,2.8, "to the Sediment", cex=1.5)
+text(-7.50,4.7, expression("Hg"[T]*~"Mediterranean \n Outflow"), cex=1.5)
+text(10,2.9,  expression("Hg"[T]*~"Rivers Load"), cex=1.5)
+text(11,3.8,  expression("Hg"[T]*~"Azov Sea Load"), cex=1.5)
+text(7,4.7, expression("Hg"[T]*~"Mediterranean \n Inflow"), cex=1.5)
+text(7,1.8, expression("Hg"[D]*~"Diffusion"), cex=1.5)
+text(-7,1.8, expression("Hg"[D]*~"Diffusion"), cex=1.5)
+text(-8,.8, expression("Hg"[P]*~"Burial"), cex=1.5)
+text(-10,5.9, expression("Hg"^0*~'Volatilization'), cex=1.5)
+text(9,5.9, expression("Hg"^II*~'Deposition'), cex=1.5)
+title(expression("Hg"[T]*~"Budget in the Black Sea"), cex=1.5)
 par(cex.axis=1, mex=0.5)
 axis(1, at=ticks, labels=(ticks), pos=0)
 tw <- 1.5*strwidth("neg")
 segments(-31, 1.5, 31, 1.5, lty=2, col="black") 
-text(-25,6, "Water", cex=1.2, font=4, col='cyan4')
-text(-25,1.3, "Sediment", cex=1.2, font=4, col='darkorange1')
-text(25,1.5, "Sediment - Water \n Interface", cex=1.1, font=3, col='black')
-text(-15, -0.6, "Output", font=2, pos=2)
-text(15, -0.6, "Input", font=2,pos=4)
-text(-3, -0.6, "kmol/y", pos=4, font=1, cex=1.3)
+text(-25,6, "Water", cex=1.7, font=4, col='cyan4')
+text(-25,1.3, "Sediment", cex=1.7, font=4, col='darkorange1')
+text(25,1.5, "Sediment - Water \n Interface", cex=1.6, font=3, col='black')
+text(-15, -0.6, "Output", cex=1.9,font=2, pos=2)
+text(15, -0.6, "Input",cex=1.9, font=2,pos=4)
+text(-3, -0.6, expression('kmol y'^-1), pos=4, font=1, cex=1.9)
 
-
+dev.off()
 
 
 

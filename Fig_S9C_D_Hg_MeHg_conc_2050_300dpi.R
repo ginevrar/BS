@@ -1,36 +1,36 @@
 getwd()
 #wd('C:/Users/gi/Dropbox/29_Luglio/Anoxic3c/ore17')
-setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 
 hg<-read.csv("Dissolved_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-hg<-hg [3:2414,1:12]; str(hg$Time)
+hg<-hg [14:2414,1:12]; str(hg$Time)
 solids<-read.csv("Total_Solids.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(solids)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
 Phg<-read.csv("Total_Sorbed_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(Phg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-Phg<-Phg [3:2414,1:12]
+Phg<-Phg [14:2414,1:12]
 DOChg<-read.csv("DOC_Sorbed_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(DOChg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-DOChg<-DOChg [3:2414,1:12]
+DOChg<-DOChg [14:2414,1:12]
 mehg<-read.csv("Dissolved_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(mehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-mehg<-mehg [3:2414,1:12]
+mehg<-mehg [14:2414,1:12]
 DOCmehg<-read.csv("DOC_Sorbed_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(DOCmehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-DOCmehg<-DOCmehg [3:2414,1:12]
+DOCmehg<-DOCmehg [14:2414,1:12]
 hg0<-read.csv("Elemental_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hg0)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-hg0<-hg0 [3:2414,1:12]
+hg0<-hg0 [14:2414,1:12]
 mehgT<-read.csv("Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(mehgT)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-mehgT<-mehgT [3:2414,1:12]
+mehgT<-mehgT [14:2414,1:12]
 hgT<-read.csv('Total_Hg.csv', header=FALSE, skip = 1,sep = ",", dec=".")
 names(hgT)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-hgT<-hgT [3:2414,1:12]
+hgT<-hgT [14:2414,1:12]
 Temp<-read.csv('Segment_Temperature.csv', header=FALSE, skip = 1,sep = ",", dec=".")
 names(Temp)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-Temp<-Temp [3:2414,1:12]
+Temp<-Temp [14:2414,1:12]
 
 Temp<-tail(Temp,36)
 
@@ -71,51 +71,54 @@ par(new=T)
 plot(tail(mehgT$Anoxic,36),xlim=c(0,36), col='darkgreen', type='b')
 
 a<-c(2.1,2,3)
-ax2<-(seq(1850,2050,by=1))
+ax2<-(seq(1850,2050, by=.0833))
 str(ax2)
+ax3<-(seq(1850,2050, by=1))
 
-setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
+
+setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
 
 tiff('Fig.7d_mEHg_conc.tiff', height=25, width=23, units='cm', 
      compression="lzw", res=300)
-par(mfrow=c(1,1)) 
+par(mfrow=c(1,1), mar=c(4.5,5,4,1), bty='n') 
 plot(mehgT$Oxic1/215*1000, col="deepskyblue", ylab=" ", ylim=c(0,0.8),
      xlab=" ", main=expression("MeHg"[T]*" concentrations in the model layers"),
-     cex.main=1.5, type="l",lwd=1.5,lty=1, xaxt='n', cex.axis=1.4)
+     cex.main=2.5,type="l",lwd=1.5,lty=1, xaxt='n', cex.axis=2.5)
 par(new=TRUE)
-plot(mehgT$Oxic2/215*1000, ylim=c(0,0.8), col="dodgerblue", 
-     ylab="MeHg (pM)", cex.lab=1.4, xlab="year", yaxt='n',type="l",lwd=1.5,lty=2, xaxt='n')
+plot(ax2,mehgT$Oxic2/215*1000, ylim=c(0,0.8), col="dodgerblue", 
+     ylab="pM", cex.lab=2.3, xlab="year", yaxt='n',type="l",lwd=1.5,lty=2, xaxt='n')
 par(new=TRUE)
-plot(mehgT$CIL/215*1000, ylim=c(0,0.8), col="#feb24c", ylab=" ", 
+plot(ax2,mehgT$CIL/215*1000, ylim=c(0,0.8), col="#feb24c", ylab=" ", 
      xlab=" ", type="l",lwd=1.5, yaxt='n',lty=3,  xaxt='n')
 par(new=TRUE)
-plot(mehgT$Oxycline/215*1000, ylim=c(0,0.8), col="#225ea8", 
+plot(ax2,mehgT$Oxycline/215*1000, ylim=c(0,0.8), col="#225ea8", 
      ylab=" ", xlab=" ", type="l",yaxt='n',lwd=1.5,lty=4,  xaxt='n')
 par(new=TRUE) 
-plot(mehgT$Suboxic1/215*1000, ylim=c(0,0.8), col="#addd8e", 
+plot(ax2,mehgT$Suboxic1/215*1000, ylim=c(0,0.8), col="#addd8e", 
      ylab="   ", xlab="   ", xaxt='n', type="l",lwd=1.5,yaxt='n',lty=5) 
 par(new=TRUE)
-plot(mehgT$Suboxic2/215*1000, ylim=c(0,0.8), col="lightslategray", 
+plot(ax2,mehgT$Suboxic2/215*1000, ylim=c(0,0.8), col="lightslategray", 
      ylab=" ", xlab=" ", type="l", xaxt='n',lwd=1.5,yaxt='n',lty=1) 
 par(new=TRUE)
-plot(mehgT$Anoxic/215*1000, ylim=c(0,0.8), col="darkslategray", 
+plot(ax2,mehgT$Anoxic/215*1000, ylim=c(0,0.8), col="darkslategray", 
      ylab=" ", xlab=" ", type="l",lwd=1.5,lty=2, yaxt='n',xaxt='n')
 par(new=TRUE)
-plot(mehgT$Anoxic2/215*1000,  ylim=c(0,0.8), col="#fc4e2a", 
+plot(ax2,mehgT$Anoxic2/215*1000,  ylim=c(0,0.8), col="#fc4e2a", 
      ylab=" ", xlab=" ", type="l",lwd=1.5,lty=3, yaxt='n',xaxt='n')
 par(new=TRUE)
-plot(mehgT$Anoxic3/215*1000, ylim=c(0,0.8), col="#800026", 
+plot(ax2,mehgT$Anoxic3/215*1000, ylim=c(0,0.8), col="#800026", 
      ylab=" ", xlab=" ", type="l",lwd=1.5,lty=4, yaxt='n',xaxt='n')
+axis(1,at=c(1850,1900,1950,2000,2050),labels=T, cex.axis=2.5)
 
-text(950,.19,'PHOT1', col='deepskyblue', cex=1.6,font=3)
-text(950,.04,'PHOT2', col='dodgerblue', cex=1.6,font=3)
-text(1500,0.09,'CIL', col='#feb24c', cex=1.6,font=3)
-text(2100,0.04,'OXCL', col='#225ea8', cex=1.6,font=3)
-text(2100,.28,'SOL', col='#addd8e', cex=1.6,font=3)
-text(1800,.45,'UAOL1', col='lightslategray', cex=1.6,font=3)
-text(2200,.55,'UAOL2', col='darkslategray', cex=1.6,font=3)
-text(1400,.7,'DAOL', col='#fc4e2a', cex=1.6,font=3)
-text(1800,.8,'BBL', col='#800026', cex=1.6,font=3)
+text((1850+95.0-10),.19,'PHOT1', col='deepskyblue', cex=2.5,font=3)
+text((1850+95.0-10),.01,'PHOT2', col='dodgerblue', cex=2.5,font=3)
+text((1850+150.0-20),0.07,'CIL', col='#feb24c', cex=2.5,font=3)
+text((1850+210.0-40),0.02,'OXCL', col='#225ea8', cex=2.5,font=3)
+text((1850+210.0-40),.31,'SOL', col='#addd8e', cex=2.5,font=3)
+text((1850+60.0-40),.45,'UAOL1', col='lightslategray', cex=2.5,font=3)
+text((1850+200.0-30),.45,'UAOL2', col='darkslategray', cex=2.5,font=3)
+text((1850+100.0-20),.6,'DAOL', col='#fc4e2a', cex=2.5,font=3)
+text((1850+150.0-20),.79,'BBL', col='#800026', cex=2.5,font=3)
 #
 dev.off()
 #end(50,1, pch=19,legend=c("Euphotic1","Euphotic2","CIL",'Oxycline',
@@ -128,63 +131,46 @@ dev.off()
 #abline(v=2013)
 tiff('Fig.7C_Hgt_conc.tiff', height=25, width=23, units='cm', 
      compression="lzw", res=300)
-par(mfrow=c(1,1)) 
-plot(hgT$Oxic1/200.59*1000, col="deepskyblue",ylim=c(0,4),
-     ylab="Hg (pM)", xlab="year",
+par(mfrow=c(1,1), mar=c(4.5,5,4,1), bty='n') 
+plot(ax2,hgT$Oxic1/200.59*1000, col="deepskyblue",ylim=c(0,4),
+     ylab="pM", xlab="year",
      main=expression("Hg"[T]*" concentrations in the model layers"),
-     cex.lab=1.4, cex.main=1.5,cex.axis=1.3,
+     cex.lab=2.3, cex.main=2.5,cex.axis=2.5,
      type="l",lwd=1.5,lty=1, xaxt='n')
 par(new=TRUE)
-plot(hgT$Oxic2/200.59*1000, ylim=c(0,4), col="dodgerblue",  ylab=" ", xlab="",
+plot(ax2,hgT$Oxic2/200.59*1000, ylim=c(0,4), col="dodgerblue",  ylab=" ", xlab="",
       type="l",lwd=1.5,lty=2,yaxt='n', xaxt='n')
 par(new=TRUE)
-plot(hgT$CIL/200.59*1000, ylim=c(0,4), col='#feb24c', ylab=" ", 
+plot(ax2,hgT$CIL/200.59*1000, ylim=c(0,4), col='#feb24c', ylab=" ", 
      xlab=" ", type="l",lwd=1.5,lty=3, yaxt='n', xaxt='n')
 par(new=TRUE)
-plot(hgT$Oxycline/200.59*1000, ylim=c(0,4), col="#225ea8", 
+plot(ax2,hgT$Oxycline/200.59*1000, ylim=c(0,4), col="#225ea8", 
      ylab=" ", xlab="",cex.lab=1.2, type="l",lwd=1.5,lty=4, yaxt='n', xaxt='n')
 par(new=TRUE) 
-plot(hgT$Suboxic1/200.59*1000, ylim=c(0,4), col="#addd8e", 
+plot(ax2,hgT$Suboxic1/200.59*1000, ylim=c(0,4), col="#addd8e", 
      ylab="   ", xlab="   ", xaxt='n',yaxt='n', type="l",lwd=1.5,lty=5) 
 par(new=TRUE)
-plot(hgT$Suboxic2/200.59*1000, ylim=c(0,4), col="lightslategray",yaxt='n', 
+plot(ax2,hgT$Suboxic2/200.59*1000, ylim=c(0,4), col="lightslategray",yaxt='n', 
      ylab=" ", xlab=" ", type="l", xaxt='n',lwd=1.5,lty=1) 
 par(new=TRUE)
-plot(hgT$Anoxic/200.59*1000, ylim=c(0,4), col="darkslategray", 
+plot(ax2,hgT$Anoxic/200.59*1000, ylim=c(0,4), col="darkslategray", 
      ylab=" ", xlab=" ", type="l",lwd=1.5,lty=2, yaxt='n',xaxt='n')
 par(new=TRUE)
-plot(hgT$Anoxic2/200.59*1000,  ylim=c(0,4), col="#fc4e2a", 
+plot(ax2,hgT$Anoxic2/200.59*1000,  ylim=c(0,4), col="#fc4e2a", 
      ylab=" ", xlab=" ", type="l",lwd=1.5,yaxt='n',lty=3, xaxt='n')
 par(new=TRUE)
-plot(hgT$Anoxic3/200.59*1000, ylim=c(0,4), col="#800026", 
+plot(ax2,hgT$Anoxic3/200.59*1000, ylim=c(0,4), col="#800026", 
      ylab=" ", xlab=" ", xaxt='n',yaxt='n', type="l",lwd=1.5,lty=4)
-
-text(160,1.7,'PHOT1', col='deepskyblue', cex=1.6,font=3)
-text(800,2.3,'PHOT2', col='dodgerblue', cex=1.6,font=3)
-text(600,0.4,'CIL', col='#feb24c', cex=1.6,font=3)
-text(1000,0.7,'OXCL', col='#225ea8', cex=1.6,font=3)
-text(1600,1.5,'SOL', col='#addd8e', cex=1.6,font=3)
-text(1300,3.5,'UAOL1', col='lightslategray', cex=1.6,font=3)
-text(2200,2.7,'UAOL2', col='darkslategray', cex=1.6,font=3)
-text(1800,3.7,'DAOL', col='#fc4e2a', cex=1.6,font=3)
-text(2200,3.95,'BBL', col='#800026', cex=1.6,font=3)
-#
+axis(1,at=c(1850,1900,1950,2000,2050),labels=T, cex.axis=2.5)
+       
+text((1850+70-20),.1,'PHOT1', col='deepskyblue', cex=2.5,font=3)
+text((1850+110-20),.5,'PHOT2', col='dodgerblue', cex=2.5,font=3)
+text((1850+135-20),.9,'CIL', col='#feb24c', cex=2.5,font=3)
+text((1850+170.0-25),1.3,'OXCL', col='#225ea8', cex=2.5,font=3)
+text((1850+225.0-40),1.5,'SOL', col='#addd8e', cex=2.5,font=3)
+text((1850+40.0-20),2.3,'UAOL1', col='lightslategray', cex=2.5,font=3)
+text((1850+80.0-20),3,'UAOL2', col='darkslategray', cex=2.5,font=3)
+text((1850+150.0-40),3.7,'DAOL', col='#fc4e2a', cex=2.5,font=3)
+text((1850+210.0-40),3.9,'BBL', col='#800026', cex=2.5,font=3)
 #
 dev.off()
-
-
-
-
-
-
-
-
-
-#legend(-1,4.1, pch=19,legend=c("Euphotic1","Euphotic2","CIL",'Oxycline',
-   #                              "SOL" ,"UAOL1", "UAOL2",
-    #                             "DAOL", "BBL"),
-      # col=c('deepskyblue', 'dodgerblue','#225ea8','#bdbdbd',
-        #     '#addd8e','#41ab5d','#feb24c','#fc4e2a','#800026'),
- #      cex=1.15)
-
-

@@ -1,5 +1,5 @@
 #setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/S1")
-setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 
 medie_hg_pM<-c(1.86,
                2.127058824,
@@ -256,20 +256,20 @@ sed_mehg_pmol_g
 
 # ----end sed conc
 
-setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
+setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
 
 #----- PLOT----------------
 #svg('dato_model_hg_mehg.svg')
 #tiff('dato_model_hg_mehg.tiff')
 
-tiff('dato_model_hg_mehg334.tiff', height=25, width=23, units='cm', 
+tiff('dato_model_hg_mehg33331.tiff', height=25, width=23, units='cm', 
      compression="lzw", res=300)
 #dev.new(width=7, height=7)
 
 par(mfrow=c(1,2),cex.axis=1.2, cex.lab=1.3, 
     cex.main=1.4, mar=c(4.5,5,1,0))
 plot(medie_hg_pM, prof,  bty='n',lwd=2, cex=4,
-     ylim=c(17.2,10.9), lty=1, yaxt='n',xaxt='n',
+     ylim=c(17.5,10.5), lty=1, yaxt='n',xaxt='n',
      xlim=c(0, 5), pch=21,
      ylab=" ", xlab=" ", type="b",     
      col="#3288bd00", bg='#41b6c400',main=" ")                   
@@ -288,12 +288,12 @@ rect(-1.5, 15.64 , 5,16.2 , density = NULL, angle = 45,
 rect(-1.5, 17.04 , 5,17.23 , density = NULL, angle = 45, 
      col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
-rect(-1.5, 17.23 , 5,17.25 , density = NULL, angle = 45, 
+rect(-1.5, 17.23 , 5,17.3 , density = NULL, angle = 45, 
      col = '#25232322', border = '#252323', lty = NULL, lwd = par("lwd"),
      xpd = NULL) 
 par(new=T)
 plot(medie_hg_pM, prof,  bty='n',lwd=1, cex=4,
-     ylim=c(17.2,10.9), lty=1, yaxt='n', xaxt='n',
+     ylim=c(17.5,10.5), lty=1, yaxt='n', xaxt='n',
      xlim=c(0, 5), pch=21,
      ylab=" ", xlab=" ", type="b", col="#5716a2", bg='#5716a244',main=" ")
 par(new=TRUE) 
@@ -303,16 +303,22 @@ segments(x1-sd1,y-epsilon,x1-sd1,y+epsilon, col='#5716a2')
 segments(x1+sd1,y-epsilon,x1+sd1,y+epsilon, col='#5716a2')
 par(new=TRUE)
 plot(disshg_pM,prof, type="b",pch=23,  lwd=1,cex=4, yaxt='n',
-     ylim=c(17.2,10.9),  bty='n', xlim=c(0, 5), lty=3,
+     ylim=c(17.5,10.5),  bty='n', xlim=c(0, 5), lty=3,
      xlab=" ", col="#b3db25", bg='#b3db2577', cex.axis=1.8,
      ylab='')
 yy<-c(11,12,13,14,15,16,17)
-axis(side=2, at = yy, col="black",  line=.50, cex.axis=1.8)
+#axis(side=2, at = yy, col="black",  line=.50, cex.axis=1.8)
+y2<-c(10.5,11.5,12.5,13.5,14.5,15.5,
+      16.5,17, 17.5)
+y1<-c(11,12,13,14,15,16,17)
+
+axis(2, at=y1,line=0, col="black", cex.axis=1.6 )
+axis(2, at=y2,line=0,labels=F, col="black" , tck =-.02, cex.axis=1.6)
 #axis(2, at=y,line=0, col="black", cex.axis=1.6 )
-expression(mtext('Hg'[D]*' (pM)',1,line=1, cex=1.4))
+expression(mtext('Hg'[D]*' (pM)',1,line=1, cex=1.6))
 
 mtext(expression(paste(sigma[theta]*' (kg m'^-3*')')), 2, line=3.2,at=13.5,
-      col="black", cex=1.4)
+      col="black", cex=1.6)
 
 p<-c(21,23)
 #legend(4,11, pch=p,legend=c("Observations", 
@@ -320,7 +326,7 @@ p<-c(21,23)
   #     col=c("#5716a2", '#b3db25'), 
    #    pt.bg=c('#5716a255','#b3db2577'))
 #text(3,15,"OM=7*10^5 \n silt=2.
-text(4,13,'OL', cex=1.4, font=2)
+text(4,12,'OL', cex=1.4, font=2)
 text(4,14.7,'CIL', cex=1.4, font=2)
 text(4,15.9,'SOL', cex=1.4, font=2)
 text(1,16.6,'AOL', cex=1.4, font=2)
@@ -328,30 +334,30 @@ text(1,16.6,'AOL', cex=1.4, font=2)
 
 # --- PLOT Mehg----------------------mehg
 #mar=c(4.5,4,1,0)
-#win.graph()  mar=c(4.5,4,1,0)  ylim=c(17.2,10.9),
+#win.graph()  mar=c(4.5,4,1,0)  ylim=c(17.5,10.5),
 #dev.new(width=12, height=4)
-par(mar=c(4.5,1,1,5), cex.axis=1.2, cex.lab=1.3, cex.main=1.4 )
+par(mar=c(4.5,.5,1,5), cex.axis=1.2, cex.lab=1.3, cex.main=1.4 )
 
 plot(medie_mehg_pM, prof,  bty='n',lwd=1.3, cex=4,
-     ylim=c(17.2,10.9), lty=1, 
+     ylim=c(17.5,10.5), lty=1, 
      xlim=c(0, 1.1), pch=22,yaxt='n',xaxt='n',
      ylab=" ", xlab=" ", type="b", col="#c51b7d00", main=" ")
-rect(-1.5, 10.5 , 1,15.64 , density = NULL, angle = 45, 
+rect(-1.5, 10.5 , 1.1,15.64 , density = NULL, angle = 45, 
      col = '#abd9e933', border = '#abd9e988', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
-rect(-1.5, 14.25 , 1,15.285 , density = NULL, angle = 45, 
+rect(-1.5, 14.25 , 1.1,15.285 , density = NULL, angle = 45, 
      col = '#ffffd933', border = '#e8e888', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
-rect(-1.5, 16.2 , 1,17.04 , density = NULL, angle = 45, 
+rect(-1.5, 16.2 , 1.1,17.04 , density = NULL, angle = 45, 
      col = '#eadede22', border = '#eadede', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
-rect(-1.5, 15.64 , 1,16.2 , density = NULL, angle = 45, 
+rect(-1.5, 15.64 , 1.1,16.2 , density = NULL, angle = 45, 
      col = '#1d932722', border = '#1d9327', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
-rect(-1.5, 17.04 , 1,17.23 , density = NULL, angle = 45, 
+rect(-1.5, 17.04 , 1.1,17.23 , density = NULL, angle = 45, 
      col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
-rect(-1.5, 17.23 , 1,17.25 , density = NULL, angle = 45, 
+rect(-1.5, 17.23 , 1.1,17.3 , density = NULL, angle = 45, 
      col = '#25232322', border = '#252323', lty = NULL, lwd = par("lwd"),
      xpd = NULL)
 #plot(layer_Pmehg*20 ,prof, type="b",pch=23,  lwd=1.3,cex=1.3,
@@ -360,7 +366,7 @@ rect(-1.5, 17.23 , 1,17.25 , density = NULL, angle = 45,
 #  main=expression(paste("MeHg vertical profiles \n along the water column")))
 par(new=T)
 plot(medie_mehg_pM, prof,  bty='n',lwd=1.3, cex=4,
-     ylim=c(17.2,10.9), lty=1, yaxt='n',xaxt='n',
+     ylim=c(17.5,10.5), lty=1, yaxt='n',xaxt='n',
      xlim=c(0, 1.1), pch=21,
      ylab=" ", xlab=" ", type="b", col="#5716a2",bg='#5716a255', main=" ")
 segments(x2-sd2,y,x2+sd2,y, col='#5716a2', lwd=1)
@@ -374,28 +380,38 @@ par(new=TRUE)
 #   main=expression(paste("MeHg vertical profiles \n along the water column")))
 par(new=TRUE)
 plot(dissMehg_pM, prof, type="b",pch=23,  lwd=1.3,cex=4,cex.axis=1.8,
-     ylim=c(17.2,10.9),  bty='n', xlim=c(0,1.1), lty=2,
-     xlab=" ", col="#b3db25", yaxt='n',
+     ylim=c(17.5,10.5),  bty='n', xlim=c(0,1.1), lty=2,
+     xlab=" ", col="#b3db25", yaxt='n',xaxt='n',
      bg='#b3db2577', ylab='',   main='')
 #mtext(expression(paste(sigma[theta]*'  (kg/m'^3*')')),
 #      2, line=2.5 ,at=14,col="black", cex=1.2)
-expression(mtext('MeHg'[D]*' (pM)',1,line=1, cex=1.4))
+expression(mtext('MeHg'[D]*' (pM)',1,line=1, cex=1.6))
 
 p<-c(21,23)
 #legend(.4,11, pch=p,legend=c("Observations", 
  #                            'Model'),pt.cex=2,
   #     col=c("#5716a2", '#b3db25'), 
    #    pt.bg=c('#5716a255','#b3db2577'), cex=1.5)
-#text(.4,12,'OL', cex=1.4, font=2)
-text(.4,14.7,'CIL', cex=1.4, font=2)
-text(.4,15.9,'SOL', cex=1.4, font=2)
+text(.8,12,'OL', cex=1.4, font=2)
+text(.8,14.7,'CIL', cex=1.4, font=2)
+text(.8,15.9,'SOL', cex=1.4, font=2)
 text(.1,16.6,'AOL', cex=1.4, font=2)
 
-aty<-c(11, 13,15,16,17)
-why<-c(10, 30, 50, 90, 1700)
+at=c(0,0.1,.3,.5,.7,.9,1.1)
+atx=c(0.2,.4,.6,.8,1)
+axis(1, at = at, labels = F ,tick=T, cex.axis=1.8)
+axis(1, at = atx, labels = atx,tick=T, cex.axis=1.8)
 
-axis(4, at = aty, labels = why, tick = TRUE, cex.axis=1.8)
-mtext('depth (m)', at=13.5, side=4,line=3.2, cex=1.4)
+
+y1<-c(11,12,13,14,15,16,17)
+aty<-c(10.5,11.5, 12.5, 13.5, 14.5, 15.5, 16.5, 17.5)
+why<-c(0,   10,   20,   30,   50,   70,   300, 1800)
+str(why)
+str(aty)
+
+axis(4, at = aty, labels = why, cex.axis=1.8)
+axis(4, at = y1, labels = F, tick = TRUE, cex.axis=1.8)
+mtext('depth (m)', at=13.5, side=4,line=3.2, cex=1.6)
 dev.off()
 
 sed_hg_pmol_g

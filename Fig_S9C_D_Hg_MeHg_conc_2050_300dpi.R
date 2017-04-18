@@ -83,10 +83,10 @@ tiff('Fig.7d_mEHg_conc.tiff', height=25, width=23, units='cm',
 par(mfrow=c(1,1), mar=c(4.5,5,4,1), bty='n') 
 plot(mehgT$Oxic1/215*1000, col="deepskyblue", ylab=" ", ylim=c(0,0.8),
      xlab=" ", main=expression("MeHg"[T]*" concentrations in the model layers"),
-     cex.main=2.5,type="l",lwd=1.5,lty=1, xaxt='n', cex.axis=2.5)
+     cex.main=2.5,type="l",lwd=1.5,lty=1, xaxt='n', cex.axis=2)
 par(new=TRUE)
 plot(ax2,mehgT$Oxic2/215*1000, ylim=c(0,0.8), col="dodgerblue", 
-     ylab="pM", cex.lab=2.3, xlab="year", yaxt='n',type="l",lwd=1.5,lty=2, xaxt='n')
+     ylab="pM", cex.lab=2, xlab="year", yaxt='n',type="l",lwd=1.5,lty=2, xaxt='n')
 par(new=TRUE)
 plot(ax2,mehgT$CIL/215*1000, ylim=c(0,0.8), col="#feb24c", ylab=" ", 
      xlab=" ", type="l",lwd=1.5, yaxt='n',lty=3,  xaxt='n')
@@ -108,7 +108,8 @@ plot(ax2,mehgT$Anoxic2/215*1000,  ylim=c(0,0.8), col="#fc4e2a",
 par(new=TRUE)
 plot(ax2,mehgT$Anoxic3/215*1000, ylim=c(0,0.8), col="#800026", 
      ylab=" ", xlab=" ", type="l",lwd=1.5,lty=4, yaxt='n',xaxt='n')
-axis(1,at=c(1850,1900,1950,2000,2050),labels=T, cex.axis=2.5)
+
+axis(1,at=c(1850,1900,1950,2000,2050),labels=T, cex.axis=2)
 
 text((1850+95.0-10),.19,'PHOT1', col='deepskyblue', cex=2.5,font=3)
 text((1850+95.0-10),.01,'PHOT2', col='dodgerblue', cex=2.5,font=3)
@@ -135,7 +136,7 @@ par(mfrow=c(1,1), mar=c(4.5,5,4,1), bty='n')
 plot(ax2,hgT$Oxic1/200.59*1000, col="deepskyblue",ylim=c(0,4),
      ylab="pM", xlab="year",
      main=expression("Hg"[T]*" concentrations in the model layers"),
-     cex.lab=2.3, cex.main=2.5,cex.axis=2.5,
+     cex.lab=2, cex.main=2.5,cex.axis=2,
      type="l",lwd=1.5,lty=1, xaxt='n')
 par(new=TRUE)
 plot(ax2,hgT$Oxic2/200.59*1000, ylim=c(0,4), col="dodgerblue",  ylab=" ", xlab="",
@@ -161,7 +162,7 @@ plot(ax2,hgT$Anoxic2/200.59*1000,  ylim=c(0,4), col="#fc4e2a",
 par(new=TRUE)
 plot(ax2,hgT$Anoxic3/200.59*1000, ylim=c(0,4), col="#800026", 
      ylab=" ", xlab=" ", xaxt='n',yaxt='n', type="l",lwd=1.5,lty=4)
-axis(1,at=c(1850,1900,1950,2000,2050),labels=T, cex.axis=2.5)
+axis(1,at=c(1850,1900,1950,2000,2050),labels=T, cex.axis=2)
        
 text((1850+70-20),.1,'PHOT1', col='deepskyblue', cex=2.5,font=3)
 text((1850+110-20),.5,'PHOT2', col='dodgerblue', cex=2.5,font=3)

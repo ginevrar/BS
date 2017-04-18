@@ -42,60 +42,57 @@ setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission
 str(atm_hg_kmol_y)
 tiff('Fig.7A_Hg.tiff', height=25, width=23, units='cm', 
      compression="lzw", res=300)
-par(mfrow=c(1,1), mar=c(4.5,5,4,1), bty='n') 
-plot(ax2,atm_hg_kmol_y, col="cyan3", type="l",  ylim=c(-35,40), 
+par(mfrow=c(1,1), mar=c(5,5,4,1), bty='n') 
+plot(ax2,atm_hg_kmol_y, col="cyan3", type="l",  ylim=c(-40,40), 
      main=expression("Hg fluxes to the Black Sea"), ylab= " ", 
-     xlab= " ",  lwd=1, cex.axis=2.5, cex.lab=2.3,cex.main=2.5)
+     xlab= "years",  lwd=1, cex.axis=2, cex.lab=2,cex.main=2.3)
 #axis(1,at=c(1850,1900,1950,2000,2050),labels=T, cex.axis=2.5)
 
 par(new=TRUE)
 plot(ax2,river_hg_kmol_y, col="darkgreen", type="l", 
-     xaxt='n',yaxt='n',ylim=c(-30,40), 
+     xaxt='n',yaxt='n',ylim=c(-40,40), 
      ylab= " ",xlab= " ",  lwd=1)
 par(new=TRUE)
 plot(ax2,hgT_inflow_kmol_y, col="darkblue", type="l", 
      xaxt='n',yaxt='n',
-     ylim=c(-35,40), ylab= " ", xlab= " ",  lwd=2)
+     ylim=c(-40,40), ylab= " ", xlab= " ",  lwd=2)
 par(new=TRUE)
 plot(ax2,diffusion_kmol_y, col="#cdcd00", type="l", 
        xaxt='n',yaxt='n',
-     ylim=c(-35,40), ylab= " ", xlab= " ",  lwd=2)
+     ylim=c(-40,40), ylab= " ", xlab= " ",  lwd=2)
 par(new=TRUE)
 plot(ax2, Input_terms, col="black", type="l", lty=2, 
        xaxt='n',yaxt='n',
-     ylim=c(-35,40), ylab= " ", xlab= " ",  lwd=1)
-text(2000.0,10,'Atmospheric deposition',col='cyan3', cex=2)
-text(1980,20,'Rivers \n load',col='darkgreen', cex=2)
-text(1850+60-20,36,'Total Input',col=1, cex=2.5)
-#text(1980,12,'Inflow from Marmara Sea',col='darkblue')
-text(1850+170-20,2.5,'Diffusion from sediment',col='#b8b800', cex=2)
-#legend(1850,50, pch=19, legend=c("Atmospheric deposition","Inflow from Marmara Sea",
-#                               "Rivers load","Pore-water diffusion","Total Input"), 
-#col=c("cyan3", "blue","darkgreen","springgreen3", "black"))
+     ylim=c(-40,40), ylab= " ", xlab= " ",  lwd=1)
 par(new=TRUE)
-#dev.new(height=100,width=200)
-#par(mfrow=c(1,1))
 plot(ax2,-evasione_kmol_y, col="cyan4", type="l", xlab= " ", 
-       ylim=c(-35,40), xaxt='n',yaxt='n',
+       ylim=c(-40,40), xaxt='n',yaxt='n',
      main=" ", ylab= " ",  lwd=1)
 par(new=TRUE)
 plot(ax2,-depo_Phg_kmol_y, col="orange", type="l", xlab= " ", 
-       ylim=c(-35,40), xaxt='n',yaxt='n',
+       ylim=c(-40,40), xaxt='n',yaxt='n',
      ylab= " ",  lwd=1)
 par(new=TRUE)
 plot(  -hgT_outflow_kmol_y, col="darkblue", type="l", 
-     ylim=c(-35,40),xlab= " ",xaxt='n',yaxt='n',
+     ylim=c(-40,40),xlab= " ",xaxt='n',yaxt='n',
      ylab= " ",  lwd=2)
 par(new=TRUE)
 plot(ax2,-Output_terms, col="black", type="l", lty=2, 
-       ylim=c(-35,40), xaxt='n',yaxt='n',
+       ylim=c(-40,40), xaxt='n',yaxt='n',
      xlab= " ", ylab= "",  lwd=1)
-mtext(expression(paste('kmol y'^-1)), 2, line=2.4, cex=1.4)
 
-text(1850+193,-9,'Evasion',col='cyan4',cex=2)
-text(210.0+1850,-18,'Deposition to \n the sediment',col='orange',cex=2)
-text(60.0+1850,-22,'Total Output',col=1,cex=2.5)
-text(170+1850,0,'Mediterranean Inflow - Outflow',col='darkblue', cex=2)
+mtext(expression(paste('kmol y'^-1)), 2, at= 0, line=2.6, cex=2)
+
+text(2000.0,10,'Atmospheric deposition',col='cyan3', cex=1.9)
+text(1975,20,' Rivers \n load',col='darkgreen', cex=1.9)
+#text(1980,12,'Inflow from Marmara Sea',col='darkblue')
+text(1850+170-20,2.5,'Sediment Diffusion',col='#b8b800', cex=1.9)
+text(1850+60-20,36,'Total Input',col=1, cex=2.5)
+
+text(1850+170,-10.5,'Evasion',col='cyan4',cex=1.9)
+text(170+1850,-17,'Deposition to \n the sediment',col='orange',cex=1.9)
+text(140+1850,0,'Mediterranean Inflow - Outflow',col='darkblue', cex=1.9)
+text(50+1850,-22,'Total Output',col=1,cex=2.5)
 
 dev.off()
 

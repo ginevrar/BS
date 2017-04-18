@@ -13,7 +13,7 @@ ax3<-(seq(1850,2050, by=1))
 
 
 met<-read.csv('mehg_prodotto_kmol_y_2050.csv')
-met<-met[12:2412]
+met<-met[12:2412,]
 str(met)
 diffusion_kmol_y<-ore1$diffusion_kmol_y[12:2412]
 str(diffusion_kmol_y)
@@ -54,8 +54,8 @@ par(mfrow=c(1,1), mar=c(4.5,5,4,1),bty='n')
 
 plot(ax2,river_mehg_kmol_y, col="darkgreen", type="l",
        main=expression("MeHg fluxes to the Black Sea"),
-      cex.axis=2.5, cex.lab=2.3,cex.main=2.5,
-       ylab= " ", ylim=c(-7,7), xlab= " ", lwd=1, lty=1)
+      cex.axis=2, cex.lab=2,cex.main=2.3,
+       ylab= " ", ylim=c(-7,7), xlab= "years", lwd=1, lty=1)
 par(new=TRUE)
 plot (ax2, mehgT_inflow_kmol_y, col="darkblue", lwd=1, type="l", 
      ylim=c(-7,7), ylab= " ", yaxt='n', xaxt='n',xlab= " ", lty=1)
@@ -80,38 +80,15 @@ plot (ax2,-Output_terms, col="black", type="l", lty=2, yaxt='n', xaxt='n',
 #legend(1850,0.22, col=c("blue","orange","black"), pch=19, 
 #legend=c("Outflow to the Marmara Sea",
 #          "Deposition to the sediment","Total Output")) 
-mtext(expression(paste('kmol y'^-1)), 2, line=2, cex=2.3)
+mtext(expression(paste('kmol y'^-1)), 2, line=2.5, cex=2, at=0)
 
-text(1850+80,6,'Total input', col=1,cex=2)
-text(1850+155,2.7,'Net \n water column \n methylation', cex=1.5, col='hotpink3')
-text(190+850,-.4,'Marmara Sea In-Out',cex=1.5, col='darkblue')
-text(1850+140,.53,'Diffusion from sediment',cex=1.5, col='#cdcd00')
-text(200+1850,1.5,'Rivers load', cex=1.5,col='darkgreen')
-text(80+1850,-4,'Total output', col=1,cex=2)
-text(199+1850,-3.5,'Deposition to \n the sediment', cex=1.5,col='orange')
+text(1850+60,6,'Total input', col=1,cex=2.5)
+text(1850+60,-6,'Net \n water column \n methylation', cex=1.9, col='hotpink3')
+text(130+1850,-.4,'Mediterranean Inflow Outflow',cex=1.9, col='darkblue')
+text(1850+140,.53,'Sediment Diffusion',cex=1.9, col='#cdcd00')
+text(1900,1.5,'Rivers load', cex=1.9,col='darkgreen')
+text(60+1850,-3,'Total output', col=1,cex=2.5)
+text(170+1850,-3.5,'Deposition to \n the sediment', cex=1.9,col='orange')
 ##
 dev.off()
-
-
-
-
-dev.new()
-par(mfrow=c(1,1))
-plot (Output_terms,  col="#5aae61",
-      type="l",ylim=c(0,2.5), main="MeHgT input and output to the Black Sea Water",
-      ylab="kmol/y", xlab=" ", lwd=3, lty=5)
-par(new=TRUE)
-plot (Input_terms,col="#762a83",lwd=3, lty=2, type="l",ylim=c(0,2.5), ylab="kmol/y", xlab=" ")
-par(new=TRUE)
-plot (diff,col="#fdb863", type="l",lwd=3, lty=4,ylim=c(0,2.5), ylab="kmol/y", xlab=" ")
-abline(h=0,lty=3, col="lightgray")
-legend(1850,2.4,legend=c("Input","Output","Difference"), box.col="lightgray",
-       col=c("#762a83","#5aae61","#fdb863"),pch=19, lty=c(2,5,4))
-
-
-
-
-
-cumulative_diff_kmol<-cumsum(diff)
-summary(cumulative_diff_kmol)
 

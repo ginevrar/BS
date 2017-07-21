@@ -1,8 +1,11 @@
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0")
+setwd('C:\\Users\\Ginevra\\Desktop\\new_sim_BS')
 input_hg1 <-read.table("input_hg.txt", header=TRUE);
 head(input_hg1,1)
 
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+#setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+setwd('C:\\Users\\Ginevra\\Desktop\\new_sim_BS\\Sensi_MEt\\met_0.002')
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
 
 mehg_prodotto_kmol_y<-read.csv('mehg_prodotto_kmol_y.csv'); str(mehg_prodotto_kmol_y)
 mehg_prodotto_kmol_y_TOT<-rowSums(mehg_prodotto_kmol_y[2:4])

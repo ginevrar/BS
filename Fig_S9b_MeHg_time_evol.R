@@ -1,5 +1,6 @@
 
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+setwd('C:\\Users\\Ginevra\\Desktop\\new_sim_BS\\Sensi_MEt\\met_0.003')
 demtilato<-read.csv(file='demetilato.csv')
 
 #leggo outpout sim per ogni sim partita a ore diverse
@@ -73,33 +74,33 @@ Input_terms<-(mehgT_inflow_kmol_y +river_mehg_kmol_y  +mehg_prodotto_kmol_y+ dif
 dev.new()
 par(mfrow=c(1,1))
 plot(ax, river_mehg_kmol_y, col="darkgreen", type="l",
-     ylim=c(-7,7), ylab= " ", yaxt='n', xaxt='n',
+     ylim=c(-15,15), ylab= " ", yaxt='n', xaxt='n',
      xlab= " ", yaxt='n', xaxt='n',lwd=2, lty=1)
 par(new=TRUE)
 plot(ax, mehgT_inflow_kmol_y, col="darkblue", lwd=2, type="l", 
-     ylim=c(-7,7), ylab= " ", yaxt='n', xaxt='n',xlab= " ", lty=1)
+     ylim=c(-15,15), ylab= " ", yaxt='n', xaxt='n',xlab= " ", lty=1)
 par(new=TRUE)
-plot(ax, diffusion_kmol_y, col="springgreen3", lwd=2, type="l",  ylim=c(-7,7), ylab= " ",
+plot(ax, diffusion_kmol_y, col="springgreen3", lwd=2, type="l",  ylim=c(-15,15), ylab= " ",
      yaxt='n', xaxt='n',xlab= " ")
 par(new=TRUE)
-plot(ax, Input_terms, col="black", type="l", lty=2, lwd=2, ylim=c(-7,7), ylab= " ",
+plot(ax, Input_terms, col="black", type="l", lty=2, lwd=2, ylim=c(-15,15), ylab= " ",
      yaxt='n', xaxt='n',xlab= " ")
 par(new=TRUE)
 plot(ax, mehg_prodotto_kmol_y, col="hotpink3", type="l", lty=1, 
-     lwd=2, ylim=c(-7,7), ylab= " ", yaxt='n', xaxt='n',    xlab= " ")
+     lwd=2, ylim=c(-15,15), ylab= " ", yaxt='n', xaxt='n',    xlab= " ")
 #&legend(1850,2.8, pch=19,box.col="lightgray",  legend=c("Inflow from Marmara Sea","Rivers load","Pore-water diffusion","Total Input"), 
 #col=c( "blue","darkgreen","springgreen3", "black"))
 #dev.new(height=100,width=200)
 #par(mfrow=c(1,1))
 par(new=TRUE)
 plot(ax, -depo_Pmehg_kmol_y, main="Input and Output of MeHg to the water", col="orange",
-     type="l", xlab= " ",yaxt='n', xaxt='n', ylim=c(-7,7), ylab= "kmol/y", lwd=2)
+     type="l", xlab= " ",yaxt='n', xaxt='n', ylim=c(-15,15), ylab= "kmol/y", lwd=2)
 par(new=TRUE)
 plot(ax, -mehgT_outflow_kmol_y, col="royalblue", type="l",yaxt='n', xaxt='n',
-     lwd=2, ylim=c(-7,7),xlab= " ", ylab= "kmol/y")
+     lwd=2, ylim=c(-15,15),xlab= " ", ylab= "kmol/y")
 par(new=TRUE)
 plot(ax, -Output_terms, col="black", type="l", lty=2, 
-     ylim=c(-7,7), xlab= " ", ylab= "", lwd=2)
+     ylim=c(-15,15), xlab= " ", ylab= "", lwd=2)
 #legend(1850,0.22, col=c("blue","orange","black"), pch=19, 
 #legend=c("Outflow to the Marmara Sea",
 #          "Deposition to the sediment","Total Output")) 

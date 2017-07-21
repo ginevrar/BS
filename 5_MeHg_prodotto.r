@@ -1,7 +1,8 @@
 ## Produzione INTERNA MeHg
 
 #REAZIONI VANNO MOLTIPLICATE PER TOTALE E NON PER FASE DISCiOLTA (?!?!)
-setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+#setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
 
 met<-read.csv('Bacterial_Methylation_Rate.csv', header=FALSE, skip = 1,sep = ",", dec=".")
 names(met)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 

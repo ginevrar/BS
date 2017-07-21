@@ -1,4 +1,5 @@
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
 
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
@@ -107,6 +108,7 @@ Pmehg_sed1     <-Pmehgs$Sed1;   Pmehg_sed2 <-Pmehgs$Sed2 #ng/L   or ug/m3
 burial_sed1  <-burial$Sed1;     burial_sed2 <-burial$Sed2  #cm/y
 
 solids_w  <-TOTs$Anoxic3
+
 
 MeHg_sed1_ngm3  <- solids_sed1 *SEDmehg_sed1  #ng/g*g/m3
 MeHg_sed2_ngm3  <- solids_sed2 *SEDmehg_sed2 

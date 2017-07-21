@@ -21,7 +21,7 @@
 #  2414 out/200 anni = 12.07
 #  sim 1850 - 2050
 #
-setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0")
+setwd('C:/Users/Ginevra/Google Drive/MERCURIO/BlackSea/implementazione')
 atm_hg<-read.table("atm_hg.txt", header = F); str(atm_hg)
 atm_hg0<-atm_hg$V1   # --- atm conc of hg0 -
 str(atm_hg0)
@@ -35,8 +35,8 @@ kox<-1.4
 kdeg<-3.14685E-1
 
 #Leggi model output
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
-setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
+
 
 evasion<-read.csv("Volatilization_Loss_Rate.csv", header=FALSE, skip = 1, sep = ",", dec=".")
 names(evasion)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 

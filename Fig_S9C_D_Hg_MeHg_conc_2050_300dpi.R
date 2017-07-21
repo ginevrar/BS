@@ -1,6 +1,7 @@
 getwd()
 #wd('C:/Users/gi/Dropbox/29_Luglio/Anoxic3c/ore17')
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
 
 hg<-read.csv("Dissolved_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")

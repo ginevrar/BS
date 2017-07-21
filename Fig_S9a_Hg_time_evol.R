@@ -1,6 +1,7 @@
 # 164 anni per 12 mesi = 1968
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
-
+#setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+#setwd('C:/Users/Ginevra/Desktop/new_sim_BS/A7_noT_corr')
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
 
 ax<-seq(1851,2050, by=1)
 #leggo outpout sim per ogni sim partita a ore diverse
@@ -22,7 +23,9 @@ plot(diffusion_kmol_y)
 plot(river_hg_kmol_y)
 
 Output_terms<-(evasione_kmol_y+depo_Phg_kmol_y+hgT_outflow_kmol_y)
-Input_terms<-(hgT_inflow_kmol_y +river_hg_kmol_y +atm_hg_kmol_y + diffusion_kmol_y)Output_terms[2:164]; summary(Output_terms)
+Input_terms<-(hgT_inflow_kmol_y +river_hg_kmol_y +atm_hg_kmol_y + 
+                diffusion_kmol_y)
+Output_terms[2:164]; summary(Output_terms)
 
 
 diff<-Input_terms-Output_terms
@@ -41,7 +44,7 @@ par(mfrow=c(1,1))
 plot(atm_hg_kmol_y, col="cyan3", type="l",  ylim=c(-35,40), 
      main=expression("Input and Output of Hg to the water"), ylab= "kmol/y", 
      xlab= " ",  lwd=1, 
-     cex.axis=1.4, cex.lab=1.4,cex.main=1.2))
+     cex.axis=1.4, cex.lab=1.4,cex.main=1.2)
 par(new=TRUE)
 plot(river_hg_kmol_y, col="darkgreen", type="l", 
      xaxt='n',yaxt='n',ylim=c(-30,40), 
@@ -51,18 +54,21 @@ plot(hgT_inflow_kmol_y, col="darkblue", type="l",
      xaxt='n',yaxt='n',
      ylim=c(-35,40), ylab= " ", xlab= " ",  lwd=2)
 par(new=TRUE)
-plot(  diffusion_kmol_y, col="#cdcd00", type="l", 
+plot(  diffusion_kmol_y, col="#ae773f", type="l", 
        xaxt='n',yaxt='n',
      ylim=c(-35,40), ylab= " ", xlab= " ",  lwd=2)
 par(new=TRUE)
 plot(  Input_terms, col="black", type="l", lty=2, 
        xaxt='n',yaxt='n',
      ylim=c(-35,40), ylab= " ", xlab= " ",  lwd=1)
+abline(v=2013, lty=2, col='gray60')
+text(2150,38,'2013',col='gray60')
+
 text(900,8,'Atmospheric deposition',col='cyan3')
 text(1520,20,'Rivers load',col='darkgreen')
 text(800,36,'Total Input',col=1, cex=1.2)
 #text(1980,12,'Inflow from Marmara Sea',col='darkblue')
-text(1500,3,'Diffusion from sediment',col='#b8b800')
+text(1500,3,'Diffusion from sediment',col='#ae773f')
 #legend(1850,50, pch=19, legend=c("Atmospheric deposition","Inflow from Marmara Sea",
 #                               "Rivers load","Pore-water diffusion","Total Input"), 
 #col=c("cyan3", "blue","darkgreen","springgreen3", "black"))

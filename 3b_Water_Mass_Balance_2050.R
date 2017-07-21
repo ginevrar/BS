@@ -1,5 +1,5 @@
 
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0")
+setwd('C:/Users/Ginevra/Google Drive/MERCURIO/BlackSea/implementazione/new_sim0')
 input_hg1 <-read.table("input_Hg.txt", header=TRUE); str(input_hg1)
 in_2013<-rbind(input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8],
                input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],
@@ -9,7 +9,7 @@ str(in_2013$river_load_hgT_kg_d)
 latest<-rbind(in_2013,in_2013,in_2013); str(latest)
 input_hg1<-rbind.data.frame(input_hg1,latest,input_hg1[1957:1968,1:8])
 str(input_hg1$inflow_L_y)
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
 
 #Leggi dati e taglia gli ultimi anni dopo il 2013 hg<-hg[2:1969,]
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")

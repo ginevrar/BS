@@ -123,10 +123,11 @@ y2<-c(10.5,11.5,12.5,13.5,14.5,15.5,
       16.5,17, 17.5)
 y<-c(10,11,12,13,14,15,16,17)
 
-
-dev.new()
+setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
+tiff('SPM_dato_model.tiff', height=25, width=23, units='cm', 
+     compression="lzw", res=300)
 par(mfrow=c(1,1), cex.axis=1.2, cex.lab=1.3,
-    cex.main=1.4,mar=c(5.1, 5.1, 3.1, 1.1), bty='n')
+    cex.main=1.4,mar=c(5.1, 5.5, 3.1, 1.1), bty='n')
 plot(A$TSM, A$Density, ylim=c(17.25,10),type="p", xlim=c(0,.7),
      ylab='', yaxt='n',xaxt='n',
      xlab=" ",
@@ -151,22 +152,24 @@ rect(0, 17.23 ,  .7,17.25 , density = NULL, angle = 45,
      xpd = NULL)
 par(new=T)   
 plot(A$TSM, A$Density, ylim=c(17.25,10),  type="p", xlim=c(0,.7),yaxt='n',
-     ylab='', xlab=" ",cex=1.3,xaxt='n',
+     ylab='', xlab=" ",cex=2.6,xaxt='n',
      pch=21, col="#85db04", bg="#85db0422")
 par(new=TRUE)
 plot(layer$solidi, layer$prof, col="black",ylim=c(17.25,10),
      main="Suspended Particulate Matter", lty=3,yaxt='n',
-     type="b",pch=17,cex=2, bty='n', xlim=c(0,.7),
+     cex.axis=1.8, cex.main=1.8,
+     type="b",pch=17,cex=4, bty='n', xlim=c(0,.7),
      ylab=" ", xlab=" ")
-legend(0.51,11, cex=1.2,col=c("#85db0444","black"),bg='white', 
-       legend=c("data","model"), pch=c(19,17))
-text(.08,12,'OL', cex=.9, font=2)
-text(.08,14.7,'CIL', cex=.9, font=2)
-text(.35,15.9,'SOL', cex=.9, font=2)
-text(.35,16.6,'AOL', cex=.9, font=2)
-axis(2, at=y,line=0, col="black" )
-axis(2, at=y2,line=0,labels=F, col="black" , tck =-.02)
-mtext(expression(paste(sigma[theta]*'  (kg/m'^3*')')), 2, line=3,
-      at=14,col="black", cex=1.2)
+legend(0.03,11.8, cex=1.8,col=c("#85db0499","black"),bg='white', 
+       legend=c( "estimated \n from BAC","model"), pch=c(19,17))
+text(.5,12,'OL', cex=2, font=2)
+text(.08,14.7,'CIL', cex=2, font=2)
+text(.35,15.9,'SOL', cex=2, font=2)
+text(.35,16.6,'AOL', cex=2, font=2)
+axis(2, at=y,line=0, col="black", cex.axis=1.8 )
+axis(2, at=y2,line=0,labels=F, col="black" , tck =-.02, cex.axis=1.8)
+mtext(expression(paste(sigma[theta]*'  (kg m'^-3*')')), 2, line=3,
+      at=14,col="black", cex=2)
 #abline(h=13,lty=3,col='gray')
-mtext('Concentrations (mg/L)', 1, line=3,at=.35,col="black", cex=1.2)
+mtext(expression('mg L'^-1), 1, line=4,at=.35,col="black", cex=1.8)
+dev.off()

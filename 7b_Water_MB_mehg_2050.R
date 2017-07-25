@@ -1,17 +1,18 @@
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0")
+setwd('C:\\Users\\Ginevra\\Desktop\\new_sim_BS')
 input_hg1 <-read.table("input_hg.txt", header=TRUE);
-head(input_hg1,1)
+str(input_hg1)
 in_2013<-rbind(input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8],
                input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],
                input_hg1[1957:1968,1:8])
 str(input_hg1$river_load_hgT_kg_d)
 str(in_2013$river_load_hgT_kg_d)
-latest<-rbind(in_2013,in_2013,in_2013); str(latest)
-input_hg1<-rbind.data.frame(input_hg1,latest,input_hg1[1957:1968,1:8])
+#latest<-rbind(in_2013,in_2013,in_2013); str(latest)
+#input_hg1<-rbind.data.frame(input_hg1,latest,input_hg1[1957:1968,1:8])
 str(input_hg1$inflow_L_y)
 
 #setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
 
 mehg_prodotto_kmol_y<-read.csv('mehg_prodotto_kmol_y_2050.csv'); str(mehg_prodotto_kmol_y)
 mehg_prodotto_kmol_y_TOT<-rowSums(mehg_prodotto_kmol_y[2:4])
@@ -127,6 +128,12 @@ mehgT_inflow_kmol_y<-mehgT_inflow_g_y/(215*1000)
 
 Input_terms<-(river_mehg_kmol_y + mehgT_inflow_kmol_y + 
                 diffusion_kmol_y+ mehg_prodotto_kmol_y_TOT); str(Input_terms); summary(Input_terms)
+
+str(river_mehg_kmol_y)
+str(mehgT_inflow_kmol_y)
+str(mehg_prodotto_kmol_y_TOT)
+
+
 diffe<-(Input_terms-Output_terms); summary(diffe)
 diff_media   <-tapply(diffe,rep(1:(length(diffe)/12),each = 12), mean); cumulative_diff_kmol<-cumsum(diff_media); tail(cumulative_diff_kmol,1)
 
@@ -158,7 +165,7 @@ bilancio_w<-cbind(river_mehg_kmol_y_media, mehgT_inflow_kmol_y_media,diffusion_k
 bilancio_w_all<-cbind(river_mehg_kmol_y, mehgT_inflow_kmol_y,diffusion_kmol_y,
                       mehgT_outflow_kmol_y, depo_Pmehg_kmol_y, burial1_kmol_y,
                       burial2_kmol_y, mehg_prodotto_kmol_y)	  
-
+plot(diffusion_kmol_y)
 				  
 write.csv(bilancio_w, file="water_input_output_mehg_1_2050")
 write.csv(bilancio_w_all, file="water_input_output_long_mehg_1_2050")
@@ -185,4 +192,4 @@ bilancio_water_cumulativo<-cbind(river_mehg_kmol_cum,
                                  burial1_cum, burial2_cum, diffusion1_cum, diffusion2_cum,
                                  Output_terms_cum, cumulative_diff_kmol)
 write.csv(bilancio_water_cumulativo, file="bilancio_acque_mehg_1_2050.csv")
-
+str(river_mehg_kmol_cum)

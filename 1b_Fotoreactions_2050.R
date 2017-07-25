@@ -35,7 +35,7 @@ kox<-1.4
 kdeg<-3.14685E-1
 
 #Leggi model output
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
 
 
 evasion<-read.csv("Volatilization_Loss_Rate.csv", header=FALSE, skip = 1, sep = ",", dec=".")
@@ -161,8 +161,7 @@ hgII_ngL<-hgII
 hg0_ngL<-hg0$Oxic1
 mehg_ngL<-mehgT$Oxic1
 
-mean(hg0_g_m3/hgII_g_m3*100) #hg0 %
-
+#mean(hg0_g_m3/hgII_g_m3*100) #hg0 %
 # ---------
 ef_red <-fotored_1_s/fDOChg ; mean(ef_red*60*60*24) 
 mean(ef_red)# quindi questo dovrebbe restituire il tasso in input +  o meno
@@ -187,12 +186,12 @@ out_red_1_d  <-fotored$Oxic1; str(out_red_1_d); mean(out_red_1_d)
 out_ox_1_d <-(fotored$Oxic1*(kox/kred)); mean(out_ox_1_d)
 out_dem_1_d <-fotodem$Oxic1; mean(out_dem_1_d[1900:1968])
 
-kred_adj<- LNt_red[1:1968]*fd$V1[1:1968]*kred*(fDOChg*100); mean(kred_adj)  
-mean(out_red_1_d)
-kox_adj<-kred_adj*(kox/kred); mean (kox_adj)
-kdem_adj<- (LNt_red[1:1968]*fd$V1[1:1968]*kdeg*(fDOCmehg*100))
-mean(kdem_adj[1900:1968]/20)  # mia formula qua stima di 20 volte?
-mean(out_dem_1_d[1900:1968])
+#kred_adj<- LNt_red[1:1968]*fd$V1[1:1968]*kred*(fDOChg*100); mean(kred_adj)  
+#mean(out_red_1_d)
+#kox_adj<-kred_adj*(kox/kred); mean (kox_adj)
+#kdem_adj<- (LNt_red[1:1968]*fd$V1[1:1968]*kdeg*(fDOCmehg*100))
+#mean(kdem_adj[1900:1968]/20)  # mia formula qua stima di 20 volte?
+#mean(out_dem_1_d[1900:1968])
 
 kred_mol_day<-(out_red_1_d*HgII_pmols)/10^12; mean(kred_mol_day)
 kox_mol_day<-(out_ox_1_d*Hg0_pmols1)/10^12; mean(kox_mol_day)
@@ -276,9 +275,10 @@ volat1_kmol_y<-volat_g_y/(200.59*1000); plot(volat1_kmol_y, type="l")
 Volat1_kmol_y_media<-tapply(volat1_kmol_y,rep(1:(length(volat1_kmol_y)/12), each = 12),
                             mean); Volat1_kmol_y_media<-as.numeric(Volat1_kmol_y_media)
 #str(atm_hg0)
-vol_2013<-rep(Volat1_kmol_y_media[164],36)
-Volat1_kmol_y_media<-c(Volat1_kmol_y_media,vol_2013)
+#vol_2013<-rep(Volat1_kmol_y_media[164],36)
+#Volat1_kmol_y_media<-c(Volat1_kmol_y_media,vol_2013)
 
+Volat1_kmol_y_media<-Volat1_kmol_y_media
 plot(tail(volat1_kmol_y,24), type="l"); 
 
 volat1_kmol_y_cumul<-cumsum(Volat1_kmol_y_media); volat1_kmol_y_cumul<-as.numeric(volat1_kmol_y_cumul)

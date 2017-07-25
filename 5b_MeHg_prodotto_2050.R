@@ -3,6 +3,7 @@
 #REAZIONI VANNO MOLTIPLICATE PER TOTALE E NON PER FASE DISCiOLTA (?!?!)
 #setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
 
 met<-read.csv('Bacterial_Methylation_Rate.csv', header=FALSE, skip = 1,sep = ",", dec=".")
 names(met)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
@@ -50,6 +51,8 @@ SOL_vol_m3 <-7.4E+12; 			SOL_vol_L  <-SOL_vol_m3*1000
 UAL1_vol_m3 <-5.3E+13; 			UAL1_vol_L  <-UAL1_vol_m3*1000
 DAOL_vol_m3 <-2.9E+14; 			DAOL_vol_L  <-DAOL_vol_m3*1000
 BBL_vol_m3 <-1E+14; 			BBL_vol_L  <-BBL_vol_m3*1000
+Sed1_vol<-8.8*10^9
+Sed2_vol<-2*10^10
 
 diss_mehg<-DOCmehg+mehg; str(diss_mehg)
 diss_hgII<-hg+DOChg; str(diss_hgII)
@@ -87,6 +90,9 @@ hgT_pmol_UAL1	 	  <-hgT_pM$Suboxic2*UAL1_vol_L
 hgT_pmol_UAL2	      <-hgT_pM$Anoxic1 *UAL1_vol_L
 hgT_pmol_DAOL         <-hgT_pM$Anoxic2 *DAOL_vol_L
 hgT_pmol_BBL	      <-hgT_pM$Anoxic3 *BBL_vol_L;
+
+hgT_pmol_sed1	      <-hgT_pM$Sed1 *Sed1_vol;
+hgT_pmol_sed2		    <-hgT_pM$Sed2 *Sed2_vol;
 # ------ end 
 
 # ------ METHYLATION IN EACH ZONE
@@ -94,6 +100,8 @@ met_pmol_day_oxic	  <-(hgT_pmol_OL1*met$Oxic1)+(hgT_pmol_OL2*met$Oxic2)+(hgT_pmo
 met_pmol_day_suboxic  <-(hgT_pmol_SOL*met$Suboxic1)
 met_pmol_day_anoxic	  <-(hgT_pmol_UAL1*met$Suboxic2)+(hgT_pmol_UAL2*met$Anoxic1)+
 						(hgT_pmol_DAOL*met$Anoxic2) + (hgT_pmol_BBL*met$Anoxic3)
+
+met_pmol_day_sed	  <-(hgT_pmol_sed1*met$Sed1)+(hgT_pmol_sed2*met$Sed2)
 
 #----------------------------------------conc mehgT
 mehgT_pmol_OL1		  <-mehgT_pM$Oxic1   *OL1_vol_L
@@ -108,23 +116,30 @@ mehgT_pmol_UAL2	      <-mehgT_pM$Anoxic1 *UAL1_vol_L
 mehgT_pmol_DAOL       <-mehgT_pM$Anoxic2 *DAOL_vol_L
 mehgT_pmol_BBL	      <-mehgT_pM$Anoxic3 *BBL_vol_L;
 
+mehgT_pmol_sed1	      <-mehgT_pM$Sed1 *Sed1_vol;
+mehgT_pmol_sed2	      <-mehgT_pM$Sed2 *Sed2_vol;
 # ------ DEMETHYLATION IN EACH ZONE					
 demet_pmol_day_oxic	   <-(mehgT_pmol_OL1 *demet$Oxic1) +(mehgT_pmol_OL2*demet$Oxic2)+
 					             	 (mehgT_pmol_CIL *demet$CIL)   +(mehgT_pmol_oxy*demet$Oxycline)
 demet_pmol_day_suboxic <-(mehgT_pmol_SOL *demet$Suboxic1)
 demet_pmol_day_anoxic  <-(mehgT_pmol_UAL1*demet$Suboxic2)+(mehgT_pmol_UAL2*demet$Anoxic1)+
 					             	 (mehgT_pmol_DAOL*demet$Anoxic2) +(mehgT_pmol_BBL*demet$Anoxic3)
-						 
+
+demet_pmol_day_sed	  <-(mehgT_pmol_sed1*demet$Sed1)+(mehgT_pmol_sed2*met$Sed2)
+
+
 met_kmol_y_OL  <-met_pmol_day_oxic*365/10^15; mean(tail(met_kmol_y_OL,12))   # 27 kmol
 met_kmol_y_SOL <-met_pmol_day_suboxic*365/10^15; mean(tail(met_kmol_y_SOL,12)) # 6.7 kmol
 met_kmol_y_AOL <-met_pmol_day_anoxic*365/10^15; mean(tail(met_kmol_y_AOL,12))  # 206 kmol
+met_kmol_y_SED <-met_pmol_day_sed*365/10^15; mean(tail(met_kmol_y_SED,12))  # 206 kmol
 
 demet_kmol_y_OL  <-demet_pmol_day_oxic*365/10^15; mean(tail(demet_kmol_y_OL,12))  # 27.8 kmol
 demet_kmol_y_SOL <-demet_pmol_day_suboxic*365/10^15; mean(tail(demet_kmol_y_SOL,12)) # 10 kmol
 demet_kmol_y_AOL <-demet_pmol_day_anoxic*365/10^15; mean(tail(demet_kmol_y_AOL,12))#  198 kmol
+demet_kmol_y_SED <-demet_pmol_day_sed*365/10^15; mean(tail(demet_kmol_y_SED,12))  # 206 kmol
 
-met_kmol_y<-data.frame(met_kmol_y_OL, met_kmol_y_SOL, met_kmol_y_AOL)
-demet_kmol_y<-data.frame(demet_kmol_y_OL, demet_kmol_y_SOL, demet_kmol_y_AOL)
+met_kmol_y<-data.frame(met_kmol_y_OL, met_kmol_y_SOL, met_kmol_y_AOL,met_kmol_y_SED)
+demet_kmol_y<-data.frame(demet_kmol_y_OL, demet_kmol_y_SOL, demet_kmol_y_AOL,demet_kmol_y_SED)
 
 trasf<-cbind(met_kmol_y,demet_kmol_y); str(trasf)
 write.csv(trasf, file='trasformazioni.csv')
@@ -156,10 +171,12 @@ met_kmol_y_media <-as.numeric(lapply(met_kmol_y ,rep(1:(length(met_kmol_y)/12),e
 OL_demet_kmol_y_media <-as.numeric(tapply(demet_kmol_y[,1] ,rep(1:(length(demet_kmol_y[,1])/12), each = 12), mean))
 SOL_demet_kmol_y_media <-as.numeric(tapply(demet_kmol_y[,2] ,rep(1:(length(demet_kmol_y[,2])/12), each = 12), mean))
 AOL_demet_kmol_y_media <-as.numeric(tapply(demet_kmol_y[,3] ,rep(1:(length(demet_kmol_y[,3])/12), each = 12), mean))
+SED_demet_kmol_y_media <-as.numeric(tapply(demet_kmol_y[,4] ,rep(1:(length(demet_kmol_y[,4])/12), each = 12), mean))
 
 OL_met_kmol_y_media <-as.numeric(tapply(met_kmol_y[,1] ,rep(1:(length(demet_kmol_y[,1])/12), each = 12), mean))
 SOL_met_kmol_y_media <-as.numeric(tapply(met_kmol_y[,2] ,rep(1:(length(demet_kmol_y[,2])/12), each = 12), mean))
 AOL_met_kmol_y_media <-as.numeric(tapply(met_kmol_y[,3] ,rep(1:(length(demet_kmol_y[,3])/12), each = 12), mean))
+SED_met_kmol_y_media <-as.numeric(tapply(met_kmol_y[,4] ,rep(1:(length(met_kmol_y[,4])/12), each = 12), mean))
 
 
 met_kmol_y<-data.frame(OL_met_kmol_y_media, SOL_met_kmol_y_media, AOL_met_kmol_y_media)
@@ -168,13 +185,15 @@ demet_kmol_y<-data.frame(OL_demet_kmol_y_media, SOL_demet_kmol_y_media, AOL_deme
 netto_prodotto_OL  <-(OL_met_kmol_y_media - OL_demet_kmol_y_media) 
 netto_prodotto_SOL <-(SOL_met_kmol_y_media- SOL_demet_kmol_y_media) 
 netto_prodotto_AOL <-(AOL_met_kmol_y_media- AOL_demet_kmol_y_media) 
+netto_prodotto_SED <-(SED_met_kmol_y_media- SED_demet_kmol_y_media) 
+
 netto<-netto_prodotto_OL+netto_prodotto_SOL+netto_prodotto_AOL; mean(tail(netto,12))
 netto_prodotto<-data.frame(netto_prodotto_OL,netto_prodotto_SOL, 
                   netto_prodotto_AOL, netto)
 
-write.csv(netto_prodotto, file='netto_prodotto_1_2050.csv')
+write.csv(netto_prodotto, file='netto_prodotto_kmol_y_2050.csv')
 write.table(netto, file='netto_TOT_2050.txt')
-write.csv(netto_prodotto_TOT_long,file='netto_prodotto_long_2050.csv)
+write.csv(netto_prodotto_TOT_long,file='netto_prodotto_long_2050.csv')
 plot(netto_prodotto_OL);abline(h=2.9)
 plot(netto_prodotto_SOL);abline(h=2.9)
 plot(netto_prodotto_AOL);abline(h=2.9)

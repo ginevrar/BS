@@ -1,5 +1,7 @@
 
-setwd('C:/Users/Ginevra/Google Drive/MERCURIO/BlackSea/implementazione/new_sim0')
+#setwd('C:/Users/Ginevra/Google Drive/MERCURIO/BlackSea/implementazione/new_sim0')
+setwd('C:/Users/Ginevra/Desktop/new_sim_BS')
+
 input_hg1 <-read.table("input_Hg.txt", header=TRUE); str(input_hg1)
 in_2013<-rbind(input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8],
                input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],
@@ -7,9 +9,9 @@ in_2013<-rbind(input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[195
 str(input_hg1$river_load_hgT_kg_d)
 str(in_2013$river_load_hgT_kg_d)
 latest<-rbind(in_2013,in_2013,in_2013); str(latest)
-input_hg1<-rbind.data.frame(input_hg1,latest,input_hg1[1957:1968,1:8])
+#input_hg1<-rbind.data.frame(input_hg1,latest,input_hg1[1957:1968,1:8])
 str(input_hg1$inflow_L_y)
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
 
 #Leggi dati e taglia gli ultimi anni dopo il 2013 hg<-hg[2:1969,]
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
@@ -150,6 +152,10 @@ bilancio_w<-cbind(atm_hg_kmol_y_media,river_hg_kmol_y_media, hgT_inflow_kmol_y_m
 
 bilancio_w_all<-cbind(atm_hg_kmol_y,river_hg_kmol_y, hgT_inflow_kmol_y,diffusion_kmol_y,
                       evasione_kmol_y, hgT_outflow_kmol_y, depo_Phg_kmol_y, burial1_kmol_y, burial2_kmol_y, burial1_kmol_y, burial2_kmol_y)	  
+
+str(burial1_kmol_y_media)
+str(hgT_outflow_kmol_y_media)
+str(evasione_kmol_y_media)
 
 write.csv(bilancio_w, file="water_input_output1_2050")
 write.csv(bilancio_w_all, file="water_input_output_long_1_2050")

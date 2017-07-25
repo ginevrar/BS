@@ -1,37 +1,37 @@
 getwd()
 #wd('C:/Users/gi/Dropbox/29_Luglio/Anoxic3c/ore17')
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
 
 hg<-read.csv("Dissolved_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-hg<-hg [14:2414,1:12]; str(hg$Time)
+hg<-hg [2:2413,]; str(hg)
 solids<-read.csv("Total_Solids.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(solids)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
 Phg<-read.csv("Total_Sorbed_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(Phg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-Phg<-Phg [14:2414,1:12]
+Phg<-Phg [2:2413,]
 DOChg<-read.csv("DOC_Sorbed_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(DOChg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-DOChg<-DOChg [14:2414,1:12]
+DOChg<-DOChg [2:2413,]
 mehg<-read.csv("Dissolved_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(mehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-mehg<-mehg [14:2414,1:12]
+mehg<-mehg [2:2413,]
 DOCmehg<-read.csv("DOC_Sorbed_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(DOCmehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-DOCmehg<-DOCmehg [14:2414,1:12]
+DOCmehg<-DOCmehg [2:2413,]
 hg0<-read.csv("Elemental_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hg0)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-hg0<-hg0 [14:2414,1:12]
+hg0<-hg0 [2:2413,]
 mehgT<-read.csv("Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(mehgT)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-mehgT<-mehgT [14:2414,1:12]
+mehgT<-mehgT [2:2413,]
 hgT<-read.csv('Total_Hg.csv', header=FALSE, skip = 1,sep = ",", dec=".")
 names(hgT)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-hgT<-hgT [14:2414,1:12]
+hgT<-hgT [2:2413,]
 Temp<-read.csv('Segment_Temperature.csv', header=FALSE, skip = 1,sep = ",", dec=".")
 names(Temp)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-Temp<-Temp [14:2414,1:12]
+Temp<-Temp [2:2413,]
 
 Temp<-tail(Temp,36)
 
@@ -72,12 +72,12 @@ par(new=T)
 plot(tail(mehgT$Anoxic,36),xlim=c(0,36), col='darkgreen', type='b')
 
 a<-c(2.1,2,3)
-ax2<-(seq(1850,2050, by=.0833))
+ax2<-(seq(1850,2050, by=.08291874))
 str(ax2)
 ax3<-(seq(1850,2050, by=1))
 
 
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
+#setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
 
 tiff('Fig.7d_mEHg_conc.tiff', height=25, width=23, units='cm', 
      compression="lzw", res=300)

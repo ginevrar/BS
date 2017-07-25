@@ -81,9 +81,38 @@ BBL_vol_m3 <-1E+14; 			BBL_vol_L  <-BBL_vol_m3*1000
 Sed1_vol<-8.8*10^9
 Sed2_vol<-2*10^10
 
+diss_hg_inor<-hg+DOChg+hg0
+diss_mehg<-DOCmehg+mehg
 
-diss_hg<-hg+DOChg+DOCmehg+mehg+hg0; str(diss_hg);tail(diss_hg)
-diss_hg_pM<-diss_hg/200.59*1000
+diss_mehg_pM<-diss_mehg/215*1000
+diss_hgIpM<-diss_hg_inor/200.59*1000
+diss_hg_pM<-diss_hgIpM+diss_mehg_pM
+
+### ....diffusion .....
+area<-
+  sed_diff<-  
+eddy_d_OL<-9.5*10^-6  #m2/s
+eddy_d_SOL<-9.5*10^-6
+eddy_d_AOL<-10^-5
+eddy_d_BBL<-8.7^-6
+
+HgD_OL<-diss_hg_pM$Oxycline *oxy_vol_L #pM OL4
+HgD_SOL<-diss_hg_pM$Suboxic1*SOL_vol_L #pM SOL
+HgD_AOL<-diss_hg_pM$Suboxic1*UAL1_vol_L #pM AOL1
+HgD_BBL<-diss_hg_pM$Anoxic3 *BBL_vol_L #pM AOL4
+HgD_Sed<-diss_hg_pM$Sed1 *BBL_vol_L #pM AOL4
+
+#check in the model how is it ... only one way?
+diff_OL<-(eddy_d_OL*area)/lenght_OL_SOL*(HgD_SOL-HgD_OL)
+diff_SOL1<-(eddy_d_SOL*area)/lenght_OL_SOL*(HgD_SOL-HgD_OL)
+diff_SOL2<-(eddy_d_OL*area)/lenght_OL_SOL*(HgD_SOL-HgD_OL)
+
+diff_AOL<-((eddy_d_AOL*area)/(lenght_AOL_Sed/0.9))*(HgD_Sed/0.9-HgD_AOL) #0.9 porosity
+diff_Sed<-(sed_diff*area)/(lenght_AOL_Sed/0.9)*(HgD_AOL-HgD_Sed/0.9)
+
+
+
+
 
 # solidi ai boundaries ta OL-SOL e sOL_AOL e aOL - SED
 solids_OL  <-solids$Oxycline     
@@ -103,26 +132,63 @@ HgT_sed2_ngm3 <- solids_sed2 *SEDhg_sed2
 HgT_sed1_gm3 <-HgT_sed1_ngm3/10^9         #   mg/m3->g/m3 hgP
 HgT_sed2_gm3  <-HgT_sed2_ngm3/10^9
 
+#DEPOSIZIONE Phg AOL -> Sed
+
+## .... settling OL - SOL.....
+POM_OLdepo_1_day<-POM_depos$Oxycline/350     #depo m/day * depth(m) --> 1/day (0.003 /d)
+silt_OLdepo_1_day<-silt_depos$Oxycline/350   # depo silt m/day  (0.014 /d)
+fPOM_OL<-mean(POMs$Oxycline/solids_OL, na.rm=TRUE)
+fsilt_OL<-mean(silts$Oxycline/solids_OL, na.rm=TRUE)
+#  Vd OL
+depo_OLmedia1<-((POM_OLdepo_1_day*fPOM_OL)+(silt_OLdepo_1_day*fsilt_OL))/2  #1/day
+depo_OLmedia1 # 0.005 /d
+
+depo_OLPhg_ug_m3_d<-depo_OLmedia1*Phg_OL        # 1/day *ug/m3 -> ug/m3d
+depo_OLPhg_g_d <-(depo_OLPhg_ug_m3_d*oxy_vol_m3)/10^6   # g/d
+depo_OLPhg_mol_d <-depo_OLPhg_g_d/200.59               # mol/d
+depo_OLPhg_kmol_y <-(depo_OLPhg_mol_d/1000)*365        # kmol/y
+
+media1_depoOL_kmol_y <-tapply(depo_OLPhg_kmol_y,rep(1:(length(depo_OLPhg_kmol_y)/12),each = 12), mean)
+
+## .... settling SOL - AOL.....
+POM_SOLdepo_1_day<-POM_depos$Suboxic1 /350     #depo m/day * depth(m) --> 1/day (0.003 /d)
+silt_SOLdepo_1_day<-silt_depos$Suboxic1/350   # depo silt m/day  (0.014 /d)
+fPOM_SOL<-mean(POMs$Suboxic1/solids_SOL, na.rm=TRUE)
+fsilt_SOL<-mean(silts$Suboxic1/solids_SOL, na.rm=TRUE)
+#  Vd SOL
+depo_SOLmedia1<-((POM_SOLdepo_1_day*fPOM_SOL)+(silt_SOLdepo_1_day*fsilt_SOL))/2  #1/day
+depo_SOLmedia1 # 
+
+depo_SOLPhg_ug_m3_d<-depo_SOLmedia1*Phg_SOL        # 1/day *ug/m3 -> ug/m3d
+depo_SOLPhg_g_d <-(depo_SOLPhg_ug_m3_d*SOL_vol_m3)/10^6   # g/d
+depo_SOLPhg_mol_d <-depo_SOLPhg_g_d/200.59               # mol/d
+depo_SOLPhg_kmol_y <-(depo_SOLPhg_mol_d/1000)*365        # kmol/y
+
+media1_depoSOL_kmol_y <-tapply(depo_SOLPhg_kmol_y,rep(1:(length(depo_SOLPhg_kmol_y)/12),each = 12), mean)
+
 
 #DEPOSIZIONE Phg AOL -> Sed
 #depo m/day * g/m3 --> g/m2d
 Vol_anox3<-1E+14
-POM_depo_1_day<-POM_depos$Anoxic3/350     #depo m/day * depth(m) --> 1/day (0.003 /d)
-silt_depo_1_day<-silt_depos$Anoxic3/350   # depo silt m/day  (0.014 /d)
-fPOM<-mean(POMs$Anoxic3/TOTs$Anoxic3, na.rm=TRUE)
-fsilt<-mean(silts$Anoxic3/TOTs$Anoxic3, na.rm=TRUE)
+POM_AOLdepo_1_day<-POM_depos$Anoxic3/350     #depo m/day * depth(m) --> 1/day (0.003 /d)
+silt_AOLdepo_1_day<-silt_depos$Anoxic3/350   # depo silt m/day  (0.014 /d)
+fPOM_AOL<-mean(POMs$Anoxic3/solids_AOL, na.rm=TRUE)
+fsilt_AOL<-mean(silts$Anoxic3/solids_AOL, na.rm=TRUE)
 #  Vd
-depo_media1<-((POM_depo_1_day*fPOM)+(silt_depo_1_day*fsilt))/2  #1/day
-depo_media1 # 0.005 /d
+depo_AOLmedia1<-((POM_AOLdepo_1_day*fPOM_AOL)+(silt_AOLdepo_1_day*fsilt_AOL))/2  #1/day
+depo_AOLmedia1 # 0.005 /d
 
-depo_Phg_ug_m3_d<-depo_media1*Phgs$Anoxic3        # 1/day *ug/m3 -> ug/m3d
-depo_Phg_g_d <-(depo_Phg_ug_m3_d*Vol_anox3)/10^6   # g/d
-depo_Phg_mol_d <-depo_Phg_g_d/200.59               # mol/d
-depo_Phg_kmol_y <-(depo_Phg_mol_d/1000)*365        # kmol/y
-plot(depo_Phg_kmol_y)
+depo_AOLPhg_ug_m3_d<-depo_media1*Phg_AOL       # 1/day *ug/m3 -> ug/m3d
+depo_AOLPhg_g_d <-(depo_AOLPhg_ug_m3_d*Vol_anox3)/10^6   # g/d
+depo_AOLPhg_mol_d <-depo_AOLPhg_g_d/200.59               # mol/d
+depo_AOLPhg_kmol_y <-(depo_AOLPhg_mol_d/1000)*365        # kmol/y
 
-media1_depoAOL_kmol_y <-tapply(depo_Phg_kmol_y,rep(1:(length(depo_Phg_kmol_y)/12),each = 12), mean)
-plot(media1_depo_kmol_y)
+media1_depoAOL_kmol_y <-tapply(depo_AOLPhg_kmol_y,rep(1:(length(depo_AOLPhg_kmol_y)/12),each = 12), mean)
 
 
-media1_depoAOL_kmol_y
+
+summary(media1_depoOL_kmol_y); str(media1_depoOL_kmol_y);tail(media1_depoOL_kmol_y)
+summary(media1_depoSOL_kmol_y); str(media1_depoSOL_kmol_y);tail(media1_depoSOL_kmol_y)
+summary(media1_depoAOL_kmol_y); str(media1_depoAOL_kmol_y);tail(media1_depoAOL_kmol_y)
+
+

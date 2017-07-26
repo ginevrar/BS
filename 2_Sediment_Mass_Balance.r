@@ -2,7 +2,6 @@
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
 
-  
     hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
     names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                  "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
@@ -192,7 +191,7 @@ setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
   
   Diffusion_coeff<-10^-9             #m2/s
   DF<-Diffusion_coeff*60*60*24       #m2/day
-  #     ng/L to g/m3
+  #     ng/L to g/m3 = mgL
   deep_w_hg<- diss_hg$Anoxic3      # ngL diss hg  Bottom water
   deep_w_hg_gm3<-deep_w_hg/10^6 
   
@@ -200,7 +199,7 @@ setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
   PWhg1_ngm3<-PWhg1_ngL*PW1_L/Vol_Sed1_m3
   PWhg2_ngm3<-PWhg2_ngL*PW2_L/Vol_Sed2_m3
   PWhg1_gm3<-PWhg1_ngm3/10^9; PWhg2_gm3<-PWhg2_ngm3/10^9
-  
+  dev.new()
   par(mfrow=c(1,1))
   plot(deep_w_hg, col="darkblue",type="l", ylim=c(0,1.3), ylab="ng/L")
   par(new=TRUE)
@@ -209,6 +208,8 @@ setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
   plot(PWhg2_ngL, col="brown",type="l", ylim=c(0,1.3), ylab="ng/L")
   legend(0,1.2,pch=19, col=c("darkblue", "orange", "brown"), 
          legend=c("deep w", "PW1", "PW2"))
+  abline(v=1960)
+  
   PWhg1_ng<-PWhg1_ngL*PW1_L; PWhg1_g<-PWhg1_ng/10^9; PWhg1_kmol<-PWhg1_g/(200.59*1000)
   PWhg2_ng<-PWhg2_ngL*PW2_L; PWhg2_g<-PWhg2_ng/10^9; PWhg2_kmol<-PWhg2_g/(200.59*1000)
   tail (PWhg1_kmol)
@@ -217,8 +218,9 @@ setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
   
   # per mol di diffusione importante Length of exchange (=depth sediment..)                        #diffusione >0 --> verso h20 (su)
                           #      diff <0 --> verso sedimento     (giu)
-  term1<-(DF*Model_area*porosity1)/(0.03/porosity1)  # m2/day*m2/m -->m3/day
+  term1<-(DF*Model_area*porosity1)/(0.05/porosity1)  # m2/day*m2/m -->m3/day
   term2<-(PWhg1_gm3/porosity1)-(deep_w_hg_gm3)       # g/m3
+  
   diffusion_g_day<-term1*term2;                        # m3/day*g/m3--> g/day   
   diffusion_g_m2_day<-diffusion_g_day/Model_area
   diffusion_mol_m2_day<-diffusion_g_m2_day/200.49

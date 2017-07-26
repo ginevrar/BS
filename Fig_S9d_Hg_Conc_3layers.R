@@ -1,4 +1,5 @@
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
+setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 
 hg<-read.csv("Dissolved_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
@@ -45,39 +46,40 @@ sd_anox<-apply( anoxic_conc, 1, sd )
 dat2<-data.frame(ax2,anoxic_conc_pM,sd_anox)
 ses2<-anoxic_conc_pM+outer(sd_anox, c(1,-1))
 
-mean(oxic_conc_pM[1957:1968])
+om<-mean(oxic_conc_pM[1957:1968])
 empty_v1<-rep('NA',2412)
-empty_v1[1957]<- 2.138961
+empty_v1[1957]<- om
 
 sub_pM<-hgT$Suboxic1/215*1000
-mean(sub_pM[1957:1968])
+os<-mean(sub_pM[1957:1968])
 empty_v2<-rep('NA',2412)
-empty_v2[1957]<- 1.913935
+empty_v2[1957]<- os
 
-mean(anoxic_conc_pM[1957:1968])
+oa<-mean(anoxic_conc_pM[1957:1968])
 empty_v3<-rep('NA',2412)
-empty_v3[1957]<- 3.1248
+empty_v3[1957]<- oa
 
 
 tiff('Fig.7D_HgConc.tiff', height=25, width=23, units='cm', 
      compression="lzw", res=300)
 par(mfrow=c(1,1), mar=c(4.5,5,4,1), bty='n') 
-with(dat, 
+with(dat1, 
      plot(ax2, oxic_conc_pM, type="l",col='#00BFFF', lwd=2, cex.axis=2, cex.lab=2,cex.main=2.3, ylim=c(0,4),ylab='pM',xlab='',
           main=expression("Modeled Hg"[T]*" concentrations"), panel.first=polygon(c(ax2,rev(ax2)), c(ses1[,1],rev(ses1[,2])),border=NA, col="#7fdfff")))
 par(new=TRUE)
-plot(ax2,empty_v1, type='p', xlab= " ", ylab= " ", pch=23, cex=2.5, xaxt='n',yaxt='n', ylim=c(0,4), bg='#0098cc',col='black')
+plot(ax2,empty_v1, type='p', xlab= " ", ylab= " ", pch=23, ce=4.5, xaxt='n',yaxt='n', ylim=c(0,4), bg='#0098cc',col='black')
 par(new=TRUE)
 plot(ax2,hgT$Suboxic1/215*1000, ylim=c(0,4), col="chartreuse3", lwd=2,
      ylab="   ", xlab="   ", xaxt='n', type="l",yaxt='n',lty=1) 
 par(new=TRUE)
-plot(ax2,empty_v2, type='p', xlab= " ", ylab= " ", pch=23, cex=2.5, xaxt='n',yaxt='n', ylim=c(0,4), bg='chartreuse4',col='black')
+plot(ax2,empty_v2, type='p', xlab= " ", ylab= " ", pch=23, ce=4.5, xaxt='n',yaxt='n', ylim=c(0,4), bg='chartreuse4',col='black')
 par(new=TRUE)
 with(dat2, plot(ax2, anoxic_conc_pM, lwd=2,type="l",xaxt='n',yaxt='n', col='#800026', ylim=c(0,4),ylab='',xlab='',
                 panel.first=polygon(c(ax2,rev(ax2)), c(ses2[,1],rev(ses2[,2])),border=NA, col="#99325177")))
 par(new=TRUE)
-plot(ax2,empty_v3, type='p', xlab= " ", ylab= " ", pch=23, cex=2.5, xaxt='n',yaxt='n', ylim=c(0,4), bg='#800026',col='black')
-text(1878,1.6,'OL',col='#0098cc', cex=1.7)
-text(1980,1.8,'SOL',col='chartreuse4', cex=1.7)
-text(2000,3.2,'AOL',col='#800026', cex=1.7)
+plot(ax2,empty_v3, type='p', xlab= " ", ylab= " ", pch=23, ce=4.5, xaxt='n',yaxt='n', ylim=c(0,4), bg='#800026',col='black')
+text(1878,1.6,'OL',col='#0098cc', cex=3)
+text(1985,1.8,'SOL',col='chartreuse4', cex=3)
+text(1995,3.4,'AOL',col='#800026', cex=3)
 dev.off()
+

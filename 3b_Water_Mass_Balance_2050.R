@@ -1,6 +1,7 @@
 
 #setwd('C:/Users/Ginevra/Google Drive/MERCURIO/BlackSea/implementazione/new_sim0')
 setwd('C:/Users/Ginevra/Desktop/new_sim_BS')
+setwd('C:/Users/gi/Documents/Lavoro/SIM_finale')
 
 input_hg1 <-read.table("input_Hg.txt", header=TRUE); str(input_hg1)
 in_2013<-rbind(input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8],
@@ -12,6 +13,8 @@ latest<-rbind(in_2013,in_2013,in_2013); str(latest)
 #input_hg1<-rbind.data.frame(input_hg1,latest,input_hg1[1957:1968,1:8])
 str(input_hg1$inflow_L_y)
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
+setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
+
 
 #Leggi dati e taglia gli ultimi anni dopo il 2013 hg<-hg[2:1969,]
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
@@ -65,12 +68,13 @@ diss_hg<-hg+DOChg+DOCmehg+mehg+hg0; str(diss_hg)
 hgT <-hgT$Oxic1
 outflow1  <-seg_outflow$Oxic1
 outflow_m3_y<-(outflow1 *60*60*24*365)*10^6  #correzione 10^6 perche input scalato
-plot(outflow_m3_y); outflow_L_y<-outflow_m3_y*1000   #m3 to L
+summary(outflow_m3_y); outflow_L_y<-outflow_m3_y*1000   #m3 to L
 
 hgT_outflow<-outflow_L_y*hgT     # L/y * ng/L -> ng/y
 hgT_outflow_g_y<-hgT_outflow/10^9
 hgT_outflow_mol_y<-hgT_outflow_g_y/200.59														
 hgT_outflow_kmol_y<-hgT_outflow_mol_y/1000; str(hgT_outflow_kmol_y)
+hgT_outflow_kmol_y[1957]
 
 FR<-read.csv("A_fotoreazioni1_2050.csv", header=TRUE)
 bent_dyn<-read.csv("aasediment_input_output1_2050.csv", header=TRUE)

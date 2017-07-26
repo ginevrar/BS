@@ -1,5 +1,5 @@
 
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
+setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 #  FLUSSI TRA BOX
 #Leggi dati e taglia gli ultimi anni dopo il 2013 hg<-hg[1:1968,]
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
@@ -91,7 +91,6 @@ diss_hgtot_pM<-diss_hgII_pM+diss_mehg_pM+(hg0/200.59*1000)
 
 ### ....diffusion .....
 area<-2.961E+11
-
 sed_diff<-10^-9  
 eddy_d_OL<-9.5*10^-6  #m2/s
 eddy_d_SOL<-9.5*10^-6
@@ -113,6 +112,7 @@ HgD_SOL_g_m3<-HgD_SOL_g_L*1000;mean(tail(HgD_SOL_g_m3,12))
 HgD_AOL_g_m3<-HgD_AOL_g_L*1000;mean(tail(HgD_AOL_g_m3,12))
 HgD_BBL_g_m3<-HgD_BBL_g_L*1000
 HgD_Sed_g_m3<-HgD_Sed_g_L*1000
+
 1968/163
 2013-1850
 A<-(eddy_d_OL *area)
@@ -121,12 +121,10 @@ C<-(sed_diff*area)
 
 conc_grad1<-(HgD_SOL_g_m3-HgD_OL_g_m3) #g/m3
 conc_grad2<-(HgD_AOL_g_m3-HgD_SOL_g_m3) #g/m3
-conc_grad2b<-(HgD_SOL_g_m3-HgD_AOL_g_m3) #g/m3
 conc_grad3<-(HgD_BBL_g_m3-(HgD_Sed_g_m3/0.95)) #g/m3
 
 diff_OL<- (A/lenght_OL_SOL)*conc_grad1;diff_OL   #g/s
 diff_SOL<-(B/lenght_AOL_SOL)*conc_grad2;diff_SOL
-diff_SOL2<-(B/lenght_AOL_SOL)*conc_grad2b;diff_SOL
 #diff_AOL<-((eddy_d_AOL*area)/(lenght_AOL_Sed/0.9))*(HgD_Sed/0.9-HgD_AOL) #0.9 porosity
 diff_Sed<-(C/(lenght_AOL_Sed/0.95))*conc_grad3
 
@@ -141,12 +139,7 @@ diff_SOL_mol_y<-diff_SOL_mol_d*365
 diff_SOL_kmol_y<-diff_SOL_mol_y/10^3
 #variazione SOL kmol/y
 mean(tail(diff_SOL_kmol_y,12)); summary(tail(diff_SOL_kmol_y,12))
-#just for check
-diff_SOL2_mol_d<-(diff_SOL2/200.59)*60*60*24
-diff_SOL2_mol_y<-diff_SOL2_mol_d*365
-diff_SOL2_kmol_y<-diff_SOL2_mol_y/10^3
-mean(tail(diff_SOL2_kmol_y,12)); summary(tail(diff_SOL2_kmol_y,12))
-#---
+
 diff_Sed_mol_d<-(diff_Sed/200.59)*60*60*24
 diff_Sed_mol_y<-diff_Sed_mol_d*365
 diff_Sed_kmol_y<-diff_Sed_mol_y/10^3
@@ -246,6 +239,7 @@ silt_AOLdepo_1_day<-silt_depos$Anoxic3/350   # depo silt m/day  (0.014 /d)
 fPOM_AOL<-mean(POMs$Anoxic3/solids_AOL, na.rm=TRUE)
 fsilt_AOL<-mean(silts$Anoxic3/solids_AOL, na.rm=TRUE)
 #  Vd
+
 AOLdepo_g_m3_d<-(hgPOM_gm3$Anoxic3*POM_AOLdepo_1_day)+(hgsilt_gm3$Anoxic3*silt_AOLdepo_1_day)
 AOLdepo_g_d_ok<-AOLdepo_g_m3_d*Vol_anox3  #g/d
 AOLdepo_mol_d_ok<-AOLdepo_g_d_ok/200.59    
@@ -263,15 +257,12 @@ depo_AOLPhg_kmol_y <-(depo_AOLPhg_mol_d/1000)*365        # kmol/y
 media1_depoAOL_kmol_y <-tapply(depo_AOLPhg_kmol_y,rep(1:(length(depo_AOLPhg_kmol_y)/12),each = 12), mean)
 
 
+tail(mediaok_depoOL_kmol_y,1);tail(mediaok_depoSOL_kmol_y,1);tail(mediaok_depoAOL_kmol_y,1)
 
-summary(tail(media1_depoOL_kmol_y,12)); 
-plot(media1_depoOL_kmol_y)
-tail(media1_depoOL_kmol_y,12)
+summary(tail(OLdepo_kmol_y_ok,12)); 
 
-summary(tail(media1_depoSOL_kmol_y,12)); 
-plot(media1_depoSOL_kmol_y)
+summary(tail(mediaok_depoSOL_kmol_y,12)); 
+
 tail(media1_depoSOL_kmol_y,12)
-
-summary(tail(media1_depoAOL_kmol_y,12)); 
-plot(media1_depoAOL_kmol_y)
+tail(mediaok_depoOL_kmol_y,12)
 tail(media1_depoAOL_kmol_y,12)

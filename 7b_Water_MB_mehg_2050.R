@@ -1,18 +1,18 @@
 setwd('C:\\Users\\Ginevra\\Desktop\\new_sim_BS')
+setwd('C:/Users/gi/Documents/Lavoro/SIM_finale')
+
 input_hg1 <-read.table("input_hg.txt", header=TRUE);
 str(input_hg1)
 in_2013<-rbind(input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8],
                input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],input_hg1[1957:1968,1:8],
                input_hg1[1957:1968,1:8])
-str(input_hg1$river_load_hgT_kg_d)
-str(in_2013$river_load_hgT_kg_d)
 #latest<-rbind(in_2013,in_2013,in_2013); str(latest)
 #input_hg1<-rbind.data.frame(input_hg1,latest,input_hg1[1957:1968,1:8])
-str(input_hg1$inflow_L_y)
 
 #setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
+setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 
 mehg_prodotto_kmol_y<-read.csv('mehg_prodotto_kmol_y_2050.csv'); str(mehg_prodotto_kmol_y)
 mehg_prodotto_kmol_y_TOT<-rowSums(mehg_prodotto_kmol_y[2:4])
@@ -114,10 +114,16 @@ Output_terms<-as.numeric(depo_Pmehg_kmol_y + mehgT_outflow_kmol_y); str(Output_t
 #mehg_rivers;
 #tot_load;
 #tot_hgII
+str(input_hg1)
+tail(input_hg1$river_load_mehg_kg_d)
+tail(input_hg1$river_load_mehg_kg_d)
 river_mehg_kg_day<-as.numeric(input_hg1$river_load_mehg_kg_d*10^6); 
-str(river_mehg_kg_day)
 river_mehg_kmol_day<-river_mehg_kg_day/215; river_mehg_kmol_y<-river_mehg_kmol_day*365  #rivers and azov sea
-#
+
+dev.new()
+str(river_mehg_kmol_y)
+mean(river_mehg_kmol_y[1957:1968])
+mean(tail(river_mehg_kmol_y,12))
 #boundary da anno sim 2460 (1960)
 inflow  <-seg_outflow$CIL*10^6  #m3/s
 bound  <- 0.022; str(bound)

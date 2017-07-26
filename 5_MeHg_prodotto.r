@@ -3,6 +3,7 @@
 #REAZIONI VANNO MOLTIPLICATE PER TOTALE E NON PER FASE DISCiOLTA (?!?!)
 #setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
+setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 
 met<-read.csv('Bacterial_Methylation_Rate.csv', header=FALSE, skip = 1,sep = ",", dec=".")
 names(met)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
@@ -187,7 +188,6 @@ netto_prodotto_SOL <-(SOL_met_kmol_y_media- SOL_demet_kmol_y_media)
 netto_prodotto_AOL <-(AOL_met_kmol_y_media- AOL_demet_kmol_y_media) 
 netto_prodotto_SED <-(SED_met_kmol_y_media- SED_demet_kmol_y_media) 
 
-
 netto<-netto_prodotto_OL+netto_prodotto_SOL+netto_prodotto_AOL; mean(tail(netto,12))
 netto_prodotto<-data.frame(netto_prodotto_OL,netto_prodotto_SOL, 
                   netto_prodotto_AOL, netto)
@@ -197,34 +197,22 @@ netto_prodotto_AOL[164]
 write.csv(netto_prodotto, file='netto_prodotto_1.csv')
 write.table(netto, file='netto_TOT.txt')
 
-
-plot(netto_prodotto_OL);abline(h=2.9)
-par(new=T)
-plot(netto_prodotto_SOL);abline(h=2.9)
-par(new=T)
-plot(netto_prodotto_AOL);abline(h=2.9)
-#plot(netto);abline(h=2.9)
-
 mean(tail(netto,12))
 mean(tail(netto_prodotto_OL,12))
 mean(tail(netto_prodotto_SOL,12))
 mean(tail(netto_prodotto_AOL,12))
 
-mean(tail(AOL_met_kmol_y_media,12))
-mean(tail(AOL_demet_kmol_y_media,12))
-
 a<-mean(tail(netto_prodotto_OL,12))+
   mean(tail(netto_prodotto_SOL,12))+mean(tail(netto_prodotto_AOL,12))
 
-b<-a+1.64
-1/b*100
-.6/b*100
-.06/b*100
 
-(a/b*100)+(1/b)*100+(.06/b*100)+(.6/b*100)
 
-AOL_met_kmol_y_media
-
+tail(OL_met_kmol_y_media,1)
+tail(OL_demet_kmol_y_media,1)
+tail(SOL_met_kmol_y_media,1)
+tail(SOL_demet_kmol_y_media,1)
+tail(AOL_met_kmol_y_media,1)
+tail(AOL_demet_kmol_y_media,1)
 
 m_pmol_day_anoxic	  <-data.frame((hgT_pmol_UAL1*met$Suboxic2),(hgT_pmol_UAL2*met$Anoxic1),
   (hgT_pmol_DAOL*met$Anoxic2) , (hgT_pmol_BBL*met$Anoxic3))

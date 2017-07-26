@@ -1,6 +1,6 @@
 ## Produzione INTERNA MeHg
 
-#REAZIONI VANNO MOLTIPLICATE PER TOTALE E NON PER FASE DISCiOLTA (?!?!)
+#REAZIONI VANNO MOLTIPLICATE PER TOTALE E NON PER FASE DISCiOLTA (!!)
 #setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
@@ -152,6 +152,8 @@ metilato   <-rowSums(met_kmol_y)
 demetilato <-rowSums(demet_kmol_y)
 mean(tail(metilato,36))
 mean(tail(demetilato,36))
+
+str(met_kmol_y_OL)
 
 mean(tail(met_kmol_y_OL,12))/mean(tail(metilato,12))*100
 mean(tail(met_kmol_y_SOL,12))/mean(tail(metilato,12))*100

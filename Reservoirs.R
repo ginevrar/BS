@@ -4,7 +4,7 @@
 #
 # Wh1b is the new wh1
 #
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
 
 
 medie_hg_pM<-c(1.86,2.127058824,1.7675,1.902,
@@ -350,7 +350,7 @@ summary(OL_mehgt_pM)
 OL_mehgd<-dissMehg_pM[1:4]; mean(OL_mehgd)*1000
 mean(OL_mehgd/OL_mehgt_pM*100)
 
-SOL_hgt<-layer_hgT_pm[5]; mean(SOL_hgt)
+SOL_hgt_pM<-layer_hgT_pm[5]; ì
 SOL_hgd<-disshg_pM[5]; mean(SOL_hgd)
 mean(SOL_hgd/SOL_hgt*100)
 
@@ -362,7 +362,7 @@ AOL_mehgt<-layer_mehgT_pm[6:9];  mean(AOL_mehgt)
 AOL_mehgd<-dissMehg_pM[6:9];  mean(AOL_mehgd)
 mean(AOL_mehgd/AOL_mehgt*100)
 
-AOL_hgt<-layer_hgT_pm[6:9];  mean(AOL_hgt)
+AOL_hgt_pM<-layer_hgT_pm[6:9];  mean(AOL_hgt)
 AOL_hgd<-disshg_pM[6:9];  mean(AOL_hgd)
 
 mean(AOL_hgd/AOL_hgt*100)
@@ -393,10 +393,10 @@ c<-sum(SOL_hgd*SOL_v_l)/10^15
 d<-sum(SOL_datihg*SOL_v_l)/10^15
 (d-c)/d*100     # SOL error -9%
 
-e<-sum(AOL_hgd*AOL_v)/10^12
-f<-sum(AOL_datihg*AOL_v)/10^12
+e<-sum(AOL_hgd*AOL_v_l)/10^15
+f<-sum(AOL_datihg*AOL_v_l)/10^15
 (f-e)/f*100    # AOL error -4%
-(a+c+e)   #tot Hg kmol
+(a+c+e)   #tot HgD kmol
 (b+d+f)-(a+c+e) #data - model reservoir
 (f-e)/((b+d+f)-(a+c+e))
 
@@ -420,23 +420,21 @@ f1<-sum(AOL_datimehg*AOL_v)/10^12
 (b1+d1+f1)-(a1+c1+e1) #data - model reservoir
 (a1+c1+e1)*215/10^3 #------ tot MehgD tons
 #  ------ HgT reservoir
-g<-sum(OL_hgt*OL_v_l)/10^15
-h<-sum(SOL_hgt*SOL_v)/10^12
-i<-sum(AOL_hgt*AOL_v)/10^12
-
+g<-sum(OL_hgt_pM*OL_v_l)/10^15
+h<-sum(SOL_hgt_pM*SOL_v)/10^12
+i<-sum(SOL_hgt_pM*AOL_v)/10^12
+i
 (g+h+i)   #--------tot Hgt kmol
 (g+h+i)*200.59/10^3   #--------tot Hgt kmol
 i/(g+h+i) 
 #  ------ MeHgT reservoir
-g1<-sum(OL_mehgt*OL_v)/10^12
+g1<-sum(OL_mehgt_pM *OL_v)/10^12
 h1<-sum(SOL_mehgt*SOL_v)/10^12
 i1<-sum(AOL_mehgt*AOL_v)/10^12
 
 g1+h1+i1  #tot Mehg kmol
 (g1+h1+i1)/(g+h+i)*100   # ------ MeHg%
 (g1+h1+i1)*200.59/10^3 
-
-
 
 
 Phg$Sed1[1968]/100

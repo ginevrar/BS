@@ -1,17 +1,23 @@
 # 164 anni per 12 mesi = 1968
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
-
-ax<-seq(1851,2050, by=1)
-a<-c(2.1,2,3)
+#
+#
+# attenzione !!
+###     DEPO è solo per HgIIP, sommare anche depomehg per budget HgT !!
+#
 ax2<-(seq(1850,2050, by=.08291874))
 str(ax2)
-ax3<-(seq(1850,2050, by=1))
+
+setwd('C:/Users/Ginevra/Desktop/new_sim_BS')
+input_hg1 <-read.table("input_Hg.txt", header=TRUE); str(input_hg1)
+
 #leggo outpout sim per ogni sim partita a ore diverse
 ore1  <-read.table("water_input_output_long_1_2050", header=TRUE, sep=","); str(ore1)
 
 hgT_inflow_kmol_y     <- ore1$hgT_inflow_kmol_y[0:2412]; str(hgT_inflow_kmol_y)
-river_hg_kmol_y       <- ore1$river_hg_kmol_y[0:2412]
+river_hgT_kmol_y       <- ore1$river_hg_kmol_y[0:2412]; tail (river_hgT_kmol_y)
+river_hgII_kmol_y<- input_hg1$river_load_hgII_kg_d*365*10^6/200.59; tail(river_hgII_kmol_y)
 atm_hg_kmol_y         <- ore1$atm_hg_kmol_y[0:2412]
 evasione_kmol_y     <-ore1$evasione_kmol_y[1:2412];str(diffusion_kmol_y)
 ore1$evasione_kmol_y[0:12]
@@ -24,10 +30,10 @@ str(burial2_kmol_y)
 plot(depo_Phg_kmol_y)
 plot(hgT_inflow_kmol_y)
 plot(diffusion_kmol_y)
-plot(river_hg_kmol_y)
+plot(river_hgT_kmol_y)
 
 Output_terms<-(evasione_kmol_y+depo_Phg_kmol_y+hgT_outflow_kmol_y)
-Input_terms<-(hgT_inflow_kmol_y +river_hg_kmol_y +atm_hg_kmol_y + diffusion_kmol_y)
+Input_terms<-(hgT_inflow_kmol_y +river_hgT_kmol_y +atm_hg_kmol_y + diffusion_kmol_y)
 Output_terms[2:164]; summary(Output_terms)
 
 
@@ -41,41 +47,43 @@ summary(cum_in)
 summary(cum_out)
 
 str(ax2)
-mean(atm_hg_kmol_y[1957:1968])
+at<-mean(atm_hg_kmol_y[1957:1968])
 empty_v<-rep('NA',2412)
-empty_v[1957]<- 5.2739
+empty_v[1957]<- at
 
+ri<-mean(river_hgT_kmol_y[1957:1968])
 empty_v2<-rep('NA',2412)
-empty_v2[1957]<-24.35274
-mean(river_hg_kmol_y[1957:1968])
+empty_v2[1957]<-ri
+mean(river_hgT_kmol_y[1957:1968])
+mean(river_hgII_kmol_y[1957:1968])
 
-mean(hgT_inflow_kmol_y[1957:1968])
+inc<-mean(hgT_inflow_kmol_y[1957:1968])
 empty_v3<-rep('NA',2412)
-empty_v3[1957]<- 0.8849407
+empty_v3[1957]<- inc
 
-mean(diffusion_kmol_y[1957:1968])
+di<-mean(diffusion_kmol_y[1957:1968])
 empty_v4<-rep('NA',2412)
-empty_v4[1957]<- 2.177538
+empty_v4[1957]<- di
 
-mean(Input_terms[1957:1968])
+T_in<-mean(Input_terms[1957:1968])
 empty_v5<-rep('NA',2412)
-empty_v5[1957]<- 32.68912
+empty_v5[1957]<- T_in
 
-mean(evasione_kmol_y[1957:1968])
+ev<-mean(evasione_kmol_y[1957:1968])
 empty_v6<-rep('NA',2412)
-empty_v6[1957]<- -5.522279
+empty_v6[1957]<- -ev
 
-mean(depo_Phg_kmol_y[1957:1968])
+dp<-mean(depo_Phg_kmol_y[1957:1968])
 empty_v7<-rep('NA',2412)
-empty_v7[1957]<- -22.81346
+empty_v7[1957]<- -dp
 
-mean(hgT_outflow_kmol_y[1957:1968])
+outc<-mean(hgT_outflow_kmol_y[1957:1968])
 empty_v8<-rep('NA',2412)
-empty_v8[1957]<--1.501057
+empty_v8[1957]<--outc
 
-mean(Output_terms[1957:1968])
+T_ou<-mean(Output_terms[1957:1968])
 empty_v9<-rep('NA',2412)
-empty_v9[1957]<--29.8368
+empty_v9[1957]<--T_ou
 
 #setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
 str(atm_hg_kmol_y)
@@ -94,7 +102,7 @@ plot(ax2,empty_v, type='p', xlab= " ", ylab= " ", pch=23, cex=2.5, xaxt='n',yaxt
 #abline(v=2013, lty=2, col='gray60', lwd=2)
 #text(2025,38,'2013',col='gray60', cex=1.9)
 par(new=TRUE)
-plot(ax2,river_hg_kmol_y, col="chartreuse3", type="l", 
+plot(ax2,river_hgT_kmol_y, col="chartreuse3", type="l", 
      xaxt='n',yaxt='n',ylim=c(-45,45), 
      ylab= " ",xlab= " ",  lwd=1)
 par(new=TRUE)

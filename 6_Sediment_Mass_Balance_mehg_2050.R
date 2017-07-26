@@ -146,38 +146,24 @@ silt_depo_1_day<-silt_depos$Anoxic3/350
 fPOM<-mean(POMs$Anoxic3/TOTs$Anoxic3, na.rm=TRUE)
 fsilt<-mean(silts$Anoxic3/TOTs$Anoxic3, na.rm=TRUE)
 
-depo_media1<-(POM_depo_1_day*fPOM+silt_depo_1_day*fsilt)  #1/day
+depo_media1<-POM_depo_1_day
 mean(depo_media1) # 0.005 /d
 
 depo_Pmehg_ug_m3_d <-depo_media1*Pmehgs$Anoxic3    #1/day *ug/m3 ->ug/m3d
 depo_Pmehg_g_d     <-(depo_Pmehg_ug_m3_d*Vol_anox3)/10^6   #ug/m3d
 depo_Pmehg_mol_d   <-depo_Pmehg_g_d/215
-depo_Pmehg_kmol_y  <-(depo_Pmehg_mol_d/1000)*365
+depo_Pmehg_kmol_y  <-(depo_Pmehg_mol_d/1000)*365;mean(depo_Pmehg_kmol_y[1957:1968])
 plot(depo_Pmehg_kmol_y)
-
-surf<-Vol_anox3/350
-#depo m/day * g/m3     --> ug/m2d
-depo2<-POM_depos$Anoxic3*Pmehgs$Anoxic3*surf #ug/d
-u<-mean(tail(depo2,12)/10^9)   #kg/d
-depo22<-silt_depos$Anoxic3*Pmehgs$Anoxic3*surf #ug/d
-uu<-mean(tail(depo22,12)/10^9)
-
-depo_new_kg_d<-fPOM*u + (fsilt*uu)
-depo_new_kmol<-depo_new_kg_d/200.59
-depo_new_kmol_y<-depo_new_kmol*365
 
 
 media1_depo_kmol_y <-tapply(depo_Pmehg_kmol_y,rep(1:(length(depo_Pmehg_kmol_y)/12),each = 12), mean)
 plot(media1_depo_kmol_y)
-cum_depo<-cumsum(media1_depo_kmol_y)
-plot(cum_depo)
-summary(cum_depo)
 
 #DIFFUSIONE
 Oxic1_vol_m3 <- 5.9E+12  
 Oxic1_vol_L <-Oxic1_vol_m3*1000
 Vol_Sed1_m3<-volumes$Sed1 *10^6;  str(Vol_Sed1_m3)
-Vol_Sed2_m3<-volumes$Sed2 *10^6;  str(Vol_Sed2_m3); plot(Vol_Sed2_m3)
+Vol_Sed2_m3<-volumes$Sed2 *10^6;  str(Vol_Sed2_m3); 
 
 Sed1_g_m3  <- TOTs$Sed1;              	Sed2_g_m3 <- TOTs$Sed2
 Sed1_g     <-Sed1_g_m3*Vol_Sed1_m3;     Sed2_g<-Sed2_g_m3*Vol_Sed2_m3
@@ -229,7 +215,7 @@ tail (PWmehg2_kmol)
 # per mol di diffusione importante Length of exchange (=depth sediment..?)
 #diffusione >0 --> verso h20 (su)
 #      diff <0 --> verso sedimento     (giu)
-term1<-(DF*Model_area*porosity1)/(0.03/porosity1)  # m2/day*m2/m -->m3/day
+term1<-(DF*Model_area*porosity1)/(0.05/porosity1)  # m2/day*m2/m -->m3/day
 term2<-(PWmehg1_gm3/porosity1)-(deep_w_mehg_gm3)       # g/m3
 diffusion_g_day<-term1*term2; plot(diffusion_g_day)                       # m3/day*g/m3--> g/day   
 diffusion_g_m2_day<-diffusion_g_day/Model_area

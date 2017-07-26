@@ -144,7 +144,7 @@ bb<-cbind(burial1_cumul,burial2_cumul)
   fPOM<-mean(POMs$Anoxic3/TOTs$Anoxic3, na.rm=TRUE)
   fsilt<-mean(silts$Anoxic3/TOTs$Anoxic3, na.rm=TRUE)
 
-depo_media1<-(POM_depo_1_day*fPOM+silt_depo_1_day*fsilt)  #1/day
+depo_media1<-POM_depo_1_day  #1/day
 mean(depo_media1) # 0.005 /d
 
 depo_Phg_ug_m3_d<-depo_media1*Phgs$Anoxic3        #1/day *ug/m3
@@ -215,7 +215,7 @@ tail (PWhg2_kmol)
 
 # per mol di diffusione importante Length of exchange (=depth sediment..)                        #diffusione >0 --> verso h20 (su)
                         #      diff <0 --> verso sedimento     (giu)
-term1<-(DF*Model_area*porosity1)/(0.03/porosity1)  # m2/day*m2/m -->m3/day
+term1<-(DF*Model_area*porosity1)/(0.05/porosity1)  # m2/day*m2/m -->m3/day
 term2<-(PWhg1_gm3/porosity1)-(deep_w_hg_gm3)       # g/m3
 diffusion_g_day<-term1*term2;                        # m3/day*g/m3--> g/day   
 diffusion_g_m2_day<-diffusion_g_day/Model_area

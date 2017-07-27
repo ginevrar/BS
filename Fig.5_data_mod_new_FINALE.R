@@ -264,37 +264,20 @@ setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission
 
 tiff('dato_model_hg_mehg33331.tiff', height=25, width=23, units='cm', 
      compression="lzw", res=300)
-#dev.new(width=7, height=7)
 
 par(mfrow=c(1,2),cex.axis=1.2, cex.lab=1.3, 
     cex.main=1.4, mar=c(4.5,5,1,0))
 plot(medie_hg_pM, prof,  bty='n',lwd=2, cex=4,
      ylim=c(17.5,10.5), lty=1, yaxt='n',xaxt='n',
-     xlim=c(0, 5), pch=21,
+     xlim=c(0, 4), pch=21,
      ylab=" ", xlab=" ", type="b",     
-     col="#3288bd00", bg='#41b6c400',main=" ")                   
-rect(0, 10.5 , 5,15.64 , density = NULL, angle = 45, 
-     col = '#abd9e933', border = '#abd9e9', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 14.25 , 5,15.285 , density = NULL, angle = 45, 
-     col = '#ffffd933', border = '#e8e888', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 16.2 , 5, 17.04 , density = NULL, angle = 45, 
-     col = '#eadede22', border = '#eadede', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 15.64 , 5,16.2 , density = NULL, angle = 45, 
-     col = '#1d932722', border = '#1d9327', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.04 , 5,17.23 , density = NULL, angle = 45, 
-     col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.23 , 5,17.3 , density = NULL, angle = 45, 
-     col = '#25232322', border = '#252323', lty = NULL, lwd = par("lwd"),
-     xpd = NULL) 
+     col="#3288bd00", bg='#41b6c400',main=" ")   
+abline(h=15.64, type='l', lty=2, col='grey60')
+abline(h=16.2, type='l', lty=2, col='grey60')
 par(new=T)
 plot(medie_hg_pM, prof,  bty='n',lwd=1, cex=4,
      ylim=c(17.5,10.5), lty=1, yaxt='n', xaxt='n',
-     xlim=c(0, 5), pch=21,
+     xlim=c(0, 4), pch=21,
      ylab=" ", xlab=" ", type="b", col="#5716a2", bg='#5716a244',main=" ")
 par(new=TRUE) 
 segments(x1-sd1,y,x1+sd1,y, col='#5716a2', lwd=1)
@@ -303,7 +286,7 @@ segments(x1-sd1,y-epsilon,x1-sd1,y+epsilon, col='#5716a2')
 segments(x1+sd1,y-epsilon,x1+sd1,y+epsilon, col='#5716a2')
 par(new=TRUE)
 plot(disshg_pM,prof, type="b",pch=23,  lwd=1,cex=4, yaxt='n',
-     ylim=c(17.5,10.5),  bty='n', xlim=c(0, 5), lty=3,
+     ylim=c(17.5,10.5),  bty='n', xlim=c(0, 4), lty=3,
      xlab=" ", col="#b3db25", bg='#b3db2577', cex.axis=1.8,
      ylab='')
 yy<-c(11,12,13,14,15,16,17)
@@ -329,7 +312,6 @@ p<-c(21,23)
 text(4,12,'OL', cex=1.4, font=2)
 text(4,14.7,'CIL', cex=1.4, font=2)
 text(4,15.9,'SOL', cex=1.4, font=2)
-text(1,16.6,'AOL', cex=1.4, font=2)
 
 
 # --- PLOT Mehg----------------------mehg
@@ -337,29 +319,10 @@ text(1,16.6,'AOL', cex=1.4, font=2)
 #win.graph()  mar=c(4.5,4,1,0)  ylim=c(17.5,10.5),
 #dev.new(width=12, height=4)
 par(mar=c(4.5,.5,1,5), cex.axis=1.2, cex.lab=1.3, cex.main=1.4 )
-
 plot(medie_mehg_pM, prof,  bty='n',lwd=1.3, cex=4,
      ylim=c(17.5,10.5), lty=1, 
-     xlim=c(0, 1.1), pch=22,yaxt='n',xaxt='n',
+     xlim=c(0, 1), pch=22,yaxt='n',xaxt='n',
      ylab=" ", xlab=" ", type="b", col="#c51b7d00", main=" ")
-rect(0, 10.5 , 1.1,15.64 , density = NULL, angle = 45, 
-     col = '#abd9e933', border = '#abd9e9', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 14.25 , 1.1,15.285 , density = NULL, angle = 45, 
-     col = '#ffffd933', border = '#e8e888', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 16.2 , 1.1,17.04 , density = NULL, angle = 45, 
-     col = '#eadede22', border = '#eadede', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 15.64 , 1.1,16.2 , density = NULL, angle = 45, 
-     col = '#1d932722', border = '#1d9327', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.04 , 1.1,17.23 , density = NULL, angle = 45, 
-     col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.23 , 1.1,17.3 , density = NULL, angle = 45, 
-     col = '#25232322', border = '#252323', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
 #plot(layer_Pmehg*20 ,prof, type="b",pch=23,  lwd=1.3,cex=1.3,
 #    ylim=c(17.3,10.9),  bty='n', xlim=c(0,1),lty=3,
 #   xlab="MeHg concentrations (pM)", col='#103513', bg='#10351322', ylab=expression(paste(sigma[theta]*'  (kg/m'^3*')')),
@@ -367,8 +330,11 @@ rect(0, 17.23 , 1.1,17.3 , density = NULL, angle = 45,
 par(new=T)
 plot(medie_mehg_pM, prof,  bty='n',lwd=1.3, cex=4,
      ylim=c(17.5,10.5), lty=1, yaxt='n',xaxt='n',
-     xlim=c(0, 1.1), pch=21,
+     xlim=c(0, 1), pch=21,
      ylab=" ", xlab=" ", type="b", col="#5716a2",bg='#5716a255', main=" ")
+
+abline(h=15.64, type='l', lty=2, col='grey60')
+abline(h=16.2, type='l', lty=2, col='grey60')
 segments(x2-sd2,y,x2+sd2,y, col='#5716a2', lwd=1)
 epsilon <- 0.12
 segments(x2-sd2,y-epsilon,x2-sd2,y+epsilon, col='#5716a2')
@@ -381,7 +347,7 @@ par(new=TRUE)
 #   main=expression(paste("MeHg vertical profiles \n along the water column")))
 par(new=TRUE)
 plot(dissMehg_pM, prof, type="b",pch=23,  lwd=1.3,cex=4,cex.axis=1.8,
-     ylim=c(17.5,10.5),  bty='n', xlim=c(0,1.1), lty=2,
+     ylim=c(17.5,10.5),  bty='n', xlim=c(0,1), lty=2,
      xlab=" ", col="#b3db25", yaxt='n',xaxt='n',
      bg='#b3db2577', ylab='',   main='')
 #mtext(expression(paste(sigma[theta]*'  (kg/m'^3*')')),

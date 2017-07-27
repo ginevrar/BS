@@ -47,6 +47,9 @@ mean(mehgT_inflow_kmol_y[1957:1968])
 empty_v2<-rep('NA',2412)
 empty_v2[1957]<-0.06241869
 
+mean(burial2_kmol_y[1957:1968])
+
+
 u<-mean(diffusion_kmol_y[1957:1968])
 empty_v3<-rep('NA',2412)
 empty_v3[1957]<- u

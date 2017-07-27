@@ -24,8 +24,10 @@
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0")
 
 setwd('C:/Users/Ginevra/Google Drive/MERCURIO/BlackSea/implementazione')
+setwd('C:/Users/gi/Documents/Lavoro/SIM_finale')
+
 atm_hg<-read.table("atm_hg.txt", header = F); str(atm_hg)
-atm_hg0<-atm_hg$V1[1:1968]   # --- atm conc of hg0 -
+atm_hg0<-atm_hg$V1     # --- atm conc of hg0 -
 
 light<-read.table("light_norm.txt", header = TRUE); names(light)<-'light' ; light_sur<-light$light
 light_sur_w_m2<-read.table("light_w_m2.txt", header = TRUE); light_sur_w_m2<-light_sur_w_m2$wm2
@@ -38,13 +40,14 @@ kdeg<-3.14685E-1
 #Leggi model output
 #setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 #setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/")
+setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/provafoto')
 
 
 evasion<-read.csv("Volatilization_Loss_Rate.csv", header=FALSE, skip = 1, sep = ",", dec=".")
 names(evasion)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                   "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-evasion<-evasion[2:1969,1:13]
+evasion<-evasion[2:366,1:13]
 str(evasion)
 cCC<-tail(evasion)
 
@@ -52,78 +55,81 @@ hg<-read.csv("Dissolved_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
 str(hg$Oxic1)
-hg<-hg[2:1969,1:13]
+hg<-hg[2:366,1:13]
 
 hgT<-read.csv("Total_Hg.csv", header=FALSE, skip = 1, sep = ",")
 names(hgT)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
               "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-hgT<-hgT[2:1969,1:13]
+hgT<-hgT[2:366,1:13]
 
 solids<-read.csv("Total_Solids.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(solids)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                  "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-solids<-solids[2:1969,1:13]
+solids<-solids[2:366,1:13]
 
 Phg<-read.csv("Total_Sorbed_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(Phg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
               "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-Phg<-Phg[2:1969,1:13]
+Phg<-Phg[2:366,1:13]
 
 DOChg<-read.csv("DOC_Sorbed_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(DOChg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                 "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-DOChg<-DOChg[2:1969,1:13]
+DOChg<-DOChg[2:366,1:13]
 
 mehg<-read.csv("Dissolved_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(mehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-mehg<-mehg[2:1969,1:13]
+mehg<-mehg[2:366,1:13]
+
+mean(DOChg$Oxic1)
+mean(hg0$Oxic1)
 
 DOCmehg<-read.csv("DOC_Sorbed_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(DOCmehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                   "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-DOCmehg<-DOCmehg[2:1969,1:13]
+DOCmehg<-DOCmehg[2:366,1:13]
 
 hg0<-read.csv("Elemental_Hg.csv", header=FALSE, skip = 1, sep = ",", dec=".")
 names(hg0)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
               "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-hg0<-hg0[2:1969,1:13]
+hg0<-hg0[2:366,1:13]
 
 dhg0<-read.csv("Dissolved_Elemental_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(dhg0)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-dhg0<-dhg0[2:1969,1:13]
+dhg0<-dhg0[2:366,1:13]
 
 DOChg0<-read.csv("DOC_Sorbed_Elemental_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(DOChg0)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                  "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-DOChg0<-DOChg0[2:1969,1:13]
+DOChg0<-DOChg0[2:366,1:13]
 
 mehgT<-read.csv("Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(mehgT)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                 "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-mehgT<-mehgT[2:1969,1:13]
+mehgT<-mehgT[2:366,1:13]
 
 fotored<-read.csv("Photo_Reduction_Divalent_Hg.csv", header=FALSE, skip = 1, sep = ",", dec=".")
 names(fotored)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                   "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2");
-fotored<-fotored[2:1969,1:13]
+fotored<-fotored[2:366,1:13]
 fotodem<-read.csv("Photo_Demethylation_Rate.csv", header=FALSE, skip = 1, sep = ",", dec=".")
 names(fotodem)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                   "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-fotodem<-fotodem[2:1969,1:13]
+fotodem<-fotodem[2:366,1:13]
 
 silt<-read.csv("Silts_Fines.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(silt)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
                "Suboxic1","Suboxic2", "Anoxic1", "Anoxic2",
                "Anoxic3","Sed1","Sed2")
-silt<-silt[2:1969,1:13]
+silt<-silt[2:366,1:13]
 
 POM<-read.csv("Organic_Matter.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(POM)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
               "Suboxic1","Suboxic2", "Anoxic1", "Anoxic2",
               "Anoxic3","Sed1","Sed2")
-POM<-POM[2:1969,1:13]
+POM<-POM[2:366,1:13]
 str(POM$Time)
 
 oxic_vol_m3<-5.9E+12
@@ -190,21 +196,42 @@ out_red_1_d  <-fotored$Oxic1; str(out_red_1_d); mean(out_red_1_d)
 out_ox_1_d <-(fotored$Oxic1*(kox/kred)); mean(out_ox_1_d)
 out_dem_1_d <-fotodem$Oxic1; mean(out_dem_1_d[1900:1968])
 
-kred_adj<- LNt_red[1:1968]*fd$V1[1:1968]*kred*(fDOChg*100); mean(kred_adj)  
-mean(out_red_1_d)
+kred_adj<- LNt_red  *fd$V1  *kred*(fDOChg*100)   # LN per fract day* kred
+mean(out_red_1_d); mean(kred_adj)
+
 kox_adj<-kred_adj*(kox/kred); mean (kox_adj)
-kdem_adj<- (LNt_red[1:1968]*fd$V1[1:1968]*kdeg*(fDOCmehg*100))
-mean(kdem_adj[1900:1968]/20)  # mia formula qua stima di 20 volte?
+kdem_adj<- (kdeg* LNt_red  *fd$V1  *kdeg*(100*fDOCmehg*mehg_ngL ) ) 
+mean(kdem_adj[1900:1968])  # mia formula qua stima di 20 volte?
 mean(out_dem_1_d[1900:1968])
 
 kred_mol_day<-(out_red_1_d*HgII_pmols)/10^12; mean(kred_mol_day)
 kox_mol_day<-(out_ox_1_d*Hg0_pmols1)/10^12; mean(kox_mol_day)
 kdem_mol_day<-(out_dem_1_d*MeHg_pmols)/10^12; mean(kdem_mol_day)
 
+red_ngLd <-out_red_1_d*(hgII_ngL)
+red_ngy <-red_ngLd *oxic_vol_L*365
+red_gy <-red_ngy/10^9
+red_kmoly<-red_gy/(200.59*1000)
+mean(red_kmoly )
+
+red_gd <-red_ngLd *oxic_vol_L/10^9
+a<-sum(red_gd)/(200.59*1000);a
+
+ox_ngLd <-out_red_1_d*hg0_ngL    
+ox_ngy <-ox_ngLd *oxic_vol_L*365
+ox_gy <-ox_ngy/10^9
+ox_kmoly<-ox_gy/(200.59*1000)
+ox_kmoly
+
+ox_gd <-ox_ngLd *oxic_vol_L/10^9
+a<-sum(ox_gd)/(200.59*1000);a
+
 # kmol trasformate all'anno
 fotored_kmols_y<-kred_mol_day*365/1000; mean(fotored_kmols_y)
 fotox_kmols_y<-kox_mol_day*365/1000;mean(fotox_kmols_y)
 fotodem_kmols_y<- kdem_mol_day*365/1000;mean(fotodem_kmols_y)
+
+(mean(fotored_kmols_y))
 
 #FOTORIDUZIONE
 fotored_1_s <-(fotored$Oxic1/(24*60*60))
@@ -244,6 +271,7 @@ HgII_pM_media<-tapply(HgII_pM,rep(1:(length(HgII_pM)/12), each = 12), mean)
 mehg_pM_media<-tapply(mehg_pM,rep(1:(length(mehg_pM)/12), each = 12), mean)
 
 
+fotox_kmols_y_media[164];fotored_kmols_y_media
 
 output_kmol_y_media<-cbind(fotox_kmols_y_media, fotored_kmols_y_media, 
                            fotodem_kmols_y_media,
@@ -296,9 +324,6 @@ par(new=TRUE)
 plot(head(skvol,24), type="l")
 par(new=TRUE)
 plot(head(kvol_1_day,24), type="l", col='red')
-
-
-
 
 #VOLATILIZZAZIONE2
 hg0_res<- Hg0_pM1*oxic_vol_m3*1000

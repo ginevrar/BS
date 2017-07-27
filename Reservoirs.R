@@ -6,6 +6,7 @@
 #
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
 
+setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 
 medie_hg_pM<-c(1.86,2.127058824,1.7675,1.902,
                2.056666667,3.0875,2.810909091,3.714, 3.713684211)
@@ -119,19 +120,18 @@ july_mehg<- mehg [1974,]
 july_hg0<- hg0 [1974,]
 july_mehgT<- mehgT [1974,]
 july_solids<- solids [1974,]
-july_t<-Temp[1975,]
+july_t<-Temp[1975,] # model out luglio 2013
 
-# model out luglio 2013
-fine_hgT<-hgT[1958:1969,]
-fine_hg<- hg [1958:1969,]
-fine_Phg<- Phg [1958:1969,]
-fine_Pmehg<- Pmehg [1958:1969,]
-fine_DOChg<- DOChg [1958:1969,]
-fine_DOCmehg<- DOCmehg [1958:1969,]
-fine_mehg<- mehg [1958:1969,]
-fine_hg0<- hg0 [1958:1969,]
-fine_mehgT<- mehgT [1958:1969,]
-fine_T<- Temp [1958:1969,]
+fine_hgT<-hgT[1957:1968,]
+fine_hg<- hg [1957:1968,]
+fine_Phg<- Phg [1957:1968,]
+fine_Pmehg<- Pmehg [1957:1968,]
+fine_DOChg<- DOChg [1957:1968,]
+fine_DOCmehg<- DOCmehg [1957:1968,]
+fine_mehg<- mehg [1957:1968,]
+fine_hg0<- hg0 [1957:1968,]
+fine_mehgT<- mehgT [1957:1968,]
+fine_T<- Temp [1957:1968,]
 plot(fine_T$Oxic1)
 
 
@@ -339,11 +339,14 @@ disshg_pM/layer_hgT_pm*100
 
 layer_Pmehg<-layer_mehgT_pm - dissMehg_pM
 
+layer_hg0_pm<-layer_hg0/200.59*1000	  
 
 OL_hgt_pM<-(layer_hgT_pm[1:4])
 summary(OL_hgt_pM)
 OL_hgd<-disshg_pM[1:4]; mean(OL_hgd)
 mean(OL_hgd/OL_hgt_pM*100)
+
+OL_hg0_pM<-(layer_hg0_pm[1:4])
 
 OL_mehgt_pM<-(layer_mehgT_pm[1:4])
 summary(OL_mehgt_pM)
@@ -353,6 +356,9 @@ mean(OL_mehgd/OL_mehgt_pM*100)
 SOL_hgt_pM<-layer_hgT_pm[5]; ì
 SOL_hgd<-disshg_pM[5]; mean(SOL_hgd)
 mean(SOL_hgd/SOL_hgt*100)
+
+SOL_hg0_pM<-(layer_hg0_pm[5])
+
 
 SOL_mehgt<-layer_mehgT_pm[5];  mean(SOL_mehgt)
 SOL_mehgd<-dissMehg_pM[5];  mean(SOL_mehgd)
@@ -364,6 +370,8 @@ mean(AOL_mehgd/AOL_mehgt*100)
 
 AOL_hgt_pM<-layer_hgT_pm[6:9];  mean(AOL_hgt)
 AOL_hgd<-disshg_pM[6:9];  mean(AOL_hgd)
+
+AOL_hg0_pM<-(layer_hg0_pm[6:9])
 
 mean(AOL_hgd/AOL_hgt*100)
 
@@ -432,6 +440,7 @@ g1<-sum(OL_mehgt_pM *OL_v)/10^12
 h1<-sum(SOL_mehgt*SOL_v)/10^12
 i1<-sum(AOL_mehgt*AOL_v)/10^12
 
+mean(AOL_mehgt)
 g1+h1+i1  #tot Mehg kmol
 (g1+h1+i1)/(g+h+i)*100   # ------ MeHg%
 (g1+h1+i1)*200.59/10^3 
@@ -441,9 +450,14 @@ Phg$Sed1[1968]/100
 Phg$Sed1[1968]/100/hgT$Sed1[1968]*100
 Phg$Sed2[1968]/100/hgT$Sed2[1968]
 
+#  ------ Hg0 reservoir
+a0<-sum(OL_hg0_pM*OL_v_l)/10^15
 
+b0<-sum(SOL_hg0_pM*SOL_v_l)/10^15
+ 
+c0<-sum(AOL_hg0_pM*AOL_v_l)/10^15
+a0; b0; c0 
 #  ------ SED HgT reservoir
-
 ##-----SEDIMENT conc
 hgT_fine<-hgT[1968, 1:13]
 b<-mean(hgT_fine$Sed1/200.59*1000);b  #ng/g

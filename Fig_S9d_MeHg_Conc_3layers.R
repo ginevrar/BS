@@ -63,7 +63,42 @@ empty_v3<-rep('NA',2412)
 empty_v3[1957]<- 0.723999
 str(empty_v3)
 
-tiff('Fig.7D_MeHgConc.tiff', height=25, width=23, units='cm', 
+
+
+oxic_conc_pM_media   <-tapply(oxic_conc_pM,rep(1:(length(oxic_conc_pM)/12),each = 12), mean)
+suboxic_conc_pM_media   <-tapply(sub_pM,rep(1:(length(sub_pM)/12),each = 12), mean)
+anoxic_conc_pM_media   <-tapply(anoxic_conc_pM,rep(1:(length(anoxic_conc_pM)/12),each = 12), mean)
+
+as.numeric(oxic_conc_pM_media[164] )-as.numeric(oxic_conc_pM_media[165] )
+as.numeric(oxic_conc_pM_media[165] )-as.numeric(oxic_conc_pM_media[166] )
+
+vol_OL<-((5.9*10^12)*2)+4.5*10^12+5.9*10^12
+vol_OL_L<-vol_OL*1000
+OLinc<- -0.0001 *vol_OL_L #pmol/y
+OLinc_kmol<-OLinc/10^15 #kmol/y
+OLinc_kmol
+
+as.numeric(suboxic_conc_pM_media[164] )-as.numeric(suboxic_conc_pM_media[165] )
+as.numeric(suboxic_conc_pM_media[165] )-as.numeric(suboxic_conc_pM_media[166] )
+
+vol_SOL<-7.4*10^12
+vol_SOL_L<-vol_SOL*1000
+SOLinc<- -0.0004 *vol_SOL_L #pmol/y
+SOLinc_kmol<-SOLinc/10^15 #kmol/y
+SOLinc_kmol
+
+
+as.numeric(anoxic_conc_pM_media[164] )-as.numeric(anoxic_conc_pM_media[165] )
+as.numeric(anoxic_conc_pM_media[165] )-as.numeric(anoxic_conc_pM_media[166] )
+
+vol_AOL<-((5.3*10^13)*2)+(2.9*10^14)+(10^14)
+vol_AOL_L<-vol_AOL*1000
+
+AOLinc<-0.002 *vol_AOL_L #pmol/y
+AOLinc_kmol<-AOLinc/10^15 #kmol/y
+AOLinc_kmol
+
+tiff('Fig.7D_MeHgConc.tiff', height=14.5, width=23, units='cm', 
      compression="lzw", res=300)
 par(mfrow=c(1,1), mar=c(4.5,5,4,1), bty='n') 
 with(dat, 

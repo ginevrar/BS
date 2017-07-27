@@ -153,26 +153,53 @@ Hg0_pM1<-hg0$Oxic1/200.59*1000; mean(hg0$Oxic1)
 Hg0_pmols1<-Hg0_pM1*oxic_vol_L  # bulk of Hg0 in upper oxic layer
 Hg0_kmols1<-Hg0_pmols1/10^15
 mean(Hg0_kmols1[1957:1968])
+mean(Hg0_pM1[1957:1968])
 
 mehg_<-mehgT$Oxic1              
 mehg_pM<-mehg_/215*1000
 MeHg_pmols<-mehg_pM*oxic_vol_L    # bulk of MeHg in upper oxic layer
-Hg0_kmols1<-Hg0_pmols1/10^15
-mean(Hg0_kmols1[1957:1968])
+MeHg_kmols1<-MeHg_pmols/10^15
+mean(MeHg_kmols1[1957:1968])
+mean(mehg_pM[1957:1968])
 
-hgII<-(hg$Oxic1+DOChg$Oxic1+Phg$Oxic1) # total HgII (diss, DOC, part)
+fDOChg2
+
+hgII_DOC<-DOChg$Oxic1 # ngL total HgII (diss, DOC, part)
+hgII_tot<-(hg$Oxic1+DOChg$Oxic1+Phg$Oxic1)
+hgII_DOC/hgII_tot*100
+
+hgII_DOC_pM<-hgII_DOC/200.59*1000
+hgII_DOC_pmols <-hgII_DOC_pM*oxic_vol_L
+HgII_DOC_kmols<-hgII_DOC_pmols/10^15
+
 HgII_pM<-hgII/200.59*1000              # pM
+
 HgII_pmols<-HgII_pM*oxic_vol_L          # bulk of HgII in oxic layer
+
+HgII_kmols<-HgII_pmols/10^15
+mean(HgII_kmols1[1957:1968])
+mean(HgII_pM[1957:1968])
+
+HgP_pM<-Phg$Oxic1/200.59*1000; 
+HgP_pmols1<-HgP_pM*oxic_vol_L  # bulk of Hg0 in upper oxic layer
+HgP_kmols1<-HgP_pmols1/10^15
 
 hgT<-hgT$Oxic1 # total Hg 
 hgI<-(hgT-mehg_-hg0$Oxic1)/200.59*1000
 hgI_pmols<-hgI*oxic_vol_L  # bulk of HgII in upper oxic layer
 
+hgDOC<-(DOChg$Oxic1) 
+hgDOC<-(DOChg$Oxic1) 
+
+# ngL total HgII (diss, DOC, part)
+HgDOC_pM<-hgDOC/200.59*1000              # pM
+HgDOC_pmols<-HgDOC_pM*oxic_vol_L          # bulk of HgII in oxic layer
 
 hgII_ngL<-hgII
 hg0_ngL<-hg0$Oxic1
 mehg_ngL<-mehgT$Oxic1
 
+plot(Hg0_kmols1[1950:2029])
 #mean(hg0_g_m3/hgII_g_m3*100) #hg0 %
 # ---------
 ef_red <-fotored_1_s/fDOChg ; mean(ef_red*60*60*24) 
@@ -182,21 +209,77 @@ ef_deg <-fotodem_1_s/fDOCmehg;     mean(ef_deg*60*60*24)
 # --------- fotoreactions out [1/d] /84600 -> 1/s; 
 # --------- those rate are given by someting as -> kdeg (1/d) * fDOCmehg (-) adjusted for light intensity
 #  
-# skred = kred*LN(t)*[xdOC*hgII]*10^-6
+#    skred = kred *LN(t) * [xdOC*hgII] * 10^-6
 ke<-0.2        #extintion coeff
 e<-2.71828     #nepero 
 d<-20 
 fac1<-ke*d
 #box depth
-#L_ref<-220
-#ekde<-e^-fac1
-###LNt_red<-(light_sur_w_m2/L_ref)*((1-ekde)/(fac1))
-##str(LNt_red)
+L_ref<-240
+ekde<-e^-fac1
+plot(ekde)
+LNt_red<-(light_sur_w_m2/L_ref)*((1-ekde)/(fac1))
+#str(LNt_red)
 #plot(LNt_red[12:24], type='l')
 
-out_red_1_d  <-fotored$Oxic1; str(out_red_1_d); mean(out_red_1_d)
+
+ skred = kred *LNt_red* 100* (hgII_DOC) #  10^-2 ug d-1
+ 
+ mean(out_red_1_d[1957:1969]);mean(skred[1957:1969]);
+  
+ skred_ugd<-skred*oxic_vol_m3  # 10^-2 ug/m3d*m3 
+ skred_moly<-skred_ugd*365/(200.59*10^8)
+ mean(skred_moly[1957:1968]/1000)  #bene ...meglio
+ 
+ plot(hg0_ngL)
+mean( hg0_ngL[1957:1968])
+mean( hg0_ngL[1977:1988])
+mean( hg0_ngL[1977:1988])
+
+skred_b = kred *LNt_red * (fDOChg2*100*hgII_tot)
+ 
+ 
+ skred_1 = kred *LNt_red * (hgII_DOC)*100
+ 
+ mean(out_red_1_d[1957:1969]);mean(skred[1957:1969]);  mean(skred_b[1957:1969]);mean(skred_1[1957:1969]);
+ 
+        # 8 e 2 ordini di grandezza
+hgII_DOC_fM<-hgII_DOC/200.59*10^6
+        
+ out_red_1_d  <-fotored$Oxic1; mean(out_red_1_d); 
 out_ox_1_d <-(fotored$Oxic1*(kox/kred)); mean(out_ox_1_d)
 out_dem_1_d <-fotodem$Oxic1; mean(out_dem_1_d[1900:1968])
+
+rr<-(HgII_kmols)*out_red_1_d*365
+mean(rr[1957:1968])
+oo<-Hg0_kmols1*out_ox_1_d*365
+mean(oo[1957:1968])
+dmt<-(MeHg_kmols1)*out_dem_1_d*365
+mean(dmt[1957:1968])
+
+
+HgII_DOC_kmols*out_red_ugm3_d*365
+
+
+
+
+
+kmol_d<-(skred*12)
+kmol_y<-kmol_d*365
+
+skox_ugd<-(fotored$Oxic1*(kred/kox))*oxic_vol_m3  # 10^-2 ug/m3d*m3 
+skox_moly<-skox_ugd*365/(200.59*10^8)
+mean(skox_moly[1957:1968]/1000)  #bene ...meglio
+
+
+skox_ugd<-(fotored$Oxic1*(kred/kox))*oxic_vol_m3  # 10^-2 ug/m3d*m3 
+skox_moly<-skox_ugd*365/(200.59*10^8)
+mean(skox_moly[1957:1968]/1000)  #bene ...meglio
+
+skdem_ugd<-(out_dem_1_d)*oxic_vol_m3  # 10^-2 ug/m3d*m3 
+skdem_moly<-skdem_ugd*365/(200.59*10^8)
+mean(skdem_moly[1957:1968]/1000)  #bene ...meglio
+
 
 #kred_adj<- LNt_red[1:1968]*fd$V1[1:1968]*kred*(fDOChg*100); mean(kred_adj)  
 #mean(out_red_1_d)
@@ -205,21 +288,39 @@ out_dem_1_d <-fotodem$Oxic1; mean(out_dem_1_d[1900:1968])
 #mean(kdem_adj[1900:1968]/20)  # mia formula qua stima di 20 volte?
 #mean(out_dem_1_d[1900:1968])
 
-kred_mol_day<-(out_red_1_d*HgII_pmols)/10^12; mean(kred_mol_day)
+N_kred_g_day<-out_red_1_d*oxy_vol_L/10^9  
+N_kred_moly<-N_kred_g_day*365/200.59
+N_kred_moly/1000
+
+
+kox_mol_day<-(out_red_1_d*HgDOC_pmols)/10^12; mean(kred_mol_day)
 kox_mol_day<-(out_ox_1_d*Hg0_pmols1)/10^12; mean(kox_mol_day)
 kdem_mol_day<-(out_dem_1_d*MeHg_pmols)/10^12; mean(kdem_mol_day)
+
+kred_g_m3_day<-(out_red_1_d*hgII_g_m3)
+kred_g_day<-kred_g_m3_day*5.9*10^12
+kred_mol_y__<-kred_g_day*365/200.9
+
+mean(kred_mol_y__[1957:1968])/1000
+
+kox_mol_day<-(out_ox_1_d*Hg0_pmols1)/10^12; mean(kox_mol_day)
+kdem_mol_day<-(out_dem_1_d*MeHg_pmols)/10^12; mean(kdem_mol_day)
+
+out_red_g_d<-out_red_g_m3_d*5.9*10^12
+out_red_mol_y<-out_red_g_d*365/200.9
+mean(out_red_mol_y[1957:1968])/1000
 
 # kmol trasformate all'anno
 fotored_kmols_y<-kred_mol_day*365/1000; mean(fotored_kmols_y)
 fotox_kmols_y<-kox_mol_day*365/1000;mean(fotox_kmols_y)
 fotodem_kmols_y<- kdem_mol_day*365/1000;mean(fotodem_kmols_y)
 
-
 mean(fotored_kmols_y[1957:1968])
 mean(fotox_kmols_y[1957:1968])
 mean(fotodem_kmols_y[1957:1968])
 
 #FOTORIDUZIONE
+
 fotored_1_s <-(fotored$Oxic1/(24*60*60))
 fotox_1_s   <-(out_ox_1_d/(24*60*60)) 
 fotodem_1_s <-(fotodem$Oxic1/(24*60*60))
@@ -318,11 +419,12 @@ hg0_res<- Hg0_pM1*oxic_vol_m3*1000
 vvol_pM_day<-kvol_1_day*hg0_res
 
 vvol_kmol_y<-vvol_pM_day*365/10^15
+(vvol_kmol_y[1957:1968])
+
 vvol_kmol_y_media<-tapply(vvol_kmol_y,rep(1:(length(vvol_kmol_y)/12), each = 12),
-                          mean); vvol_kmol_y_media<-as.numeric(vvol_kmol_y)
+                          mean)
+
 plot(tail(vvol_kmol_y_media,24), type="l"); 
 plot(vvol_kmol_y_media, type="l"); 
 
-
-mean(tail(Volat1_kmol_y_media,24));mean(tail(vvol_kmol_y_media,24))
-
+Volat1_kmol_y_media[164];vvol_kmol_y_media[164]

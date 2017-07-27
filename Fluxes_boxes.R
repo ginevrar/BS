@@ -79,9 +79,28 @@ BBL_vol_m3 <-1E+14; 			BBL_vol_L  <-BBL_vol_m3*1000
 Sed1_vol<-8.8*10^9
 Sed2_vol<-2*10^10
 
+mcy<-305*10^9 #km3y
+adv_ugy<-mcy*hgT$Oxycline
+adv_gy<-adv_ugy/10^6
+adv_moly<-adv_gy/200.59
+adv_kmoly<-adv_moly/1000
+mean(tail(adv_kmoly,12))
+
+adv2_ugy<-mcy*hgT$Suboxic1
+adv2_gy<-adv2_ugy/10^6
+adv2_moly<-adv2_gy/200.59
+adv2_kmoly<-adv2_moly/1000
+mean(tail(adv2_kmoly,12))
+mean(tail(adv_kmoly,12))-mean(tail(adv2_kmoly,12))
+
+
 diss_hgII<-hg+DOChg
 diss_mehg<-DOCmehg+mehg
 diss_tot<-diss_mehg+diss_hgII+hg0
+diss_hg_inor<-diss_hgII+hg0
+
+diss_hg_inor$Oxic1
+diss_tot$Oxic1
 
 ionic_hg_pM<-hg/200.59*1000
 diss_mehg_pM<-diss_mehg/215*1000
@@ -91,21 +110,20 @@ diss_hgtot_pM<-diss_hgII_pM+diss_mehg_pM+(hg0/200.59*1000)
 
 ### ....diffusion .....
 area<-2.961E+11
-sed_diff<-10^-9  
-eddy_d_OL<-9.5*10^-6  #m2/s
-eddy_d_SOL<-9.5*10^-6
-eddy_d_AOL<-10^-5
-eddy_d_BBL<-8.7^-6
+sed_diff<-10^-9 *60*60*24
+eddy_d_OL<-(9.5*10^-6) *60*60*24 #m2/s
+eddy_d_SOL<-(9.5*10^-6) *60*60*24
+eddy_d_BBL<-(8.7^-6) *60*60*24
 
 lenght_OL_SOL<-10
 lenght_AOL_SOL<-10
 lenght_AOL_Sed<-0.05
 
-HgD_OL_g_L<-diss_hgII_pM$Oxycline /10^9    #OL4
-HgD_SOL_g_L<-diss_hgII_pM$Suboxic1/10^9       #  SOL
-HgD_AOL_g_L<-diss_hgII_pM$Suboxic2/10^9     # AOL1
-HgD_BBL_g_L<-diss_hgII_pM$Anoxic3 /10^9  #AOL4
-HgD_Sed_g_L<-diss_hgII_pM$Sed1 /10^9      # sEd
+HgD_OL_g_L<-hgT$Oxycline /10^9    #OL4
+HgD_SOL_g_L<-hgT$Suboxic1/10^9       #  SOL
+HgD_AOL_g_L<-hgT$Suboxic2/10^9     # AOL1
+HgD_BBL_g_L<-diss_hg_inor$Anoxic3 /10^9  #AOL4
+HgD_Sed_g_L<-diss_hg_inor$Sed1 /10^9      # sEd
 
 HgD_OL_g_m3<-HgD_OL_g_L*1000
 HgD_SOL_g_m3<-HgD_SOL_g_L*1000;mean(tail(HgD_SOL_g_m3,12))
@@ -123,26 +141,31 @@ conc_grad1<-(HgD_SOL_g_m3-HgD_OL_g_m3) #g/m3
 conc_grad2<-(HgD_AOL_g_m3-HgD_SOL_g_m3) #g/m3
 conc_grad3<-(HgD_BBL_g_m3-(HgD_Sed_g_m3/0.95)) #g/m3
 
-diff_OL<- (A/lenght_OL_SOL)*conc_grad1;diff_OL   #g/s
+diff_OL<- (A/lenght_OL_SOL)*conc_grad1;
+
+diff_OL   #g/d
 diff_SOL<-(B/lenght_AOL_SOL)*conc_grad2;diff_SOL
 #diff_AOL<-((eddy_d_AOL*area)/(lenght_AOL_Sed/0.9))*(HgD_Sed/0.9-HgD_AOL) #0.9 porosity
-diff_Sed<-(C/(lenght_AOL_Sed/0.95))*conc_grad3
+diff_Sed<-(C/(lenght_AOL_Sed/0.95))*conc_grad3 #g/d
 
-diff_OL_mol_d<-(diff_OL/200.59)*60*60*24  
-diff_OL_mol_y<-diff_OL_mol_d*365
+
+diff_OL_mol_y<-(diff_OL/200.59)*365
 diff_OL_kmol_y<-diff_OL_mol_y/10^3
-#variazione conc OL kmol/y
-mean(tail(diff_OL_kmol_y,12)); summary(tail(diff_OL_kmol_y,12))
 
-diff_SOL_mol_d<-(diff_SOL/200.59)*60*60*24
-diff_SOL_mol_y<-diff_SOL_mol_d*365
+diff_SOL_mol_y<-(diff_SOL/200.59)*365
 diff_SOL_kmol_y<-diff_SOL_mol_y/10^3
+
+diff_Sed_mol_d<-(diff_Sed/200.59)
+diff_Sed_mol_y<-diff_Sed_mol_d*365
+diff_Sed_kmol_y<-diff_Sed_mol_y/10^3
+
+
+#variazione conc OL kmol/y
+str(diff_OL_kmol_y)
+mean(tail(diff_OL_kmol_y,12)); summary(tail(diff_OL_kmol_y,12))
 #variazione SOL kmol/y
 mean(tail(diff_SOL_kmol_y,12)); summary(tail(diff_SOL_kmol_y,12))
 
-diff_Sed_mol_d<-(diff_Sed/200.59)*60*60*24
-diff_Sed_mol_y<-diff_Sed_mol_d*365
-diff_Sed_kmol_y<-diff_Sed_mol_y/10^3
 mean(tail(diff_Sed_kmol_y,12)); summary(tail(diff_Sed_kmol_y,12))
 
 # solidi ai boundaries ta OL-SOL e sOL_AOL e aOL - SED
@@ -263,6 +286,15 @@ summary(tail(OLdepo_kmol_y_ok,12));
 
 summary(tail(mediaok_depoSOL_kmol_y,12)); 
 
-tail(media1_depoSOL_kmol_y,12)
 tail(mediaok_depoOL_kmol_y,12)
+tail(media1_depoSOL_kmol_y,12)
 tail(media1_depoAOL_kmol_y,12)
+
+
+#variazione conc OL kmol/y
+str(diff_OL_kmol_y)
+mean(tail(diff_OL_kmol_y,12)); summary(tail(diff_OL_kmol_y,12))
+#variazione SOL kmol/y
+mean(tail(diff_SOL_kmol_y,12)); summary(tail(diff_SOL_kmol_y,12))
+#sed diff
+mean(tail(diff_Sed_kmol_y,12)); summary(tail(diff_Sed_kmol_y,12))

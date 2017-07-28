@@ -407,7 +407,7 @@ f<-sum(AOL_datihg*AOL_v_l)/10^15
 (a+c+e)   #tot HgD kmol
 (b+d+f)-(a+c+e) #data - model reservoir
 (f-e)/((b+d+f)-(a+c+e))
-
+(a+c+e)*200.59/10^3  
 #-----------314   kmols missing 
 
 #  ------ MeHgD reservoir
@@ -430,7 +430,7 @@ f1<-sum(AOL_datimehg*AOL_v)/10^12
 #  ------ HgT reservoir
 g<-sum(OL_hgt_pM*OL_v_l)/10^15
 h<-sum(SOL_hgt_pM*SOL_v)/10^12
-i<-sum(SOL_hgt_pM*AOL_v)/10^12
+i<-sum(AOL_hgt_pM*AOL_v)/10^12
 i
 (g+h+i)   #--------tot Hgt kmol
 (g+h+i)*200.59/10^3   #--------tot Hgt kmol
@@ -483,7 +483,6 @@ solids_sed<-data.frame(solids$Sed1[1968],solids$Sed2[1968]) #g/m3
 
 sed_hg_pmol_m3<-sed_hg_pmol_g*solids_sed
 sed_mehg_pmol_m3<-sed_mehg_pmol_g*solids_sed
-
 
 Vol_Sed1_m3<-8.8*10^9
 Vol_Sed2_m3<-2*10^10

@@ -11,8 +11,8 @@ in_2013<-rbind(input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[195
 
 #setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
 
 mehg_prodotto_kmol_y<-read.csv('mehg_prodotto_kmol_y_2050.csv'); str(mehg_prodotto_kmol_y)
 mehg_prodotto_kmol_y_TOT<-rowSums(mehg_prodotto_kmol_y[2:4])

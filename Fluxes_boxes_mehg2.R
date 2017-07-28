@@ -1,11 +1,13 @@
 
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
+
 #  FLUSSI TRA BOX
 #Leggi dati e taglia gli ultimi anni dopo il 2013 hg<-hg[1:1968,]
 
 Pmehgs<-read.csv("Total_Sorbed_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(Pmehgs)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-               "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); Phgs<-Phgs[1:1968,1:13]
+               "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); Pmehgs<-Pmehgs[1:1968,1:13]
 ## Phg ngL
 
 SEDhg<-read.csv("Total_Sorbed_Divalent_Hg_Solids.csv", header=FALSE, skip = 1,sep = ",", dec=".")
@@ -157,7 +159,7 @@ Pmehg_OL <-Pmehgs$Oxycline ;  #ngL
 POMs_kgL<-POMs/10^6   #mgL/10^6 -> kgL
 silts_kgL<-silts/10^6 
 
-mehgCl_gm3<-hg/10^6   #ngL/10^6 ->mgL 
+mehgCl_gm3<-mehg/10^6   #ngL/10^6 ->mgL 
 
 mehgPOM_gm3<-mehgCl_gm3*POMs_kgL*kd_POM
 mehgsilt_gm3<-mehgCl_gm3*silts_kgL*kd_silt
@@ -174,21 +176,10 @@ solids_AOL  <-solids$Anoxic3
 solids_sed1  <-solids$Sed1
 solids_sed2  <-solids$Sed2
 
-SEDmehg_OL   <-SEDmehg$Oxycline  # Hg ng/g-> SEDhg*solid_sed --> PHg ug/m3
-SEDmehg_SOL   <-SEDmehg$Suboxic1
-SEDmehg_AOL   <-SEDmehg$Anoxic3
-SEDmehg_sed1   <-SEDmehg$Sed1
-SEDmehg_sed2   <-SEDmehg$Sed2
-
 # Hg ug/m3
 Pmehg_OL <-Pmehgs$Oxycline
 Pmehg_SOL <-Pmehgs$Suboxic1       # Hg ug/m3
 Pmehg_AOL <-Pmehgs$Anoxic3       # Hg ug/m3
-
-HgT_sed1_ngm3 <- solids_sed1 *SEDmehg_sed1  #  ng/g*g/m3 -> ng/m3
-HgT_sed2_ngm3 <- solids_sed2 *SEDmehg_sed2 
-HgT_sed1_gm3 <-HgT_sed1_ngm3/10^9         #   mg/m3->g/m3 mehgP
-HgT_sed2_gm3  <-HgT_sed2_ngm3/10^9
 
 #DEPOSIZIONE Pmehg AOL -> Sed
 
@@ -224,7 +215,7 @@ mediaok_depoSOL_kmol_y <-tapply(SOLdepo_kmol_y_ok,rep(1:(length(SOLdepo_kmol_y_o
 
 depo_SOLmedia2<-POM_SOLdepo_1_day
 depo_SOLmedia2 #
-
+str(Pmehg_SOL)
 depo_SOLPmehg_ug_m3_d<-depo_SOLmedia2*Pmehg_SOL        # 1/day *ug/m3 -> ug/m3d
 depo_SOLPmehg_g_d <-(depo_SOLPmehg_ug_m3_d*SOL_vol_m3)/10^6   # g/d
 depo_SOLPmehg_mol_d <-depo_SOLPmehg_g_d/200.59               # mol/d

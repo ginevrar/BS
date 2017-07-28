@@ -37,7 +37,7 @@ kox<-1.4
 kdeg<-3.14685E-1
 
 #Leggi model output
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 
 

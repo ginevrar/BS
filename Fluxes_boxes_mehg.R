@@ -1,5 +1,5 @@
 
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
 #  FLUSSI TRA BOX
 #Leggi dati e taglia gli ultimi anni dopo il 2013 hg<-hg[1:1968,]
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
@@ -187,7 +187,7 @@ silt_OLdepo_1_day<-silt_depos$Oxycline/20   # depo silt m/day  (0.014 /d)
 fPOM_OL<-mean(POMs$Oxycline/solids_OL, na.rm=TRUE)
 fsilt_OL<-mean(silts$Oxycline/solids_OL, na.rm=TRUE)
 #  Vd OL
-depo_OLmedia1<-((POM_OLdepo_1_day*fPOM_OL)+(silt_OLdepo_1_day*fsilt_OL))/2  #1/day
+depo_OLmedia1<-POM_OLdepo_1_day   #*fPOM_OL)+(silt_OLdepo_1_day*fsilt_OL))/2  #1/day
 depo_OLmedia1 # 0.0037 /d
 
 depo_OLPmehg_ug_m3_d<-depo_OLmedia1*Pmehg_OL        # 1/day *ug/m3 -> ug/m3d
@@ -203,7 +203,7 @@ silt_SOLdepo_1_day<-silt_depos$Suboxic1/25   # depo silt m/day  (0.014 /d)
 fPOM_SOL<-mean(POMs$Suboxic1/solids_SOL, na.rm=TRUE)
 fsilt_SOL<-mean(silts$Suboxic1/solids_SOL, na.rm=TRUE)
 #  Vd SOL
-depo_SOLmedia1<-((POM_SOLdepo_1_day*fPOM_SOL)+(silt_SOLdepo_1_day*fsilt_SOL))/2  #1/day
+depo_SOLmedia1<-POM_SOLdepo_1_day    # *fPOM_SOL)+(silt_SOLdepo_1_day*fsilt_SOL))/2  #1/day
 depo_SOLmedia1 # 
 
 depo_SOLPmehg_ug_m3_d<-depo_SOLmedia1*Pmehg_SOL        # 1/day *ug/m3 -> ug/m3d
@@ -222,7 +222,7 @@ silt_AOLdepo_1_day<-silt_depos$Anoxic3/350   # depo silt m/day  (0.014 /d)
 fPOM_AOL<-mean(POMs$Anoxic3/solids_AOL, na.rm=TRUE)
 fsilt_AOL<-mean(silts$Anoxic3/solids_AOL, na.rm=TRUE)
 #  Vd
-depo_AOLmedia1<-((POM_AOLdepo_1_day*fPOM_AOL)+(silt_AOLdepo_1_day*fsilt_AOL))/2  #1/day
+depo_AOLmedia1<-POM_AOLdepo_1_day  #1/day
 depo_AOLmedia1 # 0.005 /d
 
 depo_AOLPmehg_ug_m3_d<-depo_AOLmedia1*Pmehg_AOL       # 1/day *ug/m3 -> ug/m3d

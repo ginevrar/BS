@@ -1,5 +1,5 @@
 
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 
 #leggo outpout sim per ogni sim partita a ore diverse
@@ -15,8 +15,11 @@ str(diffusion_kmol_y)
 mehgT_outflow_kmol_y<-ore1$mehgT_outflow_kmol_y
 depo_Pmehg_kmol_y<-ore1$depo_Pmehg_kmol_y
 
+depo_Pmehg_kmol_y[1957:1968]
+
 burial2_kmol_y<-ore1$burial2_kmol_y
 
+plot(depo_Pmehg_kmol_y)
 mehgT_inflow_kmol_y<-ore1$mehgT_inflow_kmol_y 
 river_mehg_kmol_y<-ore1$river_mehg_kmol_y 
 
@@ -57,6 +60,12 @@ empty_v3[1957]<- u
 v<-mean(Input_terms[1957:1968])
 empty_v4<-rep('NA',2412)
 empty_v4[1957]<- v
+1.101366/v*100
+
+v-mm
+
+u/Tmo*100
+
 
 mm<-mean(mehg_prodotto_kmol_y[1957:1968])
 empty_v5<-rep('NA',2412)

@@ -12,7 +12,7 @@ str(in_2013$river_load_hgT_kg_d)
 latest<-rbind(in_2013,in_2013,in_2013); str(latest)
 #input_hg1<-rbind.data.frame(input_hg1,latest,input_hg1[1957:1968,1:8])
 str(input_hg1$inflow_L_y)
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 
 

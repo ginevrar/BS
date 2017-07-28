@@ -6,9 +6,12 @@ ax2<-(seq(1850,2050, by=.08291874))
 str(ax2)
 
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale')
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS")
+
 input_hg1 <-read.table("input_Hg.txt", header=TRUE); str(input_hg1)
 
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
 
 #leggo outpout sim per ogni sim partita a ore diverse
 ore1  <-read.table("water_input_output_long_1_2050", header=TRUE, sep=","); str(ore1)
@@ -27,6 +30,8 @@ diffusion_hgIIkmol_y    <-ore1$diffusion_kmol_y[1:2412]
 diffusion_mehgkmol_y    <-ore1_mehg$diffusion_kmol_y[1:2412]
 diffusion_kmol_y   <-diffusion_hgIIkmol_y+diffusion_mehgkmol_y
 
+diffusion_hgIIkmol_y[1958:1967]
+diffusion_mehgkmol_y[1958:1967]
 str(ore1_mehg)
 burialhgii_kmol_y      <-ore1$burial1_kmol_y[1:2412]
 burialmehg_kmol_y      <-ore1_mehg$burial1_kmol_y[1:2412]
@@ -41,11 +46,14 @@ burialhgII_kmol_y      <- ore1$burial2_kmol_y[1:2412]
 burialmehg_kmol_y      <- ore1_mehg$burial2_kmol_y[1:2412]
 burial2_kmol_y<-burialhgII_kmol_y+burialmehg_kmol_y
 
-
+burialhgII_kmol_y[1958:1967]
+burialmehg_kmol_y[1958:1967]
 Output_terms<-(evasione_kmol_y+depo_Phg_kmol_y+hgT_outflow_kmol_y)
 Input_terms<-(hgT_inflow_kmol_y +river_hgT_kmol_y +atm_hg_kmol_y + diffusion_kmol_y)
 Output_terms[2:164]; summary(Output_terms)
 
+depo_PhgII_kmol_y[1957:1968]
+depo_Pmehg_kmol_y[1957:1968]
 
 diff<-Input_terms-Output_terms
 cumulative_diff_kmol<-cumsum(diff)
@@ -67,6 +75,7 @@ empty_v2[1957]<-ri
 mean(river_hgT_kmol_y[1957:1968])
 mean(river_hgII_kmol_y[1957:1968])
 
+at/T_in
 inc<-mean(hgT_inflow_kmol_y[1957:1968])
 empty_v3<-rep('NA',2412)
 empty_v3[1957]<- inc
@@ -74,6 +83,8 @@ empty_v3[1957]<- inc
 di<-mean(diffusion_kmol_y[1957:1968])
 empty_v4<-rep('NA',2412)
 empty_v4[1957]<- di
+
+0.4/T_in*100
 
 T_in<-mean(Input_terms[1957:1968])
 empty_v5<-rep('NA',2412)
@@ -87,9 +98,17 @@ dp<-mean(depo_Phg_kmol_y[1957:1968])
 empty_v7<-rep('NA',2412)
 empty_v7[1957]<- -dp
 
+ev/T_ou*100
+dp/T_ou*100
+
+mean(burial2_kmol_y[1957:1968])/dp*100
+
+di/dp*100
+
 outc<-mean(hgT_outflow_kmol_y[1957:1968])
 empty_v8<-rep('NA',2412)
 empty_v8[1957]<--outc
+outc/T_ou*100
 
 T_ou<-mean(Output_terms[1957:1968])
 empty_v9<-rep('NA',2412)

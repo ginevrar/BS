@@ -4,6 +4,7 @@
 
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
 
 hg<-read.csv("Dissolved_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
@@ -118,7 +119,7 @@ par(new=TRUE)
 plot(ax2,empty_v3, type='p', xlab= " ", ylab= " ", pch=23, cex=4.5, xaxt='n',yaxt='n', ylim=c(0,0.8), bg='#800026',col='black')
 text(1980,.18,'OL',col='#0098cc', cex=3)
 text(1980,.3,'SOL',col='chartreuse4', cex=3)
-text(1940,.5,'AOL',col='#800026', cex=3)
+text(1940,.6,'AOL',col='#800026', cex=3)
 dev.off()
 
 

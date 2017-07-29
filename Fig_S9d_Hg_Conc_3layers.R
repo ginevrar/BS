@@ -33,7 +33,7 @@ names(Temp)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2",
 Temp<-Temp [2:2413,]
 
 Temp<-tail(Temp,36)
-ax2<-(seq(1850,2050, by=.08291874))
+
 
 oxic_conc<-data.frame(hgT$Oxic1,hgT$Oxic2,hgT$CIL,hgT$Oxycline)
 oxic_conc_pM<-rowMeans(oxic_conc)/215*1000

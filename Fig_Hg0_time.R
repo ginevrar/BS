@@ -1,7 +1,7 @@
 getwd()
 #wd('C:/Users/gi/Dropbox/29_Luglio/Anoxic3c/ore17')
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale2/Anne1e_morehg_tris')
 
 hg<-read.csv("Dissolved_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
@@ -52,36 +52,37 @@ hg0_layer<-c(hg0a,hg0b,hg0c,hg0d,hg0e,hg0f,hg0h,hg0i,hg0l)
 plot(hg0_layer)
 
 #setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
+ax2<-(seq(1850,2050, by=.08291874))
 
 tiff('Fig_Hg0_conc.tiff', height=25, width=23, units='cm', 
      compression="lzw", res=300)
 par(mfrow=c(1,1), mar=c(4.5,5,4,1), bty='n') 
-plot(ax2,hg0_pM$Oxic1, col="deepskyblue", ylab=" ", ylim=c(0,0.8),
-     xlab=" ", main=expression("MeHg"[T]*" concentrations in the model layers"),
+plot(ax2,hg0_pM$Oxic1, col="deepskyblue", ylab=" ", ylim=c(0,0.4),
+     xlab=" ", main=expression("Hg"^0*" concentrations in the model layers"),
      cex.main=2.5,type="l",lwd=1.5,lty=1, xaxt='n', cex.axis=2)
 par(new=TRUE)
-plot(ax2,hg0_pM$Oxic2, ylim=c(0,0.8), col="dodgerblue", 
+plot(ax2,hg0_pM$Oxic2, ylim=c(0,0.4), col="dodgerblue", 
      ylab="pM", cex.lab=2, xlab="year", yaxt='n',type="l",lwd=1.5,lty=2, xaxt='n')
 par(new=TRUE)
-plot(ax2,hg0_pM$CIL, ylim=c(0,0.8), col="#feb24c", ylab=" ", 
+plot(ax2,hg0_pM$CIL, ylim=c(0,0.4), col="#feb24c", ylab=" ", 
      xlab=" ", type="l",lwd=1.5, yaxt='n',lty=3,  xaxt='n')
 par(new=TRUE)
-plot(ax2,hg0_pM$Oxycline, ylim=c(0,0.8), col="#225ea8", 
+plot(ax2,hg0_pM$Oxycline, ylim=c(0,0.4), col="#225ea8", 
      ylab=" ", xlab=" ", type="l",yaxt='n',lwd=1.5,lty=4,  xaxt='n')
 par(new=TRUE) 
-plot(ax2,hg0_pM$Suboxic1, ylim=c(0,0.8), col="#addd8e", 
+plot(ax2,hg0_pM$Suboxic1, ylim=c(0,0.4), col="#addd8e", 
      ylab="   ", xlab="   ", xaxt='n', type="l",lwd=1.5,yaxt='n',lty=5) 
 par(new=TRUE)
-plot(ax2,hg0_pM$Suboxic2, ylim=c(0,0.8), col="lightslategray", 
+plot(ax2,hg0_pM$Suboxic2, ylim=c(0,0.4), col="lightslategray", 
      ylab=" ", xlab=" ", type="l", xaxt='n',lwd=1.5,yaxt='n',lty=1) 
 par(new=TRUE)
-plot(ax2,hg0_pM$Anoxic, ylim=c(0,0.8), col="darkslategray", 
+plot(ax2,hg0_pM$Anoxic, ylim=c(0,0.4), col="darkslategray", 
      ylab=" ", xlab=" ", type="l",lwd=1.5,lty=2, yaxt='n',xaxt='n')
 par(new=TRUE)
-plot(ax2,hg0_pM$Anoxic2,  ylim=c(0,0.8), col="#fc4e2a", 
+plot(ax2,hg0_pM$Anoxic2,  ylim=c(0,0.4), col="#fc4e2a", 
      ylab=" ", xlab=" ", type="l",lwd=1.5,lty=3, yaxt='n',xaxt='n')
 par(new=TRUE)
-plot(ax2,hg0_pM$Anoxic3, ylim=c(0,0.8), col="#800026", 
+plot(ax2,hg0_pM$Anoxic3, ylim=c(0,0.4), col="#800026", 
      ylab=" ", xlab=" ", type="l",lwd=1.5,lty=4, yaxt='n',xaxt='n')
 
 axis(1,at=c(1850,1900,1950,2000,2050),labels=T, cex.axis=2)
@@ -116,8 +117,8 @@ oc<-mean(oxic_conc_pM[1957:1968])
 empty_v1<-rep('NA',2412)
 empty_v1[1957]<- oc
 
-sc<-sub_pM<-hg0_pM$Suboxic1
-mean(sub_pM[1957:1968])
+sub_pM<-hg0_pM$Suboxic1
+sc<-mean(sub_pM[1957:1968])
 empty_v2<-rep('NA',2412)
 empty_v2[1957]<- sc
 

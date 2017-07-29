@@ -346,6 +346,8 @@ summary(OL_hgt_pM)
 OL_hgd<-disshg_pM[1:4]; mean(OL_hgd)
 mean(OL_hgd/OL_hgt_pM*100)
 
+
+
 OL_hg0_pM<-(layer_hg0_pm[1:4])
 
 OL_mehgt_pM<-(layer_mehgT_pm[1:4])

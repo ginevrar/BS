@@ -148,6 +148,9 @@ write.csv(trasf, file='trasformazioni.csv')
 netto_prodotto_long<-met_kmol_y-demet_kmol_y
 netto_prodotto_TOT_long<-rowSums(netto_prodotto_long)
 
+
+
+
 metilato   <-rowSums(met_kmol_y)
 demetilato <-rowSums(demet_kmol_y)
 mean(tail(metilato,36))
@@ -181,6 +184,8 @@ SOL_met_kmol_y_media <-as.numeric(tapply(met_kmol_y[,2] ,rep(1:(length(demet_kmo
 AOL_met_kmol_y_media <-as.numeric(tapply(met_kmol_y[,3] ,rep(1:(length(demet_kmol_y[,3])/12), each = 12), mean))
 SED_met_kmol_y_media <-as.numeric(tapply(met_kmol_y[,4] ,rep(1:(length(met_kmol_y[,4])/12), each = 12), mean))
 
+SED_demet_kmol_y_media[164]
+SED_met_kmol_y_media[164]
 
 met_kmol_y<-data.frame(OL_met_kmol_y_media, SOL_met_kmol_y_media, AOL_met_kmol_y_media)
 demet_kmol_y<-data.frame(OL_demet_kmol_y_media, SOL_demet_kmol_y_media, AOL_demet_kmol_y_media)

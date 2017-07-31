@@ -166,8 +166,8 @@ title('sm1',line=-1.4)
 
 p<-c(21,23)
 
-text(0.8,12.6,expression(paste('k'[m-SOL]*'= 8 10'^-3)),cex=2.2)
-text(0.8,13.1,expression(paste('k'[dm-SOL]*'= 2 10'^-2)),cex=2.2)
+text(0.8,12.6,expression(paste('k'[m-SOL]*'= 8·10'^-3)),cex=2.2)
+text(0.8,13.1,expression(paste('k'[dm-SOL]*'= 2·10'^-2)),cex=2.2)
 
 #legend(.4,11, pch=p,legend=c("Observations", 
 #                            'Model'),pt.cex=2,
@@ -202,8 +202,8 @@ plot(L3, prof, type="b",pch=23,  lwd=1.3,cex=4,cex.axis=1.8,
 #x axis
 title('sm2',line=-1.4)
 
-text(0.8,12.6,expression(paste('k'[m-SOL]*'= 8 10'^-3)),cex=2.2)
-text(0.8,13.1,expression(paste('k'[dm-SOL]*'= 3 10'^-2)),cex=2.2)
+text(0.8,12.6,expression(paste('k'[m-SOL]*'= 8·10'^-3)),cex=2.2)
+text(0.8,13.1,expression(paste('k'[dm-SOL]*'= 3·10'^-2)),cex=2.2)
 
 y3<-c( 10.5, 12.05, 14.25, 15.285, 15.64, 16.2, 16.6, 17.04, 17.35);why<-c(0,   20,      40,    55,    75,   100,  280,  460,   2000)
 axis(4, at = y3, labels = why, tick = TRUE, cex.axis=1.8, las=2)
@@ -234,8 +234,8 @@ plot(L2t, prof, type="b",pch=23,  lwd=1.3,cex=4,cex.axis=1.8,
 #      2, line=2.5 ,at=14,col="black", cex=1.2)
 title('sm3',line=-1.4)
 
-text(0.8,12.6,expression(paste('k'[m-SOL]*'= 8 10'^-3)),cex=2.2)
-text(0.8,13.1,expression(paste('k'[dm-SOL]*'= 2 10'^-2)),cex=2.2)
+text(0.8,12.6,expression(paste('k'[m-SOL]*'= 8·10'^-3)),cex=2.2)
+text(0.8,13.1,expression(paste('k'[dm-SOL]*'= 2·10'^-2)),cex=2.2)
 
 text(0.8,11.4,expression(paste('k'[dm-OL]*'= 1 10'^-2)),cex=2.2)
 
@@ -278,8 +278,8 @@ title('sm4',line=-1.4)
 
 text(0.8,11.9,expression(paste('k'[dm-OL]*'= 1·10'^-2)),cex=2.2)
 
-text(0.8,12.6,expression(paste('k'[m-SOL]*'= 8 10'^-3)),cex=2.2)
-text(0.8,13.1,expression(paste('k'[dm-SOL]*'= 4 10'^-2)),cex=2.2)
+text(0.8,12.6,expression(paste('k'[m-SOL]*'= 8·10'^-3)),cex=2.2)
+text(0.8,13.1,expression(paste('k'[dm-SOL]*'= 4·10'^-2)),cex=2.2)
 
 axis(1, at = at, labels = F ,tick=T, cex.axis=1.8)
 axis(1, at = atx, labels = atx,tick=T, cex.axis=1.8)
@@ -312,8 +312,8 @@ axis(1, at = atx, labels = atx,tick=T, cex.axis=1.8)
 mtext(expression('MeHg'[D]*' (pM)'),side=1,line=3.5, cex=1.2)
 #legend(.4,11, pch=p,legend=c
 
-text(0.8,12.6,expression(paste('k'[m-SOL]*'= 1.5 10'^-2)),cex=2.2)
-text(0.8,13.1,expression(paste('k'[dm-SOL]*'= 1.1 10'^-1)),cex=2.2)
+text(0.8,12.6,expression(paste('k'[m-SOL]*'= 1.5·10'^-2)),cex=2.2)
+text(0.8,13.1,expression(paste('k'[dm-SOL]*'= 1.1·10'^-1)),cex=2.2)
 
 axis(4, at = y3, labels = why, tick = TRUE, cex.axis=1.8, las=2)
 mtext('depth (m)', at=13.5, side=4,line=3.2, cex=1.2 )

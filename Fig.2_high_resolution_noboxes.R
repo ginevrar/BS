@@ -3,6 +3,9 @@ setwd('C:/Users/gi/Documents/Lavoro/SIM_finale2')
 Clean_data<-read.table('Dataset_Finale_new_no_bosforo.txt', header=T)
 str(Clean_data)
 
+plot(Clean_data$MeHg/Clean_data$Hg*100)
+
+
 setwd("C:/Users/Ginevra/Desktop")
 tiff('f223f.tiff', height = 25, width = 23, units = 'cm',   compression = "lzw", res = 300)
 
@@ -241,3 +244,5 @@ text(.8,12,'OL', cex=1.4, font=2)
 text(.95,15.9,'SOL', cex=1.4, font=2)
 text(.15,16.6,'AOL', cex=1.4, font=2)
 dev.off()
+
+Clean_data$MeHg/Clean_data$Hg

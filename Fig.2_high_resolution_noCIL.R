@@ -1,46 +1,26 @@
 setwd("C:/Users/Ginevra/Google Drive/MERCURIO/BlackSea/implementazione/nuovi_script")
+setwd('C:/Users/gi/Documents/Lavoro/SIM_finale2')
 Clean_data<-read.table('Dataset_Finale_new_no_bosforo.txt', header=T)
 str(Clean_data)
 
 setwd("C:/Users/Ginevra/Desktop")
-#tiff('f223f.tiff', height = 25, width = 23, units = 'cm', 
- #    compression = "lzw", res = 300)
+tiff('f223f.tiff', height = 25, width = 23, units = 'cm',   compression = "lzw", res = 300)
 
 # mai make  margins smaller mai=c(0.1,0.1,0.2,0.1),
-par(mfrow=c(2,3),mar=c(2.3,4.5,3.3,1.4)) 
+par(mar=c(4.5,5,1,0), mfrow=c(2,3),cex.axis=1.2, cex.lab=1.3, cex.main=2.4 )
 ##par(mar=c( bottom , left , top, right )
 #oma=c(1,1,1,4)
 summary(Clean_data$Temp)
 a<-seq(6,27, by=3)
 par(bty='n')
 #fig=c(x1, x2, y1, y2)
-
-plot(Clean_data$Temp, Clean_data$sigma,xlim=c(6,27),
-     xaxt="n",cex=2.2,yaxt='n',
-     ylim=rev(range(Clean_data$sigma)), col="#fee08b00",
-     ylab='', cex.lab=2,
-     xlab=" ", pch=17)
-rect(6, 10.5 , 27,15.64 , density = NULL, angle = 45, 
-     col = '#abd9e922', border = '#abd9e9', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(6, 16.2 , 27,17.04 , density = NULL, angle = 45, 
-     col = '#eadede22', border ='#d2c7c7', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(6, 15.64 , 27,16.2 , density = NULL, angle = 45, 
-     col = '#1d932722', border = '#35978f', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(6, 17.04 , 27,17.2 , density = NULL, angle = 45, 
-     col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(6, 17.23 , 27,17.25 , density = NULL, angle = 45, 
-     col = '#25232322', border = '#252323', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-par(new=T)
 plot(Clean_data$Temp, Clean_data$sigma,xlim=c(6,27),
      xaxt="n",cex=2.2,yaxt='n',
      ylim=rev(range(Clean_data$sigma)), col="#fee08b",
      ylab=' ', cex.lab=2,
      xlab=" ", pch=24)
+abline(h=15.64,   lty=2, col='grey60')
+abline(h=16.2,   lty=2, col='grey60')
 axis(3, at=a,line=0.3, col="darkgoldenrod1", cex.axis=1.6, cex.axis=1.6)
 mtext("T \n (蚓)", 3, line=-0.6,at=2.5,col="darkgoldenrod1", cex=1.4)
 text(16,12,'OL', cex=1.4, font=2)
@@ -67,48 +47,28 @@ mtext(expression(paste(sigma[theta]*'  (kg m'^-3*')')), 2, line=2.2,at=13.5,
 #mtext("Sal",1, line=3, col="#35978f", cex=1.4, at=24)
 
 #secondo---II-O2 HS mar=c(5.5,1,.5,1)
+par(mar=c(4,2.5,1,2.5), cex.axis=1.2, cex.lab=1.3, cex.main=2.4 )
+
 summary(Clean_data$Ox_uM)
 Ox<-Clean_data[(Clean_data$Ox_uM>1),]
 
 d <- seq(0,350,by=50)
 plot(Ox$Ox_uM, Ox$sigma, ylim=rev(range(Clean_data$sigma)),
-     col="#abd9e900", frame=FALSE, xlim=c(0,350),cex=2.2,
-     xaxt='n', yaxt='n',xlab="", ylab='', 
-     cex.lab=2, pch=8)
-axis(3,line=0.3, col="#72b3c9",at=d, cex.axis=1.6)
+     col="#abd9e9",frame=FALSE, xlim=c(0,350),cex=2.2,
+     xaxt='n',yaxt='n', xlab="", ylab=' ', cex.lab=2,pch=8)
 #Lines <- list(bquote(),   bquote())
 mtext(expression(paste('O'[2]))
-       ,side=3,
+      ,side=3,
       line=c(1),at=-90,col="#72b3c9", cex=1.4)
 mtext("(然)",side=3,
       line=c(-0.3),at=-90,col="#72b3c9", cex=1.4)
 
-rect(0, 10.5 , 350,15.64 , density = NULL, angle = 45, 
-     col = '#abd9e922', border = '#abd9e9', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-
-rect(0, 16.2 ,  350,17.04 , density = NULL, angle = 45, 
-     col = '#eadede22', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-
-rect(0, 15.64 ,  350,16.2 , density = NULL, angle = 45, 
-     col = '#1d932722', border = '#35978f', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.04 ,  350,17.2 , density = NULL, angle = 45, 
-     col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.23 ,  350,17.25 , density = NULL, angle = 45, 
-     col = '#25232322', border = '#252323', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-par(new=T)       
-plot(Ox$Ox_uM, Ox$sigma, ylim=rev(range(Clean_data$sigma)),
-     col="#abd9e9",frame=FALSE, xlim=c(0,350),cex=2.2,
-     xaxt='n',yaxt='n', xlab="", ylab=' ', cex.lab=2,pch=8)
 text(50,12,'OL', cex=1.4, font=2)
 #text(50,14.6,'CIL', cex=1.4, font=2)
 text(220,15.9,'SOL', cex=1.4, font=2)
 text(250,16.6,'AOL', cex=1.4, font=2)
-
+abline(h=15.64,   lty=2, col='grey60')
+abline(h=16.2,   lty=2, col='grey60')
 #title(sub="然", line=2.5)
 par(new=TRUE)
 HS<-Clean_data[(Clean_data$HS>0.1),]
@@ -128,10 +88,12 @@ mtext(expression(paste(sigma[theta]*'  (kg m'^-3*')')), 2,
       line=2.3,at=13.5,col="black", cex=1.3)
 
 #--III --BAC + Mn,mar=c(5.5,1,.5,5)
+par(mar=c(4.5,0,1,5), cex.axis=1.2, cex.lab=1.3, cex.main=2.4 )
+
 e <- seq(0,5000,by=1000)
 Mn<-Clean_data[(Clean_data$Mn>0.1),]
 plot(Mn$Mn, Mn$sigma, ylim=rev(range(Clean_data$sigma)), xlim=c(0,5000), 
-     col="#88419d00", bg="#d4b9da00", cex.lab=2, cex=2.2,
+     col="#e1e22f", bg="#d5f41900", cex.lab=2, cex=2.2,
      frame=FALSE,xaxt='n',yaxt='n',  pch=24,xlab='',
      ylab='')
 axis(1,at=e,line=.3, col="#cccd1c", cex.axis=1.6)
@@ -142,72 +104,8 @@ mtext(expression(paste('Mn'[D])),side=1,
                  line=-0.7,at=-1300,col="#cccd1c", cex=1.4)
 mtext(expression(paste('(nM)')),side=1,
       line=1.2,at=-1300,col="#cccd1c", cex=1.4)           
-                 
-rect(0, 10.5 , 5000,15.64 , density = NULL, angle = 45, 
-     col = '#abd9e922', border = '#abd9e9', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-
-
-rect(0, 16.2 ,  5000,17.04 , density = NULL, angle = 45, 
-     col = '#eadede22', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 15.64 ,  5000,16.2 , density = NULL, angle = 45, 
-     col = '#1d932722', border = '#35978f', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.04 ,  5000,17.2 , density = NULL, angle = 45, 
-     col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.23 ,  5000,17.25 , density = NULL, angle = 45, 
-     col = '#25232322', border = '#252323', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)   
 par(new=TRUE)
-ba<-seq(0.,0.5,by=0.1)
-plot(Clean_data$BAC, Clean_data$sigma, ylim=rev(range(Clean_data$sigma)), 
-     ylab=" ", cex=2, xlim=c(0,0.5), yaxt='n',lwd=1.5,
-     pch=21,col="#006837", frame=FALSE, xaxt='n',xlab=" ")
-axis(3, at=ba,line=0.3, col="#006837", cex.axis=1.6)
-mtext(expression(paste('BAC')),3,line=1.1, at=-.1, col="#006837", cex=1.4)
-mtext(expression(paste('(m'^-1*')')),3,line=-1.1,at=-.1, col="#006837", cex=1.4)
-
-text(0.45,12,'OL', cex=1.4, font=2)
-#text(0.45,14.7,'CIL', cex=1.4, font=2)
-text(0.45,15.9,'SOL', cex=1.4, font=2)
-text(.15,16.7,'AOL', cex=1.4, font=2)
-par(new=T)
-
-plot(Mn$Mn, Mn$sigma, ylim=rev(range(Clean_data$sigma)), xlim=c(0,5000), 
-     col="#e1e22f", bg="#d5f41900", cex.lab=2, cex=2.2,
-     frame=FALSE,xaxt='n',yaxt='n',  pch=24, xlab='',lwd=1.5,
-     ylab='')
-
-#mtext("dMn (nM)",1,line=3, at=c(7500),col="darkorange", cex=1)
-axis(2, at=y,line=0, col="black", cex.axis=1.6 )
-axis(2, at=y2,line=0,labels=F, col="black" , tck =-.02, cex.axis=1.6)
-mtext(expression(paste(sigma[theta]*'  (kg m'^-3*')')), 2, 
-      line=2.3,at=13.5,col="black", cex=1.3)
-
-#-IV ---NO3 + Fe
-summary(Clean_data$NO3)
 no3<-Clean_data[(Clean_data$NO3>0.1),]
-plot(no3$NO3, no3$sigma, cex=2.2,xlim=c(0,5), 
-     col="#66c2a400", lwd=1.3,frame=F, ylim=rev(range(Clean_data$sigma)),
-     ylab='', cex.lab=2,xaxt='n',yaxt='n',     xlab="", pch=24)
-rect(0, 10.5, 5, 15.64 , density = NULL, angle = 45, 
-     col = '#abd9e922', border = '#abd9e9', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 16.2 ,  5,17.04 , density = NULL, angle = 45, 
-     col = '#eadede22', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 15.64 ,  5,16.2 , density = NULL, angle = 45, 
-     col = '#1d932722', border = '#35978f', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.04 ,5, 17.2 , density = NULL, angle = 45, 
-     col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.235 ,  5,17.25 , density = NULL, angle = 45, 
-     col = '#25232322', border = '#252323', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)      
-par(new=T)
 plot(no3$NO3, no3$sigma, cex=2.1,xlim=c(0,5), 
      col="#66bd63", lwd=1.3,frame=F, ylim=rev(range(Clean_data$sigma)),
      ylab='', cex.lab=2, xaxt='n',yaxt='n', xlab="", pch=4)
@@ -215,13 +113,37 @@ no3a<-seq(0,5,by=1)
 axis(3,at=no3a,line=.3, col="#66bd63", cex.axis=1.6)
 #Lines <- list(bquote('NO'[3]), bquote("(然)"))
 #.mtext(do.call(expression, Lines),side=3,
-    #  line=c(1,-.4),at=c(-1.3), col="#66bd63", cex=1.4)
+#  line=c(1,-.4),at=c(-1.3), col="#66bd63", cex=1.4)
 mtext(expression(paste('NO'[3])),side=3,
-                 line=.4,at=c(-.9), col="#66bd63", cex=1.4)
+      line=.4,at=c(-.9), col="#66bd63", cex=1.4)
 mtext(expression(paste('(然)')),side=3,
       line=-1.3, at=c(-.9), col="#66bd63", cex=1.4)
-par(new=TRUE)
-summary(Clean_data$Fe)
+
+abline(h=15.64,   lty=2, col='grey60')
+abline(h=16.2,   lty=2, col='grey60')
+
+text(4.5,12,'OL', cex=1.4, font=2)
+text(4.5,15.9,'SOL', cex=1.4, font=2)
+text(1.5,16.7,'AOL', cex=1.4, font=2)
+#mtext("dMn (nM)",1,line=3, at=c(7500),col="darkorange", cex=1)
+axis(2, at=y,line=0, col="black", cex.axis=1.6 )
+axis(2, at=y2,line=0,labels=F, col="black" , tck =-.02, cex.axis=1.6)
+mtext(expression(paste(sigma[theta]*'  (kg m'^-3*')')), 2, 
+      line=2.3,at=13.5,col="black", cex=1.3)
+
+#-IV ---NO3 + Fe
+par(mar=c(4.5,5,1,0), cex.axis=1.8, cex.lab=1.3, cex.main=2.4 )
+
+ba<-seq(0.,0.5,by=0.1)
+plot(Clean_data$BAC, Clean_data$sigma, ylim=rev(range(Clean_data$sigma)), 
+     ylab=" ", cex=2, xlim=c(0,0.5), yaxt='n',lwd=1.5,
+     pch=21,col="#008224", frame=FALSE, xaxt='n',xlab=" ")
+axis(3, at=ba,line=0.3, col="#008224", cex.axis=1.6)
+mtext(expression(paste('BAC')),3,line=1.1, at=-.1, col="#006837", cex=1.4)
+mtext(expression(paste('(m'^-1*')')),3,line=-1.1,at=-.1, col="#006837", cex=1.4)
+
+par(new=T)
+
 fe <- seq(0,500,by=100)
 Fe<-Clean_data[(Clean_data$Fe>0.1),]
 plot(Fe$Fe, Fe$sigma, ylim=rev(range(Clean_data$sigma)), cex=2.1,
@@ -248,30 +170,11 @@ text(440,15.9,'SOL', cex=1.4, font=2)
 text(440,16.8,'AOL', cex=1.4, font=2)
 
 #-- V --- Hg
+dev.new()
 summary(Clean_data$Hg)
 par(bty="n")
-plot(Clean_data$Hg, Clean_data$sigma, xlim=c(0,5),
-     ylim=rev(range(Clean_data$sigma)), pch=15, xaxt='n', yaxt='n',
-     type="p",lty=4, col="#3690c000", cex=2.2,
-     ylab='', main=" ",
-     cex.lab=2, xlab=" " )
-
-rect(0, 10.5 , 5,15.64 , density = NULL, angle = 45, 
-     col = '#abd9e922', border = '#abd9e9', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 16.2 ,  5,17.04 , density = NULL, angle = 45, 
-     col = '#eadede22', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 15.64 ,  5,16.2 , density = NULL, angle = 45, 
-     col = '#1d932722', border = '#35978f', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.04 ,  5,17.2 , density = NULL, angle = 45, 
-     col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.23 ,  5,17.25 , density = NULL, angle = 45, 
-     col = '#25232322', border = '#252323', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)   
-par(new=T)
+abline(h=15.64, type='l', lty=2, col='grey60')
+abline(h=16.2, type='l', lty=2, col='grey60')
 plot(Clean_data$Hg, Clean_data$sigma, xlim=c(0,5),
      ylim=rev(range(Clean_data$sigma)), pch=21, xaxt='n', yaxt='n',
      type="p",lty=4, bg="#3690c088",col='#256486', cex=2.2,
@@ -306,21 +209,10 @@ plot(Clean_data$MeHg, Clean_data$sigma, xlim=c(0,1.2),xaxt='n', yaxt='n',
      ylim=rev(range(Clean_data$sigma)), pch=23, cex=2.2,
      type="p",lty=4, col="#df65b000", bg="#df65b000", main=" ",
      ylab='',cex.lab=2,xlab=" ")
-rect(0, 10.5 , 1.2,15.64 , density = NULL, angle = 45, 
-     col = '#abd9e922', border = '#abd9e9', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 16.2 ,  1.2,17.04 , density = NULL, angle = 45, 
-     col = '#eadede22', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 15.64 ,  1.2,16.2 , density = NULL, angle = 45, 
-     col = '#1d932722', border = '#35978f', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.04 ,  1.2,17.2 , density = NULL, angle = 45, 
-     col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.23 ,  1.2,17.25 , density = NULL, angle = 45, 
-     col = '#25232322', border = '#252323', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
+abline(h=15.64,   lty=2, col='grey60')
+abline(h=16.2,   lty=2, col='grey60')
+
+
 par(new=T)   
 plot(Clean_data$MeHg, Clean_data$sigma, xlim=c(0,1.2),xaxt='n', yaxt='n',
      ylim=rev(range(Clean_data$sigma)), pch=22, cex=2.2,

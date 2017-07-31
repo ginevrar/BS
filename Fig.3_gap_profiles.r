@@ -4,9 +4,23 @@
 medie<-read.table("C:/Users/Ginevra/Dropbox/BlackSea2/nuovi_script/medie_dati_new_12layers.txt", sep="\t", 
                   header=TRUE)
 str(medie)
-
+setwd('C:/Users/gi/Documents/Lavoro/SIM_finale2')
+medie<-read.table("medie_dati_new_12layers.txt", sep="\t", 
+                  header=TRUE)
 # if you are passing an explicit xlim or ylim.
 #  remember to subtract the width(s) of the gap(s) 
+
+dev.new()
+plot(medie$Hg,medie$Density,ylim=c(17.3,15),
+         xlim=c(0,0.9), pch=21,ylab=" ",xlab=" ",cex=2.2,cex.axis=1.6, 
+         bgcol = 'white', bg="#3690c0",col='#25648688',
+         type="b",lty=1, gap=c(11.5,15.5), gap.axis="y",add=TRUE, xticlab=NA)
+plot(medie$MeHg,medie$Density,ylim=c(15,17.3),
+         bgcol = 'white', col="#e7298a", bg="#df65b088",
+         xlim=c(0,0.9), pch=22, ylab='',
+         xlab=" ",cex=2.2, cex.axis=1.6, type="b",lty=1, cex.lab=1.6,
+         gap=c(11.5,15.5), gap.axis="y", add=TRUE, xticlab=NA)
+
 
 library(plotrix)
 head(medie)

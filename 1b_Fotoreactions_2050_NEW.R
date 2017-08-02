@@ -32,13 +32,14 @@ light<-read.table("light_norm.txt", header = TRUE); names(light)<-'light' ; ligh
 light_sur_w_m2<-read.table("light_w_m2.txt", header = TRUE); light_sur_w_m2<-light_sur_w_m2$wm2
 fd<-read.table("frac_day.txt", header = F); 
 
-kred<-1.2
-kox<-1.4
-kdeg<-3.14685E-1
+kred<-0.16
+kox<-0.57
+kdeg<-3E-3
 
 #Leggi model output
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_trisBO")
 
 
 evasion<-read.csv("Volatilization_Loss_Rate.csv", header=FALSE, skip = 1, sep = ",", dec=".")
@@ -127,7 +128,7 @@ POM<-POM [2:2413,1:13]
 str(POM$Time)
 
 oxic_vol_m3<-5.9E+12
-oxic_vol_L<-oxic_vol_m3*1000
+oxy_vol_L<-oxic_vol_m3*1000
 Model_area  <-2.961E+11
 
 time.steps <- hgT$Time     # leggo model timestep 
@@ -147,6 +148,8 @@ fDOChg <- (10^3*(2.9*10^-6))/(1+(10^3*(2.9*10^-6))+((siltOL*3000)+(POMOL*(5.1*10
 fDOCmehg <-DOCmehg$Oxic1/mehgT$Oxic1
 fDOChg0  <-DOChg0$Oxic1/hg0$Oxic1
 fdhg0    <-dhg0$Oxic1/hg0$Oxic1
+
+fdisshg2   <-(DOChg$Oxic1+hg$Oxic1)/(DOChg$Oxic1+hg$Oxic1+Phg$Oxic1); mean(fDOChg2, na.rm=TRUE);plot(fDOChg*100)
 
 #-------- conc Hg species pM
 Hg0_pM1<-hg0$Oxic1/200.59*1000; mean(hg0$Oxic1)
@@ -172,7 +175,7 @@ hgII_DOC_pM<-hgII_DOC/200.59*1000
 hgII_DOC_pmols <-hgII_DOC_pM*oxic_vol_L
 HgII_DOC_kmols<-hgII_DOC_pmols/10^15
 
-HgII_pM<-hgII/200.59*1000              # pM
+HgII_pM<-hgII_tot/200.59*1000              # pM
 
 HgII_pmols<-HgII_pM*oxic_vol_L          # bulk of HgII in oxic layer
 
@@ -202,7 +205,8 @@ mehg_ngL<-mehgT$Oxic1
 plot(Hg0_kmols1[1950:2029])
 #mean(hg0_g_m3/hgII_g_m3*100) #hg0 %
 # ---------
-ef_red <-fotored_1_s/fDOChg ; mean(ef_red*60*60*24) 
+## [(f_Hg0_diss + f_Hg0_DOC) / f_HgII_DOC]
+ef_red <-fotored_1_s/fdisshg2 ; mean(ef_red*60*60*24) 
 mean(ef_red)# quindi questo dovrebbe restituire il tasso in input +  o meno
 ef_ox  <-fotox_1_s  /fDOChg        ;  mean(ef_ox*60*60*24)
 ef_deg <-fotodem_1_s/fDOCmehg;     mean(ef_deg*60*60*24)
@@ -213,9 +217,10 @@ ef_deg <-fotodem_1_s/fDOCmehg;     mean(ef_deg*60*60*24)
 ke<-0.2        #extintion coeff
 e<-2.71828     #nepero 
 d<-20 
+fd<-0.42      #fraction daylight
 fac1<-ke*d
 #box depth
-L_ref<-240
+L_ref<-170
 ekde<-e^-fac1
 plot(ekde)
 LNt_red<-(light_sur_w_m2/L_ref)*((1-ekde)/(fac1))
@@ -223,7 +228,7 @@ LNt_red<-(light_sur_w_m2/L_ref)*((1-ekde)/(fac1))
 #plot(LNt_red[12:24], type='l')
 
 
- skred = kred *LNt_red* 100* (hgII_DOC) #  10^-2 ug d-1
+ skred = kred *LNt_red*fd*fdisshg2*hgT$Oxic1
  
  mean(out_red_1_d[1957:1969]);mean(skred[1957:1969]);
   
@@ -236,18 +241,25 @@ mean( hg0_ngL[1957:1968])
 mean( hg0_ngL[1977:1988])
 mean( hg0_ngL[1977:1988])
 
-skred_b = kred *LNt_red * (fDOChg2*100*hgII_tot)
+skred_b = kred *LNt_red * (fDOChg2*hgII_tot)
  
  
- skred_1 = kred *LNt_red * (hgII_DOC)*100
+skred_1 = kred *LNt_red* fDOChg2*fd *hgII_tot
  
  mean(out_red_1_d[1957:1969]);mean(skred[1957:1969]);  mean(skred_b[1957:1969]);mean(skred_1[1957:1969]);
  
-        # 8 e 2 ordini di grandezza
+ 
+ skox = kox *LNt_red*fd
+   10^-2 ug d-1
+ mean(out_ox_1_d[1957:1969]);mean(skox[1957:1969]); 
+ 
 hgII_DOC_fM<-hgII_DOC/200.59*10^6
-        
- out_red_1_d  <-fotored$Oxic1; mean(out_red_1_d); 
-out_ox_1_d <-(fotored$Oxic1*(kox/kred)); mean(out_ox_1_d)
+      
+ # k_photooxidation = k_photoreduction * [k_photooxidation / k_photoreduction]* [(f_Hg0_diss + f_Hg0_DOC) /f_HgII_DOC ]
+ 
+ 
+out_red_1_d  <-fotored$Oxic1; mean(out_red_1_d);
+out_ox_1_d <-fotored$Oxic1*(kox/kred)*(fDOChg2); mean(out_ox_1_d)
 out_dem_1_d <-fotodem$Oxic1; mean(out_dem_1_d[1900:1968])
 
 rr<-(HgII_kmols)*out_red_1_d*365
@@ -261,26 +273,24 @@ mean(dmt[1957:1968])
 HgII_DOC_kmols*out_red_ugm3_d*365
 
 
-
-
-
 kmol_d<-(skred*12)
 kmol_y<-kmol_d*365
 
+skred_ugd<-(fotored$Oxic1)*oxic_vol_m3  # ug/m3d*m3 
+skred_moly<-skred_ugd*365/(200.59*10^6)
+mean(skred_moly[1957:1968]/1000)  #bene ...meglio
+
 skox_ugd<-(fotored$Oxic1*(kred/kox))*oxic_vol_m3  # 10^-2 ug/m3d*m3 
-skox_moly<-skox_ugd*365/(200.59*10^8)
+skox_moly<-skox_ugd*365/(200.59*10^6)
 mean(skox_moly[1957:1968]/1000)  #bene ...meglio
 
-
-skox_ugd<-(fotored$Oxic1*(kred/kox))*oxic_vol_m3  # 10^-2 ug/m3d*m3 
-skox_moly<-skox_ugd*365/(200.59*10^8)
-mean(skox_moly[1957:1968]/1000)  #bene ...meglio
+mean(skred_moly[1957:1968]/1000)-mean(skox_moly[1957:1968]/1000)
 
 skdem_ugd<-(out_dem_1_d)*oxic_vol_m3  # 10^-2 ug/m3d*m3 
-skdem_moly<-skdem_ugd*365/(200.59*10^8)
+skdem_moly<-skdem_ugd*365/(200.59*10^6)
 mean(skdem_moly[1957:1968]/1000)  #bene ...meglio
 
-
+oxy_vol_L<-oxic_vol_m3*1000
 #kred_adj<- LNt_red[1:1968]*fd$V1[1:1968]*kred*(fDOChg*100); mean(kred_adj)  
 #mean(out_red_1_d)
 #kox_adj<-kred_adj*(kox/kred); mean (kox_adj)
@@ -293,11 +303,7 @@ N_kred_moly<-N_kred_g_day*365/200.59
 N_kred_moly/1000
 
 
-kox_mol_day<-(out_red_1_d*HgDOC_pmols)/10^12; mean(kred_mol_day)
-kox_mol_day<-(out_ox_1_d*Hg0_pmols1)/10^12; mean(kox_mol_day)
-kdem_mol_day<-(out_dem_1_d*MeHg_pmols)/10^12; mean(kdem_mol_day)
-
-kred_g_m3_day<-(out_red_1_d*hgII_g_m3)
+kred_g_m3_day<-(out_red_1_d*hgII)
 kred_g_day<-kred_g_m3_day*5.9*10^12
 kred_mol_y__<-kred_g_day*365/200.9
 
@@ -358,14 +364,20 @@ HgII_pM_media<-tapply(HgII_pM,rep(1:(length(HgII_pM)/12), each = 12), mean)
 mehg_pM_media<-tapply(mehg_pM,rep(1:(length(mehg_pM)/12), each = 12), mean)
 
 
-
-output_kmol_y_media<-cbind(fotox_kmols_y_media, fotored_kmols_y_media, 
+output_kmol_y_media<-cbind(fotox_kmols_y_media, fotored_kmols_y_media*100, 
                            fotodem_kmols_y_media,
                            Hg0_pM_media1, HgII_pM_media, mehg_pM_media, fotored_1_s_media,
                            ef_red_media, fotox_1_s_media, ef_ox_media,fotodem_1_s_media, ef_deg_media)
 
+fotox_kmols_y_media - (fotored_kmols_y_media)
 write.csv(output_kmol_y, file="A_fotoreazioni1_2050.csv")
 write.csv(output_kmol_y_media , file="A_fotoreazioni_media1_2050.csv")
+
+
+
+
+
+
 
 
 #VOLATILIZZAZIONE

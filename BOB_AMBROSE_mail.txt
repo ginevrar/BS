@@ -1,3 +1,11 @@
+
+FOTOREAZIONI
+fD <0.5 --> importante
+cambia tantissimo anche in base ai decimali, conta piu che ref light o tasso trasf
+
+
+
+
 Hi, Ginevra. First, I'm glad you are examining your output and asking these
 questions. It is important to make sense of all the calculations. This is
 the best way to discover errors or misunderstandings. Constructing mass
@@ -34,6 +42,7 @@ need to have your input file (*.wif) to look at. Alternatively, if you
 could send your *.out file (which is ASCII), I might be able to diagnose
 the problem looking at the data and messages.
 
+#-----------
 
 Ok, I've brushed up a bit on the model and the input data here. First, I
 was (partly) wrong about the photo-transformations. This type of reaction
@@ -100,8 +109,7 @@ effective photo reduction rate, you have to adjust for the phase fractions
 (since your photo reduction is applied only to the DOC-complexed fraction
 of HgII):
 
-k_photooxidation = k_photoreduction * [k_photooxidation / k_photoreduction]
-* [(f_Hg0_diss + f_Hg0_DOC) / f_HgII_DOC]
+k_photooxidation = k_photoreduction * [k_photooxidation / k_photoreduction]* [(f_Hg0_diss + f_Hg0_DOC) / f_HgII_DOC]
 
 f_Hg0_diss + f_Hg0_DOC = 1.0
 

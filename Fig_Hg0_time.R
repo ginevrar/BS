@@ -3,6 +3,8 @@ getwd()
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale2/Anne1e_morehg_tris')
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris__")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_trisBO")
 
 hg<-read.csv("Dissolved_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
@@ -133,9 +135,12 @@ oxic_conc_pM_media   <-tapply(oxic_conc_pM,rep(1:(length(oxic_conc_pM)/12),each 
 suboxic_conc_pM_media   <-tapply(sub_pM,rep(1:(length(sub_pM)/12),each = 12), mean)
 anoxic_conc_pM_media   <-tapply(anoxic_conc_pM,rep(1:(length(anoxic_conc_pM)/12),each = 12), mean)
 
+  all<-data.frame(oxic_conc_pM_media,suboxic_conc_pM_media,anoxic_conc_pM_media)
 as.numeric(oxic_conc_pM_media[164] )-as.numeric(oxic_conc_pM_media[165] )
 as.numeric(oxic_conc_pM_media[165] )-as.numeric(oxic_conc_pM_media[166] )
 
+
+write.table(all, 'hgo_pM.txt')
 
 tiff('Fig.Hg0_3layer.tiff', height=14.5, width=23, units='cm', 
      compression="lzw", res=300)

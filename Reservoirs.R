@@ -4,7 +4,7 @@
 #
 # Wh1b is the new wh1
 #
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris__")
 
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 

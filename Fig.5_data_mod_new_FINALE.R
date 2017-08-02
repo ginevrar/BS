@@ -1,6 +1,7 @@
   setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
   setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/L4")
   setwd('C:/Users/gi/Documents/Lavoro/SIM_finale2/L2tri')
+  setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_trisBO2")
   
   medie_hg_pM<-c(1.86,
                  2.127058824,
@@ -273,8 +274,8 @@
        xlim=c(0, 4), pch=21,
        ylab=" ", xlab=" ", type="b",     
        col="#3288bd00", bg='#41b6c400',main=" ")   
-  abline(h=15.64, type='l', lty=2, col='grey60')
-  abline(h=16.2, type='l', lty=2, col='grey60')
+  abline(h=15.64, lty=2, col='grey60')
+  abline(h=16.2,  lty=2, col='grey60')
   par(new=T)
   plot(medie_hg_pM, prof,  bty='n',lwd=1, cex=4,
        ylim=c(17.5,10.5), lty=1, yaxt='n', xaxt='n',
@@ -334,19 +335,14 @@
        xlim=c(0, 1), pch=21,
        ylab=" ", xlab=" ", type="b", col="#5716a2",bg='#5716a255', main=" ")
   
-  abline(h=15.64, type='l', lty=2, col='grey60')
-  abline(h=16.2, type='l', lty=2, col='grey60')
+  abline(h=15.64, lty=2, col='grey60')
+  abline(h=16.2,  lty=2, col='grey60')
   segments(x2-sd2,y,x2+sd2,y, col='#5716a2', lwd=1)
   epsilon <- 0.12
   segments(x2-sd2,y-epsilon,x2-sd2,y+epsilon, col='#5716a2')
   segments(x2+sd2,y-epsilon,x2+sd2,y+epsilon, col='#5716a2')
   par(new=TRUE)
-  #plot(sa2,prof, type="b",pch='*',  lwd=1.3,cex=3,
-  #     ylim=c(17.3,10.9),  bty='n', xlim=c(0,1),lty=3,
   
-  #    xlab="MeHg concentrations (pM)", col="#92e128", bg='#92e12833', ylab=expression(paste(sigma[theta]*'  (kg/m'^3*')')),
-  #   main=expression(paste("MeHg vertical profiles \n along the water column")))
-  par(new=TRUE)
   plot(dissMehg_pM, prof, type="b",pch=23,  lwd=1.3,cex=4,cex.axis=1.8,
        ylim=c(17.5,10.5),  bty='n', xlim=c(0,1), lty=2,
        xlab=" ", col="#b3db25", yaxt='n',xaxt='n',
@@ -409,6 +405,6 @@
   {
     mean(abs(error))
   }
-  error<-medie_hg_pM-disshg_pM# Example of invocation of functions
+  error<-medie_mehg_pM-dissMehg_pM# Example of invocation of functions
   rmse(error)
   

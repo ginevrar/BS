@@ -1,7 +1,7 @@
 
-getwd()
-setwd("C:/Users/gi/Dropbox/BlackSea2/nuovi_script")
-Clean_data<-read.table("Dataset_Finale_new.txt", header=TRUE)
+setwd("C:/Users/Ginevra/Google Drive/MERCURIO/BlackSea/implementazione/nuovi_script")
+setwd('C:/Users/gi/Documents/Lavoro/SIM_finale2')
+Clean_data<-read.table('Dataset_Finale_new_no_bosforo.txt', header=T)
 str(Clean_data)
 #Bac(670) = 0.992*Bac(660)-0.0039 (Karageorgis et al., 2008)
 ##PM = 1.01998*cpm + 0.07261 (Karageorgis & Anagnostou, 2003)
@@ -22,7 +22,7 @@ org_accum_rate_gC_m2_y<-(2.16+1.81)/2
 #setwd("C:/Users/Ginevra/Google Drive/BlackSea/14_giugno_RUNS/RUN_OM_settling_oxidation/LAST/new_met/FInale_inorganicB")
 #setwd("C:/Users/Ginevra/Google Drive/BlackSea/model_9layer/anox2/tris")
 #setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/lower/new4")
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1_prova")
+setwd("C:\\Users\\Ginevra\\Desktop\\new_sim_BS\\19_luglio\\SIM_finale2\\Anne1e_morehg_tris")
 #lower/new4")
 
 SPM<-read.csv("Total_Solids.csv", header=FALSE, skip = 1, sep = ",", dec=".")
@@ -121,51 +121,30 @@ str(prof)
 
 y2<-c(10.5,11.5,12.5,13.5,14.5,15.5,
       16.5,17, 17.5)
-y<-c(10,11,12,13,14,15,16,17)
+y<-c(11,12,13,14,15,16,17)
 
 setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
 tiff('SPM_dato_model.tiff', height=25, width=23, units='cm', 
      compression="lzw", res=300)
 par(mfrow=c(1,1), cex.axis=1.2, cex.lab=1.3,
     cex.main=1.4,mar=c(5.1, 5.5, 3.1, 1.1), bty='n')
-plot(A$TSM, A$Density, ylim=c(17.25,10),type="p", xlim=c(0,.7),
-     ylab='', yaxt='n',xaxt='n',
-     xlab=" ",
-     pch=19, col="#85db0400")
-rect(0, 10 , .7,15.64 , density = NULL, angle = 45, 
-     col = '#abd9e922', border = '#abd9e9', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 14.25 , .7,15.28 , density = NULL, angle = 45, 
-     col = '#ffffd922', border = '#e8e888', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 16.2 ,  .7,17.04 , density = NULL, angle = 45, 
-     col = '#d2c7c722', border = '#d2c7c7', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 15.64 ,  .7,16.2 , density = NULL, angle = 45, 
-     col = '#35978f22', border = '#35978f', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.04 ,  .7,17.2 , density = NULL, angle = 45, 
-     col = '#a39b9b22', border = '#a39b9b', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-rect(0, 17.23 ,  .7,17.25 , density = NULL, angle = 45, 
-     col = '#25232322', border = '#252323', lty = NULL, lwd = par("lwd"),
-     xpd = NULL)
-par(new=T)   
-plot(A$TSM, A$Density, ylim=c(17.25,10),  type="p", xlim=c(0,.7),yaxt='n',
+
+plot(A$TSM, A$Density, ylim=c(17.25,10.5),  type="p", xlim=c(0,.7),yaxt='n',
      ylab='', xlab=" ",cex=2.6,xaxt='n',
-     pch=21, col="#85db04", bg="#85db0422")
+     pch=21, col="#008224", bg="#00822422")
+abline(h=15.64,   lty=2, col='grey60')
+abline(h=16.2,   lty=2, col='grey60')
 par(new=TRUE)
-plot(layer$solidi, layer$prof, col="black",ylim=c(17.25,10),
+plot(layer$solidi, layer$prof, col="black",ylim=c(17.25,10.5),
      main="Suspended Particulate Matter", lty=3,yaxt='n',
      cex.axis=1.8, cex.main=1.8,
      type="b",pch=17,cex=4, bty='n', xlim=c(0,.7),
      ylab=" ", xlab=" ")
-legend(0.03,11.8, cex=1.8,col=c("#85db0499","black"),bg='white', 
-       legend=c( "estimated \n from BAC","model"), pch=c(19,17))
-text(.5,12,'OL', cex=2, font=2)
-text(.08,14.7,'CIL', cex=2, font=2)
-text(.35,15.9,'SOL', cex=2, font=2)
-text(.35,16.6,'AOL', cex=2, font=2)
+legend(0.5,10.6, cex=1.8,col=c("#008224","black"),pt.bg=c("#00822433",'black'),
+       legend=c( "estimated \n from BAC","model"), pch=c(21,17))
+text(.5,13,'OL', cex=2, font=2)
+text(.5,15.9,'SOL', cex=2, font=2)
+text(.5,16.6,'AOL', cex=2, font=2)
 axis(2, at=y,line=0, col="black", cex.axis=1.8 )
 axis(2, at=y2,line=0,labels=F, col="black" , tck =-.02, cex.axis=1.8)
 mtext(expression(paste(sigma[theta]*'  (kg m'^-3*')')), 2, line=3,

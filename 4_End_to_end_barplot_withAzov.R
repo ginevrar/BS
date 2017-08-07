@@ -36,8 +36,15 @@ cum_out<-cumsum(Output_terms)
 summary(cum_in)
 summary(cum_out)
 
+## river and azov  kmol y-1 --> g m-3 d-1
 
+0.42*200.59*1000/365/(5.9*10^12)
+23.9 *200.59*1000/365/(5.9*10^12)
 
+(24.32)*200.59*1000/365/(5.9*10^12)
+2.265312e-09*5/100
+((0.42*200.59/365)*1000*5/100)/(5.9*10^12)
+((23.9 *200.59/365)*1000*5/100)/(5.9*10^12)
 
 # bILANCIO ULTIMI 3 aNNI
 f_MB_depo_atm<-mean(tail(atm_hg_kmol_y,3)); plot(f_MB_depo_atm)

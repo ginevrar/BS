@@ -27,6 +27,7 @@ setwd('C:/Users/gi/Documents/Lavoro/SIM_finale')
 atm_hg<-read.table("atm_hg.txt", header = F); str(atm_hg)
 atm_hg0<-atm_hg$V1   # --- atm conc of hg0 -
 str(atm_hg0)
+atm_hg0
 
 light<-read.table("light_norm.txt", header = TRUE); names(light)<-'light' ; light_sur<-light$light
 light_sur_w_m2<-read.table("light_w_m2.txt", header = TRUE); light_sur_w_m2<-light_sur_w_m2$wm2

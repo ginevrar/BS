@@ -7,6 +7,8 @@
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris__")
 
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_trisBO")
+
 
 medie_hg_pM<-c(1.86,2.127058824,1.7675,1.902,
                2.056666667,3.0875,2.810909091,3.714, 3.713684211)
@@ -446,7 +448,7 @@ mean(AOL_mehgt)
 g1+h1+i1  #tot Mehg kmol
 (g1+h1+i1)/(g+h+i)*100   # ------ MeHg%
 (g1+h1+i1)*200.59/10^3 
-
+i
 
 Phg$Sed1[1968]/100
 Phg$Sed1[1968]/100/hgT$Sed1[1968]*100

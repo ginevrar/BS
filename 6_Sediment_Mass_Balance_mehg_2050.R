@@ -1,6 +1,7 @@
 #setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_trisBO")
 
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
@@ -215,7 +216,7 @@ tail (PWmehg2_kmol)
 # per mol di diffusione importante Length of exchange (=depth sediment..?)
 #diffusione >0 --> verso h20 (su)
 #      diff <0 --> verso sedimento     (giu)
-term1<-(DF*Model_area*porosity1)/(0.05/porosity1)  # m2/day*m2/m -->m3/day
+term1<-(DF*Model_area*porosity1)/(0.03/porosity1)  # m2/day*m2/m -->m3/day
 term2<-(PWmehg1_gm3/porosity1)-(deep_w_mehg_gm3)       # g/m3
 diffusion_g_day<-term1*term2; plot(diffusion_g_day)                       # m3/day*g/m3--> g/day   
 diffusion_g_m2_day<-diffusion_g_day/Model_area

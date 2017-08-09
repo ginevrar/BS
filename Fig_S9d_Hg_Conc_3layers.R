@@ -1,7 +1,7 @@
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
-setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_trisBO")
+
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine")
+
+ax2<-(seq(1850,2050, by=.08291874))
 
 hg<-read.csv("Dissolved_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1","Suboxic2", "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
@@ -35,6 +35,7 @@ Temp<-Temp [2:2413,]
 
 Temp<-tail(Temp,36)
 
+plot(hgT$Sed1)
 
 oxic_conc<-data.frame(hgT$Oxic1,hgT$Oxic2,hgT$CIL,hgT$Oxycline)
 oxic_conc_pM<-rowMeans(oxic_conc)/215*1000
@@ -135,7 +136,7 @@ par(new=TRUE)
 with(dat2, plot(ax2, anoxic_conc_pM, lwd=2,type="l",xaxt='n',yaxt='n', col='#800026', ylim=c(0,4),ylab='',xlab='',
                 panel.first=polygon(c(ax2,rev(ax2)), c(ses2[,1],rev(ses2[,2])),border=NA, col="#99325177")))
 par(new=TRUE)
-plot(ax2,empty_v3, type='p', xlab= " ", ylab= " ", pch=23, ce=4.5, xaxt='n',yaxt='n', ylim=c(0,4), bg='#800026',col='black')
+plot(ax2,empty_v3, type='p', xlab= " ", ylab= " ", pch=23, cex=4.5, xaxt='n',yaxt='n', ylim=c(0,4), bg='#800026',col='black')
 text(1878,1.6,'OL',col='#0098cc', cex=2.7)
 text(1985,1.8,'SOL',col='chartreuse4', cex=2.7)
 text(1995,3.5,'AOL',col='#800026', cex=2.7)

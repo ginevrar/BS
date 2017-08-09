@@ -1,7 +1,7 @@
   setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
   setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/L4")
   setwd('C:/Users/gi/Documents/Lavoro/SIM_finale2/L2tri')
-  setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_trisBO")
+  setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine")
   
   medie_hg_pM<-c(1.86,
                  2.127058824,
@@ -407,4 +407,15 @@
   }
   error<-medie_hg_pM-disshg_pM# Example of invocation of functions
   rmse(error)
+
   
+  rmse <- function(error)
+  {
+    sqrt(mean(error^2))}
+  # Function that returns Mean Absolute Error
+  mae <- function(error)
+  {
+    mean(abs(error))
+  }
+  error<-medie_mehg_pM-dissMehg_pM# Example of invocation of functions
+  rmse(error)

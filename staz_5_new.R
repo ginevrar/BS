@@ -95,8 +95,6 @@ mtext('Depth (m)', side=2, cex=1.3, line=3.3)
 axis(3, at=aty, labels =aty,tick=T, las=1, cex.axis=1.3, col='#256486')
 axis(3, at=maty, labels =F,tick=T, las=1, cex.axis=1.3, col='#256486', tcl=-.2)
 
-abline(h=80, col='grey60', lty=2)
-abline(h=120, col='grey60', lty=2)
 
 par(new=T)
 plot(uc5_hr$MeHg[!is.na(uc5_hr$MeHg)], uc5_hr$Depth[!is.na(uc5_hr$MeHg)], 
@@ -112,6 +110,8 @@ text(.8,90,'SOL', cex=1.4, font=2)
 text(.15,130,'AOL', cex=1.4, font=2)
 ##II plot
 
+abline(h=80, col='grey60', lty=2)
+abline(h=120, col='grey60', lty=2)
 par(mar=c(4.5,0,4.5,5.2))
 
 axx<-seq(0,480, by=60)
@@ -129,33 +129,116 @@ plot(uc5_hr$NO3[!is.na(uc5_hr$NO3)]*100, uc5_hr$Depth[!is.na(uc5_hr$NO3)], lty=1
      col='#66bd63', yaxt='n',cex.axis=1.3,cex.lab=1.2, lwd=1.5)
 axis(3, at=axx, labels =axx,tick=T, las=1, cex.axis=1.3, col='black')
 axis(3, at=axx2, labels =F,tick=T, las=1, cex.axis=1.3, col='black', tcl=-.2)
-text(150,50,'OL', cex=1.4, font=2)
+#text(150,50,'OL', cex=1.4, font=2)
 #text(50,14.6,'CIL', cex=1.4, font=2)
-text(220,90,'SOL', cex=1.4, font=2)
-text(250,130,'AOL', cex=1.4, font=2)
+#text(220,90,'SOL', cex=1.4, font=2)
+#text(250,130,'AOL', cex=1.4, font=2)
 mtext(expression(paste('O'[2]*'(µM)')),side=3, at=150-60,line=2.3 , col='#72b3c9', cex=1.2)
 mtext(expression(paste('NO'[3]*'(nM)')),side=3, at=320-70,line=2.3 , col='#66bd63', cex=1.2)
 mtext(expression(paste('Fe'[D]*'(nM)')),side=3, at=480-50,line=2.3 ,col="#f49b42", cex=1.2)
 par(new=T)
 plot(uc5_hr$HS[!is.na(uc5_hr$HS)], uc5_hr$Depth[!is.na(uc5_hr$HS)], pch=25,lty=1,  xaxt='n',cex=1.2,
      type='o', ylim=c(160,40), xlim=c(0,20), xlab=' ', col='#fb6a4a',bg='#fb6a4a44', yaxt='n',cex.axis=1.3,cex.lab=1.4, lwd=1.5)
-abline(h=80, col='grey60', lty=2)
-abline(h=120, col='grey60', lty=2)
 axs<-seq(0,20, by=5)
 axs2<-seq(0+2.5,20-2.5, by=5)
-
 axis(1, at=axs, labels =axs,tick=T, las=1, cex.axis=1.3, col='black')
 axis(1, at=axs2, labels =F,tick=T, las=1, cex.axis=1.3, col='black', tcl=-.2)
-mtext(expression(paste('HS'^-1*'(µM)')),side=1, line=2.3 , col='#fb6a4a', cex=1.2)
+mtext(expression(paste('HS'^-1*'(µM)')),side=1, at=5, line=2.3 , col='#fb6a4a', cex=1.2)
+mtext(expression(paste('Mn'[D])),side=1,  at=15,line=2.3 , col='darkgoldenrod1', cex=1.2)
 
 ss<-c(14.2,14.9, 15.6, 15.9, 16.2, 16.4,16.5)
 axis(4, at= dd, labels =ss,tick=T, las=1, cex.axis=1.3, col='black')
 mtext(expression(paste(sigma[theta]*'  (kg m'^-3*')')), side=4, cex=1.3, line=3.8)
+Mn<-uc52$Mn/1000
+par(new=T)
+plot(uc52$Mn[!is.na(uc52$Mn)]/1000, uc52$Depth[!is.na(uc52$Mn)], lty=1, xaxt='n',pch=21,cex=1.2,
+     type='o', ylim=c(160,40),  xlim=c(0,7.5), xlab=' ', col='darkgoldenrod1',bg='#FFB90F33', yaxt='n',cex.axis=1.5,cex.lab=1.2, lwd=1.5)
+par(new=T)
+plot(uc5_hr$PO4[!is.na(uc5_hr$PO4)], uc5_hr$Depth[!is.na(uc5_hr$PO4)], lty=1, xaxt='n',pch=24,cex=1.2,
+     type='o', ylim=c(160,40), xlim=c(0,7.5),  xlab=' ', col='darkgreen',bg='#00640033', yaxt='n',cex.axis=1.5,cex.lab=1.2, lwd=1.5)
+abline(h=80, col='grey60', lty=2)
+abline(h=120, col='grey60', lty=2)
+
+max(uc5_hr$PO4, na.rm=T)
+max(uc52$Mn, na.rm=T)/1000
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+library(marelac)
+diffcoeff(S = 35, t = 25, P = 1.013253,
+          species = c("Fe", "Mn", "Hg"))
+          
+          
+          
+dev.new()
+par(mfrow=c(1,1),mar=c(4.5,5.2,4.5,2), bty='n' )
+#plot(uc5$Hg, uc5$Depth, lty=1, type='b', ylim=c(2000,40), xlab='Hg (pM)')
+plot(uc5_hr$Hg[!is.na(uc5_hr$Hg)], uc5_hr$Depth[!is.na(uc5_hr$Hg)],type='o',lty=1, las=c(1),
+     ylim=c(160,40),xlim=c(0,4), xlab=' ',xaxt='n', yaxt='n', 
+     ylab=' ', lwd=1.5, cex.lab=1.4,cex.axis=1.3, cex=2,
+     bg="#3690c088",col='#256486',pch=21)
+mtext(expression(paste('Hg'[D]*' (pM)')),side=3, line=2.3, col='#256486', cex=1.3)
+
+axis(2, at=dd, labels =dd,tick=T, las=1, cex.axis=1.3, col='black')
+mtext('Depth (m)', side=2, cex=1.3, line=3.3)
+
+axis(3, at=aty, labels =aty,tick=T, las=1, cex.axis=1.3, col='#256486')
+axis(3, at=maty, labels =F,tick=T, las=1, cex.axis=1.3, col='#256486', tcl=-.2)
+
+abline(h=80, col='grey60', lty=2)
+abline(h=120, col='grey60', lty=2)
+
+par(new=T)
+plot(uc5_hr$MeHg[!is.na(uc5_hr$MeHg)], uc5_hr$Depth[!is.na(uc5_hr$MeHg)], 
+     lty=1, xaxt='n', type='o', ylim=c(160,40), xlim=c(0,1),  
+     xlab=' ', ylab=' ', pch=22, cex=1.8, col="#e7298a", bg="#df65b088",
+     yaxt='n',cex.axis=1.3,cex.lab=1.4, lwd=1.5)
+mtext(expression(paste('MeHg'[D])),side=1, line=2.3, col='#e7298a', cex=1.3 )
+axis(1, at=aty2, labels =aty2,tick=T, las=1, cex.axis=1.3, col='#e7298a')
+axis(1, at=maty2, labels =F,tick=T, las=1, cex.axis=1.3, col='#e7298a', tcl=-.2)
+text(.8,50,'OL', cex=1.4, font=2)
+#text(.8,14.7,'CIL', cex=1.4, font=2)
+text(.8,90,'SOL', cex=1.4, font=2)
+text(.15,130,'AOL', cex=1.4, font=2)
+##II plot
+par(new=T)
+plot(uc52$Mn[!is.na(uc52$Mn)], uc52$Depth[!is.na(uc52$Mn)], lty=1, xaxt='n',pch=21,cex=1.8,
+     type='o', ylim=c(160,40),  xlab=' ', ylab=' ',  col='darkgoldenrod1',bg='#FFB90F33', yaxt='n',cex.axis=1.5,cex.lab=1.2, lwd=1.5)
+par(new=T)
+plot(uc5_hr$Fe[!is.na(uc5_hr$Fe)], uc5_hr$Depth[!is.na(uc5_hr$Fe)], lty=1, xaxt='n',
+     type='o', ylim=c(160,40), xlab=' ',  ylab=' ', pch=23,cex=1.2,
+     col='#f49b42', bg='#f49b4222', yaxt='n',cex.axis=1.3,cex.lab=1.2, lwd=1.5)
 
 
 

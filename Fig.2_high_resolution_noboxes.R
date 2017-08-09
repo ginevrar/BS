@@ -5,9 +5,11 @@ str(Clean_data)
 
 plot(Clean_data$MeHg/Clean_data$Hg*100)
 
+y3<-c( 10.5, 12.05, 14.25, 15.285, 15.64, 16.2, 16.6, 17.04, 17.35)
+why<-c(0,   20,      40,    55,    75,   100,  280,  460,   2000)
 
 setwd("C:/Users/Ginevra/Desktop")
-tiff('f223f.tiff', height = 25, width = 23, units = 'cm',   compression = "lzw", res = 300)
+tiff('f223f.tiff', height = 25, width = 23, units = 'cm',   compression = "lzw", res = 500)
 
 
 # mai make  margins smaller mai=c(0.1,0.1,0.2,0.1),
@@ -44,7 +46,7 @@ y2<-c(10.5,11.5,12.5,13.5,14.5,15.5,
       16.5,17, 17.5)
 y<-c(11,12,13,14,15,16,17)
 
-axis(2, at=y,line=0, col="black", cex.axis=1.6 )
+axis(2, at=y,line=0, col="black", cex.axis=1.6 , las=2, las=2)
 axis(2, at=y2,line=0,labels=F, col="black" , tck =-.02, cex.axis=1.6)
 mtext(expression(paste(sigma[theta]*'  (kg m'^-3*')')), 2, line=2.2,at=13.5,
       col="black", cex=1.3)
@@ -87,7 +89,7 @@ mtext(expression(paste('HS'^-1)),side=1,line=-0.1,at=-150,col="#fb6a4a", cex=1.4
 mtext(expression(paste('(µM)')),side=1,line=1.9,at=-160,col="#fb6a4a", cex=1.4)
                                   
     #  line=c(-0.3,1),at=-90,col="#fb6a4a", cex=1.4)
-axis(2, at=y,line=0, col="black" , cex.axis=1.6)
+axis(2, at=y,line=0, col="black" , cex.axis=1.6, las=2)
 axis(2, at=y2,line=0,labels=F, col="black" , tck =-.02, cex.axis=1.6)#mtext(expression(paste(sigma[theta]*'  (kg m'^-3*')')),1, line=3, col="#35978f", cex=1.4, at=24)
 
 #--III --  terzo --NO3 + Mn,mar=c(5.5,1,.5,5)
@@ -116,7 +118,7 @@ text(2.5,12,'OL', cex=1.4, font=2)
 text(4.5,15.9,'SOL', cex=1.4, font=2)
 text(1.5,16.7,'AOL', cex=1.4, font=2)
 #mtext("dMn (nM)",1,line=3, at=c(7500),col="darkorange", cex=1)
-axis(2, at=y,line=0, col="black", cex.axis=1.6 )
+axis(2, at=y,line=0, col="black", cex.axis=1.6, las=2)
 axis(2, at=y2,line=0,labels=F, col="black" , tck =-.02, cex.axis=1.6)
 
 par(new=T)
@@ -163,7 +165,7 @@ mtext(expression(paste('(nM)')),side=1,
       line=1.8,at=c(-130), col="#f49b42", cex=1.4)
 
 
-axis(2, at=y,line=0, col="black", cex.axis=1.6)
+axis(2, at=y,line=0, col="black", cex.axis=1.6, las=2)
 axis(2, at=y2,line=0,labels=F, col="black" , tck =-.02, cex.axis=1.6)
 mtext(expression(paste(sigma[theta]*'  (kg m'^-3*')')), 2, 
       line=2.3,at=13.5,col="black", cex=1.3)
@@ -197,7 +199,7 @@ mtext(expression(paste('(pM)')),side=3,
       line=-1.5,at=-1.2,col="#3690c0", cex=1.4)
 
 
-axis(2, at=y,line=0, col="black", cex.axis=1.6)
+axis(2, at=y,line=0, col="black", cex.axis=1.6, las=2)
 axis(2, at=y2,line=0,labels=F, col="black" , tck =-.02, cex.axis=1.6)
 
 text(4,12,'OL', cex=1.4, font=2)
@@ -233,7 +235,7 @@ mtext(expression(paste('(pM)')),side=3,
       line=-1.5,at=c(-.34),col="#df65b0", cex=1.4)
 
 
-axis(2, at=y,line=0, col="black", cex.axis=1.6)
+axis(2, at=y,line=0, col="black", cex.axis=1.6, las=2)
 axis(2, at=y2,line=0,labels=F, col="black" , tck =-.02, cex.axis=1.6)
 
 axis(4, at = y3, labels = why, tick = TRUE, cex.axis=1.8, las=2)

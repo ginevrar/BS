@@ -32,13 +32,13 @@ light<-read.table("light_norm.txt", header = TRUE); names(light)<-'light' ; ligh
 light_sur_w_m2<-read.table("light_w_m2.txt", header = TRUE); light_sur_w_m2<-light_sur_w_m2$wm2
 fd<-read.table("frac_day.txt", header = F); 
 
-kred<-1.2
-kox<-1.4
-kdeg<-3.14685E-1
+kred<-0.57
+kox<-0.13
+kdeg<-0.003
 
 #Leggi model output
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
-setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine")
 
 
 evasion<-read.csv("Volatilization_Loss_Rate.csv", header=FALSE, skip = 1, sep = ",", dec=".")
@@ -143,6 +143,9 @@ POMOL<-POM$Oxic1/10^6
 
 fDOChg2   <-DOChg$Oxic1/(DOChg$Oxic1+hg$Oxic1+Phg$Oxic1); mean(fDOChg, na.rm=TRUE);plot(fDOChg*100)
 fDOChg <- (10^3*(2.9*10^-6))/(1+(10^3*(2.9*10^-6))+((siltOL*3000)+(POMOL*(5.1*10^5))))
+
+fdisshg2<-(DOChg$Oxic1+hg$Oxic1)/hgT$Oxic1
+
 #uguale a primam
 fDOCmehg <-DOCmehg$Oxic1/mehgT$Oxic1
 fDOChg0  <-DOChg0$Oxic1/hg0$Oxic1
@@ -175,9 +178,9 @@ mehg_ngL<-mehgT$Oxic1
 
 #mean(hg0_g_m3/hgII_g_m3*100) #hg0 %
 # ---------
-ef_red <-fotored_1_s/fDOChg ; mean(ef_red*60*60*24) 
+ef_red <-fotored_1_s/fdisshg2 ; mean(ef_red*60*60*24) 
 mean(ef_red)# quindi questo dovrebbe restituire il tasso in input +  o meno
-ef_ox  <-fotox_1_s  /fDOChg        ;  mean(ef_ox*60*60*24)
+ef_ox  <-fotox_1_s  /fdisshg2        ;  mean(ef_ox*60*60*24)
 ef_deg <-fotodem_1_s/fDOCmehg;     mean(ef_deg*60*60*24)
 # --------- fotoreactions out [1/d] /84600 -> 1/s; 
 # --------- those rate are given by someting as -> kdeg (1/d) * fDOCmehg (-) adjusted for light intensity
@@ -195,7 +198,7 @@ fac1<-ke*d
 #plot(LNt_red[12:24], type='l')
 
 out_red_1_d  <-fotored$Oxic1; str(out_red_1_d); mean(out_red_1_d)
-out_ox_1_d <-(fotored$Oxic1*(kox/kred)); mean(out_ox_1_d)
+out_ox_1_d <-(fotored$Oxic1*(kox/kred)*(1/fdisshg2)); mean(out_ox_1_d)
 out_dem_1_d <-fotodem$Oxic1; mean(out_dem_1_d[1900:1968])
 
 #kred_adj<- LNt_red[1:1968]*fd$V1[1:1968]*kred*(fDOChg*100); mean(kred_adj)  

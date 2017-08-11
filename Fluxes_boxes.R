@@ -1,6 +1,8 @@
 
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 #  FLUSSI TRA BOX
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine")
+
 #Leggi dati e taglia gli ultimi anni dopo il 2013 hg<-hg[1:1968,]
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
@@ -286,9 +288,9 @@ summary(tail(OLdepo_kmol_y_ok,12));
 
 summary(tail(mediaok_depoSOL_kmol_y,12)); 
 
-tail(mediaok_depoOL_kmol_y,12)
-tail(media1_depoSOL_kmol_y,12)
-tail(media1_depoAOL_kmol_y,12)
+tail(mediaok_depoOL_kmol_y,1)
+tail(media1_depoSOL_kmol_y,1)
+tail(media1_depoAOL_kmol_y,1)
 
 
 #variazione conc OL kmol/y

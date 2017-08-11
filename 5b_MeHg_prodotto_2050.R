@@ -2,10 +2,8 @@
 
 #REAZIONI VANNO MOLTIPLICATE PER TOTALE E NON PER FASE DISCiOLTA (!!)
 #setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e")
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
-setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_trisBO")
+
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
 
 met<-read.csv('Bacterial_Methylation_Rate.csv', header=FALSE, skip = 1,sep = ",", dec=".")
 names(met)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
@@ -171,7 +169,9 @@ write.csv(netto_prodotto_long, file='mehg_prodotto_kmol_y_2050.csv')
 write.csv(demetilato, file='demetilato.csv')
 write.csv(metilato, file='metilato.csv')
 
-
+head(netto_prodotto_long,30)
+head(metilato,15)
+head(demetilato,15)
 
 met_kmol_y_media <-as.numeric(lapply(met_kmol_y ,rep(1:(length(met_kmol_y)/12),each=12), mean))
 

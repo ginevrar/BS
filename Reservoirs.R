@@ -7,7 +7,7 @@
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris__")
 
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
 
 
 medie_hg_pM<-c(1.86,2.127058824,1.7675,1.902,
@@ -439,12 +439,15 @@ i
 (g+h+i)   #--------tot Hgt kmol
 (g+h+i)*200.59/10^3   #--------tot Hgt kmol
 i/(g+h+i) 
+
+mean(AOL_hgt_pM)
 #  ------ MeHgT reservoir
 g1<-sum(OL_mehgt_pM *OL_v)/10^12
 h1<-sum(SOL_mehgt*SOL_v)/10^12
 i1<-sum(AOL_mehgt*AOL_v)/10^12
 
 mean(AOL_mehgt)
+
 g1+h1+i1  #tot Mehg kmol
 (g1+h1+i1)/(g+h+i)*100   # ------ MeHg%
 (g1+h1+i1)*200.59/10^3 

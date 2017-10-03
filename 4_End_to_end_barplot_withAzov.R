@@ -1,6 +1,6 @@
 # 164 anni per 12 mesi = 1968
 
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
 
 #leggo outpout sim per ogni sim partita a ore diverse
 ore1  <-read.table("water_input_output1", header=TRUE, sep=","); str(ore1)

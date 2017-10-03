@@ -120,71 +120,71 @@ bilancio_hg
 #setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
 str(atm_hg_kmol_y)
 
-tiff('Fig.7A_Hg.tiff', height=25, width=23, units='cm', 
+tiff('Fig.7A_Hg_195.tiff', height=25, width=23, units='cm', 
      compression="lzw", res=300)
-
+as<-seq(from=1850,to=2050, length.out=length(i))
 par(mfrow=c(1,1), mar=c(5,5,4,1), bty='n') 
 
-plot(ax2, atm_hg_kmol_y, col="cyan3", type="l",  ylim=c(-35,45), 
+plot(as, atm_hg_kmol_y[61:2412], col="cyan3", type="l",  ylim=c(-35,45), 
      main=expression(paste('Hg'[T]*' fluxes to the Black Sea')), ylab= " ", 
      xlab= " ",  lwd=1, cex.axis=2, cex.lab=2,cex.main=2.3)
 par(new=T)
-plot(ax2,empty_v, type='p', xlab= " ", ylab= " ", pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-35,45), bg='cyan4',col='black')
+plot(as,empty_v, type='p', xlab= " ", ylab= " ", pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-35,45), bg='cyan4',col='black')
 #axis(1,at=c(1850,1900,1950,2000,2050),labels=T, cex.axis=2.5)
 #abline(v=2013, lty=2, col='gray60', lwd=2)
 #text(2025,38,'2013',col='gray60', cex=1.9)
 par(new=TRUE)
-plot(ax2,river_hgT_kmol_y, col="chartreuse3", type="l", 
+plot(as,river_hgT_kmol_y[61:2412], col="chartreuse3", type="l", 
      xaxt='n',yaxt='n',ylim=c(-35,45), 
      ylab= " ",xlab= " ",  lwd=1)
 par(new=TRUE)
-plot(ax2,empty_v2, bg='chartreuse4' ,col='black',type='p', xlab= " ", ylab= " ", 
+plot(as,empty_v2[61:2412], bg='chartreuse4' ,col='black',type='p', xlab= " ", ylab= " ", 
      pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-35,45))
 par(new=TRUE)
-plot(ax2,hgT_inflow_kmol_y, col="darkblue", type="l", 
+plot(as,hgT_inflow_kmol_y[61:2412], col="darkblue", type="l", 
      xaxt='n',yaxt='n',
      ylim=c(-35,45), ylab= " ", xlab= " ",  lwd=2)
 par(new=TRUE)
-plot(ax2,empty_v3, bg='darkblue' ,col='black',type='p', xlab= " ", ylab= " ", pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-35,45))
+plot(as,empty_v3[61:2412], bg='darkblue' ,col='black',type='p', xlab= " ", ylab= " ", pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-35,45))
 par(new=TRUE)
-plot(ax2,diffusion_kmol_y, col="darkgoldenrod1", type="l", 
+plot(as,diffusion_kmol_y[61:2412], col="darkgoldenrod1", type="l", 
        xaxt='n',yaxt='n',
      ylim=c(-35,45), ylab= " ", xlab= " ",  lwd=2)
 par(new=TRUE)
-plot(ax2,empty_v4, bg='darkgoldenrod' ,col='black',type='p', xlab= " ", ylab= " ",
+plot(as,empty_v4[61:2412], bg='darkgoldenrod' ,col='black',type='p', xlab= " ", ylab= " ",
      pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-35,45))
 par(new=TRUE)
-plot(ax2, Input_terms, col="black", type="l", lty=2, 
+plot(as, Input_terms[61:2412], col="black", type="l", lty=2, 
        xaxt='n',yaxt='n',
      ylim=c(-35,45), ylab= " ", xlab= " ",  lwd=1)
 par(new=TRUE)
-plot(ax2,empty_v5, bg='grey90' ,col='darkgrey',type='p', xlab= " ", ylab= " ", pch=23, cex=4, xaxt='n',yaxt='n', ylim=c(-35,45))
+plot(as,empty_v5[61:2412], bg='grey90' ,col='darkgrey',type='p', xlab= " ", ylab= " ", pch=23, cex=4, xaxt='n',yaxt='n', ylim=c(-35,45))
 par(new=TRUE)
-plot(ax2,-evasione_kmol_y, col="cyan4", type="l", xlab= " ", 
+plot(as,-evasione_kmol_y[61:2412], col="cyan4", type="l", xlab= " ", 
        ylim=c(-35,45), xaxt='n',yaxt='n',
      main=" ", ylab= " ",  lwd=1)
 par(new=TRUE)
-plot(ax2,empty_v6, bg='cyan4' ,col='black',type='p', xlab= " ", ylab= " ", pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-35,45))
+plot(as,empty_v6[61:2412], bg='cyan4' ,col='black',type='p', xlab= " ", ylab= " ", pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-35,45))
 par(new=TRUE)
-plot(ax2,-depo_Phg_kmol_y, col="orange", type="l", xlab= " ", 
+plot(as,-depo_Phg_kmol_y[61:2412], col="orange", type="l", xlab= " ", 
        ylim=c(-35,45), xaxt='n',yaxt='n',
      ylab= " ",  lwd=1)
 par(new=TRUE)
-plot(ax2,empty_v7, bg='darkorange' ,col='black',type='p', xlab= " ", ylab= " ", 
+plot(as,empty_v7[61:2412], bg='darkorange' ,col='black',type='p', xlab= " ", ylab= " ", 
      pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-35,45))
 par(new=TRUE)
-plot(ax2, -hgT_outflow_kmol_y, col="darkblue", type="l", 
+plot(as, -hgT_outflow_kmol_y[61:2412], col="darkblue", type="l", 
      ylim=c(-35,45),xlab= " ",xaxt='n',yaxt='n',
      ylab= " ",  lwd=2)
 par(new=TRUE)
-plot(ax2,empty_v8, bg=' darkblue' ,col='black',type='p', xlab= " ", ylab= " ", 
+plot(as,empty_v8[61:2412], bg=' darkblue' ,col='black',type='p', xlab= " ", ylab= " ", 
      pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-35,45))
 par(new=TRUE)
-plot(ax2,-Output_terms, col="black", type="l", lty=2, 
+plot(as,-Output_terms[61:2412], col="black", type="l", lty=2, 
        ylim=c(-35,45), xaxt='n',yaxt='n',
      xlab= " ", ylab= "",  lwd=1)
 par(new=TRUE)
-plot(ax2,empty_v9, bg='grey90' ,col='darkgrey',type='p', xlab= " ", ylab= " ", pch=23, cex=4, xaxt='n',yaxt='n', ylim=c(-35,45))
+plot(as,empty_v9[61:2412], bg='grey90' ,col='darkgrey',type='p', xlab= " ", ylab= " ", pch=23, cex=4, xaxt='n',yaxt='n', ylim=c(-35,45))
 
 mtext(expression(paste('kmol y'^-1)), 2, at= 0, line=2.6, cex=2)
 

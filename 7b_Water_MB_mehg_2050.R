@@ -9,7 +9,7 @@ in_2013<-rbind(input_hg1[1957:1968,1:8], input_hg1[1957:1968,1:8], input_hg1[195
 #latest<-rbind(in_2013,in_2013,in_2013); str(latest)
 #input_hg1<-rbind.data.frame(input_hg1,latest,input_hg1[1957:1968,1:8])
 
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
 
 mehg_prodotto_kmol_y<-read.csv('mehg_prodotto_kmol_y_2050.csv'); str(mehg_prodotto_kmol_y)
 mehg_prodotto_kmol_y_TOT<-rowSums(mehg_prodotto_kmol_y[2:4])
@@ -172,6 +172,8 @@ plot(diffusion_kmol_y)
 				  
 write.csv(bilancio_w, file="water_input_output_mehg_1_2050")
 write.csv(bilancio_w_all, file="water_input_output_long_mehg_1_2050")
+
+bilancio_w[164,]
 
 bilancioacque<-(river_mehg_kmol_y_media+mehgT_inflow_kmol_y_media + diffusion_kmol_y_media -
                   mehgT_outflow_kmol_y_media - depo_Pmehg_kmol_y_media )

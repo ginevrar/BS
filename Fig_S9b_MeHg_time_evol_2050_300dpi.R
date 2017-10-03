@@ -54,7 +54,6 @@ empty_v2[1957]<-0.06241869
 
 mean(burial2_kmol_y[1957:1968])
 
-
 u<-mean(diffusion_kmol_y[1957:1968])
 empty_v3<-rep('NA',2412)
 empty_v3[1957]<- u
@@ -63,7 +62,7 @@ v<-mean(Input_terms[1957:1968])
 empty_v4<-rep('NA',2412)
 empty_v4[1957]<- v
 1.101366/v*100
-
+1.101366/v
 v-mm
 
 u/Tmo*100
@@ -85,7 +84,7 @@ str(empty_v7)
 Tmo<-mean(Output_terms[1957:1968])
 empty_v9<-rep('NA',2412)
 empty_v9[1957]<--Tmo
-
+dpm/Tmo
 bilancio_mehg<-c(v,u,mm,dpm, ouu,Tmo)
 names(bilancio_mehg)<-c('input','diff','met','depo','outflow','output')
 bilancio_mehg

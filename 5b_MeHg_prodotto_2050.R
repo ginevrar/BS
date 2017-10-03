@@ -188,8 +188,14 @@ SED_met_kmol_y_media <-as.numeric(tapply(met_kmol_y[,4] ,rep(1:(length(met_kmol_
 SED_demet_kmol_y_media[164]
 SED_met_kmol_y_media[164]
 
+OL_met_kmol_y_media[164]
+
+
 met_kmol_y<-data.frame(OL_met_kmol_y_media, SOL_met_kmol_y_media, AOL_met_kmol_y_media)
 demet_kmol_y<-data.frame(OL_demet_kmol_y_media, SOL_demet_kmol_y_media, AOL_demet_kmol_y_media)
+
+met_kmol_y[164,]
+demet_kmol_y[164,]
 
 netto_prodotto_OL  <-(OL_met_kmol_y_media - OL_demet_kmol_y_media) 
 netto_prodotto_SOL <-(SOL_met_kmol_y_media- SOL_demet_kmol_y_media) 

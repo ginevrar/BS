@@ -1,7 +1,7 @@
 
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 #  FLUSSI TRA BOX
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
 
 #Leggi dati e taglia gli ultimi anni dopo il 2013 hg<-hg[1:1968,]
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
@@ -121,9 +121,9 @@ lenght_OL_SOL<-10
 lenght_AOL_SOL<-10
 lenght_AOL_Sed<-0.05
 
-HgD_OL_g_L<-hgT$Oxycline /10^9    #OL4
-HgD_SOL_g_L<-hgT$Suboxic1/10^9       #  SOL
-HgD_AOL_g_L<-hgT$Suboxic2/10^9     # AOL1
+HgD_OL_g_L<-(hgT$Oxycline - mehgT$Oxycline) /10^9    #OL4
+HgD_SOL_g_L<-(hgT$Suboxic1 - mehgT$Suboxic1)/10^9       #  SOL
+HgD_AOL_g_L<-(hgT$Suboxic2 - mehgT$Suboxic2)/10^9     # AOL1
 HgD_BBL_g_L<-diss_hg_inor$Anoxic3 /10^9  #AOL4
 HgD_Sed_g_L<-diss_hg_inor$Sed1 /10^9      # sEd
 

@@ -2,7 +2,7 @@
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_trisBO")
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
 
 #leggo outpout sim per ogni sim partita a ore diverse
 ore1  <-read.table("water_input_output_long_mehg_1_2050", header=TRUE, sep=","); str(ore1)
@@ -99,60 +99,60 @@ tiff('Fig.7B_MeHgver_195years.tiff', height=25, width=23, units='cm',
      compression="lzw", res=300)
 
 par(mfrow=c(1,1), mar=c(5,5,4,1), bty='n') 
-
-plot(ax2[61:2412],river_mehg_kmol_y[61:2412], col="chartreuse3", type="l",
-       main=expression("MeHg"[T]*" fluxes to the Black Sea"),
-     cex.axis=2, cex.lab=2,cex.main=2.3, xaxt='n',
-       ylab= " ", ylim=c(-4,7), xlab= " ", lwd=1, lty=1)
-as<-seq(1855,2050, by=.08291874)
-t<-c(1855,1900,1950,2000,2050)
+i<-river_mehg_kmol_y[61:2412]
+str(i)
+as<-seq(from=1850,to=2050, length.out=length(i))
+t<-c(1850,1900,1950,2000,2050)
 str(as)
-str(river_mehg_kmol_y[61:2412])
-axis(1,at=t,cex.axis=2)
+u<-as
+plot(as,river_mehg_kmol_y[61:2412], col="chartreuse3", type="l",
+       main=expression("MeHg"[T]*" fluxes to the Black Sea"),
+     cex.axis=2, cex.lab=2,cex.main=2.3, 
+       ylab= " ", ylim=c(-4,7), xlab= " ", lwd=1, lty=1)
 #abline(v=2013, lty=2, col='gray60', lwd=2)
 #text(2035,6,'2013',col='gray60', cex=1.9)
 par(new=TRUE)
-plot(ax2[61:2412],empty_v[61:2412], bg='chartreuse4' ,col='black',type='p', xlab= " ", ylab= " ", pch=23,
+plot(as,empty_v[61:2412], bg='chartreuse4' ,col='black',type='p', xlab= " ", ylab= " ", pch=23,
      cex=2.8, xaxt='n',yaxt='n', ylim=c(-4,7))
 par(new=TRUE)
 plot (mehgT_inflow_kmol_y[61:2412], col="darkblue", lwd=2, type="l", 
      ylim=c(-4,7), ylab= " ", yaxt='n', xaxt='n',xlab= " ", lty=1)
 par(new=TRUE)
-plot(ax2[61:2412],empty_v2[61:2412], bg='darkblue' ,col='black',type='p', xlab= " ", ylab= " ", pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-4,7))
+plot(as,empty_v2[61:2412], bg='darkblue' ,col='black',type='p', xlab= " ", ylab= " ", pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-4,7))
 par(new=TRUE)
 plot (diffusion_kmol_y[61:2412], col="darkgoldenrod1", lwd=2, type="l",  ylim=c(-4,7), ylab= " ",
      yaxt='n', xaxt='n',xlab= " ")
 par(new=TRUE)
-plot(ax2[61:2412],empty_v3[61:2412], bg='darkgoldenrod' ,col='black',type='p', xlab= " ", ylab= " ", 
+plot(as,empty_v3[61:2412], bg='darkgoldenrod' ,col='black',type='p', xlab= " ", ylab= " ", 
      pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-4,7))
 par(new=TRUE)
 plot (Input_terms[61:2412], col="black", type="l", lty=2, lwd=1, ylim=c(-4,7), ylab= " ",
      yaxt='n', xaxt='n',xlab= " ")
 par(new=TRUE)
-plot(ax2[61:2412],empty_v4[61:2412],  bg='grey90' ,col='darkgrey',type='p', xlab= " ", ylab= " ",
+plot(as,empty_v4[61:2412],  bg='grey90' ,col='darkgrey',type='p', xlab= " ", ylab= " ",
      pch=23, cex=4, xaxt='n',yaxt='n', ylim=c(-4,7))
 par(new=TRUE)
 plot (mehg_prodotto_kmol_y[61:2412], col="hotpink3", type="l", lty=1, 
      lwd=1, ylim=c(-4,7), ylab= " ", yaxt='n', xaxt='n',    xlab= " ")
 par(new=TRUE)  
-plot(ax2[61:2412],empty_v5[61:2412],  bg='hotpink4' ,col='black',type='p', xlab= " ", ylab= " ", pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-4,7))
+plot(as,empty_v5[61:2412],  bg='hotpink4' ,col='black',type='p', xlab= " ", ylab= " ", pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-4,7))
 par(new=TRUE)
 plot (-depo_Pmehg_kmol_y[61:2412],  col="orange",ylab=' ',
      type="l", xlab= " ",yaxt='n', xaxt='n', ylim=c(-4,7), lwd=1)
 par(new=TRUE)
-plot(ax2[61:2412],empty_v6[61:2412],  bg='darkorange' ,col='black',type='p', xlab= " ", ylab= " ", pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-4,7))
+plot(as,empty_v6[61:2412],  bg='darkorange' ,col='black',type='p', xlab= " ", ylab= " ", pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-4,7))
 par(new=TRUE)
 plot (-mehgT_outflow_kmol_y[61:2412], col="darkblue", type="l",yaxt='n', xaxt='n', lwd=2,
       ylim=c(-4,7),xlab= " ", ylab= " ")
 par(new=TRUE)
-plot(ax2[61:2412],empty_v7[61:2412],  bg='darkblue' ,col='black',type='p', xlab= " ", ylab= " ", pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-4,7))
+plot(as,empty_v7[61:2412],  bg='darkblue' ,col='black',type='p', xlab= " ", ylab= " ", pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-4,7))
 par(new=TRUE)
 plot ( -Output_terms[61:2412], col="black", type="l", lty=2, yaxt='n', xaxt='n',
      ylim=c(-4,7), xlab= " ", ylab= "", lwd=1)
 par(new=TRUE)
-plot(ax2[61:2412],empty_v9[61:2412],  bg='grey90' ,col='darkgrey',type='p', xlab= " ", ylab= " ", pch=23, cex=4, xaxt='n',yaxt='n', ylim=c(-4,7))
+plot(as,empty_v9[61:2412],  bg='grey90' ,col='darkgrey',type='p', xlab= " ", ylab= " ", pch=23, cex=4, xaxt='n',yaxt='n', ylim=c(-4,7))
 par(new=TRUE)
-plot(ax2[61:2412],empty_v3[61:2412], bg='darkgoldenrod' ,col='black',type='p', xlab= " ", ylab= " ", pch=23, cex=2.5, xaxt='n',yaxt='n', ylim=c(-4,7))
+plot(as,empty_v3[61:2412], bg='darkgoldenrod' ,col='black',type='p', xlab= " ", ylab= " ", pch=23, cex=2.5, xaxt='n',yaxt='n', ylim=c(-4,7))
 mtext(expression(paste('kmol y'^-1)), 2, at= 0, line=2.6, cex=2)
 
 

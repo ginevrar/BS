@@ -1,5 +1,5 @@
 
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
 
   hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
   names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
@@ -247,7 +247,8 @@ getwd()
 write.csv(sed_balance, file="aasediment_input_output_medie1_2050.csv")
 write.csv(sed_balance_long , file="aasediment_input_output1_2050.csv")
 
- 
+sed_balance[164,]
+
 kmol_sepolte<-tail(burial2_cumul,1)  # in 164 anni
 vi<-Model_area*0.01    #volume ipotetico
 

@@ -1,5 +1,7 @@
 
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine")
+
 #  FLUSSI TRA BOX
 #Leggi dati e taglia gli ultimi anni dopo il 2013 hg<-hg[1:1968,]
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
@@ -234,12 +236,15 @@ media1_depoAOL_kmol_y <-tapply(depo_AOLPmehg_kmol_y,rep(1:(length(depo_AOLPmehg_
 
 summary(tail(media1_depoOL_kmol_y,12)); 
 plot(media1_depoOL_kmol_y)
-tail(media1_depoOL_kmol_y,12)
+
 
 summary(tail(media1_depoSOL_kmol_y,12)); 
 plot(media1_depoSOL_kmol_y)
-tail(media1_depoSOL_kmol_y,12)
+tail(media1_depoSOL_kmol_y,1)
 
 summary(tail(media1_depoAOL_kmol_y,12)); 
 plot(media1_depoAOL_kmol_y)
-tail(media1_depoAOL_kmol_y,12)
+
+tail(media1_depoSOL_kmol_y,1)
+tail(media1_depoOL_kmol_y,1)
+tail(media1_depoAOL_kmol_y,1)

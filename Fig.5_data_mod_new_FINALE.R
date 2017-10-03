@@ -1,7 +1,7 @@
   setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
   setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/L4")
   setwd('C:/Users/gi/Documents/Lavoro/SIM_finale2/L2tri')
-  setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine")
+  setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/L1")
   
   medie_hg_pM<-c(1.86,
                  2.127058824,
@@ -311,9 +311,8 @@
   #     col=c("#5716a2", '#b3db25'), 
   #    pt.bg=c('#5716a255','#b3db2577'))
   #text(3,15,"OM=7*10^5 \n silt=2.
-  text(4,12,'OL', cex=1.4, font=2)
-  text(4,14.7,'CIL', cex=1.4, font=2)
-  text(4,15.9,'SOL', cex=1.4, font=2)
+  text(3.2,12,'OL', cex=1.6, font=2)
+  text(3.5,15.9,'SOL', cex=1.6, font=2)
   
   
   # --- PLOT Mehg----------------------mehg
@@ -351,16 +350,14 @@
   #      2, line=2.5 ,at=14,col="black", cex=1.2)
   
   p<-c(21,23)
-  #legend(.4,11, pch=p,legend=c("Observations", 
-  #                            'Model'),pt.cex=2,
-  #     col=c("#5716a2", '#b3db25'), 
-  #    pt.bg=c('#5716a255','#b3db2577'), cex=1.5)
-  text(.8,12,'OL', cex=1.4, font=2)
-  text(.8,14.7,'CIL', cex=1.4, font=2)
-  text(.8,15.9,'SOL', cex=1.4, font=2)
-  text(.1,16.6,'AOL', cex=1.4, font=2)
+ legend(.3,11, pch=p,legend=c("Observations", 
+                     'Model'),pt.cex=2,
+ col=c("#5716a2", '#b3db25'), 
+   pt.bg=c('#5716a255','#b3db2577'), cex=1.5)
+
+  text(.1,16.6,'AOL', cex=1.6, font=2)
   
-  at=c(0,0.1,.3,.5,.7,.9,1.1)
+  at=c(0,0.1,.3,.5,.7,.9)
   atx=c(0.2,.4,.6,.8,1)
   axis(1, at = at, labels = F ,tick=T, cex.axis=1.8)
   axis(1, at = atx, labels = atx,tick=T, cex.axis=1.8)

@@ -1,6 +1,7 @@
 
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
 
 #  FLUSSI TRA BOX
 #Leggi dati e taglia gli ultimi anni dopo il 2013 hg<-hg[1:1968,]
@@ -255,9 +256,9 @@ summary(tail(OLdepo_kmol_y_ok,12));
 
 summary(tail(mediaok_depoSOL_kmol_y,12)); 
 
-tail(mediaok_depoOL_kmol_y,12)
-tail(media1_depoSOL_kmol_y,12)
-tail(media1_depoAOL_kmol_y,12)
+tail(mediaok_depoOL_kmol_y,1)
+tail(media1_depoSOL_kmol_y,1)
+tail(media1_depoAOL_kmol_y,1)
 
 
 #variazione conc OL kmol/y

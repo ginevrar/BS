@@ -302,6 +302,7 @@ hg0_media_globale_ngL<-(hg0_media_globale_pM*200.59)/1000  #media Hg0 in ng/L (p
 hg0_g_m3<-hg0_media_globale_ngL/10^6; summary(hg0_g_m3)    #media Hg0 in g/m3
 
 skvol<-kvol_1_day*(hg0_g_m3 - (atm_hg0/divisore))
+
 #g/m3 day
 volat_g_y<-skvol*oxic_vol_m3*365;
 volat1_kmol_y<-volat_g_y/(200.59*1000); plot(volat1_kmol_y, type="l")

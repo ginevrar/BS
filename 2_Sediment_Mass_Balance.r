@@ -169,7 +169,6 @@ setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_t
        
   Sed1_g_m3  <- TOTs$Sed1;              Sed2_g_m3 <- TOTs$Sed2
   Sed1_g     <-Sed1_g_m3*Vol_Sed1_m3;     Sed2_g<-Sed2_g_m3*Vol_Sed2_m3
-  Sed1_kmol<-Sed1_g/(200.59*10^9)
   tail(Sed1_kmol,1); tail(Sed2_g,1)
   
   cm3_sed1   <-Sed1_g/2.43;               cm3_sed2<-Sed2_g/2.43
@@ -200,6 +199,7 @@ setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_t
   PWhg1_ngm3<-PWhg1_ngL*PW1_L/Vol_Sed1_m3
   PWhg2_ngm3<-PWhg2_ngL*PW2_L/Vol_Sed2_m3
   PWhg1_gm3<-PWhg1_ngm3/10^9; PWhg2_gm3<-PWhg2_ngm3/10^9
+  
   dev.new()
   par(mfrow=c(1,1))
   plot(deep_w_hg, col="darkblue",type="l", ylim=c(0,1.3), ylab="ng/L")

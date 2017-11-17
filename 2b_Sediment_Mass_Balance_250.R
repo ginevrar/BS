@@ -167,8 +167,6 @@ Vol_Sed2_m3<-volumes$Sed2*10^6;  str(Vol_Sed2_m3); plot(Vol_Sed2_m3)
      
 Sed1_g_m3  <- TOTs$Sed1;              Sed2_g_m3 <- TOTs$Sed2
 Sed1_g     <-Sed1_g_m3*Vol_Sed1_m3;     Sed2_g<-Sed2_g_m3*Vol_Sed2_m3
-Sed1_kmol<-Sed1_g/(200.59*10^9)
-tail(Sed1_kmol,1); tail(Sed2_g,1)
 
 cm3_sed1   <-Sed1_g/2.43;               cm3_sed2<-Sed2_g/2.43
 m3_sed1    <-cm3_sed1/10^6;              m3_sed2<-cm3_sed2/10^6

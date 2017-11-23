@@ -1,7 +1,7 @@
   setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
   setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/L4")
   setwd('C:/Users/gi/Documents/Lavoro/SIM_finale2/L2tri')
-  setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/L1")
+  setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Fuck_rev")
   
   medie_hg_pM<-c(1.86,
                  2.127058824,
@@ -258,7 +258,7 @@
   
   # ----end sed conc
   
-  setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
+  #setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
   
   #----- PLOT----------------
   #svg('dato_model_hg_mehg.svg')

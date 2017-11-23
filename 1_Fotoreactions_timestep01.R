@@ -37,7 +37,6 @@ kred<-1.2
 kox<-1.4
 kdeg<-3.14685E-1
 
-
 #output 2013 con timestep 0.1 = 59536:59900
 
 

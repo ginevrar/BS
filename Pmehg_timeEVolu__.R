@@ -1,10 +1,10 @@
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/out_1anno")
 
-Phgs<-read.csv("Total_Sorbed_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
-names(Phgs)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
+Pmehgs<-read.csv("Total_Sorbed_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
+names(Pmehgs)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
 
-Phg_pM<-Phgs/200.59*1000; 
+Phg_pM<-Pmehgs/200.59*1000; 
 
 OL_v<-c(5.9*10^12,(5.9*10^12),(4.5*10^12),(5.9*10^12))
 SOL_v<-7.4*10^12
@@ -87,9 +87,9 @@ S_f2017<-Phg_pM[168,6]-Phg_pM[167,6]
 S_f2018<-Phg_pM[169,6]-Phg_pM[168,6]
 S_f2019<-Phg_pM[170,6]-Phg_pM[169,6]
 
-varPhgSO<-c(S_f2012,S_f2013,S_f2014,S_f2015,S_f2016,S_f2017,S_f2018,S_f2019)
-varPhgSO_moly<-(varPhgSO*SO_vol_L)/10^12
-plot(anno,varPhgSO_moly)
+varPmehgsO<-c(S_f2012,S_f2013,S_f2014,S_f2015,S_f2016,S_f2017,S_f2018,S_f2019)
+varPmehgsO_moly<-(varPmehgsO*SO_vol_L)/10^12
+plot(anno,varPmehgsO_moly)
 
 A1_vol_L<-5.3E+13*10^3
 ## AOL1    Phg_pM[2,2]-Phg_pM[2,4]
@@ -151,15 +151,15 @@ varPhgA4_moly<-(varPhgA4*A4_vol_L)/10^12
 OL_var_kmoly = (varPhgO1_moly + varPhgO2_moly + 
          varPhgO3_moly + varPhgO4_moly)/1000
 
-SOL_var_kmoly = varPhgSO_moly/1000
+SOL_var_kmoly = varPmehgsO_moly/1000
 
 AOL_var_kmoly = (varPhgA1_moly + varPhgA2_moly + 
                   varPhgA3_moly + varPhgA4_moly)/1000
 
 
-var_Phg2013<-c(OL_var_kmoly[2],SOL_var_kmoly[2],AOL_var_kmoly[2])
+var_Pmehg2013<-c(OL_var_kmoly[2],SOL_var_kmoly[2],AOL_var_kmoly[2])
 
-write.csv(var_Phg2013, file='var_Phg2013.csv')
+write.csv(var_Pmehg2013, file='var_Pmehg2013.csv')
 
 par(mfrow=c(3,1), cex.axis=1.4, cex.lab=1.4, 
     mar=c(2,4,0,0))
@@ -175,7 +175,7 @@ par(new=T)
 plot(anno,varPhgO4_moly, ylim=c(0,20),ylab='mol/y', col='aquamarine4',
      lwd=3, type='b')
 
-plot(anno,varPhgSO_moly, ylim=c(0,5), ylab='mol/y',col='chartreuse4',
+plot(anno,varPmehgsO_moly, ylim=c(0,5), ylab='mol/y',col='chartreuse4',
      lwd=3, type='b')
 
 plot(anno,varPhgA1_moly, ylim=c(0,80), ylab='mol/y', col='coral',

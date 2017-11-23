@@ -1,83 +1,86 @@
 
-setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
-#  FLUSSI TRA BOX
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
 
-#Leggi dati e taglia gli ultimi anni dopo il 2013 hg<-hg[2:1969,]
+
+#output 2013 con timestep 0.1 = 59536:59900
+#  FLUSSI TRA BOX
+setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2/0.1")
+
+#Leggi dati e taglia gli ultimi anni dopo il 2013 hg<-hg[2:59900,]
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-             "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hg<-hg[2:1969,1:13]
+             "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2") 
+hg<-hg[2:59900,1:13]
 
 hgT<-read.csv("Total_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hgT)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hgT<-hgT[2:1969,1:13]
+              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hgT<-hgT[2:59900,1:13]
 
 DOChg<-read.csv("DOC_Sorbed_Divalent_Hg.csv", header=FALSE, skip =1, sep = ",", dec=".")
 names(DOChg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); DOChg<-DOChg[2:1969,1:13]
+                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); DOChg<-DOChg[2:59900,1:13]
 
 Phgs<-read.csv("Total_Sorbed_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(Phgs)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); Phgs<-Phgs[2:1969,1:13]
+              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); Phgs<-Phgs[2:59900,1:13]
 ## Phg ngL
 
 SEDhg<-read.csv("Total_Sorbed_Divalent_Hg_Solids.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(SEDhg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); SEDhg<-SEDhg[2:1969,1:13]
+                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); SEDhg<-SEDhg[2:59900,1:13]
 ## Sedhg ngg
 
 mehg<-read.csv("Dissolved_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(mehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-               "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); mehg<-mehg[2:1969,1:13]
+               "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); mehg<-mehg[2:59900,1:13]
 
 DOCmehg<-read.csv("DOC_Sorbed_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(DOCmehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                  "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); DOCmehg<-DOCmehg[2:1969,1:13]
+                  "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); DOCmehg<-DOCmehg[2:59900,1:13]
 
 mehgT<-read.csv("Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(mehgT)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); mehgT<-mehgT[2:1969,1:13]
+                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); mehgT<-mehgT[2:59900,1:13]
 
 hg0<-read.csv("Elemental_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hg0)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hg0<-hg0[2:1969,1:13]
+              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hg0<-hg0[2:59900,1:13]
 
 solids<-read.csv("Total_Solids.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(solids)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                 "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); solids<-solids[2:1969,1:13]
+                 "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); solids<-solids[2:59900,1:13]
 tail(solids)
 
 POM_depos<-read.csv("POM_Dep_Vel.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(POM_depos)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
                     "Suboxic1","Suboxic2", "Anoxic1", "Anoxic2",
                     "Anoxic3","Sed1","Sed2")
-POM_depos<-POM_depos[2:1969,1:13]
+POM_depos<-POM_depos[2:59900,1:13]
 
 silt_depos<-read.csv("Silt_Dep_Vel.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(silt_depos)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
                      "Suboxic1","Suboxic2", "Anoxic1", "Anoxic2",
                      "Anoxic3","Sed1","Sed2")
-silt_depos<-silt_depos[2:1969,1:13]
+silt_depos<-silt_depos[2:59900,1:13]
 
 silts<-read.csv("Silts_Fines.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(silts)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
                 "Suboxic1","Suboxic2", "Anoxic1", "Anoxic2",
                 "Anoxic3","Sed1","Sed2")
-silts<-silts[2:1969,1:13]
+silts<-silts[2:59900,1:13]
 
 POMs<-read.csv("Organic_Matter.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(POMs)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
                "Suboxic1", "Suboxic2", "Anoxic1", "Anoxic2",
                "Anoxic3", "Sed1","Sed2")
 str(POMs)
-POMs <-POMs[2:1969,1:13]
+POMs <-POMs[2:59900,1:13]
 
 time.steps <- POMs[,1]
 time.steps3 <- time.steps*24*3600
 TEMPO <- as.POSIXct(time.steps3, tz= "GMT", origin = "1850-01-01")
 TEMPO[1:10]
 rdate<-as.Date(TEMPO, tz= "GMT", format="%Y")
-tail(rdate,12)
+tail(rdate,365)
 
 OL1_vol_m3 <-5.9E+12; 			OL1_vol_L  <-OL1_vol_m3*1000
 CIL_vol_m3 <-4.5E+12; 			CIL_vol_L  <-CIL_vol_m3*1000
@@ -97,15 +100,15 @@ mcy<-305*10^9               # km3y *10^9-->m3/y
 adv_gy<-mcy*(hgT$Oxycline/10^6)   # m3/y * g/m3   --> gy
 adv_moly<-adv_gy/200.59
 adv_kmoly<-adv_moly/1000
-mean(tail(adv_kmoly,12))
-plot(tail(adv_kmoly,12))
+mean(tail(adv_kmoly,365))
+plot(tail(adv_kmoly,365))
 
 adv2_ugy<-mcy*hgT$Suboxic1
 adv2_gy<-adv2_ugy/10^6
 adv2_moly<-adv2_gy/200.59
 adv2_kmoly<-adv2_moly/1000
-mean(tail(adv2_kmoly,12))
-mean(tail(adv_kmoly,12))-mean(tail(adv2_kmoly,12))
+mean(tail(adv2_kmoly,365))
+mean(tail(adv_kmoly,365))-mean(tail(adv2_kmoly,365))
 
 diss_hgII<-hg+DOChg
 diss_mehg<-DOCmehg+mehg
@@ -159,24 +162,24 @@ diff_Sed<-(C/(lenght_AOL_Sed/0.95))*conc_grad3 #g/d
 diff_OL_mol_y<-(diff_OL*365)/200.59
 diff_OL_kmol_y<-diff_OL_mol_y/10^3
 
-mean(tail(diff_OL_kmol_y,12))
+mean(tail(diff_OL_kmol_y,365))
 
 diff_SOL_mol_y<-(diff_SOL/200.59)*365
 diff_SOL_kmol_y<-diff_SOL_mol_y/10^3
-mean(tail(diff_SOL_kmol_y,12))
+mean(tail(diff_SOL_kmol_y,365))
 
 diff_Sed_mol_d<-(diff_Sed/200.59)
 diff_Sed_mol_y<-diff_Sed_mol_d*365
 diff_Sed_kmol_y<-diff_Sed_mol_y/10^3
-mean(tail(diff_Sed_kmol_y,12))
+mean(tail(diff_Sed_kmol_y,365))
 
 #variazione conc OL kmol/y
 str(diff_OL_kmol_y)
-mean(tail(diff_OL_kmol_y,12)); summary(tail(diff_OL_kmol_y,12))
+mean(tail(diff_OL_kmol_y,365)); summary(tail(diff_OL_kmol_y,365))
 #variazione SOL kmol/y
-mean(tail(diff_SOL_kmol_y,12)); summary(tail(diff_SOL_kmol_y,12))
+mean(tail(diff_SOL_kmol_y,365)); summary(tail(diff_SOL_kmol_y,365))
 
-mean(tail(diff_Sed_kmol_y,12)); summary(tail(diff_Sed_kmol_y,12))
+mean(tail(diff_Sed_kmol_y,365)); summary(tail(diff_Sed_kmol_y,365))
 
 
 
@@ -247,10 +250,10 @@ OLdepo_mol_d_ok<-OLdepo_g_d_ok/200.59
 OLdepo_kmol_y_ok<-(OLdepo_mol_d_ok/1000)*365  
 mediaok_depoOL_kmol_y <-tapply(OLdepo_kmol_y_ok,rep(1:(length(OLdepo_kmol_y_ok)/12),each = 12), mean)
 
-mean(tail(OLdepo_kmol_y_ok,12))
-plot(tail(OLdepo_kmol_y_ok,12))
+mean(tail(OLdepo_kmol_y_ok,365))
+plot(tail(OLdepo_kmol_y_ok,365))
 
-tail(rdate,12)
+tail(rdate,365)
 
 ## .... settling SOL - AOL.....
 POM_SOLdepo_m_day<-POM_depos$Suboxic1     #depo m/day * depth(m) --> 1/day (0.003 /d)
@@ -266,7 +269,7 @@ SOLdepo_kmol_y_ok<-(SOLdepo_mol_d_ok/1000)*365
 mediaok_depoSOL_kmol_y <-
   tapply(SOLdepo_kmol_y_ok,rep(1:(length(SOLdepo_kmol_y_ok)/12),each = 12), mean)
 
-mean(tail(mediaok_depoSOL_kmol_y,12))
+mean(tail(mediaok_depoSOL_kmol_y,365))
 
 depo_SOLmedia2<-POM_SOLdepo_m_day
 depo_SOLmedia2 #
@@ -294,7 +297,7 @@ AOLdepo_mol_d_ok<-AOLdepo_g_d_ok/200.59
 AOLdepo_kmol_y_ok<-(AOLdepo_mol_d_ok/1000)*365  
 mediaok_depoAOL_kmol_y <-tapply(AOLdepo_kmol_y_ok,rep(1:(length(AOLdepo_kmol_y_ok)/12),each = 12), mean)
 
-mean(tail(mediaok_depoAOL_kmol_y,12))
+mean(tail(mediaok_depoAOL_kmol_y,365))
 
 depo_AOLmedia2<-POM_AOLdepo_m_day
 depo_AOLmedia2 #
@@ -311,9 +314,9 @@ tail(mediaok_depoOL_kmol_y,1);
 tail(mediaok_depoSOL_kmol_y,1);
 tail(mediaok_depoAOL_kmol_y,1)
 
-summary(tail(OLdepo_kmol_y_ok,12)); 
+summary(tail(OLdepo_kmol_y_ok,365)); 
 
-summary(tail(mediaok_depoSOL_kmol_y,12)); 
+summary(tail(mediaok_depoSOL_kmol_y,365)); 
 
 tail(mediaok_depoOL_kmol_y,1)
 tail(media1_depoSOL_kmol_y,1)
@@ -322,9 +325,9 @@ tail(media1_depoAOL_kmol_y,1)
 
 #variazione conc OL kmol/y
 str(diff_OL_kmol_y)
-mean(tail(diff_OL_kmol_y,12)); summary(tail(diff_OL_kmol_y,12))
+mean(tail(diff_OL_kmol_y,365)); summary(tail(diff_OL_kmol_y,365))
 #variazione SOL kmol/y
-mean(tail(diff_SOL_kmol_y,12)); summary(tail(diff_SOL_kmol_y,12))
+mean(tail(diff_SOL_kmol_y,365)); summary(tail(diff_SOL_kmol_y,365))
 #sed diff
-mean(tail(diff_Sed_kmol_y,12)); summary(tail(diff_Sed_kmol_y,12))
+mean(tail(diff_Sed_kmol_y,365)); summary(tail(diff_Sed_kmol_y,365))
 

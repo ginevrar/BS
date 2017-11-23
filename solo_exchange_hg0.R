@@ -4,8 +4,7 @@ setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2/0.1")
 #Anne1e_morehg_tris_pristine2
 #Leggi dati e taglia gli ultimi anni dopo il 2013 hg<-hg[59536:59900,]
-
-
+##il 2017 hg<-hg[59536:59900,]
 
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
@@ -110,22 +109,15 @@ adv2_kmoly<-adv2_moly/1000
 mean(tail(adv2_kmoly,365))
 mean(tail(adv_kmoly,365))-mean(tail(adv2_kmoly,365))
 
+hgII<-hgT-hg0-mehg
 
 diss_hgII<-hg+DOChg
 diss_mehg<-DOCmehg+mehg
 diss_hg_inor<-diss_hgII+hg0
-diss_tot<-diss_mehg+diss_hg_inor
-
-
-
-diss_hg_inor$Oxic1
-diss_tot$Oxic1
 
 ionic_hg_pM<-hg/200.59*1000
-diss_mehg_pM<-diss_mehg/215*1000
-diss_hgII_pM<-diss_hgII/200.59*1000
-diss_hg_inor_pM<- diss_hg_inor/200.59*1000
-diss_hgtot_pM<-diss_hgII_pM+diss_mehg_pM
+hgII_pM<-hgII/200.59*1000
+
 
 ### ....diffusion ..... 291600 
 area<-296100000000
@@ -140,27 +132,18 @@ lenght_AOL_Sed<-0.05
 
 diss_hg_inor$Oxycline
 
-HgT_OL_g_m3<-hgT$Oxycline/10^6    #OL4
-HgT_SOL_g_m3<-hgT$Suboxic1/10^6       #  SOL
-HgT_AOL_g_m3<-hgT$Suboxic2/10^6     # AOL1
-HgT_BBL_g_m3<-hgT$Anoxic3 /10^6  #AOL4
-HgD_BBL_g_m3<-diss_hg_inor$Anoxic3 /10^6  #AOL4
-HgD_Sed_g_m3<-diss_hg_inor$Sed1 /10^6      # sEd
+HgT_OL_g_m3<-hg0$Oxycline/10^6    #OL4
+HgT_SOL_g_m3<-hg0$Suboxic1/10^6       #  SOL
+HgT_AOL_g_m3<-hg0$Suboxic2/10^6     # AOL1
+HgT_BBL_g_m3<-hg0$Anoxic3 /10^6  #AOL4
+HgD_BBL_g_m3<-hg0$Anoxic3 /10^6  #AOL4
+HgD_Sed_g_m3<-hg0$Sed1 /10^6      # sEd
 
-plot(hg0$CIL, ylim=c(0,0.7), col=1, type='l', lty=3)
-par(new=T)
-plot(hg0$Oxycline, ylim=c(0,0.7), col=1, type='l')
-par(new=T)
-plot(hg0$Suboxic1, ylim=c(0,0.7),col='darkgreen', type='l')
-par(new=T)
-plot(hg0$Suboxic2, ylim=c(0,0.7),col=3, type='l')
-par(new=T)
-plot(hg0$Oxic1, ylim=c(0,0.7), col='cyan3', type='l', lty=3)
 1968/163
 2013-1850
-A<-(eddy_d_OL  *area)    #m2/d *m2  --> 1/d
-B<-(eddy_d_SOL *area)   #m2/d *m2  --> 1/d
-C<-(sed_diff   *area)     
+A<-(eddy_d_OL *area)    #m2/d *m2  --> 1/d
+B<-(eddy_d_SOL*area)   #m2/d *m2  --> 1/d
+C<-(sed_diff  *area)     
 
 conc_grad1<-(HgT_SOL_g_m3-HgT_OL_g_m3) #g/m3
 conc_grad2<-(HgT_AOL_g_m3-HgT_SOL_g_m3) #g/m3
@@ -171,8 +154,6 @@ diff_SOL<-(B/lenght_AOL_SOL)*conc_grad2;diff_SOL
 #diff_AOL<-((eddy_d_AOL*area)/(lenght_AOL_Sed/0.9))*(HgD_Sed/0.9-HgD_AOL) #0.9 porosity
 diff_Sed<-(C/(lenght_AOL_Sed/0.95))*conc_grad3 #g/d
 
-
-plot(HgT_SOL_g_m3)
 
 diff_OL_mol_y<-(diff_OL*365)/200.59
 diff_OL_kmol_y<-diff_OL_mol_y/10^3
@@ -202,7 +183,7 @@ mean((diff_SOL_kmol_y));
 mean((diff_Sed_kmol_y))
 
 exchange<-data.frame(rdate,diff_OL_kmol_y,diff_SOL_kmol_y,diff_Sed_kmol_y)
-write.csv(exchange, file='exchange.csv')
+write.csv(exchange, file='exchange_hg0.csv')
 
 
 

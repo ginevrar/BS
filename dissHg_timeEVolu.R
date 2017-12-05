@@ -110,9 +110,9 @@
   S_f2018<-diss_hgII_pM[169,6]-diss_hgII_pM[168,6]
   S_f2019<-diss_hgII_pM[170,6]-diss_hgII_pM[169,6]
   
-  varPmehgsO<-c(S_f2012,S_f2013,S_f2014,S_f2015,S_f2016,S_f2017,S_f2018,S_f2019)
-  varPmehgsO_moly<-(varPmehgsO*SO_vol_L)/10^12
-  plot(anno,varPmehgsO_moly)
+  vardisshgsO<-c(S_f2012,S_f2013,S_f2014,S_f2015,S_f2016,S_f2017,S_f2018,S_f2019)
+  vardisshgsO_moly<-(vardisshgsO*SO_vol_L)/10^12
+  plot(anno,vardisshgsO_moly)
   
   A1_vol_L<-5.3E+13*10^3
   ## AOL1    diss_hgII_pM[2,2]-diss_hgII_pM[2,4]
@@ -174,7 +174,7 @@
   OL_var_kmoly = (vardisshgIIO1_moly + vardisshgIIO2_moly + 
                     vardisshgIIO3_moly + vardisshgIIO4_moly)/1000
   
-  SOL_var_kmoly = varPmehgsO_moly/1000
+  SOL_var_kmoly = vardisshgsO_moly/1000
   
   AOL_var_kmoly = (vardisshgIIA1_moly + vardisshgIIA2_moly + 
                      vardisshgIIA3_moly + vardisshgIIA4_moly)/1000

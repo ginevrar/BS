@@ -1,18 +1,25 @@
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2/0.1")
 
-Phgs<-read.csv("Total_Sorbed_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
-names(Phgs)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
+mehg<-read.csv("Dissolved_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
+names(mehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); 
-Phgs<-Phgs[59536:59900,1:13]
+mehg<-mehg[59536:59900,1:13]
+
+Pmehgs<-read.csv("Total_Sorbed_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
+names(Pmehgs)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
+               "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); 
+Pmehgs<-Pmehgs[59536:59900,1:13]
 
 SEDmehg<-read.csv("Total_Sorbed_Methyl_Hg_Solids.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(SEDmehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); SEDhg<-SEDhg[59536:59900,1:13]
+                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); 
+SEDhg<-SEDhg[59536:59900,1:13]
 
-solids<-read.csv("Total_Solids.csv", header=FALSE, skip = 1,sep = ",", dec=".")
-names(solids)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                 "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); solids<-solids[59536:59900,1:13]
-tail(solids)
+silts<-read.csv("Silts_fines.csv", header=FALSE, skip = 1,sep = ",", dec=".")
+names(silts)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
+                 "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2");
+silts<-silts[59536:59900,1:13]
+tail(silts)
 
 POM_depos<-read.csv("POM_Dep_Vel.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(POM_depos)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
@@ -38,8 +45,6 @@ names(POMs)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline",
                "Anoxic3", "Sed1","Sed2")
 str(POMs)
 POMs <-POMs[59536:59900,1:13]
-
-
 # solidi ai boundaries ta OL-SOL e sOL_AOL e aOL - SED
 ###  g/m3 = mg/L
 
@@ -50,13 +55,21 @@ POMs_kgL<-POMs/10^6   #mgL/10^6 -> kgL
 silts_kgL<-silts/10^6 
 mehgCl_gm3<-mehg/10^6   #ngL/10^6 ->mgL 
 
+str(mehgCl_gm3)
+a<-c(1,2,3)
+b<-c(4,5,6)
+df1<-data.frame(a,b)
+
 mehgPOM_gm3<-mehgCl_gm3*POMs_kgL*kd_POM
 mehgsilt_gm3<-mehgCl_gm3*silts_kgL*kd_silt
 
 mehgp<-(mehgPOM_gm3+mehgsilt_gm3)*10^6
 
-Pmehg_OL <-Pmehgs$Oxycline ; tail(Pmehg_OL) #ngL
-mehgp_OL<-mehgp$Oxycline; tail(mehgp_OL)
+Pmehg_OL <-Pmehgs$Oxycline; tail(Pmehg_OL) #ngL
+mehgp_OL <-mehgp$Oxycline;   tail(mehgp_OL)
+
+str(mehgp_OL)
+str(Pmehg_OL)
 
 mehgPOM_ngL<-  mehgPOM_gm3*10^6
 mehgsilt_ngL<-  mehgsilt_gm3*10^6
@@ -64,50 +77,21 @@ mehgsilt_ngL<-  mehgsilt_gm3*10^6
 tail(mehgPOM_ngL$Oxycline)  
 tail(mehgsilt_ngL$Oxycline)
 
-solids_OL    <-solids$Oxycline     
-solids_SOL   <-solids$Suboxic1
-solids_AOL   <-solids$Anoxic3
-solids_sed1  <-solids$Sed1
-solids_sed2  <-solids$Sed2
-
-SEDmehg_OL   <-SEDmehg$Oxycline  # mehg ng/g-> SEDmehg*solid_sed --> Pmehg ug/m3
-SEDmehg_SOL   <-SEDmehg$Suboxic1
-SEDmehg_AOL   <-SEDmehg$Anoxic3
-SEDmehg_sed1   <-SEDmehg$Sed1
-SEDmehg_sed2   <-SEDmehg$Sed2
-
 # mehg ug/m3
 Pmehg_OL <-Pmehgs$Oxycline
 Pmehg_SOL <-Pmehgs$Suboxic1       # mehg ug/m3
 Pmehg_AOL <-Pmehgs$Anoxic3       # mehg ug/m3
 
-mehgT_sed1_ngm3 <- solids_sed1 *SEDmehg_sed1  #  ng/g*g/m3 -> ng/m3
-mehgT_sed2_ngm3 <- solids_sed2 *SEDmehg_sed2 
-mehgT_sed1_gm3 <-mehgT_sed1_ngm3/10^9         #   mg/m3->g/m3 mehgP
-mehgT_sed2_gm3  <-mehgT_sed2_ngm3/10^9
-
 #DEPOSIZIONE Pmehg AOL -> Sed
-
 ## .... settling OL - SOL.....
-POM_OLdepo_m_day<-POM_depos$Oxycline   #depo m/day * !!! depth(m) --> 1/day (0.003 /d)
-silt_OLdepo_m_day<-silt_depos$Oxycline # depo silt m/day  (0.014 /d)
+fPOM_OL<POMs$Oxycline/solids_OL
+fsilt_OL<-silts$Oxycline/solids_OL
 
-fPOM_OL<-mean(POMs$Oxycline/solids_OL, na.rm=TRUE)
-fsilt_OL<-mean(silts$Oxycline/solids_OL, na.rm=TRUE)
-
-#  Vd OL
-str(POM_OLdepo_m_day)
-depo_OLmedia2<-POM_OLdepo_m_day  #approssimazione migliore che depo1 (tolto)
-depo_OLmedia2 #
-
-OLdepo_g_m2_d<-(mehgPOM_gm3$Oxycline*POM_OLdepo_m_day)+
-  (mehgsilt_gm3$Oxycline*silt_OLdepo_m_day)
-OLdepo_g_d_ok<-OLdepo_g_m2_d* area  #g/d
+OLdepo_g_m2_d  <-(mehgPOM_gm3$Oxycline*POM_depos$Oxycline)+   #gm3*md ->gm2d
+                 (mehgsilt_gm3$Oxycline*silt_depos$Oxycline)
+OLdepo_g_d_ok  <-OLdepo_g_m2_d* area  #g/d
 OLdepo_mol_d_ok<-OLdepo_g_d_ok/200.59    
 OLdepo_kmol_y_ok<-(OLdepo_mol_d_ok/1000)*365  
-
-mean(tail(OLdepo_kmol_y_ok,365))
-plot(tail(OLdepo_kmol_y_ok,365))
 
 tail(rdate,365)
 

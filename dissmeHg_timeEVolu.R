@@ -190,6 +190,19 @@ vardissA4<-c(f2012,f2013,f2014,f2015,f2016,f2017,f2018,f2019)
 vardissA4_moly<-(vardissA4*A4_vol_L)/10^12
 
 
+OL_var_kmoly = (vardissO1_moly + vardissO2_moly + 
+                  vardissO3_moly + vardissO4_moly)/1000
+
+SOL_var_kmoly = vardissSO_moly/1000
+
+AOL_var_kmoly = (vardissA1_moly + vardissA2_moly + 
+                   vardissA3_moly + vardissA4_moly)/1000
+
+var_dissMehg_2013<-c(OL_var_kmoly[2],SOL_var_kmoly[2],AOL_var_kmoly[2])
+write.csv(var_dissMehg_2013, file='var_dissMehg_kmoly2013.csv')
+
+
+
 
 par(mfrow=c(3,1), cex.axis=1.4, cex.lab=1.4, 
     mar=c(2,4,0,0))

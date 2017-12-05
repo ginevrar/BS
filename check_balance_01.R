@@ -39,14 +39,20 @@ mean((hg_dep$AOL-1.925))
 mean(hg_dep$SOL-(10.09))
 mean((hg_dep$OL-1.925))
 
-                
 mean(OL_bal_hgII)   # balance 2013 =  OL  + 0.16 mol/y
 mean(SOL_bal_hgII)   # balance 2013 = SOL + 0.03 
 mean(AOL_bal_hgII)   # balance 2013 = AOL + 3 kmol/y
 
+OL_bal_mehg<-riv_m-photod+mehg_ex$OL-mehg_dep$OL+net_met1
+mean(OL_bal_mehg)                 #  0.007970122
 
-OL_bal_mehg<-riv_m-photod+mehg_ex$OL-mehg_dep$OL-net_met1
-OL_bal_hg0<-photored+hg0_ex$OL-ev
+SOL_bal_mehg<--mehg_ex$OL+mehg_dep$OL+mehg_ex$SOL-mehg_dep$SOL+net_met2
+mean(SOL_bal_mehg)              ## 0.004282833
+ 
+AOL_bal_mehg<-mehg_dep$SOL-mehg_ex$SOL-mehg_dep$AOL+net_met3-mehg_ex$AOL
+mean(AOL_bal_mehg)
+
+OL_bal_hg0<-photored+hg0_ex$OL-ev    ## AOL +0.887742711
 
 
 

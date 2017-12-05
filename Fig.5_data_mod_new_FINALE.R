@@ -1,56 +1,24 @@
-  setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/new_sim0/_met/Wh1")
-  setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/L4")
-  setwd('C:/Users/gi/Documents/Lavoro/SIM_finale2/L2tri')
-  setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Fuck_rev")
   
-  medie_hg_pM<-c(1.86,
-                 2.127058824,
-                 1.7675,
-                 1.902,
-                 2.056666667,
-                 3.0875,
-                 2.810909091,
-                 3.714,
-                 3.713684211)
+  setwd('C:/Users/Ginevra/Desktop/simREV2/base_demet_max')
+  setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
   
-  medie_mehg_pM<-c(0.116285714,
-                   0.1408125,
-                   0.120611111,
-                   0.108857143,
-                   0.157888889,
-                   0.767916667,
-                   0.551913043,
-                   0.751090909,
+  setwd('C:/Users/Ginevra/Desktop/simREV2/FOSFATI/2')
+  medie_hg_pM<-c(1.86,2.127058824,1.7675,1.902,
+                 2.056666667,3.0875,2.810909091,
+                 3.714,3.713684211)
+  
+  medie_mehg_pM<-c(0.116285714,0.1408125,0.120611111,0.108857143,
+                   0.157888889,0.767916667,0.551913043,0.751090909,
                    0.737428571)
-  sd1<-c(0.4911890,
-         0.6179782,
-         0.5060026, 
-         0.5832838,
-         0.6269617, 
-         0.7147727,
-         0.5266774,
-         0.3722066, 
-         0.4352804)
+  sd1<-c(0.4911890,0.6179782,0.5060026,0.5832838,0.6269617, 
+         0.7147727,0.5266774,0.3722066,0.4352804)
   
-  sd2<-c(0.036545471,
-         0.034533498,
-         0.034428338,
-         0.035267684,
-         0.083861152,
-         0.170347104,
-         0.149375644,
-         0.130289388,
+  sd2<-c(0.036545471,0.034533498,0.034428338,0.035267684,
+         0.083861152,0.170347104,0.149375644,0.130289388,
          0.095633974)
   
-  prof<-c(11.4525,
-          13.3275,
-          14.715,
-          15.41,
-          15.92,
-          16.41,
-          16.83,
-          17.14,
-          17.25)
+  prof<-c(11.4525,13.3275,14.715,15.41,15.92,
+          16.41,16.83,17.14,17.25)
   
   #Leggi model output
   hg<-read.csv("Dissolved_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
@@ -264,7 +232,7 @@
   #svg('dato_model_hg_mehg.svg')
   #tiff('dato_model_hg_mehg.tiff')
   
-  tiff('dato_model_hg_mehg33331.tiff', height=25, width=23, units='cm', 
+  tiff('dato_model_hg_mehg17.tiff', height=25, width=23, units='cm', 
        compression="lzw", res=300)
   
   par(mfrow=c(1,2),cex.axis=1.2, cex.lab=1.3, 
@@ -341,7 +309,7 @@
   segments(x2-sd2,y-epsilon,x2-sd2,y+epsilon, col='#5716a2')
   segments(x2+sd2,y-epsilon,x2+sd2,y+epsilon, col='#5716a2')
   par(new=TRUE)
-  
+
   plot(dissMehg_pM, prof, type="b",pch=23,  lwd=1.3,cex=4,cex.axis=1.8,
        ylim=c(17.5,10.5),  bty='n', xlim=c(0,1), lty=2,
        xlab=" ", col="#b3db25", yaxt='n',xaxt='n',
@@ -367,18 +335,13 @@
   
   y1<-c( 10.5, 12.05, 14.25, 15.285, 15.64, 16.2, 16.6, 17.04, 17.35)
   why<-c(0,   20,      40,    55,    75,   100,  280,  460,   2000)
-  str(why)
-  str(y1)
-  
-  #axis(4, at = aty, labels = F, cex.axis=1.8)
   axis(4, at = y1, labels = why, tick = TRUE, cex.axis=1.5, las=2)
   mtext('depth (m)', at=13.5, side=4,line=3.2, cex=1.6)
   dev.off()
   
   sed_hg_pmol_g
   sed_mehg_pmol_g/ sed_hg_pmol_g*100 # % of Mehg sed
-  
-  
+
   disshg_pM$Sed1
   disshg_pM_upper<-disshg_pM
   sed_hg_pmol_g_upper<-sed_hg_pmol_g
@@ -415,4 +378,16 @@
     mean(abs(error))
   }
   error<-medie_mehg_pM-dissMehg_pM# Example of invocation of functions
+  RMSE<-rmse(error)
+  
+  
+  rel_error<-error/medie_mehg_pM*100 # Example of invocation of functions
   rmse(error)
+  
+  error_hg<-medie_hg_pM-disshg_pM# Example of invocation of functions
+  RMSE_hg<-rmse(error_hg)
+  
+  model_out<-cbind(disshg_pM,dissMehg_pM,-rel_error,RMSE, RMSE_hg)
+  
+  write.table(model_out,file='mod_out.txt')
+  

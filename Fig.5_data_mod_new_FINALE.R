@@ -2,16 +2,12 @@
   setwd('C:/Users/Ginevra/Desktop/simREV2/base_demet_max')
   setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
   
-  setwd('C:/Users/Ginevra/Desktop/simREV2/FOSFATI/2')
-  medie_hg_pM<-c(1.86,2.127058824,1.7675,1.902,
-                 2.056666667,3.0875,2.810909091,
-                 3.714,3.713684211)
+  setwd('C:/Users/Ginevra/Dropbox/Inorganico_BS/FOsfati/CALIBRATO_inorganico/orig_newMet_lessDem2')
+  setwd('C:/Users/Ginevra/Desktop/bene1/Centrale_nome')
+  medie_hg_pM<-c(1.86,2.127058824,1.7675,1.902,2.056666667,3.0875,2.810909091,3.714,3.713684211)
   
-  medie_mehg_pM<-c(0.116285714,0.1408125,0.120611111,0.108857143,
-                   0.157888889,0.767916667,0.551913043,0.751090909,
-                   0.737428571)
-  sd1<-c(0.4911890,0.6179782,0.5060026,0.5832838,0.6269617, 
-         0.7147727,0.5266774,0.3722066,0.4352804)
+  medie_mehg_pM<-c(0.116285714,0.1408125,0.120611111,0.108857143,0.157888889,0.767916667,0.551913043,0.751090909,0.737428571)
+  sd1<-c(0.4911890,0.6179782,0.5060026,0.5832838,0.6269617,0.7147727,0.5266774,0.3722066,0.4352804)
   
   sd2<-c(0.036545471,0.034533498,0.034428338,0.035267684,
          0.083861152,0.170347104,0.149375644,0.130289388,
@@ -278,7 +274,7 @@
   #                             'Model'),
   #     col=c("#5716a2", '#b3db25'), 
   #    pt.bg=c('#5716a255','#b3db2577'))
-  #text(3,15,"OM=7*10^5 \n silt=2.
+  #text(3,15,"OM=7*10^5 /n silt=2.
   text(3.2,12,'OL', cex=1.6, font=2)
   text(3.5,15.9,'SOL', cex=1.6, font=2)
   
@@ -295,7 +291,7 @@
   #plot(layer_Pmehg*20 ,prof, type="b",pch=23,  lwd=1.3,cex=1.3,
   #    ylim=c(17.3,10.9),  bty='n', xlim=c(0,1),lty=3,
   #   xlab="MeHg concentrations (pM)", col='#103513', bg='#10351322', ylab=expression(paste(sigma[theta]*'  (kg/m'^3*')')),
-  #  main=expression(paste("MeHg vertical profiles \n along the water column")))
+  #  main=expression(paste("MeHg vertical profiles /n along the water column")))
   par(new=T)
   plot(medie_mehg_pM, prof,  bty='n',lwd=1.3, cex=4,
        ylim=c(17.5,10.5), lty=1, yaxt='n',xaxt='n',
@@ -387,7 +383,10 @@
   error_hg<-medie_hg_pM-disshg_pM# Example of invocation of functions
   RMSE_hg<-rmse(error_hg)
   
-  model_out<-cbind(disshg_pM,dissMehg_pM,-rel_error,RMSE, RMSE_hg)
+  model_out<-cbind(disshg_pM,dissMehg_pM,-rel_error,RMSE, RMSE_hg,sed_hg_pmol_g)
   
   write.table(model_out,file='mod_out.txt')
+  
+  sed_hg_pmol_g
+  
   

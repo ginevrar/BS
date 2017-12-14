@@ -1,9 +1,7 @@
   
-  setwd('C:/Users/Ginevra/Desktop/simREV2/base_demet_max')
-  setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
+  setwd('C:/Users/gi/Desktop/nuoveMEt/Lamb/L6')
+  #Output/FOsfati/CALIBRATO_inorganico/Centrale_nme')
   
-  setwd('C:/Users/Ginevra/Dropbox/Inorganico_BS/FOsfati/CALIBRATO_inorganico/orig_newMet_lessDem2')
-  setwd('C:/Users/Ginevra/Desktop/bene1/Centrale_nome')
   medie_hg_pM<-c(1.86,2.127058824,1.7675,1.902,2.056666667,3.0875,2.810909091,3.714,3.713684211)
   
   medie_mehg_pM<-c(0.116285714,0.1408125,0.120611111,0.108857143,0.157888889,0.767916667,0.551913043,0.751090909,0.737428571)

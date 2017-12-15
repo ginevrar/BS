@@ -1,20 +1,12 @@
+  setwd('C:/Users/Ginevra/Desktop/nuoveMEt/LambpiuDEM/')
   
-  setwd('C:/Users/Ginevra/Desktop/simREV2/base_demet_max')
-  setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
-  
-  setwd('C:/Users/Ginevra/Dropbox/Inorganico_BS/FOsfati/CALIBRATO_inorganico/orig_newMet_lessDem2')
-  setwd('C:/Users/Ginevra/Desktop/bene1/Centrale_nome')
   medie_hg_pM<-c(1.86,2.127058824,1.7675,1.902,2.056666667,3.0875,2.810909091,3.714,3.713684211)
-  
   medie_mehg_pM<-c(0.116285714,0.1408125,0.120611111,0.108857143,0.157888889,0.767916667,0.551913043,0.751090909,0.737428571)
+  
   sd1<-c(0.4911890,0.6179782,0.5060026,0.5832838,0.6269617,0.7147727,0.5266774,0.3722066,0.4352804)
+  sd2<-c(0.036545471,0.034533498,0.034428338,0.035267684,0.083861152,0.170347104,0.149375644,0.130289388,0.095633974)
   
-  sd2<-c(0.036545471,0.034533498,0.034428338,0.035267684,
-         0.083861152,0.170347104,0.149375644,0.130289388,
-         0.095633974)
-  
-  prof<-c(11.4525,13.3275,14.715,15.41,15.92,
-          16.41,16.83,17.14,17.25)
+  prof<-c(11.4525,13.3275,14.715,15.41,15.92,16.41,16.83,17.14,17.25)
   
   #Leggi model output
   hg<-read.csv("Dissolved_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
@@ -59,8 +51,7 @@
   mehgT<-read.csv("Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
   names(mehgT)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                   "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
-  
-  # dati utimo anno
+    # dati utimo anno
   
   fine_hgT<-hgT[1957:1968,]
   fine_hg<- hg [1957:1968,]
@@ -78,7 +69,6 @@
   tail(mehg_pM_,3)
   mehgT_pM<-mehgT/215*1000
   tail(mehg_pM_,3)/tail(mehgT_pM,3)*100
-  
   
   B_Phg<- fine_hgT - (fine_DOChg+fine_hg+fine_mehgT+fine_hg0)
   B_Phg$Oxic1
@@ -158,8 +148,7 @@
                   layer7<-mean(fine_DOChg$Anoxic),
                   layer8<-mean(fine_DOChg$Anoxic2),
                   layer9<-mean(fine_DOChg$Anoxic3))
-  
-  
+
   layer_DOCmehg <-c(layer1<-mean(fine_DOCmehg$Oxic1),
                     layer2<-mean(fine_DOCmehg$Oxic2),
                     layer3<-mean(fine_DOCmehg$CIL),
@@ -219,15 +208,9 @@
   names(sed_mehg_pmol_g)<-c('surface','subsurface')
   sed_hg_pmol_g
   sed_mehg_pmol_g
-  
   # ----end sed conc
-  
   #setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
-  
   #----- PLOT----------------
-  #svg('dato_model_hg_mehg.svg')
-  #tiff('dato_model_hg_mehg.tiff')
-  
   tiff('dato_model_hg_mehg17.tiff', height=25, width=23, units='cm', 
        compression="lzw", res=300)
   
@@ -278,8 +261,7 @@
   text(3.2,12,'OL', cex=1.6, font=2)
   text(3.5,15.9,'SOL', cex=1.6, font=2)
   
-  
-  # --- PLOT Mehg----------------------mehg
+    # --- PLOT Mehg----------------------mehg
   #mar=c(4.5,4,1,0)
   #win.graph()  mar=c(4.5,4,1,0)  ylim=c(17.5,10.5),
   #dev.new(width=12, height=4)

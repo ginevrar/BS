@@ -24,6 +24,7 @@ org_accum_rate_gC_m2_y<-(2.16+1.81)/2
 #setwd("C:/Users/Ginevra/Dropbox/BlackSea2/implementazione/new_sim0/lower/new4")
 setwd("C:\\Users\\Ginevra\\Desktop\\new_sim_BS\\19_luglio\\SIM_finale2\\Anne1e_morehg_tris")
 #lower/new4")
+setwd("C:\\Users\\gi\\Documents\\Lavoro\\SIM_finale2\\Anne1e_morehg_tris")
 
 SPM<-read.csv("Total_Solids.csv", header=FALSE, skip = 1, sep = ",", dec=".")
 names(SPM)<-c("Time","Oxic1","Oxic2","CIL","Oxycline", 
@@ -123,7 +124,7 @@ y2<-c(10.5,11.5,12.5,13.5,14.5,15.5,
       16.5,17, 17.5)
 y<-c(11,12,13,14,15,16,17)
 
-setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
+setwd("C:\\Users\\gi\\Desktop")
 tiff('SPM_dato_model.tiff', height=25, width=23, units='cm', 
      compression="lzw", res=300)
 par(mfrow=c(1,1), cex.axis=1.2, cex.lab=1.3,

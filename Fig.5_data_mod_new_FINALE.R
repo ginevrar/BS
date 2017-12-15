@@ -1,8 +1,6 @@
+setwd('C:/Users/gi/Desktop/ULTIME_hgII___/IIe_IIIe_IVe/IVe/In4d')
   
-  setwd('C:/Users/gi/Desktop/nuoveMEt/Lamb/L6')
-  #Output/FOsfati/CALIBRATO_inorganico/Centrale_nme')
-  
-  medie_hg_pM<-c(1.86,2.127058824,1.7675,1.902,2.056666667,3.0875,2.810909091,3.714,3.713684211)
+medie_hg_pM<-c(1.86,2.127058824,1.7675,1.902,2.056666667,3.0875,2.810909091,3.714,3.713684211)
   
   medie_mehg_pM<-c(0.116285714,0.1408125,0.120611111,0.108857143,0.157888889,0.767916667,0.551913043,0.751090909,0.737428571)
   sd1<-c(0.4911890,0.6179782,0.5060026,0.5832838,0.6269617,0.7147727,0.5266774,0.3722066,0.4352804)
@@ -381,7 +379,11 @@
   error_hg<-medie_hg_pM-disshg_pM# Example of invocation of functions
   RMSE_hg<-rmse(error_hg)
   
-  model_out<-cbind(disshg_pM,dissMehg_pM,-rel_error,RMSE, RMSE_hg,sed_hg_pmol_g)
+hgT_surf_sed<-sed_hg_pmol_g$surface + sed_mehg_pmol_g$surface
+hgT_subs_sed<-sed_hg_pmol_g$subsurface + sed_mehg_pmol_g$subsurface
+  
+  model_out<-cbind(disshg_pM,dissMehg_pM,-rel_error,
+                   RMSE, RMSE_hg,hgT_surf_sed,hgT_subs_sed )
   
   write.table(model_out,file='mod_out.txt')
   

@@ -30,8 +30,11 @@ summary(uc5_hr$MeHg)
 summary(uc5_hr$Depth)
 summary(uc5_hr$Mn)
 
-hg5<-c(3.08,2.87,2.84,2.62,2.71,2.97,NA,3.19,NA,3.25,NA,2.98,NA,2.53,NA,3.2,NA,NA,NA,3.75,NA,3.35,3.77,3.61)
-dd<-c(10.096,28.614,40.471,54.339,69.342,84.332,100.249,110.444,129.614,145.084,149.359,175.102,204.702,250.161,300.208,399.706,500.414,750.117,1000.156,1250.3101,1500.338,1750.92,1988.884,2039.769)
+hg5<-c(3.08,2.87,2.84,2.62,2.71,2.97,NA,3.19,NA,3.25,
+       NA,2.98,NA,2.53,NA,3.2,NA,NA,NA,3.75,NA,3.35,3.77,3.61)
+dd<-c(10.096,28.614,40.471,54.339,69.342,84.332,
+      100.249,110.444,129.614,145.084,149.359,175.102,204.702,
+      250.161,300.208,399.706,500.414,750.117,1000.156,1250.3101,1500.338,1750.92,1988.884,2039.769)
 
 df1<-data.frame(hg5,dd)
 str(df1$hg5)
@@ -42,7 +45,9 @@ m<-seq(0,5, by=1)
 maty<-c(0.5,1.5,2.5,3.5,4.5)
 
 aty2<-c(0,0.2,0.4,0.6,0.8,1,1.2)
+aty2c<-c(0,0.4,0.8,1.2)
 maty2<-c(0.1,0.3,0.5,0.7,.9,1.1,1.3)
+
 dd<-seq(40,160,by=20)
 
 hg<-uc5_hr$Hg
@@ -75,7 +80,8 @@ plot(uc5_hr$MeHg[!is.na(uc5_hr$MeHg)], uc5_hr$Depth[!is.na(uc5_hr$MeHg)],
      yaxt='n',cex.axis=1.3,cex.lab=1.4, lwd=1.5)
 mtext(expression(paste('MeHg'[D])),side=1, at=-0.28,line=0.2, col='#e7298a', cex=1.2 )
 mtext(expression(paste('(pM)')),side=1, at=-0.3,line=1.45, col='#e7298a', cex=1.2 )
-axis(1, at=aty2, labels =aty2,tick=T, las=1, cex.axis=1.6, col='#e7298a')
+axis(1, at=aty2, labels =F,tick=T, las=1, cex.axis=1.6, col='#e7298a')
+axis(1, at=aty2c, labels =aty2c,tick=T, las=1, cex.axis=1.6, col='#e7298a')
 axis(1, at=maty2, labels =F,tick=T, las=1, cex.axis=1.6, col='#e7298a', tcl=-.2)
 ##II plot
 par(new=T)

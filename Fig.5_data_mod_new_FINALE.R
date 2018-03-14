@@ -1,4 +1,4 @@
-  setwd('C:/Users/Ginevra/Desktop/nuoveMEt/LambpiuDEM/')
+  setwd('C:/Users/Ginevra/Desktop/ULTIME_hgII___/Centrale_NOme')
     setwd('C:/Users/gi/Desktop/nuoveMEt/Lamb/L6')
   #Output/FOsfati/CALIBRATO_inorganico/Centrale_nme')
   

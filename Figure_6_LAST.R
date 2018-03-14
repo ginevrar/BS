@@ -7,8 +7,8 @@ setwd('C:/Users/Ginevra/Dropbox')
 dat<-read.table('sed2.txt', header=T); 
 sed<-dat$sed/200.59*1000
 
-setwd('C:/Users/Ginevra/Desktop/ULTIME_hgII___/In1')
-setwd('C:/Users/Ginevra/Google Drive/MERCURIO/BlackSea/REvision2/SImulazioni_FInali/ULTIME_hgII___')
+#setwd('C:/Users/Ginevra/Desktop/ULTIME_hgII___/In1')
+setwd('C:/Users/Ginevra/Google Drive/MERCURIO/BlackSea/REvision2/SImulazioni_FInali/ULTIME_hgII___/In1')
 out1<-read.table('mod_out.txt', header=T)
 
 IN1_hg<-out1$disshg_pM
@@ -197,7 +197,7 @@ plot(medie_hg_pM, prof,  bty='n',lwd=1.8, cex=3,
      ylab=" ",  type="b", xlab='pM', 
      col="#00000000", bg='#00000000',main=" ") 
 mtext(expression(paste('Modeled and observed Hg'[D]*' in the water column')), 
-      line=1, cex=1.6)
+      line=1, cex=1.9)
 mtext('a',line=0.2,at=-1, col='grey50', cex=3)
 y<-prof
 abline(h=15.64, lty=2, col='grey60')
@@ -322,7 +322,7 @@ boxplot(sed,a_ord,col=c('#00000077','#E69F0099'),
 mtext(expression(paste('pmol g'^-1)), 
       at=880, side=2,line=3.6, cex=1.6)
 mtext(expression(paste('Hg'[T]*' sediment concentrations')),
-      line=1, cex=1.6)
+      line=1, cex=1.9)
 mtext('b',line=0.2,at=0.1, col='grey50', cex=3)
 dev.off()
 getwd()

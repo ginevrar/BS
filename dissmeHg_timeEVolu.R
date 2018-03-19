@@ -1,5 +1,6 @@
 
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/out_1anno")
+setwd('C:/Users/gi/Desktop/nuoveMEt3/Fosfati/F6')#Fminmin
 
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 

@@ -1,50 +1,55 @@
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2/0.1")
+#setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2/0.1")
+area<-2.916E+11
 
+setwd('C:/Users/gi/Desktop/nuoveMEt3/add_sim1')# Fosfati/F2
+2414/201
+164*12
 mehg<-read.csv("Dissolved_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(mehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); 
-mehg<-mehg[59536:59900,1:13]
+mehg<-mehg[1958:1969,1:13]
+mehg$Time
 
 Pmehgs<-read.csv("Total_Sorbed_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(Pmehgs)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); 
-Pmehgs<-Pmehgs[59536:59900,1:13]
+Pmehgs<-Pmehgs[1958:1969,1:13]
 
 SEDmehg<-read.csv("Total_Sorbed_Methyl_Hg_Solids.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(SEDmehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                 "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); 
-SEDhg<-SEDhg[59536:59900,1:13]
+SEDhg<-SEDhg[1958:1969,1:13]
 
 silts<-read.csv("Silts_fines.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(silts)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                  "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2");
-silts<-silts[59536:59900,1:13]
+silts<-silts[1958:1969,1:13]
 tail(silts)
 
 POM_depos<-read.csv("POM_Dep_Vel.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(POM_depos)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
                     "Suboxic1","Suboxic2", "Anoxic1", "Anoxic2",
                     "Anoxic3","Sed1","Sed2")
-POM_depos<-POM_depos[59536:59900,1:13]
+POM_depos<-POM_depos[1958:1969,1:13]
 
 silt_depos<-read.csv("Silt_Dep_Vel.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(silt_depos)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
                      "Suboxic1","Suboxic2", "Anoxic1", "Anoxic2",
                      "Anoxic3","Sed1","Sed2")
-silt_depos<-silt_depos[59536:59900,1:13]
+silt_depos<-silt_depos[1958:1969,1:13]
 
 silts<-read.csv("Silts_Fines.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(silts)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
                 "Suboxic1","Suboxic2", "Anoxic1", "Anoxic2",
                 "Anoxic3","Sed1","Sed2")
-silts<-silts[59536:59900,1:13]
+silts<-silts[1958:1969,1:13]
 
 POMs<-read.csv("Organic_Matter.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(POMs)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
                "Suboxic1", "Suboxic2", "Anoxic1", "Anoxic2",
                "Anoxic3", "Sed1","Sed2")
 str(POMs)
-POMs <-POMs[59536:59900,1:13]
+POMs <-POMs[1958:1969,1:13]
 # solidi ai boundaries ta OL-SOL e sOL_AOL e aOL - SED
 ###  g/m3 = mg/L
 
@@ -60,6 +65,12 @@ a<-c(1,2,3)
 b<-c(4,5,6)
 df1<-data.frame(a,b)
 
+time.steps <- mehg[,1]
+time.steps3 <- time.steps*24*3600
+TEMPO <- as.POSIXct(time.steps3, tz= "GMT", origin = "1850-01-01")
+TEMPO[1:12]
+rdate<-as.Date(TEMPO, tz= "GMT", format="%Y")
+tail(rdate,365)
 mehgPOM_gm3<-mehgCl_gm3*POMs_kgL*kd_POM
 mehgsilt_gm3<-mehgCl_gm3*silts_kgL*kd_silt
 
@@ -84,8 +95,8 @@ Pmehg_AOL <-Pmehgs$Anoxic3       # mehg ug/m3
 
 #DEPOSIZIONE Pmehg AOL -> Sed
 ## .... settling OL - SOL.....
-fPOM_OL<POMs$Oxycline/solids_OL
-fsilt_OL<-silts$Oxycline/solids_OL
+fPOM_OL<-POMs$Oxycline/(POMs$Oxycline+silts$Oxycline)
+fsilt_OL<-silts$Oxycline/(POMs$Oxycline+silts$Oxycline)
 
 OLdepo_g_m2_d  <-(mehgPOM_gm3$Oxycline*POM_depos$Oxycline)+   #gm3*md ->gm2d
                  (mehgsilt_gm3$Oxycline*silt_depos$Oxycline)
@@ -98,8 +109,8 @@ tail(rdate,365)
 ## .... settling SOL - AOL.....
 POM_SOLdepo_m_day<-POM_depos$Suboxic1     #depo m/day * depth(m) --> 1/day (0.003 /d)
 silt_SOLdepo_m_day<-silt_depos$Suboxic1   # depo silt m/day  (0.014 /d)
-fPOM_SOL<-mean(POMs$Suboxic1/solids_SOL, na.rm=TRUE)
-fsilt_SOL<-mean(silts$Suboxic1/solids_SOL, na.rm=TRUE)
+fPOM_SOL<-mean(POMs$Suboxic1/(POMs$Suboxic1+silts$Suboxic1), na.rm=TRUE)
+fsilt_SOL<-mean(silts$Suboxic1/(POMs$Suboxic1+silts$Suboxic1), na.rm=TRUE)
 #  Vd SOL
 SOLdepo_g_m2_d<-(mehgPOM_gm3$Suboxic1*POM_SOLdepo_m_day)+
   (mehgsilt_gm3$Suboxic1*silt_SOLdepo_m_day)

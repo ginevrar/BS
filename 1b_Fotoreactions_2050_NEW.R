@@ -37,11 +37,7 @@ kred<-0.16
 kox<-0.57
 kdeg<-3E-3
 
-#Leggi model output
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg_tris")
-setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
-setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_trisBO")
-
+setwd("C:/Users/Ginevra/Desktop/ULTIME_hgII___/Centrale_NOme")
 
 evasion<-read.csv("Volatilization_Loss_Rate.csv", header=FALSE, skip = 1, sep = ",", dec=".")
 names(evasion)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 

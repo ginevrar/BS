@@ -126,8 +126,6 @@ with(dat1,
      plot(ax2, oxic_conc_pM, type="l",col='#00BFFF', lwd=2, cex.axis=2, cex.lab=2,cex.main=2.3, ylim=c(0,4),ylab='pM',xlab='',
           main=expression("Modeled Hg"[T]*" concentrations"), panel.first=polygon(c(ax2,rev(ax2)), c(ses1[,1],rev(ses1[,2])),border=NA, col="#7fdfff")))
 par(new=TRUE)
-plot(ax2,empty_v1, type='p', xlab= " ", ylab= " ", pch=23, ce=4.5, xaxt='n',yaxt='n', ylim=c(0,4), bg='#0098cc',col='black')
-par(new=TRUE)
 plot(ax2,hgT$Suboxic1/215*1000, ylim=c(0,4), col="chartreuse3", lwd=2,
      ylab="   ", xlab="   ", xaxt='n', type="l",yaxt='n',lty=1) 
 par(new=TRUE)

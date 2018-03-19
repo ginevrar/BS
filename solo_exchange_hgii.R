@@ -3,76 +3,76 @@ setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 #  FLUSSI TRA BOX
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2/0.1")
 #Anne1e_morehg_tris_pristine2
-#Leggi dati e taglia gli ultimi anni dopo il 2013 hg<-hg[59536:59900,]
-##il 2017 hg<-hg[59536:59900,]
+#Leggi dati e taglia gli ultimi anni dopo il 2013 hg<-hg[1958:1969,]
+##il 2017 hg<-hg[1958:1969,]
 
 hg<-read.csv("Dissolved_Divalent_Hg.csv", skip = 1,header=FALSE, sep = ",", dec=".")
 names(hg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-             "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hg<-hg[59536:59900,1:13]
+             "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hg<-hg[1958:1969,1:13]
 
 hgT<-read.csv("Total_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hgT)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hgT<-hgT[59536:59900,1:13]
+              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hgT<-hgT[1958:1969,1:13]
 
 DOChg<-read.csv("DOC_Sorbed_Divalent_Hg.csv", header=FALSE, skip =1, sep = ",", dec=".")
 names(DOChg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); DOChg<-DOChg[59536:59900,1:13]
+                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); DOChg<-DOChg[1958:1969,1:13]
 
 Phgs<-read.csv("Total_Sorbed_Divalent_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(Phgs)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-               "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); Phgs<-Phgs[59536:59900,1:13]
+               "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); Phgs<-Phgs[1958:1969,1:13]
 ## Phg ngL
 
 SEDhg<-read.csv("Total_Sorbed_Divalent_Hg_Solids.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(SEDhg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); SEDhg<-SEDhg[59536:59900,1:13]
+                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); SEDhg<-SEDhg[1958:1969,1:13]
 ## Sedhg ngg
 
 mehg<-read.csv("Dissolved_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(mehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-               "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); mehg<-mehg[59536:59900,1:13]
+               "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); mehg<-mehg[1958:1969,1:13]
 
 DOCmehg<-read.csv("DOC_Sorbed_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(DOCmehg)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                  "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); DOCmehg<-DOCmehg[59536:59900,1:13]
+                  "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); DOCmehg<-DOCmehg[1958:1969,1:13]
 
 mehgT<-read.csv("Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(mehgT)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); mehgT<-mehgT[59536:59900,1:13]
+                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); mehgT<-mehgT[1958:1969,1:13]
 
 hg0<-read.csv("Elemental_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(hg0)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hg0<-hg0[59536:59900,1:13]
+              "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); hg0<-hg0[1958:1969,1:13]
 
 solids<-read.csv("Total_Solids.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(solids)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
-                 "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); solids<-solids[59536:59900,1:13]
+                 "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2"); solids<-solids[1958:1969,1:13]
 tail(solids)
 
 POM_depos<-read.csv("POM_Dep_Vel.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(POM_depos)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
                     "Suboxic1","Suboxic2", "Anoxic1", "Anoxic2",
                     "Anoxic3","Sed1","Sed2")
-POM_depos<-POM_depos[59536:59900,1:13]
+POM_depos<-POM_depos[1958:1969,1:13]
 
 silt_depos<-read.csv("Silt_Dep_Vel.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(silt_depos)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
                      "Suboxic1","Suboxic2", "Anoxic1", "Anoxic2",
                      "Anoxic3","Sed1","Sed2")
-silt_depos<-silt_depos[59536:59900,1:13]
+silt_depos<-silt_depos[1958:1969,1:13]
 
 silts<-read.csv("Silts_Fines.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(silts)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
                 "Suboxic1","Suboxic2", "Anoxic1", "Anoxic2",
                 "Anoxic3","Sed1","Sed2")
-silts<-silts[59536:59900,1:13]
+silts<-silts[1958:1969,1:13]
 
 POMs<-read.csv("Organic_Matter.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(POMs)<-c("Time", "Oxic1", "Oxic2","CIL","Oxycline", 
                "Suboxic1", "Suboxic2", "Anoxic1", "Anoxic2",
                "Anoxic3", "Sed1","Sed2")
 str(POMs)
-POMs <-POMs[59536:59900,1:13]
+POMs <-POMs[1958:1969,1:13]
 
 time.steps <- POMs[,1]
 time.steps3 <- time.steps*24*3600

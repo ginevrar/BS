@@ -1,12 +1,13 @@
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/out_1anno")
+setwd('C:/Users/gi/Desktop/nuoveMEt3/add_sim2')#Fminmin
 
 Pmehgs<-read.csv("Total_Sorbed_Methyl_Hg.csv", header=FALSE, skip = 1,sep = ",", dec=".")
 names(Pmehgs)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
                "Anoxic","Anoxic2","Anoxic3","Sed1","Sed2")
 
-Phg_pM<-Pmehgs/200.59*1000; 
+  Phg_pM<-Pmehgs/215*1000; 
 
-OL_v<-c(5.9*10^12,(5.9*10^12),(4.5*10^12),(5.9*10^12))
+OL_v<-c((5.9*10^12),(5.9*10^12),(4.5*10^12),(5.9*10^12))
 SOL_v<-7.4*10^12
 AOL_v<-c(5.3*10^13,5.3*10^13,2.9*10^14,10^14)
 t_vol<-sum(OL_v)+sum(SOL_v)+sum(AOL_v); t_vol

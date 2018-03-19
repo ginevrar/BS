@@ -3,10 +3,17 @@ setwd('C:/Users/gi/Documents/Lavoro/SIM_finale2')
 Clean_data<-read.table('Dataset_Finale_new_no_bosforo.txt', header=T)
 str(Clean_data)
 
+surf<-Clean_data[(Clean_data$Depth<=15),]
+summary(surf$sigma)
+plot(surf$sigma, surf$Depth)
+
 plot(Clean_data$MeHg/Clean_data$Hg*100)
 
-y3<-c( 10.5, 12.05, 14.25, 15.285, 15.64, 16.2, 16.6, 17.04, 17.35)
-why<-c(0,   20,      40,    55,    75,   100,  280,  460,   2000)
+#y3<-c( 10.5, 12.05, 14.25, 15.285, 15.64, 16.2, 16.6, 17.04, 17.35)
+
+y3<-c( 10.5,11.5, 13, 14.25,  15.64, 16.2, 16.6, 17.04, 17.45)
+why<-c(0,10,   25,      50,   75,   100,  250, 500,    2000) 
+
 
 setwd("C:/Users/Ginevra/Desktop")
 tiff('f223f.tiff', height = 25, width = 23, units = 'cm',   compression = "lzw", res = 500)

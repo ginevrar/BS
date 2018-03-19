@@ -1,5 +1,6 @@
-  setwd('C:/Users/Ginevra/Desktop/nuoveMEt/LambpiuDEM/')
-    setwd('C:/Users/gi/Desktop/nuoveMEt3/add_sim3')
+
+  setwd('C:/Users/Ginevra/Desktop/ULTIME_hgII___/Centrale_NOme')
+    setwd('C:/Users/gi/Desktop/nuoveMEt/Lamb/L6')
   #Output/FOsfati/CALIBRATO_inorganico/Centrale_nme')
   
   medie_hg_pM<-c(1.86,2.127058824,1.7675,1.902,2.056666667,3.0875,2.810909091,3.714,3.713684211)

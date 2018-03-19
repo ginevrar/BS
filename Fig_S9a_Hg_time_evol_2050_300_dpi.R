@@ -120,6 +120,7 @@ names(bilancio_hg)<-c('input','river','diff','evas','depo','outflow','output')
 bilancio_hg
 #setwd("C:/Users/gi/Dropbox/BlackSea2/implementazione/BlackSea_IIDraft/submission_figures")
 str(atm_hg_kmol_y)
+setwd('C:/Users/Ginevra/Documents')
 
 tiff('Fig.7A_Hg.tiff', height=25, width=23, units='cm', 
      compression="lzw", res=300)
@@ -186,7 +187,7 @@ plot(ax2,-Output_terms, col="black", type="l", lty=2,
 par(new=TRUE)
 plot(ax2,empty_v9, bg='grey90' ,col='darkgrey',type='p', xlab= " ", ylab= " ", pch=23, cex=4, xaxt='n',yaxt='n', ylim=c(-35,45))
 
-mtext(expression(paste('kmol y'^-1)), 2, at= 0, line=2.6, cex=2)
+mtext(expression(paste('kmol yr'^-1)), 2, at= 0, line=2.6, cex=2)
 
 text(2000.0,10,'Atmospheric deposition',col='cyan4', cex=1.9)
 text(1975,20,' River \n load',col='chartreuse4', cex=1.9)

@@ -11,6 +11,7 @@ setwd("C:/Users/Ginevra/Desktop/new_sim_BS")
 input_hg1 <-read.table("input_Hg.txt", header=TRUE); str(input_hg1)
 
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
+setwd('C:/Users/Ginevra/Google Drive/MERCURIO/BlackSea/REvision2/SImulazioni_FInali/ULTIME_hgII___/In1')
 
 #leggo outpout sim per ogni sim partita a ore diverse
 ore1  <-read.table("water_input_output_long_1_2050", header=TRUE, sep=","); str(ore1)
@@ -128,7 +129,7 @@ par(mfrow=c(1,1), mar=c(5,5,4,1), bty='n')
 
 plot(ax2, atm_hg_kmol_y, col="cyan3", type="l",  ylim=c(-35,45), 
      main=expression(paste('Hg'[T]*' fluxes to the Black Sea')), ylab= " ", 
-     xlab= " ",  lwd=1, cex.axis=2, cex.lab=2,cex.main=2.3)
+     xlab= " ",  lwd=1, cex.axis=2.2, cex.lab=2,cex.main=2.3)
 par(new=T)
 plot(ax2,empty_v, type='p', xlab= " ", ylab= " ", pch=23, cex=2.8, xaxt='n',yaxt='n', ylim=c(-35,45), bg='cyan4',col='black')
 #axis(1,at=c(1850,1900,1950,2000,2050),labels=T, cex.axis=2.5)

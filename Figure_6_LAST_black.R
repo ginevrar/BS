@@ -187,7 +187,7 @@ bad_shape<-c(min_hg_bad,rev(max_hg_bad))
 
 setwd('C:/Users/Ginevra/Desktop')
 
-tiff('god_and_bad_sim45678123.tiff', height=25, width=40, units='cm', 
+tiff('god_and_bad_sim456781233.tiff', height=25, width=40, units='cm', 
     compression="lzw", res=300)
 par(mfrow=c(1,2),cex.axis=1.6, cex.lab=1.3, bg='black',fg = 'white',
     col.axis = "white", col.clab = "white",
@@ -306,10 +306,10 @@ axis(2, at=y2,line=0,labels=F, tck =-.02, cex.axis=1.6)
 mtext(expression(paste(sigma[theta]*' (kg m'^-3*')')), 2, line=3.2,at=14.5,
       col="black", cex=1.6)
 
-legend(3,12,legend=c('data', 'model mean'), pch=c(21,25), 
-       col=c('#E5E5E5'), bty='n', cex=1.8)
+legend(2.75,12,legend=c('data', 'model mean'), pch=c(21,25), 
+       col=c('#E5E5E5'), bty='n', cex=2)
 
-text(3.9,14,'range of \n model output', cex=1.4, col='#E69F00')
+text(3.9,14,'range of \n model output', cex=1.9,font=2, col='#E69F00')
 
 y1<-c( 11.5, 13, 14.25,  15.64, 16.2, 16.6, 17.04, 17.45)
 why<-c(10,   25,      50,   75,   100,  250, 500,    2000) 

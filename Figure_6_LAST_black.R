@@ -309,17 +309,20 @@ mtext(expression(paste(sigma[theta]*' (kg m'^-3*')')), 2, line=3.2,at=14.5,
 legend(3,12,legend=c('data', 'model mean'), pch=c(21,25), 
        col=c('#E5E5E5'), bty='n', cex=1.8)
 
-text(3.9,14,'range of \n modeled concentrations', cex=1.4, col='#E69F00')
+text(3.9,14,'range of \n model output', cex=1.4, col='#E69F00')
 
 y1<-c( 11.5, 13, 14.25,  15.64, 16.2, 16.6, 17.04, 17.45)
 why<-c(10,   25,      50,   75,   100,  250, 500,    2000) 
 
 axis(4, at = y1, labels = why, tick = TRUE, cex.axis=1.5, las=2)
 mtext('depth (m)', at=14.5, side=4,line=3.2, cex=1.6)
+#mtext('density (m)', at=14.5, side=4,line=3.2, cex=1.6)
+mtext(expression(paste('potential density (kg m'^-3*')')), 2, line=3,at=14,
+      col="white", cex=1.5)
 
 nomi<-c('data', 'model')
 par(mar=c(4.5, 7.5, 1, 2.5)) 
-boxplot(sed,a_ord,col=c('#E5E5E599','#E69F00'), 
+boxplot(sed,a_ord,col=c('#E5E5E5','#E69F00'), 
         xlim=c(0.5,2.5),ylim=c(600,1200),
         names=nomi,
         ylab=' ',cex.lab=1.6,

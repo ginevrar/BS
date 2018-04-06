@@ -5,13 +5,16 @@
 ax2<-(seq(1850,2050, by=.08291874))
 str(ax2)
 
-setwd('C:/Users/gi/Documents/Lavoro/SIM_finale')
+setwd('C:/Users/gi/Documents/Lavoro/SIM_finale2')
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS")
 
 input_hg1 <-read.table("input_Hg.txt", header=TRUE); str(input_hg1)
 
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
+
 setwd('C:/Users/Ginevra/Google Drive/MERCURIO/BlackSea/REvision2/SImulazioni_FInali/ULTIME_hgII___/In1')
+=======
+setwd("C:/Users/gi/Desktop/ULTIME_hgII___/In1")
 
 #leggo outpout sim per ogni sim partita a ore diverse
 ore1  <-read.table("water_input_output_long_1_2050", header=TRUE, sep=","); str(ore1)
@@ -124,7 +127,6 @@ setwd('C:/Users/Ginevra/Documents')
 
 tiff('Fig.7A_Hg.tiff', height=25, width=23, units='cm', 
      compression="lzw", res=300)
-
 par(mfrow=c(1,1), mar=c(5,5,4,1), bty='n') 
 
 plot(ax2, atm_hg_kmol_y, col="cyan3", type="l",  ylim=c(-35,45), 

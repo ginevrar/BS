@@ -5,6 +5,8 @@
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/Anne1e_morehg")
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 
+setwd('C:/Users/gi/Desktop/nuoveMEt3/add_sim2')#Fminmin
+
 met<-read.csv('Bacterial_Methylation_Rate.csv', header=FALSE, skip = 1,sep = ",", dec=".")
 names(met)<-c("Time", "Oxic1","Oxic2", "CIL", "Oxycline","Suboxic1", "Suboxic2", 
               "Anoxic1","Anoxic2","Anoxic3","Sed1","Sed2");
@@ -128,11 +130,15 @@ demet_pmol_day_anoxic  <-(mehgT_pmol_UAL1*demet$Suboxic2)+(mehgT_pmol_UAL2*demet
 						 
 demet_pmol_day_sed	  <-(mehgT_pmol_sed1*demet$Sed1)+(mehgT_pmol_sed2*met$Sed2)
 
-
 met_kmol_y_OL  <-met_pmol_day_oxic*365/10^15; mean(tail(met_kmol_y_OL,12))   # 27 kmol
 met_kmol_y_SOL <-met_pmol_day_suboxic*365/10^15; mean(tail(met_kmol_y_SOL,12)) # 6.7 kmol
 met_kmol_y_AOL <-met_pmol_day_anoxic*365/10^15; mean(tail(met_kmol_y_AOL,12))  # 206 kmol
 met_kmol_y_SED <-met_pmol_day_sed*365/10^15; mean(tail(met_kmol_y_SED,12))  # 206 kmol
+
+mean(met_kmol_y_OL[1957:1968]-demet_kmol_y_OL[1957:1968])
+mean(met_kmol_y_SOL[1957:1968]-demet_kmol_y_SOL[1957:1968])
+plot(met_kmol_y_SOL[1958:1969])
+plot(met_kmol_y_AOL[1958:1969])
 
 demet_kmol_y_OL  <-demet_pmol_day_oxic*365/10^15; mean(tail(demet_kmol_y_OL,12))  # 27.8 kmol
 demet_kmol_y_SOL <-demet_pmol_day_suboxic*365/10^15; mean(tail(demet_kmol_y_SOL,12)) # 10 kmol
@@ -150,7 +156,9 @@ netto_prodotto_TOT_long<-rowSums(netto_prodotto_long)
 
 metilato   <-rowSums(met_kmol_y)
 demetilato <-rowSums(demet_kmol_y)
+met_kmol_y[164,]
 mean(tail(metilato,36))
+
 mean(tail(demetilato,36))
 
 mean(tail(met_kmol_y_OL,12))/mean(tail(metilato,12))*100

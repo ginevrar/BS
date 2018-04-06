@@ -1,3 +1,4 @@
+
   setwd('C:/Users/Ginevra/Desktop/ULTIME_hgII___/Centrale_NOme')
     setwd('C:/Users/gi/Desktop/nuoveMEt/Lamb/L6')
   #Output/FOsfati/CALIBRATO_inorganico/Centrale_nme')
@@ -187,6 +188,7 @@
   cor<-cor(disshg_pM,medie_hg_pM)
   x1<-medie_hg_pM
   y<-prof
+  cormehg<-cor(dissMehg_pM,medie_mehg_pM)
   
   
   x2<-medie_mehg_pM
@@ -367,7 +369,11 @@
   error_hg<-medie_hg_pM-disshg_pM# Example of invocation of functions
   RMSE_hg<-rmse(error_hg)
   
-  model_out<-cbind(disshg_pM,dissMehg_pM,-rel_error,RMSE, RMSE_hg,sed_hg_pmol_g)
+hgT_surf_sed<-sed_hg_pmol_g$surface + sed_mehg_pmol_g$surface
+hgT_subs_sed<-sed_hg_pmol_g$subsurface + sed_mehg_pmol_g$subsurface
+  
+  model_out<-cbind(disshg_pM,dissMehg_pM,-rel_error,
+                   RMSE, RMSE_hg,hgT_surf_sed,hgT_subs_sed )
   
   write.table(model_out,file='mod_out.txt')
   

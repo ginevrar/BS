@@ -9,6 +9,7 @@ setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_t
 setwd('C:/Users/gi/Documents/Lavoro/SIM_finale/Anne1e_morehg_tris')
 setwd("C:/Users/Ginevra/Desktop/new_sim_BS/19_luglio/SIM_finale2/Anne1e_morehg_tris_pristine2")
 
+setwd('C:/Users/gi/Desktop/nuoveMEt3/add_sim3')#Fminmin
 
 medie_hg_pM<-c(1.86,2.127058824,1.7675,1.902,
                2.056666667,3.0875,2.810909091,3.714, 3.713684211)
@@ -134,8 +135,8 @@ fine_mehg<- mehg [1957:1968,]
 fine_hg0<- hg0 [1957:1968,]
 fine_mehgT<- mehgT [1957:1968,]
 fine_T<- Temp [1957:1968,]
-plot(fine_T$Oxic1)
 
+str(fine_hg0$Oxic1)
 
 hgII_pM<-(hg+DOChg0+DOChg)/200.59*1000
 tail(hgII_pM[1975:2,13])
@@ -348,10 +349,7 @@ summary(OL_hgt_pM)
 OL_hgd<-disshg_pM[1:4]; mean(OL_hgd)
 mean(OL_hgd/OL_hgt_pM*100)
 
-
-
 OL_hg0_pM<-(layer_hg0_pm[1:4])
-
 OL_mehgt_pM<-(layer_mehgT_pm[1:4])
 summary(OL_mehgt_pM)
 OL_mehgd<-dissMehg_pM[1:4]; mean(OL_mehgd)*1000
@@ -407,12 +405,18 @@ d<-sum(SOL_datihg*SOL_v_l)/10^15
 
 e<-sum(AOL_hgd*AOL_v_l)/10^15
 f<-sum(AOL_datihg*AOL_v_l)/10^15
-(f-e)/f*100    # AOL error -4%
-(a+c+e)   #tot HgD kmol
+
+a;c;e
+(f-e)/f*100  # AOL error -4%
+(a+c+e)#tot HgD kmol
+mod_hgd<-data.frame(a,c,e);mod_hgd   
+names(mod_hgd)<-c('OL','SOL','AOL')
+mod_hgd<-t(mod_hgd)
 (b+d+f)-(a+c+e) #data - model reservoir
 (f-e)/((b+d+f)-(a+c+e))
 (a+c+e)*200.59/10^3  
 #-----------314   kmols missing 
+#sim new2 1669.91, 149 kmol missing
 
 #  ------ MeHgD reservoir
 a1<-sum(OL_mehgd*OL_v)/10^12
@@ -429,24 +433,33 @@ f1<-sum(AOL_datimehg*AOL_v)/10^12
 
 (a1+c1+e1)/(a+c+e)*100  # ------ MeHg%
 (a1+c1+e1) # ------ tot MehgD kmol
+mod_mehgd<-data.frame(a1,c1,e1);mod_mehgd  
+names(mod_mehgd)<-c('OL','SOL','AOL')
+mod_mehgd<-t(mod_mehgd)
 (b1+d1+f1)-(a1+c1+e1) #data - model reservoir
 (a1+c1+e1)*215/10^3 #------ tot MehgD tons
+# sim new2 = 372.8317 kmol, mismatch -7.5
+a1;c1;e1;
 #  ------ HgT reservoir
 g<-sum(OL_hgt_pM*OL_v_l)/10^15
 h<-sum(SOL_hgt_pM*SOL_v)/10^12
 i<-sum(AOL_hgt_pM*AOL_v)/10^12
-i
-(g+h+i)   #--------tot Hgt kmol
+g;h;i
+g+h+i   #--------tot Hgt kmol
+mod_hgt<-data.frame(g,h,i)  
+names(mod_hgt)<-c('OL','SOL','AOL')
+mod_hgt<-t(mod_hgt)
 (g+h+i)*200.59/10^3   #--------tot Hgt kmol
 i/(g+h+i) 
-
 mean(AOL_hgt_pM)
 #  ------ MeHgT reservoir
 g1<-sum(OL_mehgt_pM *OL_v)/10^12
 h1<-sum(SOL_mehgt*SOL_v)/10^12
 i1<-sum(AOL_mehgt*AOL_v)/10^12
 
-mean(AOL_mehgt)
+mod_mehgt<-data.frame(g1,h1,i1)
+names(mod_mehgt)<-c('OL','SOL','AOL')
+mod_mehgt<-t(mod_mehgt)
 
 g1+h1+i1  #tot Mehg kmol
 (g1+h1+i1)/(g+h+i)*100   # ------ MeHg%
@@ -458,11 +471,11 @@ Phg$Sed2[1968]/100/hgT$Sed2[1968]
 
 #  ------ Hg0 reservoir
 a0<-sum(OL_hg0_pM*OL_v_l)/10^15
-
 b0<-sum(SOL_hg0_pM*SOL_v_l)/10^15
- 
 c0<-sum(AOL_hg0_pM*AOL_v_l)/10^15
-a0; b0; c0 
+mod_hg0<-data.frame(a0, b0, c0) 
+names(mod_hg0)<-c('OL','SOL','AOL')
+mod_hg0<-t(mod_hg0)
 #  ------ SED HgT reservoir
 ##-----SEDIMENT conc
 hgT_fine<-hgT[1968, 1:13]
@@ -479,10 +492,11 @@ names(sed_hg_pmol_g)<-c('surface','subsurface')
 sed_mehg_pmol_g<-data.frame(d,e)
 names(sed_mehg_pmol_g)<-c('surface','subsurface')
 sed_hg_pmol_g
-sed_mehg_pmol_g
 
-sed_mehg_pmol_g/sed_hg_pmol_g*100
-
+sed_hg_pmol_g<-t(sed_hg_pmol_g)
+sed_mehg_pmol_g<-t(sed_mehg_pmol_g)
+sed_hg_kmols<-t(sed_hg_kmols)
+sed_mehg_kmols<-t(sed_mehg_kmols)
 
 
 solids_sed<-data.frame(solids$Sed1[1968],solids$Sed2[1968]) #g/m3
@@ -504,3 +518,11 @@ sed_mehg_pmols<-sed_mehg_pmol_m3*Vol_Sed_m3
 sed_mehg_kmols<-sed_mehg_pmols/10^15
 rowSums(sed_mehg_kmols)##-----SEDIMENT MeHgT reservoir
 rowSums(sed_mehg_kmols)*215/1000
+
+modeledPool<-data.frame(mod_hgt,mod_mehgt,mod_hg0,mod_hgd,mod_mehgd)
+
+modeledSEdpool<-data.frame(sed_hg_pmol_g,sed_mehg_pmol_g,
+           sed_hg_kmols,sed_mehg_kmols)
+
+write.csv(modeledPool,file='modeledPool.txt')
+write.csv(modeledSEdpool,file='modeledSEdpool.txt')
